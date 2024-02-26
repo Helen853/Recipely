@@ -3,5 +3,5 @@
 
 import UIKit
 
-/// Класс
+/// 
 final class ViewController: UIViewController {}
