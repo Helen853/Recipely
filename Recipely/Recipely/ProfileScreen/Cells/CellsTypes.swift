@@ -6,5 +6,7 @@ import Foundation
 /// Энам для типов ячеек
 enum CellsTypes {
     case info
-    case item
+    case bonuses
+    case terms
+    case logOut
 }

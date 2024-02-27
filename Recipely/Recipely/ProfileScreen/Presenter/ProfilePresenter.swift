@@ -8,12 +8,20 @@ protocol ProfilePresenterProtocol {
     func showTermsPolicy()
 }
 
+protocol ProfileViewProtocol: AnyObject {
+    func configureAlert()
+}
+
 /// Презентер экрана профиля
 final class ProfilePresenter {
-    var view: UIViewController?
+    weak var view: ProfileViewProtocol?
     var profileCoordinator: ProfileCoordinator?
-    init(view: UIViewController) {
+    init(view: ProfileViewProtocol) {
         self.view = view
+    }
+
+    func showAlert() {
+        view?.configureAlert()
     }
 }
 
