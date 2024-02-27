@@ -4,4 +4,8 @@
 import UIKit
 
 /// Экран профиля пользователя
-class ProfileViewController: UIViewController {}
+final class ProfileViewController: UIViewController {
+    var profilePresenter: ProfilePresenter?
+    
+    
+}

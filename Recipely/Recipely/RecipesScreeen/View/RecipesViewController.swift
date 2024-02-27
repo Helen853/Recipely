@@ -4,4 +4,6 @@
 import UIKit
 
 /// Экран рецептов
-class RecipesViewController: UIViewController {}
+final class RecipesViewController: UIViewController {
+    var recipesPresenter: ReciperPresenter?
+}

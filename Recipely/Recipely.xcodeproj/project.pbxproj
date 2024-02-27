@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042227612B8D697500D6F2D2 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042227602B8D697500D6F2D2 /* BaseCoordinator.swift */; };
+		042227632B8D6A1A00D6F2D2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042227622B8D6A1A00D6F2D2 /* AppCoordinator.swift */; };
+		042227682B8D6AB400D6F2D2 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042227672B8D6AB400D6F2D2 /* FavoritesPresenter.swift */; };
+		0422276C2B8D6AF800D6F2D2 /* RecipesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422276B2B8D6AF800D6F2D2 /* RecipesPresenter.swift */; };
+		0422276E2B8D6BB600D6F2D2 /* RecipesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422276D2B8D6BB600D6F2D2 /* RecipesCoordinator.swift */; };
+		042227712B8D6E7600D6F2D2 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042227702B8D6E7600D6F2D2 /* Recipes.swift */; };
+		042227732B8D6EA900D6F2D2 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042227722B8D6EA900D6F2D2 /* Favorites.swift */; };
+		042227752B8D6F6E00D6F2D2 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042227742B8D6F6E00D6F2D2 /* FavoritesCoordinator.swift */; };
+		042227782B8D707400D6F2D2 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042227772B8D707400D6F2D2 /* Profile.swift */; };
+		0422277C2B8D709600D6F2D2 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422277B2B8D709600D6F2D2 /* ProfilePresenter.swift */; };
+		0422277E2B8D70F000D6F2D2 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422277D2B8D70F000D6F2D2 /* ProfileCoordinator.swift */; };
+		042227812B8D728800D6F2D2 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042227802B8D728800D6F2D2 /* Builder.swift */; };
 		ED7B3D252B8CEA9A00C04253 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D242B8CEA9A00C04253 /* MainTabBarViewController.swift */; };
 		ED7B3D272B8CEAD200C04253 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D262B8CEAD200C04253 /* ProfileViewController.swift */; };
 		ED7B3D292B8CEB1A00C04253 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D282B8CEB1A00C04253 /* FavoritesViewController.swift */; };
@@ -21,6 +33,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042227602B8D697500D6F2D2 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		042227622B8D6A1A00D6F2D2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		042227672B8D6AB400D6F2D2 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
+		0422276B2B8D6AF800D6F2D2 /* RecipesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesPresenter.swift; sourceTree = "<group>"; };
+		0422276D2B8D6BB600D6F2D2 /* RecipesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesCoordinator.swift; sourceTree = "<group>"; };
+		042227702B8D6E7600D6F2D2 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
+		042227722B8D6EA900D6F2D2 /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
+		042227742B8D6F6E00D6F2D2 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
+		042227772B8D707400D6F2D2 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		0422277B2B8D709600D6F2D2 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		0422277D2B8D70F000D6F2D2 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		042227802B8D728800D6F2D2 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
 		ED7B3D242B8CEA9A00C04253 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		ED7B3D262B8CEAD200C04253 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		ED7B3D282B8CEB1A00C04253 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +71,121 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042227562B8D063300D6F2D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED957B852B8CD64C00761177 /* LoginViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		042227572B8D063D00D6F2D2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		042227582B8D064300D6F2D2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		0422275F2B8D694D00D6F2D2 /* Coordinaters */ = {
+			isa = PBXGroup;
+			children = (
+				0422277F2B8D727D00D6F2D2 /* Builder */,
+				042227602B8D697500D6F2D2 /* BaseCoordinator.swift */,
+				042227622B8D6A1A00D6F2D2 /* AppCoordinator.swift */,
+				0422276D2B8D6BB600D6F2D2 /* RecipesCoordinator.swift */,
+				042227742B8D6F6E00D6F2D2 /* FavoritesCoordinator.swift */,
+				0422277D2B8D70F000D6F2D2 /* ProfileCoordinator.swift */,
+			);
+			path = Coordinaters;
+			sourceTree = "<group>";
+		};
+		042227642B8D6A6D00D6F2D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED7B3D282B8CEB1A00C04253 /* FavoritesViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		042227652B8D6A7600D6F2D2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				042227672B8D6AB400D6F2D2 /* FavoritesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		042227662B8D6A8C00D6F2D2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				042227722B8D6EA900D6F2D2 /* Favorites.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		042227692B8D6ADF00D6F2D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED7B3D2A2B8CEB2900C04253 /* RecipesViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0422276A2B8D6AE600D6F2D2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				0422276B2B8D6AF800D6F2D2 /* RecipesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		0422276F2B8D6E6400D6F2D2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				042227702B8D6E7600D6F2D2 /* Recipes.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		042227762B8D706200D6F2D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED7B3D262B8CEAD200C04253 /* ProfileViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		042227792B8D707600D6F2D2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				042227772B8D707400D6F2D2 /* Profile.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0422277A2B8D708300D6F2D2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				0422277B2B8D709600D6F2D2 /* ProfilePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		0422277F2B8D727D00D6F2D2 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				042227802B8D728800D6F2D2 /* Builder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
 		ED957B752B8CD64C00761177 = {
 			isa = PBXGroup;
 			children = (
@@ -66,16 +205,17 @@
 		ED957B802B8CD64C00761177 /* Recipely */ = {
 			isa = PBXGroup;
 			children = (
-				ED957BAB2B8CE99200761177 /* TabBar */,
-				ED957BAA2B8CE96F00761177 /* Delegate */,
-				ED957BA92B8CE95E00761177 /* LoginScreen */,
+				0422275F2B8D694D00D6F2D2 /* Coordinaters */,
 				ED957BA82B8CE94900761177 /* ProfileScreen */,
 				ED957BA72B8CE83E00761177 /* FavoritesScreen */,
 				ED957BA62B8CE7ED00761177 /* RecipesScreeen */,
 				ED957B872B8CD64C00761177 /* Main.storyboard */,
+				ED957BA92B8CE95E00761177 /* LoginScreen */,
 				ED957B8A2B8CD64E00761177 /* Assets.xcassets */,
 				ED957B8C2B8CD64E00761177 /* LaunchScreen.storyboard */,
 				ED957B8F2B8CD64E00761177 /* Info.plist */,
+				ED957BAB2B8CE99200761177 /* TabBar */,
+				ED957BAA2B8CE96F00761177 /* Delegate */,
 			);
 			path = Recipely;
 			sourceTree = "<group>";
@@ -83,7 +223,9 @@
 		ED957BA62B8CE7ED00761177 /* RecipesScreeen */ = {
 			isa = PBXGroup;
 			children = (
-				ED7B3D2A2B8CEB2900C04253 /* RecipesViewController.swift */,
+				0422276F2B8D6E6400D6F2D2 /* Model */,
+				0422276A2B8D6AE600D6F2D2 /* Presenter */,
+				042227692B8D6ADF00D6F2D2 /* View */,
 			);
 			path = RecipesScreeen;
 			sourceTree = "<group>";
@@ -91,7 +233,9 @@
 		ED957BA72B8CE83E00761177 /* FavoritesScreen */ = {
 			isa = PBXGroup;
 			children = (
-				ED7B3D282B8CEB1A00C04253 /* FavoritesViewController.swift */,
+				042227662B8D6A8C00D6F2D2 /* Model */,
+				042227652B8D6A7600D6F2D2 /* Presenter */,
+				042227642B8D6A6D00D6F2D2 /* View */,
 			);
 			path = FavoritesScreen;
 			sourceTree = "<group>";
@@ -99,7 +243,9 @@
 		ED957BA82B8CE94900761177 /* ProfileScreen */ = {
 			isa = PBXGroup;
 			children = (
-				ED7B3D262B8CEAD200C04253 /* ProfileViewController.swift */,
+				0422277A2B8D708300D6F2D2 /* Presenter */,
+				042227792B8D707600D6F2D2 /* Model */,
+				042227762B8D706200D6F2D2 /* View */,
 			);
 			path = ProfileScreen;
 			sourceTree = "<group>";
@@ -107,7 +253,9 @@
 		ED957BA92B8CE95E00761177 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
-				ED957B852B8CD64C00761177 /* LoginViewController.swift */,
+				042227582B8D064300D6F2D2 /* Presenter */,
+				042227572B8D063D00D6F2D2 /* Model */,
+				042227562B8D063300D6F2D2 /* View */,
 			);
 			path = LoginScreen;
 			sourceTree = "<group>";
@@ -246,14 +394,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042227782B8D707400D6F2D2 /* Profile.swift in Sources */,
+				0422276C2B8D6AF800D6F2D2 /* RecipesPresenter.swift in Sources */,
 				ED7B3D252B8CEA9A00C04253 /* MainTabBarViewController.swift in Sources */,
+				042227612B8D697500D6F2D2 /* BaseCoordinator.swift in Sources */,
+				042227732B8D6EA900D6F2D2 /* Favorites.swift in Sources */,
+				042227632B8D6A1A00D6F2D2 /* AppCoordinator.swift in Sources */,
+				042227682B8D6AB400D6F2D2 /* FavoritesPresenter.swift in Sources */,
 				ED7B3D2B2B8CEB2900C04253 /* RecipesViewController.swift in Sources */,
 				ED957B862B8CD64C00761177 /* LoginViewController.swift in Sources */,
 				ED7B3D272B8CEAD200C04253 /* ProfileViewController.swift in Sources */,
+				0422277E2B8D70F000D6F2D2 /* ProfileCoordinator.swift in Sources */,
+				0422276E2B8D6BB600D6F2D2 /* RecipesCoordinator.swift in Sources */,
+				042227712B8D6E7600D6F2D2 /* Recipes.swift in Sources */,
 				ED957B822B8CD64C00761177 /* AppDelegate.swift in Sources */,
+				042227752B8D6F6E00D6F2D2 /* FavoritesCoordinator.swift in Sources */,
+				0422277C2B8D709600D6F2D2 /* ProfilePresenter.swift in Sources */,
 				ED7B3D292B8CEB1A00C04253 /* FavoritesViewController.swift in Sources */,
 				ED7B3D2D2B8CEFB000C04253 /* AppConstants.swift in Sources */,
 				ED957B842B8CD64C00761177 /* SceneDelegate.swift in Sources */,
+				042227812B8D728800D6F2D2 /* Builder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
