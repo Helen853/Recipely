@@ -6,6 +6,7 @@ import UIKit
 protocol FavoritesPresenterProtocol: AnyObject {
     func pushDetaivFavoriteController()
 }
+
 /// Презентер экрана с фаворитами
 final class FavoritesPresenter {
     var view: UIViewController?

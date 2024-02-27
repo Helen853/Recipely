@@ -1,8 +1,4 @@
-//
-//  LoginViewControllerCoordinator.swift
-//  Recipely
-//
-//  Created by Киса Мурлыса on 26.02.2024.
-//
+// LoginViewControllerCoordinator.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation

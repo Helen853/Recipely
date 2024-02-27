@@ -7,6 +7,7 @@ protocol ProfilePresenterProtocol {
     func changeName()
     func showTermsPolicy()
 }
+
 /// Презентер экрана профиля
 final class ProfilePresenter {
     var view: UIViewController?

@@ -5,6 +5,7 @@ import UIKit
 
 /// Экран профиля пользователя
 class ProfileViewController: UIViewController {
+    var profilePresenter: ProfilePresenter?
     private let tableView = UITableView()
 
     // Массив с моделями ячеек
@@ -12,7 +13,7 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // configureTitle()
+        configureTitle()
     }
 
     private func configureTitle() {
@@ -23,7 +24,7 @@ class ProfileViewController: UIViewController {
     private func configureTable() {
         view.addSubview(tableView)
         // tableView.delegate = self
-        // tableView.dataSource = self
+        tableView.dataSource = self
         // tableView.estimatedRowHeight = 144
         // tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
@@ -49,7 +50,6 @@ class ProfileViewController: UIViewController {
 // MARK: - Extension UITableViewDataSource
 
 extension ProfileViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         cells.count
     }
@@ -80,5 +80,4 @@ extension ProfileViewController: UITableViewDataSource {
             return cell
         }
     }
-    var profilePresenter: ProfilePresenter?
 }
