@@ -24,6 +24,15 @@
 		ED7B3D292B8CEB1A00C04253 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D282B8CEB1A00C04253 /* FavoritesViewController.swift */; };
 		ED7B3D2B2B8CEB2900C04253 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D2A2B8CEB2900C04253 /* RecipesViewController.swift */; };
 		ED7B3D2D2B8CEFB000C04253 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D2C2B8CEFB000C04253 /* AppConstants.swift */; };
+		ED7B3D332B8D07AE00C04253 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D322B8D07AE00C04253 /* BaseCoordinator.swift */; };
+		ED7B3D352B8D085E00C04253 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D342B8D085E00C04253 /* AppCoordinator.swift */; };
+		ED7B3D372B8D099F00C04253 /* LoginViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D362B8D099F00C04253 /* LoginViewControllerCoordinator.swift */; };
+		ED7B3D602B8DC32600C04253 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D5F2B8DC32600C04253 /* InfoTableViewCell.swift */; };
+		ED7B3D622B8DC38400C04253 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D612B8DC38400C04253 /* Info.swift */; };
+		ED7B3D642B8DC47300C04253 /* CellsTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D632B8DC47300C04253 /* CellsTypes.swift */; };
+		ED7B3D662B8DC5AC00C04253 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D652B8DC5AC00C04253 /* ItemTableViewCell.swift */; };
+		ED7B3D682B8DC5E000C04253 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D672B8DC5E000C04253 /* Item.swift */; };
+		ED7B3D6A2B8DC6BD00C04253 /* CellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D692B8DC6BD00C04253 /* CellProtocol.swift */; };
 		ED957B822B8CD64C00761177 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED957B812B8CD64C00761177 /* AppDelegate.swift */; };
 		ED957B842B8CD64C00761177 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED957B832B8CD64C00761177 /* SceneDelegate.swift */; };
 		ED957B862B8CD64C00761177 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED957B852B8CD64C00761177 /* LoginViewController.swift */; };
@@ -50,6 +59,15 @@
 		ED7B3D282B8CEB1A00C04253 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		ED7B3D2A2B8CEB2900C04253 /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		ED7B3D2C2B8CEFB000C04253 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		ED7B3D322B8D07AE00C04253 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		ED7B3D342B8D085E00C04253 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		ED7B3D362B8D099F00C04253 /* LoginViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerCoordinator.swift; sourceTree = "<group>"; };
+		ED7B3D5F2B8DC32600C04253 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		ED7B3D612B8DC38400C04253 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		ED7B3D632B8DC47300C04253 /* CellsTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsTypes.swift; sourceTree = "<group>"; };
+		ED7B3D652B8DC5AC00C04253 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		ED7B3D672B8DC5E000C04253 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		ED7B3D692B8DC6BD00C04253 /* CellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocol.swift; sourceTree = "<group>"; };
 		ED957B7E2B8CD64C00761177 /* Recipely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED957B812B8CD64C00761177 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED957B832B8CD64C00761177 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -402,6 +420,9 @@
 				042227632B8D6A1A00D6F2D2 /* AppCoordinator.swift in Sources */,
 				042227682B8D6AB400D6F2D2 /* FavoritesPresenter.swift in Sources */,
 				ED7B3D2B2B8CEB2900C04253 /* RecipesViewController.swift in Sources */,
+				ED7B3D622B8DC38400C04253 /* Info.swift in Sources */,
+				ED7B3D6A2B8DC6BD00C04253 /* CellProtocol.swift in Sources */,
+				ED7B3D682B8DC5E000C04253 /* Item.swift in Sources */,
 				ED957B862B8CD64C00761177 /* LoginViewController.swift in Sources */,
 				ED7B3D272B8CEAD200C04253 /* ProfileViewController.swift in Sources */,
 				0422277E2B8D70F000D6F2D2 /* ProfileCoordinator.swift in Sources */,
@@ -411,6 +432,7 @@
 				042227752B8D6F6E00D6F2D2 /* FavoritesCoordinator.swift in Sources */,
 				0422277C2B8D709600D6F2D2 /* ProfilePresenter.swift in Sources */,
 				ED7B3D292B8CEB1A00C04253 /* FavoritesViewController.swift in Sources */,
+				ED7B3D602B8DC32600C04253 /* InfoTableViewCell.swift in Sources */,
 				ED7B3D2D2B8CEFB000C04253 /* AppConstants.swift in Sources */,
 				ED957B842B8CD64C00761177 /* SceneDelegate.swift in Sources */,
 				042227812B8D728800D6F2D2 /* Builder.swift in Sources */,

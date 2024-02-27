@@ -8,4 +8,7 @@ struct AppConstants {
     static let profile = "Profile"
     static let favorites = "Favorites"
     static let recipes = "Recipes"
+
+    static let infoIdentifier = "InfoIdentifier"
+    static let itemIdentifier = "ItemIdentifier"
 }
