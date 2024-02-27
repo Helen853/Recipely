@@ -1,11 +1,9 @@
 // Builder.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
 import UIKit
-
-/// wew
-class Builder {
+/// Билдер таббара
+final class Builder {
     func makeRecipesViewController() -> RecipesViewController {
         let recipesViewController = RecipesViewController()
         let recipesPresenter = ReciperPresenter(view: recipesViewController)
