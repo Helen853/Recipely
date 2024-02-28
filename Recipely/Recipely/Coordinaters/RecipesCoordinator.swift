@@ -3,8 +3,8 @@
 
 import UIKit
 
-/// wew
-class RecipesCoordinator: BaseCoordinator {
+/// Координатор рецептов
+final class RecipesCoordinator: BaseCoordinator {
     var rootViewController: UINavigationController
 
     init(rootViewController: UIViewController) {

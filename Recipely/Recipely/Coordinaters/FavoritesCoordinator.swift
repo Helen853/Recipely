@@ -3,8 +3,8 @@
 
 import UIKit
 
-/// wew
-class FavoritesCoordinator: BaseCoordinator {
+/// Координатор фаворитов
+final class FavoritesCoordinator: BaseCoordinator {
     var rootViewController: UINavigationController
 
     init(rootViewController: UIViewController) {

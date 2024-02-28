@@ -15,6 +15,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         configureSceneDeklegate(windowScene: windowScene)
+//        let window = UIWindow(windowScene: windowScene)
+//        window.rootViewController = LoginViewController()
+//        window.makeKeyAndVisible()
+//        self.window = window
     }
 
     private func configureSceneDeklegate(windowScene: UIWindowScene) {
