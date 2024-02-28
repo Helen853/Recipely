@@ -3,7 +3,7 @@
 
 import UIKit
 
-///Протокол для презентера экрана профиля
+/// Протокол для презентера экрана профиля
 protocol ProfilePresenterProtocol {
     func changeName(text: String)
     func showTermsPolicy()
