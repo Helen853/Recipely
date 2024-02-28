@@ -3,14 +3,15 @@
 
 import UIKit
 
+/// Презентер FavoritesPresenter
 protocol FavoritesPresenterProtocol: AnyObject {
     func pushDetaivFavoriteController()
 }
 
 /// Презентер экрана с фаворитами
 final class FavoritesPresenter {
-    var view: UIViewController?
-    var favoritesCoordinator: FavoritesCoordinator?
+    weak var view: UIViewController?
+    weak var favoritesCoordinator: FavoritesCoordinator?
 
     init(view: UIViewController) {
         self.view = view

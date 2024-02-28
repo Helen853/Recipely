@@ -3,7 +3,7 @@
 
 import UIKit
 
-/// Экран с фаворитами
+/// Экран с избранным
 final class FavoritesViewController: UIViewController {
     var fvoritesPresenter: FavoritesPresenter?
 

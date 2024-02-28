@@ -6,7 +6,6 @@ import UIKit
 /// Протокол для презентера экрана профиля
 protocol ProfilePresenterProtocol {
     func changeName(text: String)
-    func showTermsPolicy()
     func showBonuses()
     func showAlert()
 }
@@ -27,11 +26,6 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     /// - Parametr: текст из поля ввода
     func changeName(text: String) {
         view?.changeLabel(updateName: text)
-    }
-
-    /// Передаем координатору чтобы показал условия политики
-    func showTermsPolicy() {
-        profileCoordinator?.presentTemsPolicyController()
     }
 
     /// Передаем координатору чтобы показал шторку с бонусами

@@ -3,17 +3,21 @@
 
 import UIKit
 
-/// TabBar
+/// Главный таббар
 final class MainTabBarController: UITabBarController {
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBarAppearance()
-        view.backgroundColor = .white
+        setBackgroundColorView()
     }
 
     // MARK: - Private Methods
+
+    private func setBackgroundColorView() {
+        view.backgroundColor = .white
+    }
 
     private func setTabBarAppearance() {
         tabBar.itemPositioning = .centered
