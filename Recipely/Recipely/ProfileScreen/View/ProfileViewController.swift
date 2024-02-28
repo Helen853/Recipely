@@ -18,8 +18,8 @@ final class ProfileViewController: UIViewController {
     // MARK: - Public Properties
 
     var profilePresenter: ProfilePresenter?
-    var onTapHandler: (() -> ())?
-    var arrowTapHandler: (() -> ())?
+    var onTapHandler: VoidHandler?
+    var arrowTapHandler: VoidHandler?
 
     // MARK: - Private Properties
 

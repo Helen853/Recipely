@@ -15,7 +15,7 @@ final class BonusesTableViewCell: UITableViewCell {
     // MARK: - Public Properties
 
     // кложура для нажатия стрелки в ячейке
-    var arrowTapHandler: (() -> ())?
+    var arrowTapHandler: VoidHandler?
 
     // MARK: - Initializers
 
@@ -34,7 +34,7 @@ final class BonusesTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configureCell(model: Bonuses, tapButton: (() -> ())?) {
+    func configureCell(model: Bonuses, tapButton: VoidHandler?) {
         configureImage(nameImage: model.imageName)
         configureLabel(title: model.itemTitle)
         arrowTapHandler = tapButton

@@ -13,7 +13,7 @@ final class InfoTableViewCell: UITableViewCell {
 
     // MARK: - Public Properties
 
-    var onTapHandler: (() -> ())?
+    var onTapHandler: VoidHandler?
 
     // MARK: - Initializers
 
@@ -31,7 +31,7 @@ final class InfoTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configureCell(model: Info, tapButton: (() -> ())?) {
+    func configureCell(model: Info, tapButton: VoidHandler?) {
         configureImage(nameImage: model.imageName)
         configureLabel(title: model.fullName)
         onTapHandler = tapButton

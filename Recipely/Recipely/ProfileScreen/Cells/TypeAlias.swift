@@ -3,4 +3,6 @@
 
 import Foundation
 
-/// Тип для пустой кложуры
+// swiftlint:disable all
+typealias VoidHandler = () -> ()
+// swiftlint:enable all
