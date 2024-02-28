@@ -6,6 +6,4 @@ import UIKit
 /// Экран профиля пользователя
 final class ProfileViewController: UIViewController {
     var profilePresenter: ProfilePresenter?
-    
-    
 }

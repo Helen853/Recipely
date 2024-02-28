@@ -7,7 +7,11 @@ final class AppCoordinator: BaseCoordinator {
     private var appBuilder = Builder()
 
     override func start() {
-        tabBarMain()
+        if "admin" != "admin" {
+            tabBarMain()
+        } else {
+            t​oLogin()
+        }
     }
 
     private func tabBarMain() {
@@ -39,5 +43,15 @@ final class AppCoordinator: BaseCoordinator {
 
         guard let tabBarViewController = tabBarViewController else { return }
         setAsRoot​(​_​: tabBarViewController)
+    }
+
+    private func t​oLogin() {
+        let loginCoordinator = LoginCoordinator()
+//        loginCoordinator.onFinishFlow = { [weak self] in
+//            self?.remove(coordinator: loginCoordinator)
+//            self?.​toMain​()
+//        }
+        add(coordinator: loginCoordinator)
+        loginCoordinator.start()
     }
 }

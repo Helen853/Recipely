@@ -6,6 +6,7 @@ import UIKit
 protocol ReciperPresenterProtocol: AnyObject {
     func openCell()
 }
+
 /// Презентер экрана рецептов
 final class ReciperPresenter {
     private weak var view: UIViewController?
