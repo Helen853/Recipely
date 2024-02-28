@@ -51,7 +51,7 @@ final class ProfileViewController: UIViewController {
         configureTable()
         registerCell()
         onTap()
-        tappedArrowButton()
+        arrowButtonTapped()
     }
 
     // MARK: - Private Methods
@@ -63,7 +63,7 @@ final class ProfileViewController: UIViewController {
         }
     }
 
-    private func tappedArrowButton() {
+    private func arrowButtonTapped() {
         arrowTapHandler = { [weak self] in
             guard let self = self else { return }
             profilePresenter?.showBonuses()
@@ -175,7 +175,7 @@ extension ProfileViewController: ProfileViewProtocol {
         let actionCancel = UIAlertAction(title: AppConstants.cancel, style: .default)
         let actionOk = UIAlertAction(title: AppConstants.ok, style: .cancel) { _ in
             guard let text = alertController.textFields?.first?.text else { return }
-            self.tapActionOk(text: text)
+            self.actionOkTap(text: text)
         }
         alertController.addTextField { title in
             title.placeholder = AppConstants.placeholderText
@@ -187,7 +187,7 @@ extension ProfileViewController: ProfileViewProtocol {
 
     /// Уведомляем презентер о нажатии на "ок" в алерте
     /// - Parametr: текст из текстфилда
-    func tapActionOk(text: String) {
+    func actionOkTap(text: String) {
         profilePresenter?.changeName(text: text)
     }
 

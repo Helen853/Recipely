@@ -3,7 +3,6 @@
 
 import UIKit
 
-/// Класс Scene
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private var appCoordinator: AppCoordinator?
     var window: UIWindow?

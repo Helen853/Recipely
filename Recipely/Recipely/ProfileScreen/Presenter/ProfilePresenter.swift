@@ -13,7 +13,7 @@ protocol ProfilePresenterProtocol {
 
 /// Презентер экрана профиля
 final class ProfilePresenter {
-    weak var view: ProfileViewProtocol?
+    private weak var view: ProfileViewProtocol?
     weak var profileCoordinator: ProfileCoordinator?
     init(view: ProfileViewProtocol) {
         self.view = view
@@ -23,18 +23,23 @@ final class ProfilePresenter {
 // MARK: - ProfilePresenter + ProfilePresenterProtocol
 
 extension ProfilePresenter: ProfilePresenterProtocol {
+    /// Изменение имени пользователя профиле
+    /// - Parametr: текст из поля ввода
     func changeName(text: String) {
         view?.changeLabel(updateName: text)
     }
 
+    /// Передаем координатору чтобы показал условия политики
     func showTermsPolicy() {
         profileCoordinator?.presentTemsPolicyController()
     }
 
+    /// Передаем координатору чтобы показал шторку с бонусами
     func showBonuses() {
         profileCoordinator?.presentBonusesController()
     }
 
+    /// Показываем алерт
     func showAlert() {
         view?.configureAlert()
     }

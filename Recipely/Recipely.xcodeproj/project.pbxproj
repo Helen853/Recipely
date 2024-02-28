@@ -48,6 +48,7 @@
 		E40C6F1705DBD7B27FBA0796 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A857425DCBD2DCED9671C1B7 /* InfoTableViewCell.swift */; };
 		EC76E24A30F24713BD49711D /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F39E528952CCE47B1865BB /* TermsTableViewCell.swift */; };
 		ECB98BF27F96C17F3BF0C185 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A3671F8DF2A330D2A9CCF1 /* SceneDelegate.swift */; };
+		ED9F30A32B8F640F0069D8E2 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9F30A22B8F640F0069D8E2 /* TypeAlias.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 		E4F39E528952CCE47B1865BB /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
 		E7936ED31A5297ACC97C1548 /* RecipesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesPresenter.swift; sourceTree = "<group>"; };
 		EC78B0E2C10F00A01BCEC4D3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		ED9F30A22B8F640F0069D8E2 /* TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAlias.swift; sourceTree = "<group>"; };
 		F1C0200EE0C3DC7F4E1284E5 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		F82600648C6D1A4FD7643B0C /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -392,6 +394,7 @@
 				67D3E2F8067599F69A3677E1 /* TermsCell */,
 				1507AE6FE0F316A788136337 /* CellProtocol.swift */,
 				BCE1220110B1B271B68BFCC0 /* CellsTypes.swift */,
+				ED9F30A22B8F640F0069D8E2 /* TypeAlias.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				ECB98BF27F96C17F3BF0C185 /* SceneDelegate.swift in Sources */,
 				33FF6C9945DC5EF6B190119C /* Terms.swift in Sources */,
 				C93EFBD768DBA88B24DD00B3 /* TermsPolicyViewController.swift in Sources */,
+				ED9F30A32B8F640F0069D8E2 /* TypeAlias.swift in Sources */,
 				EC76E24A30F24713BD49711D /* TermsTableViewCell.swift in Sources */,
 				12BB284FF2ACBC8F06288E15 /* UIView+Extension.swift in Sources */,
 			);

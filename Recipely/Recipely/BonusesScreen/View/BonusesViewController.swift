@@ -90,10 +90,10 @@ final class BonusesViewController: UIViewController {
         closeButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
-        closeButton.addTarget(self, action: #selector(onTap), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(onCloseButtonTap), for: .touchUpInside)
     }
 
-    @objc private func onTap() {
+    @objc private func onCloseButtonTap() {
         bonusesPresenter?.closeBonuses()
     }
 }

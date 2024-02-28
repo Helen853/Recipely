@@ -5,6 +5,7 @@ import Foundation
 
 /// Протокол для презентера экрана бонусов
 protocol BonusesPresenterProtocol {
+    /// Закрытие экрана с бонусами
     func closeBonuses()
 }
 
