@@ -1,10 +1,10 @@
-// Builder.swift
+// MainTabBarBuilder.swift
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
 /// Билдер таббара
-final class Builder {
+final class MainTabBarBuilder {
     func makeRecipesViewController() -> RecipesViewController {
         let recipesViewController = RecipesViewController()
         let recipesPresenter = ReciperPresenter(view: recipesViewController)

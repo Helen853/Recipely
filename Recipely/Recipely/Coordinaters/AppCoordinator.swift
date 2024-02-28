@@ -3,19 +3,19 @@
 
 /// Главный координатор
 final class AppCoordinator: BaseCoordinator {
-    private var tabBarViewController: MainTabBarController?
-    private var appBuilder = Builder()
+    private var mainTabBarController: MainTabBarController?
+    private var appBuilder = MainTabBarBuilder()
 
     override func start() {
         if "admin" == "admin" {
-            tabBarMain()
+            showMainTabBar()
         } else {
-            t​oLogin()
+            showLoginModule()
         }
     }
 
-    private func tabBarMain() {
-        tabBarViewController = MainTabBarController()
+    private func showMainTabBar() {
+        mainTabBarController = MainTabBarController()
 
         let recipesModule = appBuilder.makeRecipesViewController()
         let recipesCoordinator = RecipesCoordinator(rootViewController: recipesModule)
@@ -32,7 +32,7 @@ final class AppCoordinator: BaseCoordinator {
         profileModule.profilePresenter?.profileCoordinator = profileCoordinator
         add(coordinator: profileCoordinator)
 
-        tabBarViewController?.setViewControllers(
+        mainTabBarController?.setViewControllers(
             [
                 recipesCoordinator.rootViewController,
                 favoritesCoordinator.rootViewController,
@@ -41,16 +41,12 @@ final class AppCoordinator: BaseCoordinator {
             animated: true
         )
 
-        guard let tabBarViewController = tabBarViewController else { return }
+        guard let tabBarViewController = mainTabBarController else { return }
         setAsRoot​(​_​: tabBarViewController)
     }
 
-    private func t​oLogin() {
+    private func showLoginModule() {
         let loginCoordinator = LoginCoordinator()
-//        loginCoordinator.onFinishFlow = { [weak self] in
-//            self?.remove(coordinator: loginCoordinator)
-//            self?.​toMain​()
-//        }
         add(coordinator: loginCoordinator)
         loginCoordinator.start()
     }

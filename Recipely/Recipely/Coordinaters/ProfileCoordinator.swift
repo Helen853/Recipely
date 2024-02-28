@@ -11,10 +11,6 @@ final class ProfileCoordinator: BaseCoordinator {
         self.rootViewController = UINavigationController(rootViewController: rootViewController)
     }
 
-    func presentTemsPolicyController() {
-        print("Показываем экран с текстом")
-    }
-
     func presentBonusesController() {
         let bonusesViewController = BonusesViewController()
         let bonusesPresenter = BonusesPresenter(view: bonusesViewController)

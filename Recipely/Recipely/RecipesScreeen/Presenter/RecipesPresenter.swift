@@ -3,6 +3,7 @@
 
 import UIKit
 
+/// Презентер ReciperPresenter
 protocol ReciperPresenterProtocol: AnyObject {
     func openCell()
 }
@@ -10,7 +11,7 @@ protocol ReciperPresenterProtocol: AnyObject {
 /// Презентер экрана рецептов
 final class ReciperPresenter {
     private weak var view: UIViewController?
-    var coordinator: RecipesCoordinator?
+    weak var coordinator: RecipesCoordinator?
 
     init(view: UIViewController) {
         self.view = view

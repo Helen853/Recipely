@@ -4,8 +4,8 @@
 import UIKit
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    private var appCoordinator: AppCoordinator?
     var window: UIWindow?
+    private var appCoordinator: AppCoordinator?
 
     func scene(
         _ scene: UIScene,
@@ -14,10 +14,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         configureSceneDeklegate(windowScene: windowScene)
-//        let window = UIWindow(windowScene: windowScene)
-//        window.rootViewController = LoginViewController()
-//        window.makeKeyAndVisible()
-//        self.window = window
     }
 
     private func configureSceneDeklegate(windowScene: UIWindowScene) {
