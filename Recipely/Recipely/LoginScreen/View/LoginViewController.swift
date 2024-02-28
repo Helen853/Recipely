@@ -380,8 +380,8 @@ extension LoginViewController: UITextFieldDelegate {
 
 /// LoginViewController + LoginViewControllerProtocol
 extension LoginViewController: LoginViewControllerProtocol {
-    func showPassword(_ eyeImageView: UIImage, _ isSecurity: Bool) {
-        eyePasswordButton.setImage(eyeImageView, for: .normal)
+    func showPassword(_ eyeImageView: String, _ isSecurity: Bool) {
+        eyePasswordButton.setImage(UIImage(systemName: eyeImageView), for: .normal)
         passwordTextField.isSecureTextEntry = isSecurity
     }
 
@@ -403,15 +403,15 @@ extension LoginViewController: LoginViewControllerProtocol {
         loginButton.imageView?.rotate()
     }
 
-    func setValidationStatusPassword(_ colorText: UIColor, _ colorBorder: UIColor, _ isValidation: Bool) {
-        passwordLabel.textColor = colorText
-        passwordTextField.layer.borderColor = colorBorder.cgColor
+    func setValidationStatusPassword(_ colorText: String, _ colorBorder: String, _ isValidation: Bool) {
+        passwordLabel.textColor = UIColor(named: colorText)
+        passwordTextField.layer.borderColor = UIColor(named: colorBorder)?.cgColor
         errorPasswordLabel.isHidden = isValidation
     }
 
-    func setValidationStatusEmail(_ colorText: UIColor, _ colorBorder: UIColor, _ isValidation: Bool) {
-        emailLabel.textColor = colorText
-        emailTextField.layer.borderColor = colorBorder.cgColor
+    func setValidationStatusEmail(_ colorText: String, _ colorBorder: String, _ isValidation: Bool) {
+        emailLabel.textColor = UIColor(named: colorText)
+        emailTextField.layer.borderColor = UIColor(named: colorBorder)?.cgColor
         errorEmailLabel.isHidden = isValidation
     }
 }

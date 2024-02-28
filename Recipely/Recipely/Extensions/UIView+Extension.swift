@@ -5,6 +5,7 @@ import UIKit
 
 /// Расширение для анимации кружка загрузки на кнопке login после нажатия
 extension UIView {
+    /// Функция анимации прокрутки картинки при загрузке
     func rotate() {
         let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotation.toValue = NSNumber(value: Double.pi * 2)

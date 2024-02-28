@@ -3,8 +3,8 @@
 
 import UIKit
 
-/// ere
-class LoginCoordinator: BaseCoordinator {
+/// Координатор экрана авторизации
+final class LoginCoordinator: BaseCoordinator {
     var rootViewController: UINavigationController?
 
     override func start() {

@@ -3,18 +3,29 @@
 
 import UIKit
 
+///  Протокол LoginViewController
 protocol LoginViewControllerProtocol: AnyObject {
-    func setValidationStatusEmail(_ colorText: UIColor, _ colorBorder: UIColor, _ isValidation: Bool)
-    func setValidationStatusPassword(_ colorText: UIColor, _ colorBorder: UIColor, _ isValidation: Bool)
+    /// Проверка валидации почты
+    func setValidationStatusEmail(_ colorText: String, _ colorBorder: String, _ isValidation: Bool)
+    /// Проверка валидации пароля
+    func setValidationStatusPassword(_ colorText: String, _ colorBorder: String, _ isValidation: Bool)
+    /// Установка кружка загрузки на кнопке после нажатия
     func setloginButtonPressed(_ nameOfButtonImage: String, _ titleButton: String)
+    /// Показать экран предупрежденияя
     func showErrorSplashOn()
+    /// Скрыть экран предупреждения
     func showErrorSplashOff()
-    func showPassword(_ eyeImageView: UIImage, _ isSecurity: Bool)
+    /// Показать/скрыть пароль
+    func showPassword(_ eyeImageView: String, _ isSecurity: Bool)
 }
 
+/// Протокол LoginPresenter
 protocol LoginPresenterProtocol: AnyObject {
+    /// Установка цвета emailView
     func setColorEmail(_ email: String)
+    /// Установка цвета passwordView
     func setColorPassword(_ password: String, _ email: String)
+    /// Установка секретности
     func setSecurity(_ isSecurity: Bool)
 }
 
@@ -38,7 +49,7 @@ final class LoginPresenter: LoginPresenterProtocol {
     // MARK: - Public Properties
 
     weak var loginCoordinator: LoginCoordinator?
-    weak var view: LoginViewControllerProtocol?
+    private weak var view: LoginViewControllerProtocol?
 
     // MARK: - Initializers
 
@@ -51,14 +62,14 @@ final class LoginPresenter: LoginPresenterProtocol {
     func setColorEmail(_ email: String) {
         if email.contains(Constants.domenEmail) {
             view?.setValidationStatusEmail(
-                UIColor(named: Constants.defaultTextColor) ?? UIColor(),
-                UIColor(named: Constants.defaultBorderTextFieldColor) ?? UIColor(),
+                Constants.defaultTextColor,
+                Constants.defaultBorderTextFieldColor,
                 true
             )
         } else {
             view?.setValidationStatusEmail(
-                UIColor(named: Constants.errorColor) ?? UIColor(),
-                UIColor(named: Constants.errorColor) ?? UIColor(),
+                Constants.errorColor,
+                Constants.errorColor,
                 false
             )
         }
@@ -67,8 +78,8 @@ final class LoginPresenter: LoginPresenterProtocol {
     func setColorPassword(_ password: String, _ email: String) {
         if password.count > Constants.passwordCount, email.contains(Constants.domenEmail) {
             view?.setValidationStatusPassword(
-                UIColor(named: Constants.defaultTextColor) ?? UIColor(),
-                UIColor(named: Constants.defaultBorderTextFieldColor) ?? UIColor(),
+                Constants.defaultTextColor,
+                Constants.defaultBorderTextFieldColor,
                 true
             )
             view?.setloginButtonPressed(Constants.spinerIamgename, "")
@@ -78,8 +89,8 @@ final class LoginPresenter: LoginPresenterProtocol {
         } else {
             view?.showErrorSplashOn()
             view?.setValidationStatusPassword(
-                UIColor(named: Constants.errorColor) ?? UIColor(),
-                UIColor(named: Constants.errorColor) ?? UIColor(),
+                Constants.errorColor,
+                Constants.errorColor,
                 false
             )
             DispatchQueue.main.asyncAfter(deadline: .now() + Constants.dispatchQueueTime) { [weak self] in
@@ -89,10 +100,8 @@ final class LoginPresenter: LoginPresenterProtocol {
     }
 
     func setSecurity(_ isSecurity: Bool) {
-        if isSecurity == true {
-            view?.showPassword(UIImage(systemName: Constants.eyeImageName) ?? UIImage(), false)
-        } else if isSecurity == false {
-            view?.showPassword(UIImage(systemName: Constants.eyeSlashImageName) ?? UIImage(), true)
-        }
+        let imageName = isSecurity ? Constants.eyeImageName : Constants.eyeSlashImageName
+        let shouldHidePassword = isSecurity ? false : true
+        view?.showPassword(imageName, shouldHidePassword)
     }
 }

@@ -7,7 +7,7 @@ final class AppCoordinator: BaseCoordinator {
     private var appBuilder = Builder()
 
     override func start() {
-        if "admin" != "admin" {
+        if "admin" == "admin" {
             tabBarMain()
         } else {
             t​oLogin()
