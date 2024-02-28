@@ -14,4 +14,19 @@ final class ProfileCoordinator: BaseCoordinator {
     func presentTemsPolicyController() {
         print("Показываем экран с текстом")
     }
+
+    func presentBonusesController() {
+        let bonusesViewController = BonusesViewController()
+        let bonusesPresenter = BonusesPresenter(view: bonusesViewController)
+        bonusesViewController.bonusesPresenter = bonusesPresenter
+        bonusesPresenter.profileCoordinator = self
+        if let sheet = bonusesViewController.sheetPresentationController {
+            sheet.detents = [.custom { _ in 355 }]
+        }
+        rootViewController.present(bonusesViewController, animated: true)
+    }
+
+    func closeBonuses() {
+        rootViewController.dismiss(animated: true)
+    }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Протокол предоставляет информацию о типе модели
+/// Протокол для типов моделей
 protocol CellTypeProtocol {
     var cellType: CellsTypes { get }
 }

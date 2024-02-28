@@ -4,11 +4,20 @@
 import UIKit
 
 /// Ячейка с бонусами
-class BonusesTableViewCell: UITableViewCell {
-    let groundView = UIView()
-    let titleLabel = UILabel()
-    let arrowButton = UIButton()
-    let starImageView = UIImageView()
+final class BonusesTableViewCell: UITableViewCell {
+    // MARK: - Visual Components
+
+    private let groundView = UIView()
+    private let titleLabel = UILabel()
+    private let arrowButton = UIButton()
+    private let starImageView = UIImageView()
+
+    // MARK: - Public Properties
+
+    // кложура для нажатия стрелки в ячейке
+    var arrowTapHandler: (() -> ())?
+
+    // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,12 +32,25 @@ class BonusesTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureCell(model: Bonuses) {
-        starImageView.image = UIImage(named: model.imageName)
-        titleLabel.text = model.itemTitle
+    // MARK: - Public Methods
+
+    func configureCell(model: Bonuses, tapButton: (() -> ())?) {
+        configureImage(nameImage: model.imageName)
+        configureLabel(title: model.itemTitle)
+        arrowTapHandler = tapButton
     }
 
-    func configureGroundView() {
+    // MARK: - Private Methods
+
+    private func configureImage(nameImage: String) {
+        starImageView.image = UIImage(named: nameImage)
+    }
+
+    private func configureLabel(title: String) {
+        titleLabel.text = title
+    }
+
+    private func configureGroundView() {
         contentView.addSubview(groundView)
         groundView.backgroundColor = #colorLiteral(red: 0.9559337497, green: 0.9685742259, blue: 0.9688379169, alpha: 1)
         groundView.layer.cornerRadius = 12
@@ -40,11 +62,10 @@ class BonusesTableViewCell: UITableViewCell {
         groundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
     }
 
-    func configureTitleLabel() {
+    private func configureTitleLabel() {
         contentView.addSubview(titleLabel)
         titleLabel.font = UIFont.systemFont(ofSize: 18)
         titleLabel.textColor = #colorLiteral(red: 0.3469149768, green: 0.4360020161, blue: 0.475877285, alpha: 1)
-        // titleLabel.textAlignment = .right
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.widthAnchor.constraint(equalToConstant: 224).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
@@ -52,7 +73,7 @@ class BonusesTableViewCell: UITableViewCell {
         titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
 
-    func configureStarImage() {
+    private func configureStarImage() {
         groundView.addSubview(starImageView)
         starImageView.translatesAutoresizingMaskIntoConstraints = false
         starImageView.widthAnchor.constraint(equalToConstant: 23.34).isActive = true
@@ -61,7 +82,7 @@ class BonusesTableViewCell: UITableViewCell {
         starImageView.centerXAnchor.constraint(equalTo: groundView.centerXAnchor).isActive = true
     }
 
-    func configureArrowButton() {
+    private func configureArrowButton() {
         contentView.addSubview(arrowButton)
         arrowButton.setImage(UIImage(named: AppConstants.arrowName), for: .normal)
         arrowButton.translatesAutoresizingMaskIntoConstraints = false
@@ -69,5 +90,10 @@ class BonusesTableViewCell: UITableViewCell {
         arrowButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         arrowButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
         arrowButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        arrowButton.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
+    }
+
+    @objc private func tappedButton() {
+        arrowTapHandler?()
     }
 }

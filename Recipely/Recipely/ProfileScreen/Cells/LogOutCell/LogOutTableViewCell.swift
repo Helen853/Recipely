@@ -3,12 +3,16 @@
 
 import UIKit
 
-/// Ячейка с выходом
-class LogOutTableViewCell: UITableViewCell {
-    let groundView = UIView()
-    let titleLabel = UILabel()
-    let arrowButton = UIButton()
-    let logoutImageView = UIImageView()
+/// Ячейка с выходом из профиля
+final class LogOutTableViewCell: UITableViewCell {
+    // MARK: - Visual Components
+
+    private let groundView = UIView()
+    private let titleLabel = UILabel()
+    private let arrowButton = UIButton()
+    private let logoutImageView = UIImageView()
+
+    // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,12 +27,24 @@ class LogOutTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Public Methods
+
     func configureCell(model: LogOut) {
-        logoutImageView.image = UIImage(named: model.imageName)
-        titleLabel.text = model.itemTitle
+        configureImage(nameImage: model.imageName)
+        configureTitleLabel(title: model.itemTitle)
     }
 
-    func configureGroundView() {
+    // MARK: - Private Methods
+
+    private func configureImage(nameImage: String) {
+        logoutImageView.image = UIImage(named: nameImage)
+    }
+
+    private func configureTitleLabel(title: String) {
+        titleLabel.text = title
+    }
+
+    private func configureGroundView() {
         contentView.addSubview(groundView)
         groundView.backgroundColor = #colorLiteral(red: 0.9559337497, green: 0.9685742259, blue: 0.9688379169, alpha: 1)
         groundView.layer.cornerRadius = 12
@@ -40,11 +56,10 @@ class LogOutTableViewCell: UITableViewCell {
         groundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
     }
 
-    func configureTitleLabel() {
+    private func configureTitleLabel() {
         contentView.addSubview(titleLabel)
         titleLabel.font = UIFont.systemFont(ofSize: 18)
         titleLabel.textColor = #colorLiteral(red: 0.3469149768, green: 0.4360020161, blue: 0.475877285, alpha: 1)
-        // titleLabel.textAlignment = .right
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.widthAnchor.constraint(equalToConstant: 224).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
@@ -52,18 +67,16 @@ class LogOutTableViewCell: UITableViewCell {
         titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
 
-    func configureLogoutImage() {
+    private func configureLogoutImage() {
         groundView.addSubview(logoutImageView)
         logoutImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoutImageView.tintColor = #colorLiteral(red: 0.5131713152, green: 0.7742882967, blue: 0.7948206067, alpha: 1)
-
-        logoutImageView.widthAnchor.constraint(equalToConstant: 16.33).isActive = true
+        logoutImageView.widthAnchor.constraint(equalToConstant: 24.24).isActive = true
         logoutImageView.heightAnchor.constraint(equalToConstant: 23.33).isActive = true
         logoutImageView.centerYAnchor.constraint(equalTo: groundView.centerYAnchor).isActive = true
         logoutImageView.centerXAnchor.constraint(equalTo: groundView.centerXAnchor).isActive = true
     }
 
-    func configureArrowButton() {
+    private func configureArrowButton() {
         contentView.addSubview(arrowButton)
         arrowButton.setImage(UIImage(named: AppConstants.arrowName), for: .normal)
         arrowButton.translatesAutoresizingMaskIntoConstraints = false

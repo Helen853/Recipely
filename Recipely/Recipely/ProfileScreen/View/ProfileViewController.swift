@@ -3,16 +3,28 @@
 
 import UIKit
 
+/// Протокол для экрана профиля
+protocol ProfileViewProtocol: AnyObject {
+    func configureAlert()
+    func changeLabel(updateName: String)
+}
+
 /// Экран профиля пользователя
-class ProfileViewController: UIViewController {
-    var profilePresenter: ProfilePresenter?
+final class ProfileViewController: UIViewController {
+    // MARK: - Visual Components
 
     private let tableView = UITableView()
 
+    // MARK: - Public Properties
+
+    var profilePresenter: ProfilePresenter?
     var onTapHandler: (() -> ())?
+    var arrowTapHandler: (() -> ())?
+
+    // MARK: - Private Properties
 
     // Массив с моделями ячеек
-    private let cells: [CellTypeProtocol] = [
+    private var cells: [CellTypeProtocol] = [
         Info(
             imageName: AppConstants.avatarName,
             fullName: AppConstants.fullName
@@ -31,18 +43,30 @@ class ProfileViewController: UIViewController {
         )
     ]
 
+    // MARK: - Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTitle()
         configureTable()
         registerCell()
         onTap()
+        tappedArrowButton()
     }
 
-    func onTap() {
+    // MARK: - Private Methods
+
+    private func onTap() {
         onTapHandler = { [weak self] in
             guard let self = self else { return }
             profilePresenter?.showAlert()
+        }
+    }
+
+    private func tappedArrowButton() {
+        arrowTapHandler = { [weak self] in
+            guard let self = self else { return }
+            profilePresenter?.showBonuses()
         }
     }
 
@@ -53,9 +77,7 @@ class ProfileViewController: UIViewController {
 
     private func configureTable() {
         view.addSubview(tableView)
-        // tableView.delegate = self
         tableView.dataSource = self
-        // tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -84,13 +106,9 @@ class ProfileViewController: UIViewController {
     }
 }
 
-// MARK: - Extension UITableViewDataSource
+// MARK: - Extension ProfileViewController + UITableViewDataSource
 
 extension ProfileViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         cells.count
     }
@@ -117,7 +135,7 @@ extension ProfileViewController: UITableViewDataSource {
             else {
                 return UITableViewCell()
             }
-            cell.configureCell(model: model)
+            cell.configureCell(model: model, tapButton: arrowTapHandler)
             return cell
         case .terms:
             guard
@@ -143,22 +161,43 @@ extension ProfileViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - Extension ProfileViewProtocol
+// MARK: - Extension ProfileViewController + ProfileViewProtocol
 
+/// Имплементация ProfileViewProtocol
 extension ProfileViewController: ProfileViewProtocol {
+    // настройка алерта
     func configureAlert() {
         let alertController = UIAlertController(
             title: AppConstants.changeAlertTitle,
             message: nil,
             preferredStyle: .alert
         )
-        let actionCancel = UIAlertAction(title: "Отмена", style: .default)
-        let actionOk = UIAlertAction(title: "Ok", style: .cancel)
+        let actionCancel = UIAlertAction(title: AppConstants.cancel, style: .default)
+        let actionOk = UIAlertAction(title: AppConstants.ok, style: .cancel) { _ in
+            guard let text = alertController.textFields?.first?.text else { return }
+            self.tapActionOk(text: text)
+        }
         alertController.addTextField { title in
             title.placeholder = AppConstants.placeholderText
         }
         alertController.addAction(actionCancel)
         alertController.addAction(actionOk)
         present(alertController, animated: true)
+    }
+
+    /// Уведомляем презентер о нажатии на "ок" в алерте
+    /// - Parametr: текст из текстфилда
+    func tapActionOk(text: String) {
+        profilePresenter?.changeName(text: text)
+    }
+
+    /// Изменение текста лейбла с именем
+    /// - Parametr: новое имя
+    func changeLabel(updateName: String) {
+        cells[0] = Info(
+            imageName: AppConstants.avatarName,
+            fullName: updateName
+        )
+        tableView.reloadData()
     }
 }

@@ -15,7 +15,6 @@ struct AppConstants {
     static let logOutIdentifier = "LogoutIdentifier"
 
     static let avatarName = "Avatar"
-    static let fullName = "Surname Name"
     static let changeImageName = "Карандаш"
     static let bonuses = "Bonuses"
     static let termsTitle = "Terms & Privacy Policy"
@@ -27,4 +26,13 @@ struct AppConstants {
     static let placeholderText = "Name Surname"
     static let actionOkTitle = "OK"
     static let actionCancelTitle = "Cancel"
+    static let fullName = "Surname Name"
+    static let bonusesTitle = "Your bonuses"
+    static let countBonusesText = "100"
+    static let boxImageName = "Коробка"
+    static let starImageName = "Звезда"
+    static let closeImageName = "Close"
+    static let cancel = "Cancel"
+    static let ok = "Ok"
+    static let outImageName = "out"
 }

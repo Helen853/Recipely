@@ -35,12 +35,16 @@
 		ED7B3D852B8E091400C04253 /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D842B8E091400C04253 /* TermsTableViewCell.swift */; };
 		ED7B3D872B8E092000C04253 /* LogOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D862B8E092000C04253 /* LogOut.swift */; };
 		ED7B3D892B8E092E00C04253 /* Terms.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D882B8E092E00C04253 /* Terms.swift */; };
+		ED7B3D8C2B8E43E000C04253 /* BonusesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D8B2B8E43E000C04253 /* BonusesViewController.swift */; };
+		ED7B3D912B8E545400C04253 /* BonusesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D902B8E545400C04253 /* BonusesPresenter.swift */; };
+		ED7B3D932B8E546900C04253 /* Bonus.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3D922B8E546800C04253 /* Bonus.swift */; };
 		ED957B822B8CD64C00761177 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED957B812B8CD64C00761177 /* AppDelegate.swift */; };
 		ED957B842B8CD64C00761177 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED957B832B8CD64C00761177 /* SceneDelegate.swift */; };
 		ED957B862B8CD64C00761177 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED957B852B8CD64C00761177 /* LoginViewController.swift */; };
 		ED957B892B8CD64C00761177 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED957B872B8CD64C00761177 /* Main.storyboard */; };
-		ED957B8B2B8CD64E00761177 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED957B8A2B8CD64E00761177 /* Assets.xcassets */; };
 		ED957B8E2B8CD64E00761177 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED957B8C2B8CD64E00761177 /* LaunchScreen.storyboard */; };
+		ED9F30812B8F0DBF0069D8E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED9F30802B8F0DBF0069D8E2 /* Assets.xcassets */; };
+		EDEB6B6A2B8E7D1400F4DBB2 /* TermsPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB6B692B8E7D1400F4DBB2 /* TermsPolicyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,14 +76,18 @@
 		ED7B3D842B8E091400C04253 /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
 		ED7B3D862B8E092000C04253 /* LogOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOut.swift; sourceTree = "<group>"; };
 		ED7B3D882B8E092E00C04253 /* Terms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terms.swift; sourceTree = "<group>"; };
+		ED7B3D8B2B8E43E000C04253 /* BonusesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusesViewController.swift; sourceTree = "<group>"; };
+		ED7B3D902B8E545400C04253 /* BonusesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusesPresenter.swift; sourceTree = "<group>"; };
+		ED7B3D922B8E546800C04253 /* Bonus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bonus.swift; sourceTree = "<group>"; };
 		ED957B7E2B8CD64C00761177 /* Recipely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED957B812B8CD64C00761177 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED957B832B8CD64C00761177 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		ED957B852B8CD64C00761177 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ED957B882B8CD64C00761177 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		ED957B8A2B8CD64E00761177 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED957B8D2B8CD64E00761177 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED957B8F2B8CD64E00761177 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED9F30802B8F0DBF0069D8E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
+		EDEB6B692B8E7D1400F4DBB2 /* TermsPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsPolicyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +251,40 @@
 			path = LogOutCell;
 			sourceTree = "<group>";
 		};
+		ED7B3D8A2B8E43AC00C04253 /* BonusesScreen */ = {
+			isa = PBXGroup;
+			children = (
+				ED7B3D8F2B8E543600C04253 /* View */,
+				ED7B3D8E2B8E542E00C04253 /* Model */,
+				ED7B3D8D2B8E542500C04253 /* Presenter */,
+			);
+			path = BonusesScreen;
+			sourceTree = "<group>";
+		};
+		ED7B3D8D2B8E542500C04253 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				ED7B3D902B8E545400C04253 /* BonusesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		ED7B3D8E2B8E542E00C04253 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED7B3D922B8E546800C04253 /* Bonus.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ED7B3D8F2B8E543600C04253 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED7B3D8B2B8E43E000C04253 /* BonusesViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		ED957B752B8CD64C00761177 = {
 			isa = PBXGroup;
 			children = (
@@ -262,13 +304,14 @@
 		ED957B802B8CD64C00761177 /* Recipely */ = {
 			isa = PBXGroup;
 			children = (
+				EDEB6B652B8E7CBC00F4DBB2 /* TermsPolicyScreen */,
+				ED7B3D8A2B8E43AC00C04253 /* BonusesScreen */,
 				0422275F2B8D694D00D6F2D2 /* Coordinaters */,
 				ED957BA82B8CE94900761177 /* ProfileScreen */,
 				ED957BA72B8CE83E00761177 /* FavoritesScreen */,
 				ED957BA62B8CE7ED00761177 /* RecipesScreeen */,
 				ED957B872B8CD64C00761177 /* Main.storyboard */,
 				ED957BA92B8CE95E00761177 /* LoginScreen */,
-				ED957B8A2B8CD64E00761177 /* Assets.xcassets */,
 				ED957B8C2B8CD64E00761177 /* LaunchScreen.storyboard */,
 				ED957B8F2B8CD64E00761177 /* Info.plist */,
 				ED957BAB2B8CE99200761177 /* TabBar */,
@@ -320,6 +363,7 @@
 		ED957BAA2B8CE96F00761177 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
+				ED9F30802B8F0DBF0069D8E2 /* Assets.xcassets */,
 				ED957B832B8CD64C00761177 /* SceneDelegate.swift */,
 				ED957B812B8CD64C00761177 /* AppDelegate.swift */,
 				ED7B3D2C2B8CEFB000C04253 /* AppConstants.swift */,
@@ -333,6 +377,38 @@
 				ED7B3D242B8CEA9A00C04253 /* MainTabBarViewController.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		EDEB6B652B8E7CBC00F4DBB2 /* TermsPolicyScreen */ = {
+			isa = PBXGroup;
+			children = (
+				EDEB6B682B8E7CF400F4DBB2 /* Presenter */,
+				EDEB6B672B8E7CEA00F4DBB2 /* View */,
+				EDEB6B662B8E7CE200F4DBB2 /* Model */,
+			);
+			path = TermsPolicyScreen;
+			sourceTree = "<group>";
+		};
+		EDEB6B662B8E7CE200F4DBB2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EDEB6B672B8E7CEA00F4DBB2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EDEB6B692B8E7D1400F4DBB2 /* TermsPolicyViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EDEB6B682B8E7CF400F4DBB2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,7 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED957B8E2B8CD64E00761177 /* LaunchScreen.storyboard in Resources */,
-				ED957B8B2B8CD64E00761177 /* Assets.xcassets in Resources */,
+				ED9F30812B8F0DBF0069D8E2 /* Assets.xcassets in Resources */,
 				ED957B892B8CD64C00761177 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,12 +531,14 @@
 				ED7B3D832B8E090800C04253 /* LogOutTableViewCell.swift in Sources */,
 				ED7B3D792B8DEBB100C04253 /* CellProtocol.swift in Sources */,
 				0422276C2B8D6AF800D6F2D2 /* RecipesPresenter.swift in Sources */,
+				ED7B3D912B8E545400C04253 /* BonusesPresenter.swift in Sources */,
 				ED7B3D7D2B8DEBB100C04253 /* Info.swift in Sources */,
 				ED7B3D252B8CEA9A00C04253 /* MainTabBarViewController.swift in Sources */,
 				042227612B8D697500D6F2D2 /* BaseCoordinator.swift in Sources */,
 				042227732B8D6EA900D6F2D2 /* Favorites.swift in Sources */,
 				ED7B3D852B8E091400C04253 /* TermsTableViewCell.swift in Sources */,
 				042227632B8D6A1A00D6F2D2 /* AppCoordinator.swift in Sources */,
+				ED7B3D932B8E546900C04253 /* Bonus.swift in Sources */,
 				042227682B8D6AB400D6F2D2 /* FavoritesPresenter.swift in Sources */,
 				ED7B3D2B2B8CEB2900C04253 /* RecipesViewController.swift in Sources */,
 				ED7B3D7A2B8DEBB100C04253 /* Bonuses.swift in Sources */,
@@ -471,12 +549,14 @@
 				ED7B3D272B8CEAD200C04253 /* ProfileViewController.swift in Sources */,
 				0422277E2B8D70F000D6F2D2 /* ProfileCoordinator.swift in Sources */,
 				0422276E2B8D6BB600D6F2D2 /* RecipesCoordinator.swift in Sources */,
+				ED7B3D8C2B8E43E000C04253 /* BonusesViewController.swift in Sources */,
 				042227712B8D6E7600D6F2D2 /* Recipes.swift in Sources */,
 				ED957B822B8CD64C00761177 /* AppDelegate.swift in Sources */,
 				ED7B3D892B8E092E00C04253 /* Terms.swift in Sources */,
 				042227752B8D6F6E00D6F2D2 /* FavoritesCoordinator.swift in Sources */,
 				ED7B3D7F2B8DEC5000C04253 /* LoginViewControllerCoordinator.swift in Sources */,
 				ED7B3D782B8DEBB100C04253 /* CellsTypes.swift in Sources */,
+				EDEB6B6A2B8E7D1400F4DBB2 /* TermsPolicyViewController.swift in Sources */,
 				0422277C2B8D709600D6F2D2 /* ProfilePresenter.swift in Sources */,
 				ED7B3D292B8CEB1A00C04253 /* FavoritesViewController.swift in Sources */,
 				ED7B3D2D2B8CEFB000C04253 /* AppConstants.swift in Sources */,

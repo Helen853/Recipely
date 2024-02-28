@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Элементы
+/// Ячейка выхода с профиля
 struct LogOut: CellTypeProtocol {
     // тип ячейки
     var cellType: CellsTypes = .logOut

@@ -4,11 +4,18 @@
 import UIKit
 
 /// Ячейка с информацией о пользователе
-class InfoTableViewCell: UITableViewCell {
+final class InfoTableViewCell: UITableViewCell {
+    // MARK: - Visual Components
+
     private let avatarImageView = UIImageView()
     private let fullNameLabel = UILabel()
     private let changeButton = UIButton()
+
+    // MARK: - Public Properties
+
     var onTapHandler: (() -> ())?
+
+    // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,16 +29,27 @@ class InfoTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Public Methods
+
     func configureCell(model: Info, tapButton: (() -> ())?) {
-        avatarImageView.image = UIImage(named: model.imageName)
-        fullNameLabel.text = model.fullName
+        configureImage(nameImage: model.imageName)
+        configureLabel(title: model.fullName)
         onTapHandler = tapButton
     }
 
-    func configureAvatar() {
+    // MARK: - Private Methods
+
+    private func configureImage(nameImage: String) {
+        avatarImageView.image = UIImage(named: nameImage)
+    }
+
+    private func configureLabel(title: String) {
+        fullNameLabel.text = title
+    }
+
+    private func configureAvatar() {
         contentView.addSubview(avatarImageView)
         avatarImageView.clipsToBounds = true
-//        avatarImageView.layer.cornerRadius = 15
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         avatarImageView.widthAnchor.constraint(equalToConstant: 160).isActive = true
         avatarImageView.heightAnchor.constraint(equalToConstant: 160).isActive = true
@@ -39,7 +57,7 @@ class InfoTableViewCell: UITableViewCell {
         avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 36).isActive = true
     }
 
-    func configureLabel() {
+    private func configureLabel() {
         contentView.addSubview(fullNameLabel)
         fullNameLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         fullNameLabel.textColor = #colorLiteral(red: 0.3469149768, green: 0.4360020161, blue: 0.475877285, alpha: 1)
@@ -52,7 +70,7 @@ class InfoTableViewCell: UITableViewCell {
         fullNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -29).isActive = true
     }
 
-    func configureButton() {
+    private func configureButton() {
         contentView.addSubview(changeButton)
         changeButton.setImage(UIImage(named: AppConstants.changeImageName), for: .normal)
         changeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +81,7 @@ class InfoTableViewCell: UITableViewCell {
         changeButton.addTarget(self, action: #selector(onTap), for: .touchUpInside)
     }
 
-    @objc func onTap() {
+    @objc private func onTap() {
         onTapHandler?()
     }
 }
