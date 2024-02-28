@@ -48,13 +48,14 @@ final class LoginPresenter: LoginPresenterProtocol {
 
     // MARK: - Public Properties
 
-    weak var loginCoordinator: LoginCoordinator?
+    private weak var loginCoordinator: LoginCoordinator?
     private weak var view: LoginViewControllerProtocol?
 
     // MARK: - Initializers
 
-    required init(view: LoginViewControllerProtocol) {
+    required init(view: LoginViewControllerProtocol, coordinator: LoginCoordinator) {
         self.view = view
+        loginCoordinator = coordinator
     }
 
     // MARK: - Public Methods

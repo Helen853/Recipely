@@ -5,10 +5,10 @@ import UIKit
 
 /// Координатор профиля
 final class ProfileCoordinator: BaseCoordinator {
-    var rootViewController: UINavigationController
+    var rootViewController: UINavigationController?
 
-    init(rootViewController: UIViewController) {
-        self.rootViewController = UINavigationController(rootViewController: rootViewController)
+    func setRootViewController(view: UIViewController) {
+        rootViewController = UINavigationController(rootViewController: view)
     }
 
     func presentBonusesController() {
@@ -19,10 +19,10 @@ final class ProfileCoordinator: BaseCoordinator {
         if let sheet = bonusesViewController.sheetPresentationController {
             sheet.detents = [.custom { _ in 355 }]
         }
-        rootViewController.present(bonusesViewController, animated: true)
+        rootViewController?.present(bonusesViewController, animated: true)
     }
 
     func closeBonuses() {
-        rootViewController.dismiss(animated: true)
+        rootViewController?.dismiss(animated: true)
     }
 }

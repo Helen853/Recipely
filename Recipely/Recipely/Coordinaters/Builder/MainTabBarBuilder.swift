@@ -5,9 +5,9 @@ import UIKit
 
 /// Билдер таббара
 final class MainTabBarBuilder {
-    func makeRecipesViewController() -> RecipesViewController {
+    func makeRecipesViewController(coordinator: RecipesCoordinator) -> RecipesViewController {
         let recipesViewController = RecipesViewController()
-        let recipesPresenter = ReciperPresenter(view: recipesViewController)
+        let recipesPresenter = ReciperPresenter(view: recipesViewController, coordinator: coordinator)
         recipesViewController.recipesPresenter = recipesPresenter
         recipesViewController.tabBarItem = UITabBarItem(
             title: AppConstants.recipes,
@@ -17,9 +17,9 @@ final class MainTabBarBuilder {
         return recipesViewController
     }
 
-    func makeFavoritesViewController() -> FavoritesViewController {
+    func makeFavoritesViewController(coordinator: FavoritesCoordinator) -> FavoritesViewController {
         let favoritesViewController = FavoritesViewController()
-        let favoritesPresenter = FavoritesPresenter(view: favoritesViewController)
+        let favoritesPresenter = FavoritesPresenter(view: favoritesViewController, coordinator: coordinator)
         favoritesViewController.fvoritesPresenter = favoritesPresenter
         favoritesViewController.tabBarItem = UITabBarItem(
             title: AppConstants.favorites,
@@ -29,9 +29,9 @@ final class MainTabBarBuilder {
         return favoritesViewController
     }
 
-    func makeProfileViewController() -> ProfileViewController {
+    func makeProfileViewController(coordinator: ProfileCoordinator) -> ProfileViewController {
         let profileViewController = ProfileViewController()
-        let profilePresenter = ProfilePresenter(view: profileViewController)
+        let profilePresenter = ProfilePresenter(view: profileViewController, coordinator: coordinator)
         profileViewController.profilePresenter = profilePresenter
         profileViewController.tabBarItem = UITabBarItem(
             title: AppConstants.profile,

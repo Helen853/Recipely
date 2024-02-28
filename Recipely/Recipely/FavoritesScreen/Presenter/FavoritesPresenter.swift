@@ -10,11 +10,12 @@ protocol FavoritesPresenterProtocol: AnyObject {
 
 /// Презентер экрана с фаворитами
 final class FavoritesPresenter {
-    weak var view: UIViewController?
-    weak var favoritesCoordinator: FavoritesCoordinator?
+    private weak var view: UIViewController?
+    private weak var favoritesCoordinator: FavoritesCoordinator?
 
-    init(view: UIViewController) {
+    init(view: UIViewController, coordinator: FavoritesCoordinator) {
         self.view = view
+        favoritesCoordinator = coordinator
     }
 }
 

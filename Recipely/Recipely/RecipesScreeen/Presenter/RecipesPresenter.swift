@@ -11,10 +11,11 @@ protocol ReciperPresenterProtocol: AnyObject {
 /// Презентер экрана рецептов
 final class ReciperPresenter {
     private weak var view: UIViewController?
-    weak var coordinator: RecipesCoordinator?
+    private weak var coordinator: RecipesCoordinator?
 
-    init(view: UIViewController) {
+    init(view: UIViewController, coordinator: RecipesCoordinator) {
         self.view = view
+        self.coordinator = coordinator
     }
 }
 

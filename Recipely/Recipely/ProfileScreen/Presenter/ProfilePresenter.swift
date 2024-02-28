@@ -13,9 +13,10 @@ protocol ProfilePresenterProtocol {
 /// Презентер экрана профиля
 final class ProfilePresenter {
     private weak var view: ProfileViewProtocol?
-    weak var profileCoordinator: ProfileCoordinator?
-    init(view: ProfileViewProtocol) {
+    private weak var profileCoordinator: ProfileCoordinator?
+    init(view: ProfileViewProtocol, coordinator: ProfileCoordinator) {
         self.view = view
+        profileCoordinator = coordinator
     }
 }
 

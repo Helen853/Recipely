@@ -17,26 +17,32 @@ final class AppCoordinator: BaseCoordinator {
     private func showMainTabBar() {
         mainTabBarController = MainTabBarController()
 
-        let recipesModule = appBuilder.makeRecipesViewController()
-        let recipesCoordinator = RecipesCoordinator(rootViewController: recipesModule)
-        recipesModule.recipesPresenter?.coordinator = recipesCoordinator
+        let recipesCoordinator = RecipesCoordinator()
+        let recipesModule = appBuilder.makeRecipesViewController(coordinator: recipesCoordinator)
+        recipesCoordinator.setRootViewController(view: recipesModule)
         add(coordinator: recipesCoordinator)
 
-        let favoritesModule = appBuilder.makeFavoritesViewController()
-        let favoritesCoordinator = FavoritesCoordinator(rootViewController: favoritesModule)
-        favoritesModule.fvoritesPresenter?.favoritesCoordinator = favoritesCoordinator
+        guard let recipesView = recipesCoordinator.rootViewController else { return }
+
+        let favoritesCoordinator = FavoritesCoordinator()
+        let favoritesModule = appBuilder.makeFavoritesViewController(coordinator: favoritesCoordinator)
+        favoritesCoordinator.setRootViewController(view: favoritesModule)
         add(coordinator: favoritesCoordinator)
 
-        let profileModule = appBuilder.makeProfileViewController()
-        let profileCoordinator = ProfileCoordinator(rootViewController: profileModule)
-        profileModule.profilePresenter?.profileCoordinator = profileCoordinator
+        guard let favoriteView = favoritesCoordinator.rootViewController else { return }
+
+        let profileCoordinator = ProfileCoordinator()
+        let profileModule = appBuilder.makeProfileViewController(coordinator: profileCoordinator)
+        profileCoordinator.setRootViewController(view: profileModule)
         add(coordinator: profileCoordinator)
+
+        guard let profileView = profileCoordinator.rootViewController else { return }
 
         mainTabBarController?.setViewControllers(
             [
-                recipesCoordinator.rootViewController,
-                favoritesCoordinator.rootViewController,
-                profileCoordinator.rootViewController
+                recipesView,
+                favoriteView,
+                profileView
             ],
             animated: true
         )

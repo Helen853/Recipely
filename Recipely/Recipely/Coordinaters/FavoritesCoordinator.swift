@@ -5,9 +5,9 @@ import UIKit
 
 /// Координатор фаворитов
 final class FavoritesCoordinator: BaseCoordinator {
-    var rootViewController: UINavigationController
+    var rootViewController: UINavigationController?
 
-    init(rootViewController: UIViewController) {
-        self.rootViewController = UINavigationController(rootViewController: rootViewController)
+    func setRootViewController(view: UIViewController) {
+        rootViewController = UINavigationController(rootViewController: view)
     }
 }
