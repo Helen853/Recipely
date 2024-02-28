@@ -5,13 +5,15 @@ import UIKit
 
 /// TabBar
 final class MainTabBarController: UITabBarController {
-    // MARK: - Private Methods
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBarAppearance()
         view.backgroundColor = .white
     }
+
+    // MARK: - Private Methods
 
     private func setTabBarAppearance() {
         tabBar.itemPositioning = .centered

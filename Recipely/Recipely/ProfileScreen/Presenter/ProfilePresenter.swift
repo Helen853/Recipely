@@ -3,27 +3,39 @@
 
 import UIKit
 
+///Протокол для презентера экрана профиля
 protocol ProfilePresenterProtocol {
-    func changeName()
+    func changeName(text: String)
     func showTermsPolicy()
+    func showBonuses()
+    func showAlert()
 }
 
 /// Презентер экрана профиля
 final class ProfilePresenter {
-    var view: UIViewController?
-    var profileCoordinator: ProfileCoordinator?
-    init(view: UIViewController) {
+    weak var view: ProfileViewProtocol?
+    weak var profileCoordinator: ProfileCoordinator?
+    init(view: ProfileViewProtocol) {
         self.view = view
     }
 }
 
-/// ProfilePresenter + ProfilePresenterProtocol
+// MARK: - ProfilePresenter + ProfilePresenterProtocol
+
 extension ProfilePresenter: ProfilePresenterProtocol {
-    func changeName() {
-        print("функция по замене имени")
+    func changeName(text: String) {
+        view?.changeLabel(updateName: text)
     }
 
     func showTermsPolicy() {
         profileCoordinator?.presentTemsPolicyController()
+    }
+
+    func showBonuses() {
+        profileCoordinator?.presentBonusesController()
+    }
+
+    func showAlert() {
+        view?.configureAlert()
     }
 }
