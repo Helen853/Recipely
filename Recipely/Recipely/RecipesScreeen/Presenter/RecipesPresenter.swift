@@ -5,7 +5,8 @@ import UIKit
 
 /// Протокол для RecipesPresenter
 protocol ReciperPresenterProtocol: AnyObject {
-    // открываем ячейку
+    /// Открытие ячейку
+    /// -   Parametr: тип ячейки
     func openCell(type: CategoryCellType)
 }
 
@@ -13,7 +14,6 @@ protocol ReciperPresenterProtocol: AnyObject {
 final class RecipesPresenter {
     private weak var view: UIViewController?
     private weak var coordinator: RecipesCoordinator?
-
     init(view: UIViewController, coordinator: RecipesCoordinator) {
         self.view = view
         self.coordinator = coordinator

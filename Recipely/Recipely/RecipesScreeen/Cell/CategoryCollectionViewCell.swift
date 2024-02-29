@@ -9,6 +9,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
+
     var categoryTapHandler: ((_ type: CategoryCellType) -> ())?
     var category: Category?
 
@@ -76,7 +77,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
 
-    @objc func tappedImage() {
+    @objc private func tappedImage() {
         categoryTapHandler?(category?.categoryType ?? .chicken)
     }
 }

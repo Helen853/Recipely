@@ -5,9 +5,14 @@ import UIKit
 
 /// Экран рецептов
 final class RecipesViewController: UIViewController {
+    // MARK: - Public Properties
+
     var recipesPresenter: RecipesPresenter?
     var categoryTapHandler: ((_ type: CategoryCellType) -> ())?
 
+    // MARK: - Private Properties
+
+    // Массив с моделями ячеек категорий
     private var categories: [Category] = [
         Category(
             cellType: .medium,
@@ -74,12 +79,16 @@ final class RecipesViewController: UIViewController {
         )
     ]
 
+    // MARK: - Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         configureCollection()
         categoryTapped()
     }
+
+    // MARK: - Private Methods
 
     private func categoryTapped() {
         categoryTapHandler = { [weak self] type in
@@ -112,7 +121,6 @@ final class RecipesViewController: UIViewController {
     private func setupFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 15
-        // layout.minimumInteritemSpacing = 10
         return layout
     }
 }
