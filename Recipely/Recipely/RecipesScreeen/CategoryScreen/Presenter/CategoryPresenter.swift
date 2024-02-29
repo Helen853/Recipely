@@ -7,6 +7,9 @@ import Foundation
 protocol CategoryViewControllerProtocol: AnyObject {
     /// Функция замены тайтла страницы и добавление элементов из хранилища
     func uppdateRecipes(_ recipes: [Recipes], _ title: String)
+    /// Обновление кнопки
+    func updateButtonCalories(_ state: SortingState)
+    func updateButtonTimer(_ state: SortingState)
 }
 
 /// Протокол CategoryPresenter
@@ -16,6 +19,9 @@ protocol CategoryPresenterProtocol: AnyObject {
     var coordinator: RecipesCoordinator? { get set }
     /// Получение рецептов
     func returnRecipes(_ type: CategoryCellType)
+    /// Обновление статуса
+    func updateSortingStateCaloriesButton()
+    func updateSortingStateTimeButton()
 }
 
 /// Презентер экрана категорий
@@ -36,6 +42,7 @@ final class CategoryPresenter: CategoryPresenterProtocol {
 
     // MARK: - Private Properties
 
+    private var state: SortingState = .none
     private weak var view: CategoryViewControllerProtocol?
     weak var coordinator: RecipesCoordinator?
 
@@ -73,5 +80,29 @@ final class CategoryPresenter: CategoryPresenterProtocol {
         case .desserts:
             view?.uppdateRecipes(storage.chicken, Constants.desserts)
         }
+    }
+
+    func updateSortingStateCaloriesButton() {
+        switch state {
+        case .none:
+            state = .up
+        case .up:
+            state = .down
+        case .down:
+            state = .none
+        }
+        view?.updateButtonCalories(state)
+    }
+
+    func updateSortingStateTimeButton() {
+        switch state {
+        case .none:
+            state = .up
+        case .up:
+            state = .down
+        case .down:
+            state = .none
+        }
+        view?.updateButtonTimer(state)
     }
 }

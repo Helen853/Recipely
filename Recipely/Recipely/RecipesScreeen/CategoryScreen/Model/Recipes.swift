@@ -12,3 +12,13 @@ struct Recipes {
     // Калории
     var foodKkal: String
 }
+
+/// Сотстония кнопок
+enum SortingState {
+    // Кнопка не нажата
+    case none
+    // Сортировка по возрастанию
+    case up
+    // Сортировка по убыванию
+    case down
+}
