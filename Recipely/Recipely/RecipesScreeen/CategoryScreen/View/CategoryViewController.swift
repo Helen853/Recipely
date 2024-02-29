@@ -4,7 +4,7 @@
 import UIKit
 
 /// Экран категорий
-class CategoryViewController: UIViewController {
+final class CategoryViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
@@ -97,7 +97,7 @@ class CategoryViewController: UIViewController {
 
     // MARK: - Public Methods
 
-    func setupCatergory(_ type: CategoryCellType) {
+    func setupCategory(_ type: CategoryCellType) {
         categoryPresenter?.returnRecipes(type)
     }
 
@@ -233,6 +233,9 @@ extension CategoryViewController: UITableViewDataSource {
 
 /// CategoryViewController + CategoryViewControllerProtocol
 extension CategoryViewController: CategoryViewControllerProtocol {
+    // Обновляется массив с рецептами и название экрана
+    // - Parametr: массив рецептов
+    // - Parametr: тайтл для навигейшенБара
     func uppdateRecipes(_ recipes: [Recipes], _ title: String) {
         self.recipes = recipes
         titleScreen = title
