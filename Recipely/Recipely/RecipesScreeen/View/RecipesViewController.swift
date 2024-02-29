@@ -6,7 +6,7 @@ import UIKit
 /// Экран рецептов
 final class RecipesViewController: UIViewController {
     var recipesPresenter: RecipesPresenter?
-    var categoryTapHandler: VoidHandler?
+    var categoryTapHandler: ((_ type: CategoryCellType) -> ())?
 
     private var categories: [Category] = [
         Category(
@@ -14,63 +14,63 @@ final class RecipesViewController: UIViewController {
             imageName: AppConstants.salad,
             categoryName: AppConstants.salad,
             hightTitle: 30,
-            sizeText: 20
+            sizeText: 20, categoryType: .salad
         ),
         Category(
             cellType: .medium,
             imageName: AppConstants.soup,
             categoryName: AppConstants.soup,
             hightTitle: 30,
-            sizeText: 20
+            sizeText: 20, categoryType: .soup
         ),
         Category(
             cellType: .large,
             imageName: AppConstants.chicken,
             categoryName: AppConstants.chicken,
             hightTitle: 50,
-            sizeText: 20
+            sizeText: 20, categoryType: .chicken
         ),
         Category(
             cellType: .small,
             imageName: AppConstants.meat,
             categoryName: AppConstants.meat,
             hightTitle: 28.6,
-            sizeText: 16
+            sizeText: 16, categoryType: .meat
         ),
         Category(
             cellType: .small,
             imageName: AppConstants.fish,
             categoryName: AppConstants.fish,
             hightTitle: 28.6,
-            sizeText: 16
+            sizeText: 16, categoryType: .fish
         ),
         Category(
             cellType: .small,
             imageName: AppConstants.sideDish,
             categoryName: AppConstants.sideDish,
             hightTitle: 28.6,
-            sizeText: 16
+            sizeText: 16, categoryType: .sideDish
         ),
         Category(
             cellType: .large,
             imageName: AppConstants.drinks,
             categoryName: AppConstants.drinks,
             hightTitle: 50,
-            sizeText: 20
+            sizeText: 20, categoryType: .drinks
         ),
         Category(
             cellType: .medium,
             imageName: AppConstants.pancake,
             categoryName: AppConstants.pancake,
             hightTitle: 30,
-            sizeText: 20
+            sizeText: 20, categoryType: .pancake
         ),
         Category(
             cellType: .medium,
             imageName: AppConstants.desserts,
             categoryName: AppConstants.desserts,
             hightTitle: 30,
-            sizeText: 20
+            sizeText: 20, categoryType: .desserts
         )
     ]
 
@@ -82,9 +82,9 @@ final class RecipesViewController: UIViewController {
     }
 
     private func categoryTapped() {
-        categoryTapHandler = { [weak self] in
+        categoryTapHandler = { [weak self] type in
             guard let self = self else { return }
-            recipesPresenter?.openCell()
+            recipesPresenter?.openCell(type: type)
         }
     }
 

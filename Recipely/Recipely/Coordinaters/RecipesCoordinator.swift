@@ -11,7 +11,8 @@ final class RecipesCoordinator: BaseCoordinator {
         rootViewController = UINavigationController(rootViewController: view)
     }
 
-    func pushDetailViewController() {
-        debugPrint("Переход на экран с рецептами")
+    func pushDetailViewController(type: CategoryCellType) {
+        let categoryVewController = CategoryViewController()
+        rootViewController?.pushViewController(categoryVewController, animated: true)
     }
 }

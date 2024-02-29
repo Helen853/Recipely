@@ -91,7 +91,7 @@ class CategoryViewController: UIViewController {
         .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274"),
         .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274"),
         .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274"),
-        .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274"),
+        .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274")
     ]
     private lazy var items: [CellTypes] = [
         .foods(recipes)

@@ -6,7 +6,7 @@ import UIKit
 /// Протокол для RecipesPresenter
 protocol ReciperPresenterProtocol: AnyObject {
     // открываем ячейку
-    func openCell()
+    func openCell(type: CategoryCellType)
 }
 
 /// Презентер экрана рецептов
@@ -22,7 +22,7 @@ final class RecipesPresenter {
 
 /// ReciperPresenter + ReciperPresenterProtocol
 extension RecipesPresenter: ReciperPresenterProtocol {
-    func openCell() {
-        coordinator?.pushDetailViewController()
+    func openCell(type: CategoryCellType) {
+        coordinator?.pushDetailViewController(type: type)
     }
 }

@@ -9,7 +9,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
-    var categoryTapHandler: VoidHandler?
+    var categoryTapHandler: ((_ type: CategoryCellType) -> ())?
+    var category: Category?
 
     // MARK: - Initializers
 
@@ -27,7 +28,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public Methods
 
-    func configureCell(model: Category, handler: VoidHandler?) {
+    func configureCell(model: Category, handler: ((_ type: CategoryCellType) -> ())?) {
+        category = model
         imageView.image = UIImage(named: model.imageName)
         configureTextLabel(model: model)
         categoryTapHandler = handler
@@ -75,6 +77,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
 
     @objc func tappedImage() {
-        categoryTapHandler?()
+        categoryTapHandler?(category?.categoryType ?? .chicken)
     }
 }
