@@ -4,7 +4,20 @@
 import UIKit
 
 /// Ячейка с едой
-class FoodCell: UITableViewCell {
+final class FoodCell: UITableViewCell {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let fontVerdana = "Verdana"
+        static let timerImageViewName = "timer"
+        static let pizzaImageViewName = "pizza"
+        static let nextButtonImageName = "goToDetailsArrow"
+        static let timeLabelText = " min"
+        static let pizzaLabelText = " kkal"
+    }
+
+    // MARK: - VIsual Components
+
     private let uiViewBackground: UIView = {
         let uiView = UIView()
         uiView.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
@@ -23,7 +36,7 @@ class FoodCell: UITableViewCell {
         let label = UILabel()
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
-        label.font = UIFont(name: "Verdana", size: 14)
+        label.font = UIFont(name: Constants.fontVerdana, size: 14)
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -31,38 +44,40 @@ class FoodCell: UITableViewCell {
 
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Verdana", size: 12)
+        label.font = UIFont(name: Constants.fontVerdana, size: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private let timerImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "timer")
+        imageView.image = UIImage(named: Constants.timerImageViewName)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
     private let pizzaImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "pizza")
+        imageView.image = UIImage(named: Constants.pizzaImageViewName)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
     private let pizzaLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Verdana", size: 12)
+        label.font = UIFont(name: Constants.fontVerdana, size: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private let nextButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "goToDetailsArrow"), for: .normal)
+        button.setImage(UIImage(named: Constants.nextButtonImageName), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+
+    // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -77,12 +92,16 @@ class FoodCell: UITableViewCell {
         setupAnchors()
     }
 
+    // MARK: - Public Methods
+
     func configure(with items: Recipes) {
         recipeImageView.image = UIImage(named: items.imageFoodName)
         titleRecipe.text = items.foodName
-        timeLabel.text = items.foodTime + " min"
-        pizzaLabel.text = items.foodKkal + " kkal"
+        timeLabel.text = items.foodTime + Constants.timeLabelText
+        pizzaLabel.text = items.foodKkal + Constants.pizzaLabelText
     }
+
+    // MARK: - Private Methods
 
     private func setupViews() {
         contentView.addSubview(uiViewBackground)

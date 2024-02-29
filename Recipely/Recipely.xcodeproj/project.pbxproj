@@ -13,6 +13,7 @@
 		04FEC31F2B8F945C0091D767 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31E2B8F945C0091D767 /* Recipes.swift */; };
 		04FEC3252B8F95F70091D767 /* CellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC3242B8F95F70091D767 /* CellTypes.swift */; };
 		04FEC32D2B8F9EB60091D767 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC32C2B8F9EB60091D767 /* RecipeCell.swift */; };
+		04FEC3312B90B2D00091D767 /* StorageRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC3302B90B2D00091D767 /* StorageRecipes.swift */; };
 		12BB284FF2ACBC8F06288E15 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E79B398C0013840C670AA /* UIView+Extension.swift */; };
 		16983A61F50F4264F0AAFC71 /* Bonus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6A4A22F74191B2876F487D /* Bonus.swift */; };
 		1BF3BBA0AE4AEFF3F97228A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38EF68AA2BBA5083D179CDBD /* Main.storyboard */; };
@@ -66,6 +67,7 @@
 		04FEC31E2B8F945C0091D767 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
 		04FEC3242B8F95F70091D767 /* CellTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTypes.swift; sourceTree = "<group>"; };
 		04FEC32C2B8F9EB60091D767 /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
+		04FEC3302B90B2D00091D767 /* StorageRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRecipes.swift; sourceTree = "<group>"; };
 		05C175DA0ADB8C7AEB0D8A50 /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		1507AE6FE0F316A788136337 /* CellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocol.swift; sourceTree = "<group>"; };
 		195F53FE1C150A44C6F01724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				26C44E8FCFFA0BE0FCF62877 /* Info.plist */,
 				E1F27B60849A7196363239AB /* LaunchScreen.storyboard */,
 				38EF68AA2BBA5083D179CDBD /* Main.storyboard */,
+				04FEC3302B90B2D00091D767 /* StorageRecipes.swift */,
 			);
 			path = Recipely;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				8D2B7E9120A126911D6EF3A3 /* Bonuses.swift in Sources */,
 				04FEC32D2B8F9EB60091D767 /* RecipeCell.swift in Sources */,
 				788649B3899EA19983CDBE6D /* BonusesPresenter.swift in Sources */,
+				04FEC3312B90B2D00091D767 /* StorageRecipes.swift in Sources */,
 				DF74EB171B6BB6DA1FE55530 /* BonusesTableViewCell.swift in Sources */,
 				C177D56382AE30999FEA8D1F /* BonusesViewController.swift in Sources */,
 				ED9F30AA2B8FBED00069D8E2 /* Category.swift in Sources */,

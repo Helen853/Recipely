@@ -12,7 +12,14 @@ final class RecipesCoordinator: BaseCoordinator {
     }
 
     func pushDetailViewController(type: CategoryCellType) {
-        let categoryVewController = CategoryViewController()
+        let categoryVewController = MainTabBarBuilder().makeCategoryViewcontroller()
+        categoryVewController.categoryPresenter?.coordinator = self
+        categoryVewController.setupCatergory(type)
+        categoryVewController.hidesBottomBarWhenPushed = true
         rootViewController?.pushViewController(categoryVewController, animated: true)
+    }
+
+    func popRecipesViewController() {
+        rootViewController?.popViewController(animated: true)
     }
 }
