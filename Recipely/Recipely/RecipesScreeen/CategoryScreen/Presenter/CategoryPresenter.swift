@@ -7,8 +7,9 @@ import Foundation
 protocol CategoryViewControllerProtocol: AnyObject {
     /// Функция замены тайтла страницы и добавление элементов из хранилища
     func uppdateRecipes(_ recipes: [Recipes], _ title: String)
-    /// Обновление кнопки
+    /// Обновление кнопки с калориями
     func updateButtonCalories(_ state: SortingState)
+    /// Обновление кнопки с временем
     func updateButtonTimer(_ state: SortingState)
 }
 
@@ -19,8 +20,9 @@ protocol CategoryPresenterProtocol: AnyObject {
     var coordinator: RecipesCoordinator? { get set }
     /// Получение рецептов
     func returnRecipes(_ type: CategoryCellType)
-    /// Обновление статуса
+    /// Обновление статуса кнопки с калориями
     func updateSortingStateCaloriesButton()
+    /// Обновление статуса кнопки с временем
     func updateSortingStateTimeButton()
 }
 
