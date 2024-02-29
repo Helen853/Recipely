@@ -40,4 +40,11 @@ final class MainTabBarBuilder {
         )
         return profileViewController
     }
+
+    func makeCategoryViewcontroller() -> CategoryViewController {
+        let categoryViewController = CategoryViewController()
+        let categoryPresenter = CategoryPresenter(view: categoryViewController)
+        categoryViewController.categoryPresenter = categoryPresenter
+        return categoryViewController
+    }
 }

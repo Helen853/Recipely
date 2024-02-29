@@ -3,7 +3,7 @@
 
 import UIKit
 
-// Экран категорий
+/// Экран категорий
 class CategoryViewController: UIViewController {
     // MARK: - Constants
 
@@ -74,73 +74,44 @@ class CategoryViewController: UIViewController {
         return button
     }()
 
+    // MARK: - Puplic Properties
+
+    var titleScreen: String?
+    var categoryPresenter: CategoryPresenterProtocol?
+    var recipes: [Recipes] = []
+
     // MARK: - Private Properties
 
-    var titleScreen = "Fish"
-    var recipes: [Recipes] = [
-        .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274"),
-        .init(
-            imageFoodName: "recipeImage1",
-            foodName: "Basked Fish with Lemon Herb Sauce",
-            foodTime: "90",
-            foodKkal: "616"
-        ),
-        .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274"),
-        .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274"),
-        .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274"),
-        .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274"),
-        .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274"),
-        .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274"),
-        .init(imageFoodName: "recipeImage1", foodName: "Simple Fish And Corn", foodTime: "60", foodKkal: "274")
-    ]
     private lazy var items: [CellTypes] = [
         .foods(recipes)
     ]
 
     // MARK: - Life Cycle
 
-    @objc private func caloriesButtonTapped() {
-        caloriesButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
-        caloriesButton.setTitleColor(.white, for: .normal)
-        caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameTwo), for: .normal)
-        timeButton.setTitleColor(.black, for: .normal)
-        timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
-        timeButton.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
-    }
-
-    @objc private func timeButtonTapped() {
-        timeButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
-        timeButton.setTitleColor(.white, for: .normal)
-        timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameTwo), for: .normal)
-        caloriesButton.setTitleColor(.black, for: .normal)
-        caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
-        caloriesButton.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
         setupViews()
         setupAnchors()
         setupTableView()
-        setupNavigationItem()
+    }
+
+    // MARK: - Public Methods
+
+    func setupCatergory(_ type: CategoryCellType) {
+        categoryPresenter?.returnRecipes(type)
     }
 
     // MARK: - Private Methods
 
     private func setupViews() {
-//        view.addSubview(search)
-        view.addSubview(searchImage)
+        view.backgroundColor = .white
         view.addSubview(caloriesButton)
         view.addSubview(timeButton)
         view.addSubview(searchBar)
     }
 
     private func setupAnchors() {
-//        setupAnchorsSearch()
         setupAnchorsSearchBar()
-//        setupAnchorsSearchImage()
         setupAnchorsCaloriesButton()
         setupAnchorsTimeButton()
     }
@@ -150,13 +121,6 @@ class CategoryViewController: UIViewController {
         searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 96).isActive = true
         searchBar.widthAnchor.constraint(equalToConstant: 335).isActive = true
         searchBar.heightAnchor.constraint(equalToConstant: 36).isActive = true
-    }
-
-    private func setupAnchorsSearchImage() {
-        searchImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-        searchImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 105).isActive = true
-        searchImage.widthAnchor.constraint(equalToConstant: 16).isActive = true
-        searchImage.heightAnchor.constraint(equalToConstant: 16).isActive = true
     }
 
     private func setupAnchorsCaloriesButton() {
@@ -197,7 +161,7 @@ class CategoryViewController: UIViewController {
             image: UIImage(named: Constants.backButtonImagename),
             style: .plain,
             target: self,
-            action: nil
+            action: #selector(goBack)
         )
         backButton.tintColor = .black
 
@@ -205,6 +169,28 @@ class CategoryViewController: UIViewController {
         titleButton.tintColor = .black
         titleButton.setTitleTextAttributes(textAttributes, for: .normal)
         navigationItem.leftBarButtonItems = [backButton, titleButton]
+    }
+
+    @objc private func goBack() {
+        categoryPresenter?.goBackRecipesScreen()
+    }
+
+    @objc private func caloriesButtonTapped() {
+        caloriesButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
+        caloriesButton.setTitleColor(.white, for: .normal)
+        caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameTwo), for: .normal)
+        timeButton.setTitleColor(.black, for: .normal)
+        timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
+        timeButton.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
+    }
+
+    @objc private func timeButtonTapped() {
+        timeButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
+        timeButton.setTitleColor(.white, for: .normal)
+        timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameTwo), for: .normal)
+        caloriesButton.setTitleColor(.black, for: .normal)
+        caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
+        caloriesButton.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
     }
 }
 
@@ -242,5 +228,15 @@ extension CategoryViewController: UITableViewDataSource {
         case .foods:
             return CGFloat(Constants.heightcFoodCell)
         }
+    }
+}
+
+/// CategoryViewController + CategoryViewControllerProtocol
+extension CategoryViewController: CategoryViewControllerProtocol {
+    func uppdateRecipes(_ recipes: [Recipes], _ title: String) {
+        self.recipes = recipes
+        titleScreen = title
+        setupNavigationItem()
+        tableView.reloadData()
     }
 }
