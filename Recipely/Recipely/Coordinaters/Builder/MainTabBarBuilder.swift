@@ -7,7 +7,7 @@ import UIKit
 final class MainTabBarBuilder {
     func makeRecipesViewController(coordinator: RecipesCoordinator) -> RecipesViewController {
         let recipesViewController = RecipesViewController()
-        let recipesPresenter = ReciperPresenter(view: recipesViewController, coordinator: coordinator)
+        let recipesPresenter = RecipesPresenter(view: recipesViewController, coordinator: coordinator)
         recipesViewController.recipesPresenter = recipesPresenter
         recipesViewController.tabBarItem = UITabBarItem(
             title: AppConstants.recipes,

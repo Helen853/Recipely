@@ -3,13 +3,14 @@
 
 import UIKit
 
-/// Презентер ReciperPresenter
+/// Протокол для RecipesPresenter
 protocol ReciperPresenterProtocol: AnyObject {
+    // открываем ячейку
     func openCell()
 }
 
 /// Презентер экрана рецептов
-final class ReciperPresenter {
+final class RecipesPresenter {
     private weak var view: UIViewController?
     private weak var coordinator: RecipesCoordinator?
 
@@ -20,7 +21,7 @@ final class ReciperPresenter {
 }
 
 /// ReciperPresenter + ReciperPresenterProtocol
-extension ReciperPresenter: ReciperPresenterProtocol {
+extension RecipesPresenter: ReciperPresenterProtocol {
     func openCell() {
         coordinator?.pushDetailViewController()
     }
