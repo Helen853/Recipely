@@ -15,7 +15,7 @@ enum CategoryCellType {
     case meat
     // рыба
     case fish
-    // не знаю как преводится
+    // гарнир
     case sideDish
     // напитки
     case drinks

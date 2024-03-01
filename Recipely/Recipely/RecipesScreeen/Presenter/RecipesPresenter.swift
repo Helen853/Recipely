@@ -22,6 +22,8 @@ final class RecipesPresenter {
 
 /// ReciperPresenter + ReciperPresenterProtocol
 extension RecipesPresenter: ReciperPresenterProtocol {
+    /// Открытие ячейку
+    /// -   Parametr: тип ячейки
     func openCell(type: CategoryCellType) {
         coordinator?.pushDetailViewController(type: type)
     }
