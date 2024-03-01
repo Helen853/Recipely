@@ -16,6 +16,7 @@ final class CategoryViewController: UIViewController {
         static let caloriesButtonTitle = "Calories"
         static let caloriesButtonImageNameOne = "CaloriesImage"
         static let caloriesButtonImageNameTwo = "caloriesImageTwo"
+        static let caloriesButtonImageNameThree = "CaloriesImageThree"
         static let timeButtonTitle = "Time"
         static let foodCellIdentifier = "FoodCell"
         static let heightcFoodCell = 125
@@ -55,7 +56,7 @@ final class CategoryViewController: UIViewController {
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 10)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 10)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(caloriesButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonTappedCalories), for: .touchUpInside)
         return button
     }()
 
@@ -70,7 +71,7 @@ final class CategoryViewController: UIViewController {
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 10)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 10)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(timeButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonTappedTimer), for: .touchUpInside)
         return button
     }()
 
@@ -143,6 +144,7 @@ final class CategoryViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         view.addSubview(tableView)
 
         tableView.topAnchor.constraint(equalTo: caloriesButton.bottomAnchor, constant: 10).isActive = true
@@ -175,22 +177,12 @@ final class CategoryViewController: UIViewController {
         categoryPresenter?.goBackRecipesScreen()
     }
 
-    @objc private func caloriesButtonTapped() {
-        caloriesButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
-        caloriesButton.setTitleColor(.white, for: .normal)
-        caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameTwo), for: .normal)
-        timeButton.setTitleColor(.black, for: .normal)
-        timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
-        timeButton.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
+    @objc private func buttonTappedCalories() {
+        categoryPresenter?.updateSortingStateCaloriesButton()
     }
 
-    @objc private func timeButtonTapped() {
-        timeButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
-        timeButton.setTitleColor(.white, for: .normal)
-        timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameTwo), for: .normal)
-        caloriesButton.setTitleColor(.black, for: .normal)
-        caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
-        caloriesButton.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
+    @objc private func buttonTappedTimer() {
+        categoryPresenter?.updateSortingStateTimeButton()
     }
 }
 
@@ -199,10 +191,6 @@ extension CategoryViewController: UITableViewDelegate {}
 
 /// CategoryViewController + UITableViewDataSource
 extension CategoryViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        items.count
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         recipes.count
     }
@@ -233,6 +221,46 @@ extension CategoryViewController: UITableViewDataSource {
 
 /// CategoryViewController + CategoryViewControllerProtocol
 extension CategoryViewController: CategoryViewControllerProtocol {
+    func updateButtonTimer(_ state: SortingState) {
+        switch state {
+        case .none:
+            timeButton.setTitle(Constants.timeButtonTitle, for: .normal)
+            timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
+            timeButton.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
+            timeButton.setTitleColor(.black, for: .normal)
+        case .up:
+            timeButton.setTitle(Constants.timeButtonTitle, for: .normal)
+            timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameTwo), for: .normal)
+            timeButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
+            timeButton.setTitleColor(.white, for: .normal)
+        case .down:
+            timeButton.setTitle(Constants.timeButtonTitle, for: .normal)
+            timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameThree), for: .normal)
+            timeButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
+            timeButton.setTitleColor(.white, for: .normal)
+        }
+    }
+
+    func updateButtonCalories(_ state: SortingState) {
+        switch state {
+        case .none:
+            caloriesButton.setTitle(Constants.caloriesButtonTitle, for: .normal)
+            caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
+            caloriesButton.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
+            caloriesButton.setTitleColor(.black, for: .normal)
+        case .up:
+            caloriesButton.setTitle(Constants.caloriesButtonTitle, for: .normal)
+            caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameTwo), for: .normal)
+            caloriesButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
+            caloriesButton.setTitleColor(.white, for: .normal)
+        case .down:
+            caloriesButton.setTitle(Constants.caloriesButtonTitle, for: .normal)
+            caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameThree), for: .normal)
+            caloriesButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
+            caloriesButton.setTitleColor(.white, for: .normal)
+        }
+    }
+
     // Обновляется массив с рецептами и название экрана
     // - Parametr: массив рецептов
     // - Parametr: тайтл для навигейшенБара
