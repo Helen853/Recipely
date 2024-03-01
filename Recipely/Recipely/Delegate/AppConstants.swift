@@ -35,4 +35,16 @@ struct AppConstants {
     static let cancel = "Cancel"
     static let ok = "Ok"
     static let outImageName = "out"
+
+    static let recipesIdentifier = "RecipesIdentifier"
+
+    static let salad = "Salad"
+    static let soup = "Soup"
+    static let chicken = "Chicken"
+    static let meat = "Meat"
+    static let fish = "Fish"
+    static let sideDish = "Side dish"
+    static let drinks = "Drinks"
+    static let pancake = "Pancakes"
+    static let desserts = "Desserts"
 }
