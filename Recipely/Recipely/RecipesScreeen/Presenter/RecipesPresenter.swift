@@ -5,16 +5,19 @@ import UIKit
 
 /// Протокол для RecipesPresenter
 protocol ReciperPresenterProtocol: AnyObject {
-    /// Открытие ячейку
+    /// Открытие ячейки
     /// -   Parametr: тип ячейки
     func openCell(type: CategoryCellType)
+    /// Загрузка  коллекции
+    ///  -   Parametr: массив с данными
+    func loadCell(model: [Category])
 }
 
 /// Презентер экрана рецептов
 final class RecipesPresenter {
-    private weak var view: UIViewController?
+    private weak var view: RecipesViewControllerProtocol?
     private weak var coordinator: RecipesCoordinator?
-    init(view: UIViewController, coordinator: RecipesCoordinator) {
+    init(view: RecipesViewControllerProtocol, coordinator: RecipesCoordinator) {
         self.view = view
         self.coordinator = coordinator
     }
@@ -22,6 +25,12 @@ final class RecipesPresenter {
 
 /// ReciperPresenter + ReciperPresenterProtocol
 extension RecipesPresenter: ReciperPresenterProtocol {
+    /// Загрузка  коллекции
+    ///  -   Parametr: массив с данными
+    func loadCell(model: [Category]) {
+        view?.loadCollection(categories: model)
+    }
+
     /// Открытие ячейку
     /// -   Parametr: тип ячейки
     func openCell(type: CategoryCellType) {
