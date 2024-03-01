@@ -11,7 +11,15 @@ final class RecipesCoordinator: BaseCoordinator {
         rootViewController = UINavigationController(rootViewController: view)
     }
 
-    func pushDetailViewController() {
-        debugPrint("Переход на экран с рецептами")
+    func pushDetailViewController(type: CategoryCellType) {
+        let categoryVewController = MainTabBarBuilder().makeCategoryViewcontroller()
+        categoryVewController.categoryPresenter?.coordinator = self
+        categoryVewController.setupCatergory(type)
+        categoryVewController.hidesBottomBarWhenPushed = true
+        rootViewController?.pushViewController(categoryVewController, animated: true)
+    }
+
+    func popRecipesViewController() {
+        rootViewController?.popViewController(animated: true)
     }
 }

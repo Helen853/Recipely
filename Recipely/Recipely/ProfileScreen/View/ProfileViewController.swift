@@ -76,6 +76,7 @@ final class ProfileViewController: UIViewController {
     }
 
     private func configureTable() {
+        tableView.separatorStyle = .none
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
