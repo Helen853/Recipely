@@ -18,7 +18,7 @@ protocol CategoryPresenterProtocol: AnyObject {
     /// Вернуться на RecipesScreen
     func goBackRecipesScreen()
     var coordinator: RecipesCoordinator? { get set }
-    /// Получение рецептов
+    /// Возврат рецептов
     func returnRecipes(_ type: CategoryCellType)
     /// Обновление статуса кнопки с калориями
     func updateSortingStateCaloriesButton()

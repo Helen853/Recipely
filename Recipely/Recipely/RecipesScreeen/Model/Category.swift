@@ -3,10 +3,10 @@
 
 import Foundation
 
-/// Категории рецептов
+/// Категория рецептов
 struct Category {
-    /// тип ячейки
-    var cellType: CellType
+    /// тип размера
+    var sizeType: SizeCellType
     // картинка категории
     var imageName: String
     // название категории
@@ -17,24 +17,4 @@ struct Category {
     var sizeText: CGFloat
     // тип категории
     var categoryType: CategoryCellType
-}
-
-/// Енам для типов ячеек
-enum CellType {
-    case small
-    case medium
-    case large
-}
-
-/// Енам с типом категорий ячеек
-enum CategoryCellType {
-    case salad
-    case soup
-    case chicken
-    case meat
-    case fish
-    case sideDish
-    case drinks
-    case pancake
-    case desserts
 }
