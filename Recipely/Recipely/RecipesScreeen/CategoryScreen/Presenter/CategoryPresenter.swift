@@ -24,10 +24,16 @@ protocol CategoryPresenterProtocol: AnyObject {
     func updateSortingStateCaloriesButton()
     /// Обновление статуса кнопки с временем
     func updateSortingStateTimeButton()
+    /// Переход на экран подробного рецепта
+    func showRecipeDetail()
 }
 
 /// Презентер экрана категорий
 final class CategoryPresenter: CategoryPresenterProtocol {
+    func showRecipeDetail() {
+        coordinator?.showRecipeDetailViewController()
+    }
+
     // MARK: - Constants
 
     private enum Constants {

@@ -4,7 +4,7 @@
 import UIKit
 
 /// Ячейка с категорией рецептов
-class CategoryCollectionViewCell: UICollectionViewCell {
+final class CategoryCollectionViewCell: UICollectionViewCell {
     // MARK: - Visual Components
 
     private let imageView = UIImageView()
