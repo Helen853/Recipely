@@ -72,7 +72,7 @@ final class FoodCell: UITableViewCell {
         return label
     }()
 
-    private let nextButton: UIButton = {
+    public let nextButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: Constants.nextButtonImageName), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
