@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		015071CFB03747F1C83ED6E6 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5F3571CC8D172D47594825 /* FavoritesPresenter.swift */; };
+		0469A1CE2B923227006F349A /* StorageFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A1CD2B923227006F349A /* StorageFavorites.swift */; };
+		0469A1D02B931FCB006F349A /* BasketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A1CF2B931FCB006F349A /* BasketView.swift */; };
 		04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC3192B8F94010091D767 /* CategoryViewController.swift */; };
 		04FEC31D2B8F94500091D767 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */; };
 		04FEC31F2B8F945C0091D767 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31E2B8F945C0091D767 /* Recipes.swift */; };
@@ -63,6 +65,8 @@
 /* Begin PBXFileReference section */
 		008E79B398C0013840C670AA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		036CDB27228B00761E3B8BF5 /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
+		0469A1CD2B923227006F349A /* StorageFavorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageFavorites.swift; sourceTree = "<group>"; };
+		0469A1CF2B931FCB006F349A /* BasketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketView.swift; sourceTree = "<group>"; };
 		04FEC3192B8F94010091D767 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		04FEC31E2B8F945C0091D767 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
@@ -400,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				B7CDFDB9112C6B0542569E2E /* FavoritesViewController.swift */,
+				0469A1CF2B931FCB006F349A /* BasketView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -444,6 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				036CDB27228B00761E3B8BF5 /* Favorites.swift */,
+				0469A1CD2B923227006F349A /* StorageFavorites.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -614,6 +620,7 @@
 				788649B3899EA19983CDBE6D /* BonusesPresenter.swift in Sources */,
 				04FEC3312B90B2D00091D767 /* StorageRecipes.swift in Sources */,
 				DF74EB171B6BB6DA1FE55530 /* BonusesTableViewCell.swift in Sources */,
+				0469A1D02B931FCB006F349A /* BasketView.swift in Sources */,
 				C177D56382AE30999FEA8D1F /* BonusesViewController.swift in Sources */,
 				ED9F30AA2B8FBED00069D8E2 /* Category.swift in Sources */,
 				3D1E8686A7D68154B8D22B97 /* MainTabBarBuilder.swift in Sources */,
@@ -627,6 +634,7 @@
 				276D51793032EA26BBFEB2A7 /* Info.swift in Sources */,
 				E40C6F1705DBD7B27FBA0796 /* InfoTableViewCell.swift in Sources */,
 				04FEC31D2B8F94500091D767 /* CategoryPresenter.swift in Sources */,
+				0469A1CE2B923227006F349A /* StorageFavorites.swift in Sources */,
 				1C3A9F21A21CB3F8D2D21D3A /* LogOut.swift in Sources */,
 				6BFD435F7249D6C74016FE4A /* LogOutTableViewCell.swift in Sources */,
 				04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */,
