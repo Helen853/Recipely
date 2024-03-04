@@ -20,6 +20,7 @@ final class ProfileViewController: UIViewController {
     var profilePresenter: ProfilePresenter?
     var onTapHandler: VoidHandler?
     var arrowTapHandler: VoidHandler?
+    var termsTapHandler: VoidHandler?
 
     // MARK: - Private Properties
 
@@ -52,6 +53,7 @@ final class ProfileViewController: UIViewController {
         registerCell()
         onTap()
         arrowButtonTapped()
+        termsButtonTapped()
     }
 
     // MARK: - Private Methods
@@ -67,6 +69,13 @@ final class ProfileViewController: UIViewController {
         arrowTapHandler = { [weak self] in
             guard let self = self else { return }
             profilePresenter?.showBonuses()
+        }
+    }
+
+    private func termsButtonTapped() {
+        termsTapHandler = { [weak self] in
+            guard let self = self else { return }
+            profilePresenter?.showTermsPolicy()
         }
     }
 
@@ -146,7 +155,7 @@ extension ProfileViewController: UITableViewDataSource {
             else {
                 return UITableViewCell()
             }
-            cell.configureCell(model: model)
+            cell.configureCell(model: model, tapButton: termsTapHandler)
             return cell
         case .logOut:
             guard

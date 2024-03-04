@@ -54,4 +54,11 @@ final class MainTabBarBuilder {
         recipeDetailViewController.recipeDetailPresenter = detailPresenter
         return recipeDetailViewController
     }
+
+    func makeTermsPolicyViewController() -> TermsPolicyViewController {
+        let termsPolicyViewController = TermsPolicyViewController()
+        let termsPresenter = TermsPolicyPresenter(view: termsPolicyViewController)
+        termsPolicyViewController.termsPolicyPresenter = termsPresenter
+        return termsPolicyViewController
+    }
 }
