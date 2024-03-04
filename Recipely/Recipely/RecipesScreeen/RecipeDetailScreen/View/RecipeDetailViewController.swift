@@ -17,7 +17,7 @@ protocol RecipeDetailViewControllerProtocol: AnyObject {
     func removeLabel()
     /// Отправить рецепт в телеграмм
     ///  -   Parametr: текст рецепта
-    func shareCode(text: String)
+    func shareRecipe(text: String)
 }
 
 /// Экран подробного рецепта
@@ -68,9 +68,10 @@ final class RecipeDetailViewController: UIViewController {
     }
 
     private func configureTable() {
-        tableView.separatorStyle = .none
         view.addSubview(tableView)
         tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -166,7 +167,7 @@ extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
 
     /// Отправить рецепт в телеграмм
     ///  -   Parametr: текст рецепта
-    func shareCode(text: String) {
+    func shareRecipe(text: String) {
         let textToShare = [text]
         let activity = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         present(activity, animated: true, completion: nil)
@@ -186,7 +187,7 @@ extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
         addFavoritesLabel.widthAnchor.constraint(equalToConstant: 350).isActive = true
         addFavoritesLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
         addFavoritesLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        addFavoritesLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+        addFavoritesLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 63).isActive = true
     }
 
     /// Исчезновение уведомления о добавлении в избранное

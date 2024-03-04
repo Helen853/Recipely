@@ -18,9 +18,9 @@ protocol RecipeDetailPresenterProtocol {
 
 /// Презентор для экрана с подробным рецептом
 final class RecipeDetailPresenter {
-    var storage = RecipeDetail()
     weak var coordinator: RecipesCoordinator?
     private var state: SaveButtonState = .clear
+    private var storage = RecipeDetail()
     private weak var view: RecipeDetailViewControllerProtocol?
 
     // MARK: - Initializers
@@ -41,7 +41,7 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
 
     /// Отправка текста рецепта в телеграм
     func shareRecipeText() {
-        view?.shareCode(text: AppConstants.recipeText)
+        view?.shareRecipe(text: AppConstants.recipeText)
     }
 
     /// Обновиление цвета кнопки
