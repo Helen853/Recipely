@@ -47,4 +47,11 @@ final class MainTabBarBuilder {
         categoryViewController.categoryPresenter = categoryPresenter
         return categoryViewController
     }
+
+    func makeRecipeDetailViewController() -> RecipeDetailViewController {
+        let recipeDetailViewController = RecipeDetailViewController()
+        let detailPresenter = RecipeDetailPresenter(view: recipeDetailViewController)
+        recipeDetailViewController.recipeDetailPresenter = detailPresenter
+        return recipeDetailViewController
+    }
 }

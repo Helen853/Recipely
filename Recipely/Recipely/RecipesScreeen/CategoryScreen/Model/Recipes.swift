@@ -13,7 +13,7 @@ struct Recipes {
     var foodKkal: String
 }
 
-/// Сотстония кнопок
+/// Состояния кнопок
 enum SortingState {
     // Кнопка не нажата
     case none

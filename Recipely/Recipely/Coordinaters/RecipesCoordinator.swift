@@ -22,4 +22,14 @@ final class RecipesCoordinator: BaseCoordinator {
     func popRecipesViewController() {
         rootViewController?.popViewController(animated: true)
     }
+
+    func showRecipeDetailViewController() {
+        let recipeDetailViewController = MainTabBarBuilder().makeRecipeDetailViewController()
+        recipeDetailViewController.recipeDetailPresenter?.coordinator = self
+        rootViewController?.pushViewController(recipeDetailViewController, animated: true)
+    }
+
+    func popDetailViewController() {
+        rootViewController?.popViewController(animated: true)
+    }
 }
