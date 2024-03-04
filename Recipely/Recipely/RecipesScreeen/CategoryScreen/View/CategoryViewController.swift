@@ -22,6 +22,8 @@ final class CategoryViewController: UIViewController {
         static let heightcFoodCell = 125
     }
 
+    var tappedNextHandler: VoidHandler?
+
     // MARK: - Visual Components
 
     private let tableView: UITableView = {
@@ -94,6 +96,7 @@ final class CategoryViewController: UIViewController {
         setupViews()
         setupAnchors()
         setupTableView()
+        tappedNextButton()
     }
 
     // MARK: - Public Methods
@@ -103,6 +106,13 @@ final class CategoryViewController: UIViewController {
     }
 
     // MARK: - Private Methods
+
+    private func tappedNextButton() {
+        tappedNextHandler = { [weak self] in
+            guard let self = self else { return }
+            categoryPresenter?.showRecipeDetail()
+        }
+    }
 
     private func setupViews() {
         view.backgroundColor = .white
@@ -205,7 +215,7 @@ extension CategoryViewController: UITableViewDataSource {
             ) as? FoodCell
             else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.configure(with: info[indexPath.row])
+            cell.configure(with: info[indexPath.row], handler: tappedNextHandler)
             return cell
         }
     }

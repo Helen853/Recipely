@@ -25,6 +25,7 @@ final class FavoritesViewController: UIViewController {
 
     var favorites: [Recipes] = []
     var fvoritesPresenter: FavoritesPresenterProtocol?
+    var tappedNextHandler: VoidHandler?
 
     // MARK: - Private Methods
 
@@ -96,7 +97,7 @@ extension FavoritesViewController: UITableViewDataSource {
             else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.nextButton.isHidden = true
-            cell.configure(with: info[indexPath.row])
+            cell.configure(with: info[indexPath.row], handler: tappedNextHandler)
             return cell
         }
     }
