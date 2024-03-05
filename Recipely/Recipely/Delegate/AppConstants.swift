@@ -55,6 +55,7 @@ struct AppConstants {
     static let imageIdentifier = "ImageIdentifier"
     static let infoRecipeIdentifier = "InfoRecipeIdentifier"
     static let textIdentifier = "TextIdentifier"
+    static let shimmerIdentifier = "ShimmerIdentifier"
 
     static let foodName = "Simple Fish And Corn"
     static let foodImageName = "Рыба"

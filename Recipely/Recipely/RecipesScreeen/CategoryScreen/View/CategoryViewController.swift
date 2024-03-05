@@ -80,6 +80,7 @@ final class CategoryViewController: UIViewController {
     // MARK: - Puplic Properties
 
     var titleScreen: String?
+    var isDataLoaded = false
     var categoryPresenter: CategoryPresenterProtocol?
     var recipes: [Recipes] = []
 
@@ -99,6 +100,11 @@ final class CategoryViewController: UIViewController {
         tappedNextButton()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showLoadedTableView()
+    }
+
     // MARK: - Public Methods
 
     func setupCategory(_ type: CategoryCellType) {
@@ -111,6 +117,13 @@ final class CategoryViewController: UIViewController {
         tappedNextHandler = { [weak self] in
             guard let self = self else { return }
             categoryPresenter?.showRecipeDetail()
+        }
+    }
+
+    private func showLoadedTableView() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            self?.isDataLoaded = true
+            self?.tableView.reloadData()
         }
     }
 
@@ -150,6 +163,7 @@ final class CategoryViewController: UIViewController {
 
     private func setupTableView() {
         tableView.register(FoodCell.self, forCellReuseIdentifier: Constants.foodCellIdentifier)
+        tableView.register(ShimmerRecipeTableViewCell.self, forCellReuseIdentifier: AppConstants.shimmerIdentifier)
         view.backgroundColor = .white
         tableView.dataSource = self
         tableView.delegate = self
@@ -206,17 +220,21 @@ extension CategoryViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = items[indexPath.section]
-        switch item {
-        case let .foods(info):
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: Constants.foodCellIdentifier,
-                for: indexPath
-            ) as? FoodCell
-            else { return UITableViewCell() }
-            cell.selectionStyle = .none
-            cell.configure(with: info[indexPath.row], handler: tappedNextHandler)
-            return cell
+        if isDataLoaded {
+            let item = items[indexPath.section]
+            switch item {
+            case let .foods(info):
+                guard let cell = tableView.dequeueReusableCell(
+                    withIdentifier: Constants.foodCellIdentifier,
+                    for: indexPath
+                ) as? FoodCell
+                else { return UITableViewCell() }
+                cell.selectionStyle = .none
+                cell.configure(with: info[indexPath.row], handler: tappedNextHandler)
+                return cell
+            }
+        } else {
+            return ShimmerRecipeTableViewCell()
         }
     }
 
