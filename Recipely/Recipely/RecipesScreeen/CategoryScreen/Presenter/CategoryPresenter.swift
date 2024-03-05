@@ -3,14 +3,36 @@
 
 import Foundation
 
+/// Сортировка по калорием
+enum SortedCalories {
+    /// Обычное состояние
+    case non
+    /// Состояние в меньшую сторону
+    case caloriesLow
+    /// Состояние в большое сторону
+    case caloriesHigh
+}
+
+/// Сортировка по времени
+enum SortedTime {
+    /// Обчное состояние
+    case non
+    /// Состояние в меньшую сторону
+    case timeLow
+    /// Состояние в большую сторону
+    case timeHigh
+}
+
 /// Протокол CategoryViewControllerProtocol
 protocol CategoryViewControllerProtocol: AnyObject {
     /// Функция замены тайтла страницы и добавление элементов из хранилища
     func uppdateRecipes(_ recipes: [Recipes], _ title: String)
-    /// Обновление кнопки с калориями
-    func updateButtonCalories(_ state: SortingState)
-    /// Обновление кнопки с временем
-    func updateButtonTimer(_ state: SortingState)
+    ///  Установка отсортированных рецептов
+    func sortedRecip(recipe: [Recipes])
+    /// Установка занчения кнопки калорий
+    func buttonCaloriesState(color: String, image: String)
+    /// Установка занчения кнопки времени
+    func buttonTimeState(color: String, image: String)
 }
 
 /// Протокол CategoryPresenter
@@ -20,12 +42,14 @@ protocol CategoryPresenterProtocol: AnyObject {
     var coordinator: RecipesCoordinator? { get set }
     /// Возврат рецептов
     func returnRecipes(_ type: CategoryCellType)
-    /// Обновление статуса кнопки с калориями
-    func updateSortingStateCaloriesButton()
-    /// Обновление статуса кнопки с временем
-    func updateSortingStateTimeButton()
     /// Переход на экран подробного рецепта
     func showRecipeDetail()
+    /// Сортировка рецептов
+    func sortedRecipe(category: [Recipes])
+    /// Смена значения кнопки калорий
+    func buttonCaloriesChange(category: [Recipes])
+    /// Смена значения кнопки калорий
+    func buttonTimeChange(category: [Recipes])
 }
 
 /// Презентер экрана категорий
@@ -53,6 +77,9 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     private var state: SortingState = .none
     private weak var view: CategoryViewControllerProtocol?
     weak var coordinator: RecipesCoordinator?
+    private var sortedCalories = SortedCalories.non
+    private var sortedTime = SortedTime.non
+    private var recipes: [Recipes]?
 
     // MARK: - Initializers
 
@@ -90,27 +117,52 @@ final class CategoryPresenter: CategoryPresenterProtocol {
         }
     }
 
-    func updateSortingStateCaloriesButton() {
-        switch state {
-        case .none:
-            state = .up
-        case .up:
-            state = .down
-        case .down:
-            state = .none
+    func sortedRecipe(category: [Recipes]) {
+        let sorted: [Recipes]
+        switch (sortedCalories, sortedTime) {
+        case (.non, .non):
+            sorted = category
+        case (.caloriesLow, _):
+            sorted = category.sorted(by: { $0.foodKkal < $1.foodKkal })
+        case (.caloriesHigh, _):
+            sorted = category.sorted(by: { $0.foodKkal > $1.foodKkal })
+        case (_, .timeLow):
+            sorted = category.sorted(by: { $0.foodTime < $1.foodTime })
+        case (_, .timeHigh):
+            sorted = category.sorted(by: { $0.foodTime > $1.foodTime })
         }
-        view?.updateButtonCalories(state)
+        view?.sortedRecip(recipe: sorted)
     }
 
-    func updateSortingStateTimeButton() {
-        switch state {
-        case .none:
-            state = .up
-        case .up:
-            state = .down
-        case .down:
-            state = .none
+    func buttonTimeChange(category: [Recipes]) {
+        if sortedTime == .non {
+            sortedTime = .timeLow
+            view?.buttonTimeState(color: "buttonPressed", image: "caloriesImageTwo")
+            sortedRecipe(category: category)
+        } else if sortedTime == .timeLow {
+            view?.buttonTimeState(color: "buttonPressed", image: "CaloriesImageThree")
+            sortedTime = .timeHigh
+            sortedRecipe(category: category)
+        } else if sortedTime == .timeHigh {
+            sortedTime = .non
+            view?.buttonTimeState(color: "buttonDefault", image: "CaloriesImage")
+            sortedRecipe(category: category)
         }
-        view?.updateButtonTimer(state)
+    }
+
+    func buttonCaloriesChange(category: [Recipes]) {
+        if sortedCalories == .non {
+            sortedCalories = .caloriesLow
+            view?.buttonCaloriesState(color: "buttonPressed", image: "caloriesImageTwo")
+            sortedRecipe(category: category)
+        } else if sortedCalories == .caloriesLow {
+            sortedCalories = .caloriesHigh
+            view?.buttonCaloriesState(color: "buttonPressed", image: "CaloriesImageThree")
+            sortedRecipe(category: category)
+        } else if sortedCalories == .caloriesHigh {
+            sortedCalories = .non
+            view?.buttonCaloriesState(color: "buttonDefault", image: "CaloriesImage")
+            sortedRecipe(category: category)
+        }
     }
 }

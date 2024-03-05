@@ -100,8 +100,8 @@ final class FoodCell: UITableViewCell {
     func configure(with items: Recipes, handler: VoidHandler?) {
         recipeImageView.image = UIImage(named: items.imageFoodName)
         titleRecipe.text = items.foodName
-        timeLabel.text = items.foodTime + Constants.timeLabelText
-        pizzaLabel.text = items.foodKkal + Constants.pizzaLabelText
+        timeLabel.text = String(items.foodTime) + Constants.timeLabelText
+        pizzaLabel.text = String(items.foodKkal) + Constants.pizzaLabelText
         tappedNextHandler = handler
     }
 

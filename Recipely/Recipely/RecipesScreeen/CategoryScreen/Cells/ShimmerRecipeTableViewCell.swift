@@ -23,8 +23,6 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
 
     private let titleRecipe: UILabel = {
         let label = UILabel()
-        label.lineBreakMode = .byWordWrapping
-        label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -81,22 +79,6 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
         addGradient()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setupLayer()
-        gradientTitle.frame = titleRecipe.bounds
-    }
-
-    func setupLayer() {
-        gradientTitle.startPoint = CGPoint(x: 0, y: 0.5)
-        gradientTitle.endPoint = CGPoint(x: 1, y: 0.5)
-        titleRecipe.layer.addSublayer(gradientTitle)
-
-        let animationTitle = makeAnimation()
-        animationTitle.beginTime = 0.0
-        gradientTitle.add(animationTitle, forKey: "backgroundColor")
-    }
-
     // MARK: - Private Methods
 
     private func setupViews() {
@@ -131,17 +113,22 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
     private func setupAnchorsRecipeImageView() {
         recipeImageView.leadingAnchor.constraint(equalTo: uiViewBackground.leadingAnchor, constant: 10).isActive = true
         recipeImageView.topAnchor.constraint(equalTo: uiViewBackground.topAnchor, constant: 10).isActive = true
+        recipeImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        recipeImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
     }
 
     private func setupAnchorsTitleRecipe() {
         titleRecipe.topAnchor.constraint(equalTo: uiViewBackground.topAnchor, constant: 22).isActive = true
         titleRecipe.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor, constant: 20).isActive = true
         titleRecipe.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        titleRecipe.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
 
     private func setupAnchorsTimeLabel() {
-        timeLabel.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor, constant: 40).isActive = true
+        timeLabel.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor, constant: 20).isActive = true
         timeLabel.topAnchor.constraint(equalTo: titleRecipe.bottomAnchor, constant: 20).isActive = true
+        timeLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        timeLabel.widthAnchor.constraint(equalToConstant: 74).isActive = true
     }
 
     private func setupAnchorsTimerImageView() {
@@ -155,8 +142,10 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
     }
 
     private func setupAnchorsPizzaLabel() {
-        pizzaLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 55).isActive = true
+        pizzaLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 35).isActive = true
         pizzaLabel.topAnchor.constraint(equalTo: titleRecipe.bottomAnchor, constant: 20).isActive = true
+        pizzaLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        pizzaLabel.widthAnchor.constraint(equalToConstant: 91).isActive = true
     }
 
     private func setupAnchorsNextButton() {
@@ -165,37 +154,53 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
     }
 
     private func addGradient() {
-        let gradient = CAGradientLayer()
-        gradient.startPoint = CGPoint(x: 0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1, y: 0.5)
+        let gradientBackground = CAGradientLayer()
+        gradientBackground.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientBackground.endPoint = CGPoint(x: 1, y: 0.5)
+        gradientBackground.frame = uiViewBackground.bounds
+        gradientBackground.cornerRadius = 12
+        uiViewBackground.layer.addSublayer(gradientBackground)
 
-        // titleRecipe.layer.addSublayer(gradient)
-        uiViewBackground.layer.addSublayer(gradient)
-        // recipeImageView.layer.insertSublayer(gradient, at: 0)
-//      timeLabel.layer.addSublayer(gradient)
-//      pizzaLabel.layer.addSublayer(gradient)
+        let viewBackgroundGroup = makeAnimation()
+        viewBackgroundGroup.beginTime = 0.0
+        gradientBackground.add(viewBackgroundGroup, forKey: "background")
 
-        let animation = makeAnimation()
-        animation.beginTime = 0.0
-        gradient.add(animation, forKey: "background")
+        let gradientImage = CAGradientLayer()
+        gradientImage.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientImage.endPoint = CGPoint(x: 1, y: 0.5)
+        gradientImage.cornerRadius = 12
+        gradientImage.frame = recipeImageView.bounds
+        recipeImageView.layer.addSublayer(gradientImage)
 
-//      gradient.frame = titleRecipe.bounds
-        gradient.frame = uiViewBackground.bounds
-        gradient.cornerRadius = 12
-//      gradient.frame = recipeImageView.bounds
-//      gradient.frame = timeLabel.bounds
-//      gradient.frame = pizzaLabel.bounds
-    }
+        let imageGroup = makeAnimation(previousGroup: viewBackgroundGroup)
+        gradientImage.add(imageGroup, forKey: "background")
 
-    func addGradientImage() {
-        let gradient = CAGradientLayer()
-        gradient.startPoint = CGPoint(x: 0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1, y: 0.5)
-        recipeImageView.layer.addSublayer(gradient)
-        let animation = makeAnimation()
-        animation.beginTime = 0.0
-        gradient.add(animation, forKey: "background")
-        gradient.frame = recipeImageView.bounds
+        let gradientTitle = CAGradientLayer()
+        gradientTitle.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientTitle.endPoint = CGPoint(x: 1, y: 0.5)
+        gradientTitle.frame = titleRecipe.bounds
+        titleRecipe.layer.addSublayer(gradientTitle)
+
+        let titleGroup = makeAnimation(previousGroup: viewBackgroundGroup)
+        gradientTitle.add(titleGroup, forKey: "background")
+
+        let gradientTimelabel = CAGradientLayer()
+        gradientTimelabel.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientTimelabel.endPoint = CGPoint(x: 1, y: 0.5)
+        gradientTimelabel.frame = timeLabel.bounds
+        timeLabel.layer.addSublayer(gradientTimelabel)
+
+        let timeGroup = makeAnimation(previousGroup: viewBackgroundGroup)
+        gradientTimelabel.add(timeGroup, forKey: "background")
+
+        let gradientPizzalabel = CAGradientLayer()
+        gradientPizzalabel.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientPizzalabel.endPoint = CGPoint(x: 1, y: 0.5)
+        gradientPizzalabel.frame = pizzaLabel.bounds
+        pizzaLabel.layer.addSublayer(gradientPizzalabel)
+
+        let pizzaGroup = makeAnimation(previousGroup: viewBackgroundGroup)
+        gradientPizzalabel.add(pizzaGroup, forKey: "background")
     }
 
     func makeAnimation(previousGroup: CAAnimationGroup? = nil) -> CAAnimationGroup {

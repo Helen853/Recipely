@@ -8,9 +8,9 @@ struct Recipes {
     // Название еды
     var foodName: String
     // Время готовки еды
-    var foodTime: String
+    var foodTime: Int
     // Калории
-    var foodKkal: String
+    var foodKkal: Int
 }
 
 /// Состояния кнопок

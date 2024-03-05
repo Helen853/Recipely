@@ -29,7 +29,12 @@ final class FavoritesViewController: UIViewController {
 
     // MARK: - Private Methods
 
-    private var basketView = BasketView()
+    private var basketView = BasketView(
+        frame: .zero,
+        title: "There's nothing here yet",
+        text: "Add interesting recipes to make ordering products convenient",
+        image: UIImage(named: "emptyFavorites") ?? UIImage()
+    )
     private lazy var items: [CellTypes] = [
         .foods(favorites)
     ]

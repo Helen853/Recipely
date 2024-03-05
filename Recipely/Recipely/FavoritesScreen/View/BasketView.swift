@@ -10,9 +10,6 @@ final class BasketView: UIView {
     private enum Constants {
         static let fontVerdanaBold = "Verdana-Bold"
         static let fontVerdana = "Verdana"
-        static let viewTitle = "There's nothing here yet"
-        static let viewText = "Add interesting recipes to make ordering products convenient"
-        static let viewImageName = "emptyFavorites"
     }
 
     // MARK: - Visual Components
@@ -23,17 +20,15 @@ final class BasketView: UIView {
         return view
     }()
 
-    private let viewTitle: UILabel = {
+    private var viewTitle: UILabel = {
         let label = UILabel()
-        label.text = Constants.viewTitle
         label.font = UIFont(name: Constants.fontVerdanaBold, size: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private let viewText: UILabel = {
+    private var viewText: UILabel = {
         let label = UILabel()
-        label.text = Constants.viewText
         label.font = UIFont(name: Constants.fontVerdana, size: 14)
         label.textColor = UIColor(red: 151 / 255, green: 162 / 255, blue: 176 / 255, alpha: 1.0)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -51,17 +46,19 @@ final class BasketView: UIView {
         return view
     }()
 
-    private let viewImage: UIImageView = {
+    private var viewImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: Constants.viewImageName)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
     // MARK: - Initializers
 
-    override init(frame: CGRect) {
+    init(frame: CGRect, title: String, text: String, image: UIImage) {
         super.init(frame: .zero)
+        viewText.text = text
+        viewTitle.text = title
+        viewImage.image = image
         setupViews()
         setupAnchors()
     }

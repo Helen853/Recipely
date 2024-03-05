@@ -10,6 +10,7 @@
 		015071CFB03747F1C83ED6E6 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5F3571CC8D172D47594825 /* FavoritesPresenter.swift */; };
 		0469A1CE2B923227006F349A /* StorageFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A1CD2B923227006F349A /* StorageFavorites.swift */; };
 		0469A1D02B931FCB006F349A /* BasketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A1CF2B931FCB006F349A /* BasketView.swift */; };
+		0469A20E2B9605D5006F349A /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A20D2B9605D5006F349A /* LoginPresenter.swift */; };
 		04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC3192B8F94010091D767 /* CategoryViewController.swift */; };
 		04FEC31D2B8F94500091D767 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */; };
 		04FEC31F2B8F945C0091D767 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31E2B8F945C0091D767 /* Recipes.swift */; };
@@ -43,7 +44,6 @@
 		92B85DE393ADE8B04925252A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC78B0E2C10F00A01BCEC4D3 /* LoginViewController.swift */; };
 		981F24736C3C9CB2FD809B23 /* CellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1507AE6FE0F316A788136337 /* CellProtocol.swift */; };
 		995902DCA50F73D6B693F43A /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670AD90FC89A7C634CCD3A2B /* ProfilePresenter.swift */; };
-		AA2A71EEC92B0D14A8819DE2 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFD2847BC27D0EDFB66412D /* LoginPresenter.swift */; };
 		B74658D99DAE048F54FE7624 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CDB27228B00761E3B8BF5 /* Favorites.swift */; };
 		B9B4FD3C53A944F5AC43F825 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C175DA0ADB8C7AEB0D8A50 /* RecipesViewController.swift */; };
 		C177D56382AE30999FEA8D1F /* BonusesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA766C1B032D41608CE4B12 /* BonusesViewController.swift */; };
@@ -82,6 +82,7 @@
 		036CDB27228B00761E3B8BF5 /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		0469A1CD2B923227006F349A /* StorageFavorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageFavorites.swift; sourceTree = "<group>"; };
 		0469A1CF2B931FCB006F349A /* BasketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketView.swift; sourceTree = "<group>"; };
+		0469A20D2B9605D5006F349A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		04FEC3192B8F94010091D767 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		04FEC31E2B8F945C0091D767 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
@@ -106,7 +107,6 @@
 		5622EB8677C0468C9CC60E14 /* LogOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutTableViewCell.swift; sourceTree = "<group>"; };
 		670AD90FC89A7C634CCD3A2B /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		69900E2CE095E2CA61DC1F08 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
-		6AFD2847BC27D0EDFB66412D /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		757B69C924B03C0A6A9B0D75 /* Bonuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bonuses.swift; sourceTree = "<group>"; };
 		7AC8557BF2D8A9C6E20F38E4 /* BonusesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusesPresenter.swift; sourceTree = "<group>"; };
 		7C18FDC609EC27A7C8DAE0AB /* Recipely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipely.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -384,7 +384,7 @@
 		76B9066415CDB231A1054A02 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				6AFD2847BC27D0EDFB66412D /* LoginPresenter.swift */,
+				0469A20D2B9605D5006F349A /* LoginPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -746,6 +746,7 @@
 				ED9F30AA2B8FBED00069D8E2 /* Category.swift in Sources */,
 				3D1E8686A7D68154B8D22B97 /* MainTabBarBuilder.swift in Sources */,
 				981F24736C3C9CB2FD809B23 /* CellProtocol.swift in Sources */,
+				0469A20E2B9605D5006F349A /* LoginPresenter.swift in Sources */,
 				ED6537DE2B91F297005C8BE2 /* RecipeDetailProtocol.swift in Sources */,
 				487C6D29AEAC58096001FD9B /* CellsTypes.swift in Sources */,
 				B74658D99DAE048F54FE7624 /* Favorites.swift in Sources */,
@@ -763,7 +764,6 @@
 				6BFD435F7249D6C74016FE4A /* LogOutTableViewCell.swift in Sources */,
 				04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */,
 				85668033CE189CFC2EE1EC8F /* LoginCoordinator.swift in Sources */,
-				AA2A71EEC92B0D14A8819DE2 /* LoginPresenter.swift in Sources */,
 				92B85DE393ADE8B04925252A /* LoginViewController.swift in Sources */,
 				7624FE4A1C1A909CD406CC67 /* LoginViewControllerCoordinator.swift in Sources */,
 				5EFC07E4EBB455E1FF8A82AC /* MainTabBarViewController.swift in Sources */,

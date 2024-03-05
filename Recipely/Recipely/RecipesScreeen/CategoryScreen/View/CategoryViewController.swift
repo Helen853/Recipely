@@ -83,12 +83,17 @@ final class CategoryViewController: UIViewController {
     var isDataLoaded = false
     var categoryPresenter: CategoryPresenterProtocol?
     var recipes: [Recipes] = []
+    var searchidgRecipes: [Recipes] = []
+    var searching = false
 
     // MARK: - Private Properties
 
-    private lazy var items: [CellTypes] = [
-        .foods(recipes)
-    ]
+    private var notFoundView = BasketView(
+        frame: .zero,
+        title: "Nothing found",
+        text: "Try entering your query differently",
+        image: UIImage(named: "search2") ?? UIImage()
+    )
 
     // MARK: - Life Cycle
 
@@ -98,6 +103,7 @@ final class CategoryViewController: UIViewController {
         setupAnchors()
         setupTableView()
         tappedNextButton()
+        searchBar.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -132,12 +138,14 @@ final class CategoryViewController: UIViewController {
         view.addSubview(caloriesButton)
         view.addSubview(timeButton)
         view.addSubview(searchBar)
+        tableView.addSubview(notFoundView)
     }
 
     private func setupAnchors() {
         setupAnchorsSearchBar()
         setupAnchorsCaloriesButton()
         setupAnchorsTimeButton()
+        setupNotFoundView()
     }
 
     private func setupAnchorsSearchBar() {
@@ -177,6 +185,14 @@ final class CategoryViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 
+    private func setupNotFoundView() {
+        notFoundView.isHidden = true
+
+        notFoundView.translatesAutoresizingMaskIntoConstraints = false
+        notFoundView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+        notFoundView.topAnchor.constraint(equalTo: tableView.topAnchor, constant: -200).isActive = true
+    }
+
     private func setupNavigationItem() {
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: Constants.fontVerdanaBold, size: 24) ?? UIFont(),
@@ -202,11 +218,11 @@ final class CategoryViewController: UIViewController {
     }
 
     @objc private func buttonTappedCalories() {
-        categoryPresenter?.updateSortingStateCaloriesButton()
+        categoryPresenter?.buttonCaloriesChange(category: recipes)
     }
 
     @objc private func buttonTappedTimer() {
-        categoryPresenter?.updateSortingStateTimeButton()
+        categoryPresenter?.buttonTimeChange(category: recipes)
     }
 }
 
@@ -216,77 +232,52 @@ extension CategoryViewController: UITableViewDelegate {}
 /// CategoryViewController + UITableViewDataSource
 extension CategoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        recipes.count
+        if searching {
+            return searchidgRecipes.count
+        } else {
+            return recipes.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isDataLoaded {
-            let item = items[indexPath.section]
-            switch item {
-            case let .foods(info):
-                guard let cell = tableView.dequeueReusableCell(
-                    withIdentifier: Constants.foodCellIdentifier,
-                    for: indexPath
-                ) as? FoodCell
-                else { return UITableViewCell() }
-                cell.selectionStyle = .none
-                cell.configure(with: info[indexPath.row], handler: tappedNextHandler)
-                return cell
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: Constants.foodCellIdentifier,
+                for: indexPath
+            ) as? FoodCell
+            else { return UITableViewCell() }
+            cell.selectionStyle = .none
+            if searching {
+                cell.configure(with: searchidgRecipes[indexPath.row], handler: tappedNextHandler)
+            } else {
+                cell.configure(with: recipes[indexPath.row], handler: tappedNextHandler)
             }
+            return cell
         } else {
             return ShimmerRecipeTableViewCell()
         }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let item = items[indexPath.section]
-        switch item {
-        case .foods:
-            return CGFloat(Constants.heightcFoodCell)
-        }
+        CGFloat(Constants.heightcFoodCell)
     }
 }
 
 /// CategoryViewController + CategoryViewControllerProtocol
 extension CategoryViewController: CategoryViewControllerProtocol {
-    func updateButtonTimer(_ state: SortingState) {
-        switch state {
-        case .none:
-            timeButton.setTitle(Constants.timeButtonTitle, for: .normal)
-            timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
-            timeButton.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
-            timeButton.setTitleColor(.black, for: .normal)
-        case .up:
-            timeButton.setTitle(Constants.timeButtonTitle, for: .normal)
-            timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameTwo), for: .normal)
-            timeButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
-            timeButton.setTitleColor(.white, for: .normal)
-        case .down:
-            timeButton.setTitle(Constants.timeButtonTitle, for: .normal)
-            timeButton.setImage(UIImage(named: Constants.caloriesButtonImageNameThree), for: .normal)
-            timeButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
-            timeButton.setTitleColor(.white, for: .normal)
-        }
+    func buttonCaloriesState(color: String, image: String) {
+        caloriesButton.backgroundColor = UIColor(named: color)
+        caloriesButton.setImage(UIImage(named: image), for: .normal)
     }
 
-    func updateButtonCalories(_ state: SortingState) {
-        switch state {
-        case .none:
-            caloriesButton.setTitle(Constants.caloriesButtonTitle, for: .normal)
-            caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
-            caloriesButton.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
-            caloriesButton.setTitleColor(.black, for: .normal)
-        case .up:
-            caloriesButton.setTitle(Constants.caloriesButtonTitle, for: .normal)
-            caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameTwo), for: .normal)
-            caloriesButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
-            caloriesButton.setTitleColor(.white, for: .normal)
-        case .down:
-            caloriesButton.setTitle(Constants.caloriesButtonTitle, for: .normal)
-            caloriesButton.setImage(UIImage(named: Constants.caloriesButtonImageNameThree), for: .normal)
-            caloriesButton.backgroundColor = UIColor(red: 112 / 255, green: 185 / 255, blue: 190 / 255, alpha: 1.0)
-            caloriesButton.setTitleColor(.white, for: .normal)
-        }
+    func buttonTimeState(color: String, image: String) {
+        timeButton.backgroundColor = UIColor(named: color)
+        timeButton.setImage(UIImage(named: image), for: .normal)
+    }
+
+    func sortedRecip(recipe: [Recipes]) {
+        recipes = recipe
+        tableView.reloadData()
     }
 
     // Обновляется массив с рецептами и название экрана
@@ -297,5 +288,20 @@ extension CategoryViewController: CategoryViewControllerProtocol {
         titleScreen = title
         setupNavigationItem()
         tableView.reloadData()
+    }
+}
+
+extension CategoryViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count > 3 {
+            searchidgRecipes = recipes.filter { $0.foodName.prefix(searchText.count) == searchText }
+            notFoundView.isHidden = !searchidgRecipes.isEmpty
+            searching = true
+            tableView.reloadData()
+        } else {
+            searching = false
+            notFoundView.isHidden = true
+            tableView.reloadData()
+        }
     }
 }
