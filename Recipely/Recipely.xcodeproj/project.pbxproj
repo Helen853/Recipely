@@ -72,6 +72,7 @@
 		ED9F30A32B8F640F0069D8E2 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9F30A22B8F640F0069D8E2 /* TypeAlias.swift */; };
 		ED9F30A82B8FBEB70069D8E2 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9F30A72B8FBEB70069D8E2 /* CategoryCollectionViewCell.swift */; };
 		ED9F30AA2B8FBED00069D8E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9F30A92B8FBED00069D8E2 /* Category.swift */; };
+		EDB335B82B9602B6008FD7AD /* TermsPolicyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335B72B9602B6008FD7AD /* TermsPolicyPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +141,7 @@
 		ED9F30A22B8F640F0069D8E2 /* TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAlias.swift; sourceTree = "<group>"; };
 		ED9F30A72B8FBEB70069D8E2 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		ED9F30A92B8FBED00069D8E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		EDB335B72B9602B6008FD7AD /* TermsPolicyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsPolicyPresenter.swift; sourceTree = "<group>"; };
 		F1C0200EE0C3DC7F4E1284E5 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		F82600648C6D1A4FD7643B0C /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -230,6 +232,7 @@
 		14B17A8B25B2353C81997CDA /* TermsPolicyScreen */ = {
 			isa = PBXGroup;
 			children = (
+				EDB335B62B96026B008FD7AD /* TermsPolicyPresenter */,
 				18BDD5721ECC0D4C32CB5E28 /* View */,
 			);
 			path = TermsPolicyScreen;
@@ -604,6 +607,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		EDB335B62B96026B008FD7AD /* TermsPolicyPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				EDB335B72B9602B6008FD7AD /* TermsPolicyPresenter.swift */,
+			);
+			path = TermsPolicyPresenter;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -759,6 +770,7 @@
 				ED6537CE2B91920D005C8BE2 /* StorageCategory.swift in Sources */,
 				4B73D309DEAD3C1A35B0DF98 /* ProfileViewController.swift in Sources */,
 				7EEA770942ADA3FF3BD5798F /* CategoryType.swift in Sources */,
+				EDB335B82B9602B6008FD7AD /* TermsPolicyPresenter.swift in Sources */,
 				CEEB83723799F51874159F69 /* RecipesCoordinator.swift in Sources */,
 				70419907185A5729727C7ABB /* RecipesPresenter.swift in Sources */,
 				B9B4FD3C53A944F5AC43F825 /* RecipesViewController.swift in Sources */,

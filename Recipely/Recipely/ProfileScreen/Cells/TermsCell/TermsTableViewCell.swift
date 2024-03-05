@@ -12,6 +12,11 @@ final class TermsTableViewCell: UITableViewCell {
     private let arrowButton = UIButton()
     private let termsImageView = UIImageView()
 
+    // MARK: - Public Properties
+
+    // кложура для нажатия стрелки в ячейке
+    var arrowTapHandler: VoidHandler?
+
     // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -29,9 +34,10 @@ final class TermsTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configureCell(model: Terms) {
+    func configureCell(model: Terms, tapButton: VoidHandler?) {
         configureImage(nameImage: model.imageName)
         configureLabel(title: model.itemTitle)
+        arrowTapHandler = tapButton
     }
 
     // MARK: - Private Methods
@@ -84,5 +90,10 @@ final class TermsTableViewCell: UITableViewCell {
         arrowButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         arrowButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
         arrowButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        arrowButton.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
+    }
+
+    @objc private func tappedButton() {
+        arrowTapHandler?()
     }
 }

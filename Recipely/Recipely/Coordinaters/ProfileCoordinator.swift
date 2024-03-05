@@ -22,7 +22,13 @@ final class ProfileCoordinator: BaseCoordinator {
         rootViewController?.present(bonusesViewController, animated: true)
     }
 
-    func closeBonuses() {
+    func closeViewController() {
         rootViewController?.dismiss(animated: true)
+    }
+
+    func showTermsPolicyViewController() {
+        let termsPolicyViewController = MainTabBarBuilder().makeTermsPolicyViewController()
+        termsPolicyViewController.termsPolicyPresenter?.profileCoordinator = self
+        rootViewController?.present(termsPolicyViewController, animated: true)
     }
 }
