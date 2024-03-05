@@ -24,10 +24,10 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-      super.init(coder: coder)
-      configureImage()
-      configureLable()
-      configureContentView()
+        super.init(coder: coder)
+        configureImage()
+        configureLable()
+        configureContentView()
     }
 
     // MARK: - Public Methods

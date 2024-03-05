@@ -11,7 +11,7 @@ final class FavoritesViewController: UIViewController {
         static let title = "Favorites"
         static let foodCellIdentifier = "FoodCell"
         static let cellHeight = 125
-      static let countShimmerRows = 4
+        static let countShimmerRows = 4
     }
 
     // MARK: - Visual Components
@@ -101,7 +101,7 @@ extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch state {
         case .loading:
-          return Constants.countShimmerRows
+            return Constants.countShimmerRows
         case .loaded:
             return favorites.count
         }

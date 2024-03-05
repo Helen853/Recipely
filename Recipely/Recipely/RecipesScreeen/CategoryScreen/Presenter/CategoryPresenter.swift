@@ -102,20 +102,66 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     }
 
     func sortedRecipe(category: [Recipes]) {
-        let sorted: [Recipes]
+        var sorted = category
         switch (sortedCalories, sortedTime) {
         case (.non, .non):
-            sorted = category
+            view?.sortedRecip(recipe: sorted)
         case (.caloriesLow, _):
-            sorted = category.sorted(by: { $0.foodKkal < $1.foodKkal })
+            if sortedTime == .timeLow {
+                sorted = category.sorted(by: { lhs, rhs in
+                    if lhs.foodKkal == rhs.foodKkal {
+                        return lhs.foodTime < rhs.foodTime
+                    }
+                    return lhs.foodTime < rhs.foodTime
+                })
+            } else if sortedTime == .timeHigh {
+                sorted = category.sorted(by: { lhs, rhs in
+                    if lhs.foodKkal == rhs.foodKkal {
+                        return lhs.foodTime > rhs.foodTime
+                    }
+                    return lhs.foodKkal < rhs.foodKkal
+                })
+            } else {
+                sorted = category.sorted(by: { $0.foodKkal < $1.foodKkal })
+            }
+            view?.sortedRecip(recipe: sorted)
         case (.caloriesHigh, _):
-            sorted = category.sorted(by: { $0.foodKkal > $1.foodKkal })
+            if sortedTime == .timeLow {
+                sorted = category.sorted(by: { lhs, rhs in
+                    if lhs.foodKkal == rhs.foodKkal {
+                        return lhs.foodTime > rhs.foodTime
+                    }
+                    return lhs.foodKkal > rhs.foodKkal
+                })
+            } else if sortedTime == .timeHigh {
+                sorted = category.sorted(by: { lhs, rhs in
+                    if lhs.foodKkal == rhs.foodKkal {
+                        return lhs.foodTime < rhs.foodTime
+                    }
+                    return lhs.foodKkal > rhs.foodKkal
+                })
+            } else {
+                sorted = category.sorted(by: { $0.foodKkal > $1.foodKkal })
+            }
+            view?.sortedRecip(recipe: sorted)
         case (_, .timeLow):
-            sorted = category.sorted(by: { $0.foodTime < $1.foodTime })
+            sorted = category.sorted(by: { lhs, rhs in
+                if lhs.foodTime == rhs.foodTime {
+                    return lhs.foodKkal < rhs.foodKkal
+                }
+                return lhs.foodTime < rhs.foodTime
+            })
+            view?.sortedRecip(recipe: sorted)
         case (_, .timeHigh):
+            sorted = category.sorted(by: { lhs, rhs in
+                if lhs.foodTime == rhs.foodTime {
+                    return lhs.foodKkal < rhs.foodKkal
+                }
+                return lhs.foodTime > rhs.foodTime
+            })
             sorted = category.sorted(by: { $0.foodTime > $1.foodTime })
+            view?.sortedRecip(recipe: sorted)
         }
-        view?.sortedRecip(recipe: sorted)
     }
 
     func buttonTimeChange(category: [Recipes]) {
