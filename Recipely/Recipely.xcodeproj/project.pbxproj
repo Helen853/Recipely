@@ -74,6 +74,9 @@
 		ED9F30AA2B8FBED00069D8E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9F30A92B8FBED00069D8E2 /* Category.swift */; };
 		EDB335BA2B9612F7008FD7AD /* StateTerms.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335B92B9612F7008FD7AD /* StateTerms.swift */; };
 		EDB335BC2B966180008FD7AD /* ShimmerRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335BB2B966180008FD7AD /* ShimmerRecipeTableViewCell.swift */; };
+		EDB335BE2B978DBB008FD7AD /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335BD2B978DBB008FD7AD /* UIColor+Extension.swift */; };
+		EDB335C02B979E03008FD7AD /* CGColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335BF2B979E03008FD7AD /* CGColor+Extension.swift */; };
+		EDB335C22B97B1C2008FD7AD /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335C12B97B1C2008FD7AD /* UIFont+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +147,9 @@
 		ED9F30A92B8FBED00069D8E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EDB335B92B9612F7008FD7AD /* StateTerms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateTerms.swift; sourceTree = "<group>"; };
 		EDB335BB2B966180008FD7AD /* ShimmerRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerRecipeTableViewCell.swift; sourceTree = "<group>"; };
+		EDB335BD2B978DBB008FD7AD /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		EDB335BF2B979E03008FD7AD /* CGColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+Extension.swift"; sourceTree = "<group>"; };
+		EDB335C12B97B1C2008FD7AD /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		F1C0200EE0C3DC7F4E1284E5 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		F82600648C6D1A4FD7643B0C /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -295,6 +301,9 @@
 			isa = PBXGroup;
 			children = (
 				008E79B398C0013840C670AA /* UIView+Extension.swift */,
+				EDB335BD2B978DBB008FD7AD /* UIColor+Extension.swift */,
+				EDB335BF2B979E03008FD7AD /* CGColor+Extension.swift */,
+				EDB335C12B97B1C2008FD7AD /* UIFont+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -739,6 +748,7 @@
 				ED6537DE2B91F297005C8BE2 /* RecipeDetailProtocol.swift in Sources */,
 				487C6D29AEAC58096001FD9B /* CellsTypes.swift in Sources */,
 				B74658D99DAE048F54FE7624 /* Favorites.swift in Sources */,
+				EDB335C02B979E03008FD7AD /* CGColor+Extension.swift in Sources */,
 				69BC773F1FE7F038321E12A2 /* FavoritesCoordinator.swift in Sources */,
 				015071CFB03747F1C83ED6E6 /* FavoritesPresenter.swift in Sources */,
 				360A7FFC4D48100CF9191E84 /* FavoritesViewController.swift in Sources */,
@@ -765,11 +775,13 @@
 				995902DCA50F73D6B693F43A /* ProfilePresenter.swift in Sources */,
 				ED6537CE2B91920D005C8BE2 /* StorageCategory.swift in Sources */,
 				4B73D309DEAD3C1A35B0DF98 /* ProfileViewController.swift in Sources */,
+				EDB335BE2B978DBB008FD7AD /* UIColor+Extension.swift in Sources */,
 				7EEA770942ADA3FF3BD5798F /* CategoryType.swift in Sources */,
 				CEEB83723799F51874159F69 /* RecipesCoordinator.swift in Sources */,
 				70419907185A5729727C7ABB /* RecipesPresenter.swift in Sources */,
 				B9B4FD3C53A944F5AC43F825 /* RecipesViewController.swift in Sources */,
 				ED6537EE2B94A174005C8BE2 /* StorageDetail.swift in Sources */,
+				EDB335C22B97B1C2008FD7AD /* UIFont+Extension.swift in Sources */,
 				ECB98BF27F96C17F3BF0C185 /* SceneDelegate.swift in Sources */,
 				EDB335BA2B9612F7008FD7AD /* StateTerms.swift in Sources */,
 				ED6537E62B91F48A005C8BE2 /* ImageTableViewCell.swift in Sources */,

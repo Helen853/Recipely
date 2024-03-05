@@ -12,8 +12,12 @@ protocol ProfileViewProtocol: AnyObject {
     func changeLabel(updateName: String)
     /// установка вью с условиями политики
     func setupTermsPolicy()
+    /// Удаление экрана условий политики
     func removeTerms()
+    /// Удаление визуального эффекта экрана профиля
     func removeVisualEffect()
+    /// Переходы анимации
+    /// - Parametr: state - состояние экрана условий, duration - продолжительность
     func animateTransition(state: TermsState, duration: TimeInterval)
 }
 
@@ -280,6 +284,7 @@ extension ProfileViewController: ProfileViewProtocol {
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(tapScreenTerms))
         termsView.addGestureRecognizer(panGestureRecognizer)
         profilePresenter?.addVisualEffect()
+        isVisible = true
     }
 
     @objc func tapScreenTerms(recognizer: UIPanGestureRecognizer) {

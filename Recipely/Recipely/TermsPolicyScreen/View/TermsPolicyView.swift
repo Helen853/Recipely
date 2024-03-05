@@ -36,7 +36,7 @@ final class TermsPolicyView: UIView {
     private func configureTitle() {
         addSubview(titleLabel)
         textLabel.numberOfLines = 0
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        titleLabel.font = .verdanaBold20
         titleLabel.text = AppConstants.termsUseTitle
         titleLabel.textColor = .black
         titleLabel.textAlignment = .left
@@ -49,7 +49,7 @@ final class TermsPolicyView: UIView {
 
     private func configureTextLabel() {
         addSubview(textLabel)
-        textLabel.font = UIFont(name: AppConstants.fontVerdana, size: 14)
+        textLabel.font = .verdana14
         textLabel.text = AppConstants.termsText
         textLabel.textColor = .black
         textLabel.textAlignment = .left

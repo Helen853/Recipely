@@ -59,8 +59,8 @@ final class InfoTableViewCell: UITableViewCell {
 
     private func configureLabel() {
         contentView.addSubview(fullNameLabel)
-        fullNameLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        fullNameLabel.textColor = #colorLiteral(red: 0.3469149768, green: 0.4360020161, blue: 0.475877285, alpha: 1)
+        fullNameLabel.font = .verdanaBold25
+        fullNameLabel.textColor = .grayForTitle
         fullNameLabel.textAlignment = .right
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
         fullNameLabel.widthAnchor.constraint(equalToConstant: 220).isActive = true

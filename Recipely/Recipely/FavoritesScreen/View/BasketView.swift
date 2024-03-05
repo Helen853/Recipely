@@ -5,13 +5,6 @@ import UIKit
 
 /// Надпись когда фавориты пустые
 final class BasketView: UIView {
-    // MARK: - Constants
-
-    private enum Constants {
-        static let fontVerdanaBold = "Verdana-Bold"
-        static let fontVerdana = "Verdana"
-    }
-
     // MARK: - Visual Components
 
     private let backgroundView: UIView = {
@@ -22,15 +15,15 @@ final class BasketView: UIView {
 
     private var viewTitle: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Constants.fontVerdanaBold, size: 18)
+        label.font = .verdanaBold18
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private var viewText: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Constants.fontVerdana, size: 14)
-        label.textColor = UIColor(red: 151 / 255, green: 162 / 255, blue: 176 / 255, alpha: 1.0)
+        label.font = .verdana14
+        label.textColor = .grayForText
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -40,7 +33,7 @@ final class BasketView: UIView {
 
     private let viewImageBackground: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
+        view.backgroundColor = .grayForGround
         view.layer.cornerRadius = 12
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

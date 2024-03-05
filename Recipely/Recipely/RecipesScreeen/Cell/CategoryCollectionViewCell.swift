@@ -68,7 +68,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
 
     private func configureLable() {
         imageView.addSubview(titleLabel)
-        titleLabel.backgroundColor = #colorLiteral(red: 0.5957052112, green: 0.6146538258, blue: 0.6359308362, alpha: 0.7136020281)
+        titleLabel.backgroundColor = .grayOpasity
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

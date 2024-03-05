@@ -52,7 +52,7 @@ final class TermsTableViewCell: UITableViewCell {
 
     private func configureGroundView() {
         contentView.addSubview(groundView)
-        groundView.backgroundColor = #colorLiteral(red: 0.9559337497, green: 0.9685742259, blue: 0.9688379169, alpha: 1)
+        groundView.backgroundColor = .white
         groundView.layer.cornerRadius = 12
         groundView.translatesAutoresizingMaskIntoConstraints = false
         groundView.widthAnchor.constraint(equalToConstant: 48).isActive = true
@@ -64,7 +64,7 @@ final class TermsTableViewCell: UITableViewCell {
 
     private func configureTitleLabel() {
         contentView.addSubview(titleLabel)
-        titleLabel.font = UIFont.systemFont(ofSize: 18)
+        titleLabel.font = .verdana18
         titleLabel.textColor = #colorLiteral(red: 0.3469149768, green: 0.4360020161, blue: 0.475877285, alpha: 1)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.widthAnchor.constraint(equalToConstant: 224).isActive = true
