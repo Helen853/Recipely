@@ -3,7 +3,14 @@
 
 import UIKit
 
+/// Шимер ячейка рецепта
 final class ShimmerRecipeTableViewCell: UITableViewCell {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let gradientKey = "background"
+    }
+
     // MARK: - VIsual Components
 
     private let uiViewBackground: UIView = {
@@ -161,7 +168,7 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
 
         let viewBackgroundGroup = makeAnimation()
         viewBackgroundGroup.beginTime = 0.0
-        gradientBackground.add(viewBackgroundGroup, forKey: "background")
+        gradientBackground.add(viewBackgroundGroup, forKey: Constants.gradientKey)
 
         let gradientImage = CAGradientLayer()
         gradientImage.startPoint = CGPoint(x: 0, y: 0.5)
@@ -171,7 +178,7 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
         recipeImageView.layer.addSublayer(gradientImage)
 
         let imageGroup = makeAnimation(previousGroup: viewBackgroundGroup)
-        gradientImage.add(imageGroup, forKey: "background")
+        gradientImage.add(imageGroup, forKey: Constants.gradientKey)
 
         let gradientTitle = CAGradientLayer()
         gradientTitle.startPoint = CGPoint(x: 0, y: 0.5)
@@ -180,7 +187,7 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
         titleRecipe.layer.addSublayer(gradientTitle)
 
         let titleGroup = makeAnimation(previousGroup: viewBackgroundGroup)
-        gradientTitle.add(titleGroup, forKey: "background")
+        gradientTitle.add(titleGroup, forKey: Constants.gradientKey)
 
         let gradientTimelabel = CAGradientLayer()
         gradientTimelabel.startPoint = CGPoint(x: 0, y: 0.5)
@@ -189,7 +196,7 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
         timeLabel.layer.addSublayer(gradientTimelabel)
 
         let timeGroup = makeAnimation(previousGroup: viewBackgroundGroup)
-        gradientTimelabel.add(timeGroup, forKey: "background")
+        gradientTimelabel.add(timeGroup, forKey: Constants.gradientKey)
 
         let gradientPizzalabel = CAGradientLayer()
         gradientPizzalabel.startPoint = CGPoint(x: 0, y: 0.5)
@@ -198,10 +205,10 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
         pizzaLabel.layer.addSublayer(gradientPizzalabel)
 
         let pizzaGroup = makeAnimation(previousGroup: viewBackgroundGroup)
-        gradientPizzalabel.add(pizzaGroup, forKey: "background")
+        gradientPizzalabel.add(pizzaGroup, forKey: Constants.gradientKey)
     }
 
-    func makeAnimation(previousGroup: CAAnimationGroup? = nil) -> CAAnimationGroup {
+    private func makeAnimation(previousGroup: CAAnimationGroup? = nil) -> CAAnimationGroup {
         let animDuration: CFTimeInterval = 1.5
 
         let animation = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.backgroundColor))

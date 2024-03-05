@@ -20,9 +20,9 @@ final class CategoryViewController: UIViewController {
         static let timeButtonTitle = "Time"
         static let foodCellIdentifier = "FoodCell"
         static let heightcFoodCell = 125
+        static let countShimmerRows = 4
+        static let searchAfterCount = 3
     }
-
-    var tappedNextHandler: VoidHandler?
 
     // MARK: - Visual Components
 
@@ -79,12 +79,11 @@ final class CategoryViewController: UIViewController {
 
     // MARK: - Puplic Properties
 
+    var tappedNextHandler: VoidHandler?
     var titleScreen: String?
-    var isDataLoaded = false
     var categoryPresenter: CategoryPresenterProtocol?
     var recipes: [Recipes] = []
     var searchidgRecipes: [Recipes] = []
-    var searching = false
 
     // MARK: - Private Properties
 
@@ -94,6 +93,9 @@ final class CategoryViewController: UIViewController {
         text: "Try entering your query differently",
         image: UIImage(named: "search2") ?? UIImage()
     )
+    private var isDataLoaded = false
+    private var searching = false
+    private var state: StateLoaded = .loading
 
     // MARK: - Life Cycle
 
@@ -127,8 +129,8 @@ final class CategoryViewController: UIViewController {
     }
 
     private func showLoadedTableView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-            self?.isDataLoaded = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.state = .loaded
             self?.tableView.reloadData()
         }
     }
@@ -232,15 +234,25 @@ extension CategoryViewController: UITableViewDelegate {}
 /// CategoryViewController + UITableViewDataSource
 extension CategoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searching {
-            return searchidgRecipes.count
-        } else {
-            return recipes.count
+        switch state {
+        case .loading:
+            return Constants.countShimmerRows
+        case .loaded:
+            if searching {
+                return searchidgRecipes.count
+            } else {
+                return recipes.count
+            }
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isDataLoaded {
+        switch state {
+        case .loading:
+            tableView.isScrollEnabled = false
+            return ShimmerRecipeTableViewCell()
+        case .loaded:
+            tableView.isScrollEnabled = true
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: Constants.foodCellIdentifier,
                 for: indexPath
@@ -253,8 +265,6 @@ extension CategoryViewController: UITableViewDataSource {
                 cell.configure(with: recipes[indexPath.row], handler: tappedNextHandler)
             }
             return cell
-        } else {
-            return ShimmerRecipeTableViewCell()
         }
     }
 
@@ -293,7 +303,7 @@ extension CategoryViewController: CategoryViewControllerProtocol {
 
 extension CategoryViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.count > 3 {
+        if searchText.count > Constants.searchAfterCount {
             searchidgRecipes = recipes.filter { $0.foodName.prefix(searchText.count) == searchText }
             notFoundView.isHidden = !searchidgRecipes.isEmpty
             searching = true

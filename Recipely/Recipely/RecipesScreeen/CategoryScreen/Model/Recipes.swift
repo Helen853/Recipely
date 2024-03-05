@@ -13,12 +13,30 @@ struct Recipes {
     var foodKkal: Int
 }
 
-/// Состояния кнопок
-enum SortingState {
-    // Кнопка не нажата
-    case none
-    // Сортировка по возрастанию
-    case up
-    // Сортировка по убыванию
-    case down
+/// Состояния загрузки ячеек
+enum StateLoaded {
+    /// Процесс загрузки
+    case loading
+    /// Загружено
+    case loaded
+}
+
+/// Сортировка по калорием
+enum SortedCalories {
+    /// Обычное состояние
+    case non
+    /// Состояние в меньшую сторону
+    case caloriesLow
+    /// Состояние в большое сторону
+    case caloriesHigh
+}
+
+/// Сортировка по времени
+enum SortedTime {
+    /// Обчное состояние
+    case non
+    /// Состояние в меньшую сторону
+    case timeLow
+    /// Состояние в большую сторону
+    case timeHigh
 }
