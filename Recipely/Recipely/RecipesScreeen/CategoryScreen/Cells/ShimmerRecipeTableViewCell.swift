@@ -4,6 +4,8 @@
 import UIKit
 
 final class ShimmerRecipeTableViewCell: UITableViewCell {
+    let gradientTitle = CAGradientLayer()
+
     // MARK: - VIsual Components
 
     private let uiViewBackground: UIView = {
@@ -79,32 +81,20 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
         addGradient()
     }
 
-//
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupLayer()
+        gradientTitle.frame = titleRecipe.bounds
+    }
 
     func setupLayer() {
-        let gradientTitle = CAGradientLayer()
         gradientTitle.startPoint = CGPoint(x: 0, y: 0.5)
         gradientTitle.endPoint = CGPoint(x: 1, y: 0.5)
-
         titleRecipe.layer.addSublayer(gradientTitle)
-        // uiViewBackground.layer.addSublayer(gradient)
-        // recipeImageView.layer.insertSublayer(gradient, at: 0)
-//        timeLabel.layer.addSublayer(gradient)
-//        pizzaLabel.layer.addSublayer(gradient)
 
-        let animation = makeAnimation()
-        animation.beginTime = 0.0
-        gradientTitle.add(animation, forKey: "backgroundColor")
-
-        gradientTitle.frame = titleRecipe.bounds
-//      gradient.frame = uiViewBackground.bounds
-//      gradient.cornerRadius = 12
-//        gradient.frame = recipeImageView.bounds
-//        gradient.frame = timeLabel.bounds
-//        gradient.frame = pizzaLabel.bounds
+        let animationTitle = makeAnimation()
+        animationTitle.beginTime = 0.0
+        gradientTitle.add(animationTitle, forKey: "backgroundColor")
     }
 
     // MARK: - Private Methods
