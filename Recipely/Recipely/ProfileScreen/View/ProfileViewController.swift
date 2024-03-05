@@ -5,9 +5,16 @@ import UIKit
 
 /// Протокол для экрана профиля
 protocol ProfileViewProtocol: AnyObject {
+    /// настройка алерта
     func configureAlert()
+    /// изменение имени пользователя в профиле
+    /// -Parametr: новое имя
     func changeLabel(updateName: String)
-    func setupTerms()
+    /// установка вью с условиями политики
+    func setupTermsPolicy()
+    func removeTerms()
+    func removeVisualEffect()
+    func animateTransition(state: TermsState, duration: TimeInterval)
 }
 
 /// Экран профиля пользователя
@@ -16,27 +23,25 @@ final class ProfileViewController: UIViewController {
 
     private let tableView = UITableView()
     private let visualEffectView = UIVisualEffectView()
+    private let termsHieght: CGFloat = 760
+    private let termsHandleArea: CGFloat = 300
 
     // MARK: - Public Properties
 
     var profilePresenter: ProfilePresenter?
-    var termsPolicyViewController: TermsPolicyViewController?
     var termsView: TermsPolicyView?
-    let termsHieght: CGFloat = 760
-    let termsHandleArea: CGFloat = 300
-    var isVisible = false
-    var nextState: TermsState {
-        isVisible ? .collapsed : .expanded
-    }
-
-    var animationProgressWhenInterputted: CGFloat = 0
-
     var onTapHandler: VoidHandler?
     var arrowTapHandler: VoidHandler?
     var termsTapHandler: VoidHandler?
-    var runningAnimations: [UIViewPropertyAnimator] = []
 
     // MARK: - Private Properties
+
+    private var runningAnimations: [UIViewPropertyAnimator] = []
+    private var animationProgressWhenInterputted: CGFloat = 0
+    private var isVisible = true
+    private var nextState: TermsState {
+        isVisible ? .collapsed : .expanded
+    }
 
     // Массив с моделями ячеек
     private var cells: [CellTypeProtocol] = [
@@ -65,14 +70,14 @@ final class ProfileViewController: UIViewController {
         configureTitle()
         configureTable()
         registerCell()
-        onTap()
+        onTapChangeName()
         arrowButtonTapped()
         termsButtonTapped()
     }
 
     // MARK: - Private Methods
 
-    private func onTap() {
+    private func onTapChangeName() {
         onTapHandler = { [weak self] in
             guard let self = self else { return }
             profilePresenter?.showAlert()
@@ -127,6 +132,37 @@ final class ProfileViewController: UIViewController {
             LogOutTableViewCell.self,
             forCellReuseIdentifier: AppConstants.logOutIdentifier
         )
+    }
+
+    private func setupVisualEffect() {
+        visualEffectView.frame = view.frame
+        view.addSubview(visualEffectView)
+        let darkAnimator = UIViewPropertyAnimator(duration: 0.9, dampingRatio: 1)
+        visualEffectView.effect = UIBlurEffect(style: .dark)
+        darkAnimator.startAnimation()
+        runningAnimations.append(darkAnimator)
+    }
+
+    private func startInteractiveTransition(state: TermsState, duration: TimeInterval) {
+        if runningAnimations.isEmpty {
+            animateTransition(state: state, duration: duration)
+        }
+        for animator in runningAnimations {
+            animator.pauseAnimation()
+            animationProgressWhenInterputted = animator.fractionComplete
+        }
+    }
+
+    private func updateInteractiveTransition(fractionCompleted: CGFloat) {
+        for animator in runningAnimations {
+            animator.fractionComplete = fractionCompleted + animationProgressWhenInterputted
+        }
+    }
+
+    private func continueInteractiveTransition() {
+        for animator in runningAnimations {
+            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+        }
     }
 }
 
@@ -225,20 +261,8 @@ extension ProfileViewController: ProfileViewProtocol {
         tableView.reloadData()
     }
 
-    //
-    func setupTerms() {
-        // Задаем эффект для экрана профиля
-        visualEffectView.frame = view.frame
-        view.addSubview(visualEffectView)
-
-        // настройка экрана политики конфиденциальности
-//        termsPolicyViewController = TermsPolicyViewController()
-//        guard let termsPolicyViewController = termsPolicyViewController else { return }
-//        tabBarController?.tabBar.isHidden = true
-//        view.addSubview(termsPolicyViewController.view)
-//        addChild(termsPolicyViewController)
-//        termsPolicyViewController.didMove(toParent: self)
-//
+    /// настройка вью конфиденциальности
+    func setupTermsPolicy() {
         termsView = TermsPolicyView()
         guard let termsView = termsView else { return }
         termsView.frame = CGRect(
@@ -247,16 +271,18 @@ extension ProfileViewController: ProfileViewProtocol {
             width: view.frame.width,
             height: termsHieght
         )
-
         termsView.clipsToBounds = true
-        view.addSubview(termsView)
+        let scene = UIApplication.shared.connectedScenes
+        let windowScene = scene.first as? UIWindowScene
+        windowScene?.windows.last?.addSubview(termsView)
 
-        // устанавливааем распознователь жестов
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panScreenTerms))
+        // устанавливааем распознователь жестов на вью c условиями
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(tapScreenTerms))
         termsView.addGestureRecognizer(panGestureRecognizer)
+        profilePresenter?.addVisualEffect()
     }
 
-    @objc func panScreenTerms(recognizer: UIPanGestureRecognizer) {
+    @objc func tapScreenTerms(recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
             startInteractiveTransition(state: nextState, duration: 0.9)
@@ -272,14 +298,19 @@ extension ProfileViewController: ProfileViewProtocol {
         }
     }
 
-    func animateTransitionNeeded(state: TermsState, duration: TimeInterval) {
+    /// Анимация переходов
+    /// -Parametr: state -состояние вью "политики конфиденциальности", duration - продолжительность
+    func animateTransition(state: TermsState, duration: TimeInterval) {
         if runningAnimations.isEmpty {
             let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
                 switch state {
+                case .started:
+                    self.termsView?.frame.origin.y = self.view.frame.height - self.termsHandleArea
                 case .expanded:
                     self.termsView?.frame.origin.y = self.view.frame.height - self.termsHieght
                 case .collapsed:
                     self.termsView?.frame.origin.y = self.view.frame.height - self.termsHandleArea
+                    self.profilePresenter?.removeTermsPolicy()
                 }
             }
 
@@ -290,33 +321,17 @@ extension ProfileViewController: ProfileViewProtocol {
 
             frameAnimator.startAnimation()
             runningAnimations.append(frameAnimator)
-
-            let darkAnimator = UIViewPropertyAnimator(duration: 0.9, dampingRatio: 1)
-            visualEffectView.effect = UIBlurEffect(style: .dark)
-            darkAnimator.startAnimation()
-            runningAnimations.append(darkAnimator)
+            setupVisualEffect()
         }
     }
 
-    func startInteractiveTransition(state: TermsState, duration: TimeInterval) {
-        if runningAnimations.isEmpty {
-            animateTransitionNeeded(state: state, duration: duration)
-        }
-        for animator in runningAnimations {
-            animator.pauseAnimation()
-            animationProgressWhenInterputted = animator.fractionComplete
-        }
+    /// удаление экрана с условиями
+    func removeTerms() {
+        termsView?.removeFromSuperview()
     }
 
-    func updateInteractiveTransition(fractionCompleted: CGFloat) {
-        for animator in runningAnimations {
-            animator.fractionComplete = fractionCompleted + animationProgressWhenInterputted
-        }
-    }
-
-    func continueInteractiveTransition() {
-        for animator in runningAnimations {
-            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-        }
+    /// удаление визуального эффекта с вью
+    func removeVisualEffect() {
+        visualEffectView.removeFromSuperview()
     }
 }

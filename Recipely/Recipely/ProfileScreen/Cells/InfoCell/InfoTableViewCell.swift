@@ -78,10 +78,10 @@ final class InfoTableViewCell: UITableViewCell {
         changeButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         changeButton.leadingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor, constant: 8).isActive = true
         changeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -32).isActive = true
-        changeButton.addTarget(self, action: #selector(onTap), for: .touchUpInside)
+        changeButton.addTarget(self, action: #selector(onTapChangeName), for: .touchUpInside)
     }
 
-    @objc private func onTap() {
+    @objc private func onTapChangeName() {
         onTapHandler?()
     }
 }

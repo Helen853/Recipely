@@ -9,6 +9,8 @@ protocol ProfilePresenterProtocol {
     func showBonuses()
     func showAlert()
     func showTermsPolicy()
+    func removeTermsPolicy()
+    func addVisualEffect()
 }
 
 /// Презентер экрана профиля
@@ -24,9 +26,19 @@ final class ProfilePresenter {
 // MARK: - ProfilePresenter + ProfilePresenterProtocol
 
 extension ProfilePresenter: ProfilePresenterProtocol {
+    func addVisualEffect() {
+        view?.animateTransition(state: .started, duration: 1)
+    }
+
+    func removeTermsPolicy() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { [weak self] in
+            self?.view?.removeTerms()
+            self?.view?.removeVisualEffect()
+        }
+    }
+
     func showTermsPolicy() {
-        // profileCoordinator?.showTermsPolicyViewController()
-        view?.setupTerms()
+        view?.setupTermsPolicy()
     }
 
     /// Изменение имени пользователя профиле
