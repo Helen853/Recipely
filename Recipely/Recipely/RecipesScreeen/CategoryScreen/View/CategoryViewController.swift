@@ -80,6 +80,7 @@ final class CategoryViewController: UIViewController {
     // MARK: - Puplic Properties
 
     var titleScreen: String?
+    var isDataLoaded = false
     var categoryPresenter: CategoryPresenterProtocol?
     var recipes: [Recipes] = []
     var searchidgRecipes: [Recipes] = []
@@ -102,9 +103,12 @@ final class CategoryViewController: UIViewController {
         setupAnchors()
         setupTableView()
         tappedNextButton()
-//        categoryPresenter?.getRecipes(recipes: recipes)
         searchBar.delegate = self
-        navigationController?.navigationBar.backgroundColor = .red
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showLoadedTableView()
     }
 
     // MARK: - Public Methods
@@ -119,6 +123,13 @@ final class CategoryViewController: UIViewController {
         tappedNextHandler = { [weak self] in
             guard let self = self else { return }
             categoryPresenter?.showRecipeDetail()
+        }
+    }
+
+    private func showLoadedTableView() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            self?.isDataLoaded = true
+            self?.tableView.reloadData()
         }
     }
 
@@ -160,6 +171,7 @@ final class CategoryViewController: UIViewController {
 
     private func setupTableView() {
         tableView.register(FoodCell.self, forCellReuseIdentifier: Constants.foodCellIdentifier)
+        tableView.register(ShimmerRecipeTableViewCell.self, forCellReuseIdentifier: AppConstants.shimmerIdentifier)
         view.backgroundColor = .white
         tableView.dataSource = self
         tableView.delegate = self
@@ -228,18 +240,22 @@ extension CategoryViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.foodCellIdentifier,
-            for: indexPath
-        ) as? FoodCell
-        else { return UITableViewCell() }
-        cell.selectionStyle = .none
-        if searching {
-            cell.configure(with: searchidgRecipes[indexPath.row], handler: tappedNextHandler)
+        if isDataLoaded {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: Constants.foodCellIdentifier,
+                for: indexPath
+            ) as? FoodCell
+            else { return UITableViewCell() }
+            cell.selectionStyle = .none
+            if searching {
+                cell.configure(with: searchidgRecipes[indexPath.row], handler: tappedNextHandler)
+            } else {
+                cell.configure(with: recipes[indexPath.row], handler: tappedNextHandler)
+            }
+            return cell
         } else {
-            cell.configure(with: recipes[indexPath.row], handler: tappedNextHandler)
+            return ShimmerRecipeTableViewCell()
         }
-        return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -25,7 +25,8 @@ final class ProfilePresenter {
 
 extension ProfilePresenter: ProfilePresenterProtocol {
     func showTermsPolicy() {
-        profileCoordinator?.showTermsPolicyViewController()
+        // profileCoordinator?.showTermsPolicyViewController()
+        view?.setupTerms()
     }
 
     /// Изменение имени пользователя профиле
