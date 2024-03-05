@@ -1,6 +1,8 @@
 // AppCoordinator.swift
 // Copyright © RoadMap. All rights reserved.
 
+import UIKit
+
 /// Главный координатор
 final class AppCoordinator: BaseCoordinator {
     private var mainTabBarController: MainTabBarController?
@@ -14,7 +16,7 @@ final class AppCoordinator: BaseCoordinator {
         }
     }
 
-    private func showMainTabBar() {
+    func showMainTabBar() {
         mainTabBarController = MainTabBarController()
 
         let recipesCoordinator = RecipesCoordinator()
@@ -52,7 +54,20 @@ final class AppCoordinator: BaseCoordinator {
     }
 
     private func showLoginModule() {
+//        let loginCoordinator = AppCoordinator()
+//        let loginViewController = LoginViewController()
+//        let loginPresenter = LoginPresenter(view: loginViewController, coordinator: loginCoordinator)
+//        loginViewController.loginPresenter = loginPresenter
+//        let rootViewContreoller = UINavigationController(rootViewController: loginViewController)
+//        setAsRoot​(​_​: rootViewContreoller)
+//        add(coordinator: loginCoordinator)
+//        loginCoordinator.start()
+
         let loginCoordinator = LoginCoordinator()
+        loginCoordinator.goToTabBarController = { [weak self] in
+            self?.remove(coordinator: loginCoordinator)
+            self?.showMainTabBar()
+        }
         add(coordinator: loginCoordinator)
         loginCoordinator.start()
     }

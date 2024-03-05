@@ -86,6 +86,7 @@ final class LoginPresenter: LoginPresenterProtocol {
             view?.setloginButtonPressed(Constants.spinerIamgename, "")
             DispatchQueue.main.asyncAfter(deadline: .now() + Constants.dispatchQueueTime) { [weak self] in
                 self?.view?.setloginButtonPressed("", Constants.titleButtonText)
+                self?.loginCoordinator?.goToTabBarScreen()
             }
         } else {
             view?.showErrorSplashOn()
