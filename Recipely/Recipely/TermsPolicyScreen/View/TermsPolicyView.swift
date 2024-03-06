@@ -23,7 +23,7 @@ final class TermsPolicyView: UIView {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-      super.init(coder: coder)
+        super.init(coder: coder)
     }
 
     // MARK: - Private Methods

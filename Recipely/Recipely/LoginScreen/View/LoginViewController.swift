@@ -34,7 +34,7 @@ final class LoginViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.titleLabelText
-        label.font = .verdanaBold18
+        label.font = .verdanaBold28
         label.textColor = .grayForTitle
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -43,7 +43,7 @@ final class LoginViewController: UIViewController {
     private let emailLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.emailLabelText
-        label.font = .verdanaBold28
+        label.font = .verdanaBold18
         label.textColor = .grayForTitle
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

@@ -20,6 +20,9 @@ final class CategoryViewController: UIViewController {
         static let heightcFoodCell = 125
         static let countShimmerRows = 4
         static let searchAfterCount = 3
+        static let notFoundViewTitle = "Nothing found"
+        static let notFoundViewText = "Try entering your query differently"
+        static let notFoundViewImageName = "search2"
     }
 
     // MARK: - Visual Components
@@ -46,35 +49,17 @@ final class CategoryViewController: UIViewController {
         return imageView
     }()
 
-    lazy var caloriesButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(Constants.caloriesButtonTitle, for: .normal)
-        button.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
-        button.backgroundColor = .grayForGround
-        button.titleLabel?.font = .verdana16
-        button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 20
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 10)
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 10)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(buttonTappedCalories), for: .touchUpInside)
-        return button
-    }()
+    private lazy var caloriesButton: UIButton = makeSortingButton(
+        title: Constants.caloriesButtonTitle,
+        image: UIImage(named: Constants.caloriesButtonImageNameOne) ?? UIImage(),
+        action: #selector(buttonTappedCalories)
+    )
 
-    lazy var timeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(Constants.timeButtonTitle, for: .normal)
-        button.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
-        button.backgroundColor = .grayForGround
-        button.titleLabel?.font = .verdana16
-        button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 20
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 10)
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 10)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(buttonTappedTimer), for: .touchUpInside)
-        return button
-    }()
+    private lazy var timeButton: UIButton = makeSortingButton(
+        title: Constants.timeButtonTitle,
+        image: UIImage(named: Constants.caloriesButtonImageNameOne) ?? UIImage(),
+        action: #selector(buttonTappedTimer)
+    )
 
     // MARK: - Puplic Properties
 
@@ -85,13 +70,13 @@ final class CategoryViewController: UIViewController {
 
     private var notFoundView = BasketView(
         frame: .zero,
-        title: "Nothing found",
-        text: "Try entering your query differently",
-        image: UIImage(named: "search2") ?? UIImage()
+        title: Constants.notFoundViewTitle,
+        text: Constants.notFoundViewText,
+        image: UIImage(named: Constants.notFoundViewImageName) ?? UIImage()
     )
-  private var recipes: [Recipes] = []
-  private var searchidgRecipes: [Recipes] = []
-  private var titleScreen: String?
+    private var recipes: [Recipes] = []
+    private var searchidgRecipes: [Recipes] = []
+    private var titleScreen: String?
     private var isDataLoaded = false
     private var searching = false
     private var state: StateLoaded = .loading
@@ -154,7 +139,7 @@ final class CategoryViewController: UIViewController {
     private func setupAnchorsTimeButton() {
         timeButton.leadingAnchor.constraint(equalTo: caloriesButton.trailingAnchor, constant: 11).isActive = true
         timeButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20).isActive = true
-        timeButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        timeButton.widthAnchor.constraint(equalToConstant: 112).isActive = true
         timeButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
     }
 
@@ -200,6 +185,15 @@ final class CategoryViewController: UIViewController {
         titleButton.tintColor = .black
         titleButton.setTitleTextAttributes(textAttributes, for: .normal)
         navigationItem.leftBarButtonItems = [backButton, titleButton]
+    }
+
+    private func makeSortingButton(title: String, image: UIImage, action: Selector) -> UIButton {
+        let button = SortingButton(
+            title: title,
+            image: image
+        )
+        button.addTarget(self, action: action, for: .touchUpInside)
+        return button
     }
 
     @objc private func goBack() {

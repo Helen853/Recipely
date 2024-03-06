@@ -175,8 +175,8 @@ final class CategoryPresenter: CategoryPresenterProtocol {
             view?.buttonTimeState(color: Constants.buttonPressedColor, image: Constants.stateImageTwo)
             sortedRecipe(category: category)
         case .timeLow:
-            view?.buttonTimeState(color: Constants.buttonPressedColor, image: Constants.stateImageThree)
             sortedTime = .timeHigh
+            view?.buttonTimeState(color: Constants.buttonPressedColor, image: Constants.stateImageThree)
             sortedRecipe(category: category)
         case .timeHigh:
             sortedTime = .non
