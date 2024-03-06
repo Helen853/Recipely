@@ -1,20 +1,22 @@
 // AppCoordinator.swift
 // Copyright © RoadMap. All rights reserved.
 
+import UIKit
+
 /// Главный координатор
 final class AppCoordinator: BaseCoordinator {
     private var mainTabBarController: MainTabBarController?
     private var appBuilder = MainTabBarBuilder()
 
     override func start() {
-        if "admin" == "admin" {
+        if "adminn" == "admin" {
             showMainTabBar()
         } else {
             showLoginModule()
         }
     }
 
-    private func showMainTabBar() {
+    func showMainTabBar() {
         mainTabBarController = MainTabBarController()
 
         let recipesCoordinator = RecipesCoordinator()
@@ -53,6 +55,10 @@ final class AppCoordinator: BaseCoordinator {
 
     private func showLoginModule() {
         let loginCoordinator = LoginCoordinator()
+        loginCoordinator.goToTabBarController = { [weak self] in
+            self?.remove(coordinator: loginCoordinator)
+            self?.showMainTabBar()
+        }
         add(coordinator: loginCoordinator)
         loginCoordinator.start()
     }

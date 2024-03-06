@@ -1,8 +1,6 @@
 // FavoritesPresenter.swift
 // Copyright © RoadMap. All rights reserved.
 
-import UIKit
-
 /// Протокол FavoritesViewController
 protocol FavoritesViewControllerProtocol: AnyObject {
     /// Обновление массива с избранным

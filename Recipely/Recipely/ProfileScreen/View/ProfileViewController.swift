@@ -7,6 +7,7 @@ import UIKit
 protocol ProfileViewProtocol: AnyObject {
     func configureAlert()
     func changeLabel(updateName: String)
+    func setupTerms()
 }
 
 /// Экран профиля пользователя
@@ -14,12 +15,26 @@ final class ProfileViewController: UIViewController {
     // MARK: - Visual Components
 
     private let tableView = UITableView()
+    private let visualEffectView = UIVisualEffectView()
 
     // MARK: - Public Properties
 
     var profilePresenter: ProfilePresenter?
+    var termsPolicyViewController: TermsPolicyViewController?
+    var termsView: TermsPolicyView?
+    let termsHieght: CGFloat = 760
+    let termsHandleArea: CGFloat = 300
+    var isVisible = false
+    var nextState: TermsState {
+        isVisible ? .collapsed : .expanded
+    }
+
+    var animationProgressWhenInterputted: CGFloat = 0
+
     var onTapHandler: VoidHandler?
     var arrowTapHandler: VoidHandler?
+    var termsTapHandler: VoidHandler?
+    var runningAnimations: [UIViewPropertyAnimator] = []
 
     // MARK: - Private Properties
 
@@ -52,6 +67,7 @@ final class ProfileViewController: UIViewController {
         registerCell()
         onTap()
         arrowButtonTapped()
+        termsButtonTapped()
     }
 
     // MARK: - Private Methods
@@ -67,6 +83,13 @@ final class ProfileViewController: UIViewController {
         arrowTapHandler = { [weak self] in
             guard let self = self else { return }
             profilePresenter?.showBonuses()
+        }
+    }
+
+    private func termsButtonTapped() {
+        termsTapHandler = { [weak self] in
+            guard let self = self else { return }
+            profilePresenter?.showTermsPolicy()
         }
     }
 
@@ -146,7 +169,7 @@ extension ProfileViewController: UITableViewDataSource {
             else {
                 return UITableViewCell()
             }
-            cell.configureCell(model: model)
+            cell.configureCell(model: model, tapButton: termsTapHandler)
             return cell
         case .logOut:
             guard
@@ -200,5 +223,100 @@ extension ProfileViewController: ProfileViewProtocol {
             fullName: updateName
         )
         tableView.reloadData()
+    }
+
+    //
+    func setupTerms() {
+        // Задаем эффект для экрана профиля
+        visualEffectView.frame = view.frame
+        view.addSubview(visualEffectView)
+
+        // настройка экрана политики конфиденциальности
+//        termsPolicyViewController = TermsPolicyViewController()
+//        guard let termsPolicyViewController = termsPolicyViewController else { return }
+//        tabBarController?.tabBar.isHidden = true
+//        view.addSubview(termsPolicyViewController.view)
+//        addChild(termsPolicyViewController)
+//        termsPolicyViewController.didMove(toParent: self)
+//
+        termsView = TermsPolicyView()
+        guard let termsView = termsView else { return }
+        termsView.frame = CGRect(
+            x: 0,
+            y: view.frame.height - termsHandleArea,
+            width: view.frame.width,
+            height: termsHieght
+        )
+
+        termsView.clipsToBounds = true
+        view.addSubview(termsView)
+
+        // устанавливааем распознователь жестов
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panScreenTerms))
+        termsView.addGestureRecognizer(panGestureRecognizer)
+    }
+
+    @objc func panScreenTerms(recognizer: UIPanGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            startInteractiveTransition(state: nextState, duration: 0.9)
+        case .changed:
+            let translation = recognizer.translation(in: termsView)
+            var fractionComplete = translation.y / termsHieght
+            fractionComplete = isVisible ? fractionComplete : -fractionComplete
+            updateInteractiveTransition(fractionCompleted: fractionComplete)
+        case .ended:
+            continueInteractiveTransition()
+        default:
+            break
+        }
+    }
+
+    func animateTransitionNeeded(state: TermsState, duration: TimeInterval) {
+        if runningAnimations.isEmpty {
+            let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
+                switch state {
+                case .expanded:
+                    self.termsView?.frame.origin.y = self.view.frame.height - self.termsHieght
+                case .collapsed:
+                    self.termsView?.frame.origin.y = self.view.frame.height - self.termsHandleArea
+                }
+            }
+
+            frameAnimator.addCompletion { _ in
+                self.isVisible = !self.isVisible
+                self.runningAnimations.removeAll()
+            }
+
+            frameAnimator.startAnimation()
+            runningAnimations.append(frameAnimator)
+
+            let darkAnimator = UIViewPropertyAnimator(duration: 0.9, dampingRatio: 1)
+            visualEffectView.effect = UIBlurEffect(style: .dark)
+            darkAnimator.startAnimation()
+            runningAnimations.append(darkAnimator)
+        }
+    }
+
+    func startInteractiveTransition(state: TermsState, duration: TimeInterval) {
+        if runningAnimations.isEmpty {
+            animateTransitionNeeded(state: state, duration: duration)
+        }
+        for animator in runningAnimations {
+            animator.pauseAnimation()
+            animationProgressWhenInterputted = animator.fractionComplete
+        }
+    }
+
+    func updateInteractiveTransition(fractionCompleted: CGFloat) {
+        for animator in runningAnimations {
+            animator.fractionComplete = fractionCompleted + animationProgressWhenInterputted
+        }
+    }
+
+    func continueInteractiveTransition() {
+        for animator in runningAnimations {
+            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+        }
     }
 }

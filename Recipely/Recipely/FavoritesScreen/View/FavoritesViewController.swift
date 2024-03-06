@@ -11,6 +11,7 @@ final class FavoritesViewController: UIViewController {
         static let title = "Favorites"
         static let foodCellIdentifier = "FoodCell"
         static let cellHeight = 125
+        static let countShimmerRows = 4
     }
 
     // MARK: - Visual Components
@@ -27,12 +28,15 @@ final class FavoritesViewController: UIViewController {
     var fvoritesPresenter: FavoritesPresenterProtocol?
     var tappedNextHandler: VoidHandler?
 
-    // MARK: - Private Methods
+    // MARK: - Private Properties
 
-    private var basketView = BasketView()
-    private lazy var items: [CellTypes] = [
-        .foods(favorites)
-    ]
+    private var basketView = BasketView(
+        frame: .zero,
+        title: "There's nothing here yet",
+        text: "Add interesting recipes to make ordering products convenient",
+        image: UIImage(named: "emptyFavorites") ?? UIImage()
+    )
+    private var state: StateLoaded = .loading
 
     // MARK: - Life Cycle
 
@@ -42,6 +46,11 @@ final class FavoritesViewController: UIViewController {
         setupTableView()
         setupBasketViewAnchors()
         fvoritesPresenter?.returnFavourites(StorageFavorites())
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showLoadedTableView()
     }
 
     // MARK: - Private Methods
@@ -66,6 +75,13 @@ final class FavoritesViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 
+    private func showLoadedTableView() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.state = .loaded
+            self?.tableView.reloadData()
+        }
+    }
+
     private func setupBasketViewAnchors() {
         basketView.isHidden = false
 
@@ -83,13 +99,21 @@ extension FavoritesViewController: UITableViewDelegate {}
 /// FavoritesViewController + UITableViewDataSource
 extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        favorites.count
+        switch state {
+        case .loading:
+            return Constants.countShimmerRows
+        case .loaded:
+            return favorites.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = items[indexPath.section]
-        switch item {
-        case let .foods(info):
+        switch state {
+        case .loading:
+            tableView.isScrollEnabled = false
+            return ShimmerRecipeTableViewCell()
+        case .loaded:
+            tableView.isScrollEnabled = true
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: Constants.foodCellIdentifier,
                 for: indexPath
@@ -97,17 +121,13 @@ extension FavoritesViewController: UITableViewDataSource {
             else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.nextButton.isHidden = true
-            cell.configure(with: info[indexPath.row], handler: tappedNextHandler)
+            cell.configure(with: favorites[indexPath.row], handler: tappedNextHandler)
             return cell
         }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let item = items[indexPath.section]
-        switch item {
-        case .foods:
-            return CGFloat(Constants.cellHeight)
-        }
+        CGFloat(Constants.cellHeight)
     }
 
     func tableView(

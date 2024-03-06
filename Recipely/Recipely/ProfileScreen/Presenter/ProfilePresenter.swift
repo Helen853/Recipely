@@ -8,6 +8,7 @@ protocol ProfilePresenterProtocol {
     func changeName(text: String)
     func showBonuses()
     func showAlert()
+    func showTermsPolicy()
 }
 
 /// Презентер экрана профиля
@@ -23,6 +24,11 @@ final class ProfilePresenter {
 // MARK: - ProfilePresenter + ProfilePresenterProtocol
 
 extension ProfilePresenter: ProfilePresenterProtocol {
+    func showTermsPolicy() {
+        // profileCoordinator?.showTermsPolicyViewController()
+        view?.setupTerms()
+    }
+
     /// Изменение имени пользователя профиле
     /// - Parametr: текст из поля ввода
     func changeName(text: String) {
