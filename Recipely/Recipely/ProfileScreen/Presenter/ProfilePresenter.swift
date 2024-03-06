@@ -15,6 +15,12 @@ protocol ProfilePresenterProtocol {
 
 /// Презентер экрана профиля
 final class ProfilePresenter {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let removeTermsPolicyTime = 0.7
+    }
+
     private weak var view: ProfileViewProtocol?
     private weak var profileCoordinator: ProfileCoordinator?
     init(view: ProfileViewProtocol, coordinator: ProfileCoordinator) {
@@ -31,7 +37,7 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     }
 
     func removeTermsPolicy() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.removeTermsPolicyTime) { [weak self] in
             self?.view?.removeTerms()
             self?.view?.removeVisualEffect()
         }

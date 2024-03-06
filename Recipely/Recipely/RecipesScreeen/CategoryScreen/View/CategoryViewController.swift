@@ -79,10 +79,7 @@ final class CategoryViewController: UIViewController {
     // MARK: - Puplic Properties
 
     var tappedNextHandler: VoidHandler?
-    var titleScreen: String?
     var categoryPresenter: CategoryPresenterProtocol?
-    var recipes: [Recipes] = []
-    var searchidgRecipes: [Recipes] = []
 
     // MARK: - Private Properties
 
@@ -92,6 +89,9 @@ final class CategoryViewController: UIViewController {
         text: "Try entering your query differently",
         image: UIImage(named: "search2") ?? UIImage()
     )
+  private var recipes: [Recipes] = []
+  private var searchidgRecipes: [Recipes] = []
+  private var titleScreen: String?
     private var isDataLoaded = false
     private var searching = false
     private var state: StateLoaded = .loading

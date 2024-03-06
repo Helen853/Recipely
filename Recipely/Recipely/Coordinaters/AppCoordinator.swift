@@ -9,11 +9,7 @@ final class AppCoordinator: BaseCoordinator {
     private var appBuilder = MainTabBarBuilder()
 
     override func start() {
-        if "adminn" == "admin" {
-            showMainTabBar()
-        } else {
-            showLoginModule()
-        }
+        showLoginModule()
     }
 
     func showMainTabBar() {

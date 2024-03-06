@@ -12,6 +12,9 @@ final class FavoritesViewController: UIViewController {
         static let foodCellIdentifier = "FoodCell"
         static let cellHeight = 125
         static let countShimmerRows = 4
+        static let basketViewTitle = "There's nothing here yet"
+        static let basketViewText = "Add interesting recipes to make ordering products convenient"
+        static let basketViewImageName = "emptyFavorites"
     }
 
     // MARK: - Visual Components
@@ -32,9 +35,9 @@ final class FavoritesViewController: UIViewController {
 
     private var basketView = BasketView(
         frame: .zero,
-        title: "There's nothing here yet",
-        text: "Add interesting recipes to make ordering products convenient",
-        image: UIImage(named: "emptyFavorites") ?? UIImage()
+        title: Constants.basketViewTitle,
+        text: Constants.basketViewText,
+        image: UIImage(named: Constants.basketViewImageName) ?? UIImage()
     )
     private var state: StateLoaded = .loading
 

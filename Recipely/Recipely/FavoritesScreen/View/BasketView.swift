@@ -13,14 +13,14 @@ final class BasketView: UIView {
         return view
     }()
 
-    private var viewTitle: UILabel = {
+    private let viewTitle: UILabel = {
         let label = UILabel()
         label.font = .verdanaBold18
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private var viewText: UILabel = {
+    private let viewText: UILabel = {
         let label = UILabel()
         label.font = .verdana14
         label.textColor = .grayForText
@@ -39,11 +39,7 @@ final class BasketView: UIView {
         return view
     }()
 
-    private var viewImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private let viewImage = UIImageView()
 
     // MARK: - Initializers
 
@@ -106,6 +102,7 @@ final class BasketView: UIView {
     }
 
     private func setupAnchorsViewImage() {
+        viewImage.translatesAutoresizingMaskIntoConstraints = false
         viewImage.centerYAnchor.constraint(equalTo: viewImageBackground.centerYAnchor).isActive = true
         viewImage.centerXAnchor.constraint(equalTo: viewImageBackground.centerXAnchor).isActive = true
     }

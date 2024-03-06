@@ -20,47 +20,17 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
         return uiView
     }()
 
-    private let recipeImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private let recipeImageView = UIImageView()
+    private let titleRecipe = UILabel()
+    private let timeLabel = UILabel()
+    private let timerImageView = UIImageView()
+    private let pizzaImageView = UIImageView()
+    private let pizzaLabel = UILabel()
+    public let nextButton = UIButton()
 
-    private let titleRecipe: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    // MARK: - Private Properties
 
-    private let timeLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    private let timerImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-
-    private let pizzaImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-
-    private let pizzaLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    public let nextButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    private var viewBackgroundGroup = CAAnimationGroup()
 
     // MARK: - Initializers
 
@@ -81,7 +51,11 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
 
     override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: self.layer)
-        addGradient()
+        addGradientBackground()
+        addGradientImage()
+        addGradientTitle()
+        addGradientTimeLabel()
+        addGradientPizzaLabel()
     }
 
     // MARK: - Private Methods
@@ -116,6 +90,7 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
     }
 
     private func setupAnchorsRecipeImageView() {
+        recipeImageView.translatesAutoresizingMaskIntoConstraints = false
         recipeImageView.leadingAnchor.constraint(equalTo: uiViewBackground.leadingAnchor, constant: 10).isActive = true
         recipeImageView.topAnchor.constraint(equalTo: uiViewBackground.topAnchor, constant: 10).isActive = true
         recipeImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
@@ -123,6 +98,7 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
     }
 
     private func setupAnchorsTitleRecipe() {
+        titleRecipe.translatesAutoresizingMaskIntoConstraints = false
         titleRecipe.topAnchor.constraint(equalTo: uiViewBackground.topAnchor, constant: 22).isActive = true
         titleRecipe.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor, constant: 20).isActive = true
         titleRecipe.widthAnchor.constraint(equalToConstant: 200).isActive = true
@@ -130,6 +106,7 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
     }
 
     private func setupAnchorsTimeLabel() {
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor, constant: 20).isActive = true
         timeLabel.topAnchor.constraint(equalTo: titleRecipe.bottomAnchor, constant: 20).isActive = true
         timeLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
@@ -137,16 +114,19 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
     }
 
     private func setupAnchorsTimerImageView() {
+        timerImageView.translatesAutoresizingMaskIntoConstraints = false
         timerImageView.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor, constant: 22).isActive = true
         timerImageView.topAnchor.constraint(equalTo: titleRecipe.bottomAnchor, constant: 19).isActive = true
     }
 
     private func setupAnchorsPizzaImageView() {
+        pizzaImageView.translatesAutoresizingMaskIntoConstraints = false
         pizzaImageView.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 37).isActive = true
         pizzaImageView.topAnchor.constraint(equalTo: titleRecipe.bottomAnchor, constant: 19).isActive = true
     }
 
     private func setupAnchorsPizzaLabel() {
+        pizzaLabel.translatesAutoresizingMaskIntoConstraints = false
         pizzaLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 35).isActive = true
         pizzaLabel.topAnchor.constraint(equalTo: titleRecipe.bottomAnchor, constant: 20).isActive = true
         pizzaLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
@@ -154,11 +134,12 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
     }
 
     private func setupAnchorsNextButton() {
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.trailingAnchor.constraint(equalTo: uiViewBackground.trailingAnchor, constant: -16).isActive = true
         nextButton.topAnchor.constraint(equalTo: uiViewBackground.topAnchor, constant: 40).isActive = true
     }
 
-    private func addGradient() {
+    private func addGradientBackground() {
         let gradientBackground = CAGradientLayer()
         gradientBackground.startPoint = CGPoint(x: 0, y: 0.5)
         gradientBackground.endPoint = CGPoint(x: 1, y: 0.5)
@@ -166,10 +147,12 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
         gradientBackground.cornerRadius = 12
         uiViewBackground.layer.addSublayer(gradientBackground)
 
-        let viewBackgroundGroup = makeAnimation()
+        viewBackgroundGroup = makeAnimation()
         viewBackgroundGroup.beginTime = 0.0
         gradientBackground.add(viewBackgroundGroup, forKey: Constants.gradientKey)
+    }
 
+    private func addGradientImage() {
         let gradientImage = CAGradientLayer()
         gradientImage.startPoint = CGPoint(x: 0, y: 0.5)
         gradientImage.endPoint = CGPoint(x: 1, y: 0.5)
@@ -179,7 +162,9 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
 
         let imageGroup = makeAnimation(previousGroup: viewBackgroundGroup)
         gradientImage.add(imageGroup, forKey: Constants.gradientKey)
+    }
 
+    private func addGradientTitle() {
         let gradientTitle = CAGradientLayer()
         gradientTitle.startPoint = CGPoint(x: 0, y: 0.5)
         gradientTitle.endPoint = CGPoint(x: 1, y: 0.5)
@@ -188,7 +173,9 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
 
         let titleGroup = makeAnimation(previousGroup: viewBackgroundGroup)
         gradientTitle.add(titleGroup, forKey: Constants.gradientKey)
+    }
 
+    private func addGradientTimeLabel() {
         let gradientTimelabel = CAGradientLayer()
         gradientTimelabel.startPoint = CGPoint(x: 0, y: 0.5)
         gradientTimelabel.endPoint = CGPoint(x: 1, y: 0.5)
@@ -197,7 +184,9 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
 
         let timeGroup = makeAnimation(previousGroup: viewBackgroundGroup)
         gradientTimelabel.add(timeGroup, forKey: Constants.gradientKey)
+    }
 
+    private func addGradientPizzaLabel() {
         let gradientPizzalabel = CAGradientLayer()
         gradientPizzalabel.startPoint = CGPoint(x: 0, y: 0.5)
         gradientPizzalabel.endPoint = CGPoint(x: 1, y: 0.5)
@@ -211,22 +200,22 @@ final class ShimmerRecipeTableViewCell: UITableViewCell {
     private func makeAnimation(previousGroup: CAAnimationGroup? = nil) -> CAAnimationGroup {
         let animDuration: CFTimeInterval = 1.5
 
-        let animation = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.backgroundColor))
-        animation.fromValue = UIColor.lightGray.cgColor
-        animation.toValue = UIColor.white.cgColor
-        animation.duration = animDuration
-        animation.beginTime = 0.0
+        let animationFirst = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.backgroundColor))
+        animationFirst.fromValue = UIColor.lightGray.cgColor
+        animationFirst.toValue = UIColor.white.cgColor
+        animationFirst.duration = animDuration
+        animationFirst.beginTime = 0.0
 
-        let animation2 = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.backgroundColor))
-        animation2.fromValue = UIColor.white.cgColor
-        animation2.toValue = UIColor.lightGray.cgColor
-        animation2.duration = animDuration
-        animation2.beginTime = animation.beginTime + animation2.duration
+        let animationSecond = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.backgroundColor))
+        animationSecond.fromValue = UIColor.white.cgColor
+        animationSecond.toValue = UIColor.lightGray.cgColor
+        animationSecond.duration = animDuration
+        animationSecond.beginTime = animationFirst.beginTime + animationSecond.duration
 
         let group = CAAnimationGroup()
-        group.animations = [animation, animation2]
+        group.animations = [animationFirst, animationSecond]
         group.repeatCount = .greatestFiniteMagnitude
-        group.duration = animation2.beginTime + animation.duration
+        group.duration = animationSecond.beginTime + animationFirst.duration
         group.isRemovedOnCompletion = false
 
         if let previousGroup = previousGroup {

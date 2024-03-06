@@ -13,7 +13,7 @@ protocol CategoryViewControllerProtocol: AnyObject {
     func buttonCaloriesState(color: String, image: String)
     /// Установка занчения кнопки времени
     func buttonTimeState(color: String, image: String)
-    /// Изменнение состояния
+    /// Изменение состояния
     func changeState()
 }
 
@@ -169,15 +169,16 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     }
 
     func buttonTimeChange(category: [Recipes]) {
-        if sortedTime == .non {
+        switch sortedTime {
+        case .non:
             sortedTime = .timeLow
             view?.buttonTimeState(color: Constants.buttonPressedColor, image: Constants.stateImageTwo)
             sortedRecipe(category: category)
-        } else if sortedTime == .timeLow {
+        case .timeLow:
             view?.buttonTimeState(color: Constants.buttonPressedColor, image: Constants.stateImageThree)
             sortedTime = .timeHigh
             sortedRecipe(category: category)
-        } else if sortedTime == .timeHigh {
+        case .timeHigh:
             sortedTime = .non
             view?.buttonTimeState(color: Constants.buttonDefaultColor, image: Constants.stateImageOne)
             sortedRecipe(category: category)
@@ -185,15 +186,16 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     }
 
     func buttonCaloriesChange(category: [Recipes]) {
-        if sortedCalories == .non {
+        switch sortedCalories {
+        case .non:
             sortedCalories = .caloriesLow
             view?.buttonCaloriesState(color: Constants.buttonPressedColor, image: Constants.stateImageTwo)
             sortedRecipe(category: category)
-        } else if sortedCalories == .caloriesLow {
+        case .caloriesLow:
             sortedCalories = .caloriesHigh
             view?.buttonCaloriesState(color: Constants.buttonPressedColor, image: Constants.stateImageThree)
             sortedRecipe(category: category)
-        } else if sortedCalories == .caloriesHigh {
+        case .caloriesHigh:
             sortedCalories = .non
             view?.buttonCaloriesState(color: Constants.buttonDefaultColor, image: Constants.stateImageOne)
             sortedRecipe(category: category)

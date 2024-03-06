@@ -8,7 +8,7 @@ protocol ProfileViewProtocol: AnyObject {
     /// настройка алерта
     func configureAlert()
     /// изменение имени пользователя в профиле
-    /// -Parametr: новое имя
+    /// -Parametr updateName - новое имя
     func changeLabel(updateName: String)
     /// установка вью с условиями политики
     func setupTermsPolicy()
@@ -17,18 +17,25 @@ protocol ProfileViewProtocol: AnyObject {
     /// Удаление визуального эффекта экрана профиля
     func removeVisualEffect()
     /// Переходы анимации
-    /// - Parametr: state - состояние экрана условий, duration - продолжительность
+    /// - Parametrs:
+    ///  -state: состояние экрана условий
+    ///  -duration: продолжительность
     func animateTransition(state: TermsState, duration: TimeInterval)
 }
 
 /// Экран профиля пользователя
 final class ProfileViewController: UIViewController {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let termsHeight = 760
+        static let termsHandleArea = 300
+    }
+
     // MARK: - Visual Components
 
     private let tableView = UITableView()
     private let visualEffectView = UIVisualEffectView()
-    private let termsHieght: CGFloat = 760
-    private let termsHandleArea: CGFloat = 300
 
     // MARK: - Public Properties
 
@@ -271,9 +278,9 @@ extension ProfileViewController: ProfileViewProtocol {
         guard let termsView = termsView else { return }
         termsView.frame = CGRect(
             x: 0,
-            y: view.frame.height - termsHandleArea,
-            width: view.frame.width,
-            height: termsHieght
+            y: Int(view.frame.height) - Constants.termsHandleArea,
+            width: Int(view.frame.width),
+            height: Constants.termsHeight
         )
         termsView.clipsToBounds = true
         let scene = UIApplication.shared.connectedScenes
@@ -293,7 +300,7 @@ extension ProfileViewController: ProfileViewProtocol {
             startInteractiveTransition(state: nextState, duration: 0.9)
         case .changed:
             let translation = recognizer.translation(in: termsView)
-            var fractionComplete = translation.y / termsHieght
+            var fractionComplete = translation.y / CGFloat(Constants.termsHeight)
             fractionComplete = isVisible ? fractionComplete : -fractionComplete
             updateInteractiveTransition(fractionCompleted: fractionComplete)
         case .ended:
@@ -304,30 +311,31 @@ extension ProfileViewController: ProfileViewProtocol {
     }
 
     /// Анимация переходов
-    /// -Parametr: state -состояние вью "политики конфиденциальности", duration - продолжительность
+    /// -Parametr:
+    /// -state: состояние вью "политики конфиденциальности"
+    ///  -duration: продолжительность
     func animateTransition(state: TermsState, duration: TimeInterval) {
-        if runningAnimations.isEmpty {
-            let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
-                switch state {
-                case .started:
-                    self.termsView?.frame.origin.y = self.view.frame.height - self.termsHandleArea
-                case .expanded:
-                    self.termsView?.frame.origin.y = self.view.frame.height - self.termsHieght
-                case .collapsed:
-                    self.termsView?.frame.origin.y = self.view.frame.height - self.termsHandleArea
-                    self.profilePresenter?.removeTermsPolicy()
-                }
+        guard runningAnimations.isEmpty else { return }
+        let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
+            switch state {
+            case .started:
+                self.termsView?.frame.origin.y = self.view.frame.height - CGFloat(Constants.termsHandleArea)
+            case .expanded:
+                self.termsView?.frame.origin.y = self.view.frame.height - CGFloat(Constants.termsHeight)
+            case .collapsed:
+                self.termsView?.frame.origin.y = self.view.frame.height - CGFloat(Constants.termsHandleArea)
+                self.profilePresenter?.removeTermsPolicy()
             }
-
-            frameAnimator.addCompletion { _ in
-                self.isVisible = !self.isVisible
-                self.runningAnimations.removeAll()
-            }
-
-            frameAnimator.startAnimation()
-            runningAnimations.append(frameAnimator)
-            setupVisualEffect()
         }
+
+        frameAnimator.addCompletion { _ in
+            self.isVisible = !self.isVisible
+            self.runningAnimations.removeAll()
+        }
+
+        frameAnimator.startAnimation()
+        runningAnimations.append(frameAnimator)
+        setupVisualEffect()
     }
 
     /// удаление экрана с условиями
