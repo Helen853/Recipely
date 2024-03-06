@@ -32,11 +32,12 @@ final class CategoryViewController: UIViewController {
         return tableView
     }()
 
-    private let searchBar: UISearchBar = {
+    private lazy var searchBar: UISearchBar = {
         let search = UISearchBar()
         search.translatesAutoresizingMaskIntoConstraints = false
         search.placeholder = Constants.serchPlaceholder
         search.backgroundImage = UIImage()
+        search.delegate = self
         return search
     }()
 
@@ -105,12 +106,7 @@ final class CategoryViewController: UIViewController {
         setupAnchors()
         setupTableView()
         tappedNextButton()
-        searchBar.delegate = self
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        showLoadedTableView()
+        categoryPresenter?.changeState()
     }
 
     // MARK: - Public Methods
@@ -125,13 +121,6 @@ final class CategoryViewController: UIViewController {
         tappedNextHandler = { [weak self] in
             guard let self = self else { return }
             categoryPresenter?.showRecipeDetail()
-        }
-    }
-
-    private func showLoadedTableView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.state = .loaded
-            self?.tableView.reloadData()
         }
     }
 
@@ -275,6 +264,13 @@ extension CategoryViewController: UITableViewDataSource {
 
 /// CategoryViewController + CategoryViewControllerProtocol
 extension CategoryViewController: CategoryViewControllerProtocol {
+    func changeState() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.state = .loaded
+            self?.tableView.reloadData()
+        }
+    }
+
     func buttonCaloriesState(color: String, image: String) {
         caloriesButton.backgroundColor = UIColor(named: color)
         caloriesButton.setImage(UIImage(named: image), for: .normal)

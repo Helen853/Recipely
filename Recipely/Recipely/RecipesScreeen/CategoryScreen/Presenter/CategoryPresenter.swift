@@ -13,6 +13,8 @@ protocol CategoryViewControllerProtocol: AnyObject {
     func buttonCaloriesState(color: String, image: String)
     /// Установка занчения кнопки времени
     func buttonTimeState(color: String, image: String)
+    ///
+    func changeState()
 }
 
 /// Протокол CategoryPresenter
@@ -30,6 +32,8 @@ protocol CategoryPresenterProtocol: AnyObject {
     func buttonCaloriesChange(category: [Recipes])
     /// Смена значения кнопки калорий
     func buttonTimeChange(category: [Recipes])
+    ///
+    func changeState()
 }
 
 /// Презентер экрана категорий
@@ -194,5 +198,9 @@ final class CategoryPresenter: CategoryPresenterProtocol {
             view?.buttonCaloriesState(color: Constants.buttonDefaultColor, image: Constants.stateImageOne)
             sortedRecipe(category: category)
         }
+    }
+
+    func changeState() {
+        view?.changeState()
     }
 }

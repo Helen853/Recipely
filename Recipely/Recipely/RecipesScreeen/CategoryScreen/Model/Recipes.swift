@@ -13,14 +13,6 @@ struct Recipes {
     var foodKkal: Int
 }
 
-/// Состояния загрузки ячеек
-enum StateLoaded {
-    /// Процесс загрузки
-    case loading
-    /// Загружено
-    case loaded
-}
-
 /// Сортировка по калорием
 enum SortedCalories {
     /// Обычное состояние
