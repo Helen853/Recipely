@@ -12,7 +12,7 @@
 		0469A1D02B931FCB006F349A /* BasketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A1CF2B931FCB006F349A /* BasketView.swift */; };
 		0469A20E2B9605D5006F349A /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A20D2B9605D5006F349A /* LoginPresenter.swift */; };
 		0469A25F2B984E88006F349A /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A25E2B984E88006F349A /* State.swift */; };
-		0469A2C72B98B207006F349A /* SortingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A2C62B98B207006F349A /* SortingButton.swift */; };
+		0469A2C72B98B207006F349A /* StateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A2C62B98B207006F349A /* StateButton.swift */; };
 		04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC3192B8F94010091D767 /* CategoryViewController.swift */; };
 		04FEC31D2B8F94500091D767 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */; };
 		04FEC31F2B8F945C0091D767 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31E2B8F945C0091D767 /* Recipes.swift */; };
@@ -87,7 +87,7 @@
 		0469A1CF2B931FCB006F349A /* BasketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketView.swift; sourceTree = "<group>"; };
 		0469A20D2B9605D5006F349A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		0469A25E2B984E88006F349A /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
-		0469A2C62B98B207006F349A /* SortingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingButton.swift; sourceTree = "<group>"; };
+		0469A2C62B98B207006F349A /* StateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateButton.swift; sourceTree = "<group>"; };
 		04FEC3192B8F94010091D767 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		04FEC31E2B8F945C0091D767 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				04FEC3192B8F94010091D767 /* CategoryViewController.swift */,
-				0469A2C62B98B207006F349A /* SortingButton.swift */,
+				0469A2C62B98B207006F349A /* StateButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -780,7 +780,7 @@
 				EDB335BE2B978DBB008FD7AD /* UIColor+Extension.swift in Sources */,
 				0469A25F2B984E88006F349A /* State.swift in Sources */,
 				7EEA770942ADA3FF3BD5798F /* CategoryType.swift in Sources */,
-				0469A2C72B98B207006F349A /* SortingButton.swift in Sources */,
+				0469A2C72B98B207006F349A /* StateButton.swift in Sources */,
 				CEEB83723799F51874159F69 /* RecipesCoordinator.swift in Sources */,
 				70419907185A5729727C7ABB /* RecipesPresenter.swift in Sources */,
 				B9B4FD3C53A944F5AC43F825 /* RecipesViewController.swift in Sources */,

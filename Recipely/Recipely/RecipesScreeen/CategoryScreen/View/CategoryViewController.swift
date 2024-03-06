@@ -188,7 +188,7 @@ final class CategoryViewController: UIViewController {
     }
 
     private func makeSortingButton(title: String, image: UIImage, action: Selector) -> UIButton {
-        let button = SortingButton(
+        let button = StateButton(
             title: title,
             image: image
         )

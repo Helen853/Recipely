@@ -3,7 +3,7 @@
 
 import UIKit
 
-final class SortingButton: UIButton {
+final class StateButton: UIButton {
     // MARK: - Private Properties
 
     private var title: String
