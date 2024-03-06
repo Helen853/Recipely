@@ -5,16 +5,6 @@ import UIKit
 
 /// Надпись когда фавориты пустые
 final class BasketView: UIView {
-    // MARK: - Constants
-
-    private enum Constants {
-        static let fontVerdanaBold = "Verdana-Bold"
-        static let fontVerdana = "Verdana"
-        static let viewTitle = "There's nothing here yet"
-        static let viewText = "Add interesting recipes to make ordering products convenient"
-        static let viewImageName = "emptyFavorites"
-    }
-
     // MARK: - Visual Components
 
     private let backgroundView: UIView = {
@@ -25,17 +15,15 @@ final class BasketView: UIView {
 
     private let viewTitle: UILabel = {
         let label = UILabel()
-        label.text = Constants.viewTitle
-        label.font = UIFont(name: Constants.fontVerdanaBold, size: 18)
+        label.font = .verdanaBold18
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private let viewText: UILabel = {
         let label = UILabel()
-        label.text = Constants.viewText
-        label.font = UIFont(name: Constants.fontVerdana, size: 14)
-        label.textColor = UIColor(red: 151 / 255, green: 162 / 255, blue: 176 / 255, alpha: 1.0)
+        label.font = .verdana14
+        label.textColor = .grayForText
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -45,23 +33,21 @@ final class BasketView: UIView {
 
     private let viewImageBackground: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
+        view.backgroundColor = .grayForGround
         view.layer.cornerRadius = 12
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private let viewImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: Constants.viewImageName)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private let viewImage = UIImageView()
 
     // MARK: - Initializers
 
-    override init(frame: CGRect) {
+    init(frame: CGRect, title: String, text: String, image: UIImage) {
         super.init(frame: .zero)
+        viewText.text = text
+        viewTitle.text = title
+        viewImage.image = image
         setupViews()
         setupAnchors()
     }
@@ -116,6 +102,7 @@ final class BasketView: UIView {
     }
 
     private func setupAnchorsViewImage() {
+        viewImage.translatesAutoresizingMaskIntoConstraints = false
         viewImage.centerYAnchor.constraint(equalTo: viewImageBackground.centerYAnchor).isActive = true
         viewImage.centerXAnchor.constraint(equalTo: viewImageBackground.centerXAnchor).isActive = true
     }

@@ -22,7 +22,7 @@ final class ProfileCoordinator: BaseCoordinator {
         rootViewController?.present(bonusesViewController, animated: true)
     }
 
-    func closeBonuses() {
+    func closeViewController() {
         rootViewController?.dismiss(animated: true)
     }
 }

@@ -25,6 +25,6 @@ final class BonusesPresenter {
 
 extension BonusesPresenter: BonusesPresenterProtocol {
     func closeBonuses() {
-        profileCoordinator?.closeBonuses()
+        profileCoordinator?.closeViewController()
     }
 }

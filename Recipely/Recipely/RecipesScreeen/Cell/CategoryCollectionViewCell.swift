@@ -10,6 +10,8 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
 
+    // MARK: - Public Properties
+
     var categoryTapHandler: ((_ type: CategoryCellType) -> ())?
     var category: Category?
 
@@ -24,7 +26,10 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        configureImage()
+        configureLable()
+        configureContentView()
     }
 
     // MARK: - Public Methods
@@ -68,7 +73,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
 
     private func configureLable() {
         imageView.addSubview(titleLabel)
-        titleLabel.backgroundColor = #colorLiteral(red: 0.5957052112, green: 0.6146538258, blue: 0.6359308362, alpha: 0.7136020281)
+        titleLabel.backgroundColor = .grayOpasity
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

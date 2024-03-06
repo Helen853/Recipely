@@ -12,6 +12,11 @@ final class TermsTableViewCell: UITableViewCell {
     private let arrowButton = UIButton()
     private let termsImageView = UIImageView()
 
+    // MARK: - Public Properties
+
+    // кложура для нажатия стрелки в ячейке
+    var arrowTapHandler: VoidHandler?
+
     // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -29,9 +34,10 @@ final class TermsTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configureCell(model: Terms) {
+    func configureCell(model: Terms, tapButton: VoidHandler?) {
         configureImage(nameImage: model.imageName)
         configureLabel(title: model.itemTitle)
+        arrowTapHandler = tapButton
     }
 
     // MARK: - Private Methods
@@ -46,7 +52,7 @@ final class TermsTableViewCell: UITableViewCell {
 
     private func configureGroundView() {
         contentView.addSubview(groundView)
-        groundView.backgroundColor = #colorLiteral(red: 0.9559337497, green: 0.9685742259, blue: 0.9688379169, alpha: 1)
+        groundView.backgroundColor = .white
         groundView.layer.cornerRadius = 12
         groundView.translatesAutoresizingMaskIntoConstraints = false
         groundView.widthAnchor.constraint(equalToConstant: 48).isActive = true
@@ -58,7 +64,7 @@ final class TermsTableViewCell: UITableViewCell {
 
     private func configureTitleLabel() {
         contentView.addSubview(titleLabel)
-        titleLabel.font = UIFont.systemFont(ofSize: 18)
+        titleLabel.font = .verdana18
         titleLabel.textColor = #colorLiteral(red: 0.3469149768, green: 0.4360020161, blue: 0.475877285, alpha: 1)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.widthAnchor.constraint(equalToConstant: 224).isActive = true
@@ -84,5 +90,10 @@ final class TermsTableViewCell: UITableViewCell {
         arrowButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         arrowButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
         arrowButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        arrowButton.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
+    }
+
+    @objc private func tappedButton() {
+        arrowTapHandler?()
     }
 }

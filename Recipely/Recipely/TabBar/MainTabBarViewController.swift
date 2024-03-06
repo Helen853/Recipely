@@ -21,7 +21,7 @@ final class MainTabBarController: UITabBarController {
 
     private func setTabBarAppearance() {
         tabBar.itemPositioning = .centered
-        tabBar.tintColor = #colorLiteral(red: 0.5131713152, green: 0.7742882967, blue: 0.7948206067, alpha: 1)
+        tabBar.tintColor = .turquoise
         tabBar.unselectedItemTintColor = .lightGray
     }
 }

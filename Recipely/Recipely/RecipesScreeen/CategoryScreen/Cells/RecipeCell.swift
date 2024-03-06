@@ -8,7 +8,6 @@ final class FoodCell: UITableViewCell {
     // MARK: - Constants
 
     private enum Constants {
-        static let fontVerdana = "Verdana"
         static let timerImageViewName = "timer"
         static let pizzaImageViewName = "pizza"
         static let nextButtonImageName = "goToDetailsArrow"
@@ -22,7 +21,7 @@ final class FoodCell: UITableViewCell {
 
     private let uiViewBackground: UIView = {
         let uiView = UIView()
-        uiView.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
+        uiView.backgroundColor = .grayForGround
         uiView.layer.cornerRadius = 12
         uiView.translatesAutoresizingMaskIntoConstraints = false
         return uiView
@@ -38,7 +37,7 @@ final class FoodCell: UITableViewCell {
         let label = UILabel()
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
-        label.font = UIFont(name: Constants.fontVerdana, size: 14)
+        label.font = .verdana14
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -46,7 +45,7 @@ final class FoodCell: UITableViewCell {
 
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Constants.fontVerdana, size: 12)
+        label.font = .verdana12
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -67,7 +66,7 @@ final class FoodCell: UITableViewCell {
 
     private let pizzaLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Constants.fontVerdana, size: 12)
+        label.font = .verdana12
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -100,8 +99,8 @@ final class FoodCell: UITableViewCell {
     func configure(with items: Recipes, handler: VoidHandler?) {
         recipeImageView.image = UIImage(named: items.imageFoodName)
         titleRecipe.text = items.foodName
-        timeLabel.text = items.foodTime + Constants.timeLabelText
-        pizzaLabel.text = items.foodKkal + Constants.pizzaLabelText
+        timeLabel.text = String(items.foodTime) + Constants.timeLabelText
+        pizzaLabel.text = String(items.foodKkal) + Constants.pizzaLabelText
         tappedNextHandler = handler
     }
 

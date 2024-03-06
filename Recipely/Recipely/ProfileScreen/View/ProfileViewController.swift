@@ -5,23 +5,54 @@ import UIKit
 
 /// Протокол для экрана профиля
 protocol ProfileViewProtocol: AnyObject {
+    /// настройка алерта
     func configureAlert()
+    /// изменение имени пользователя в профиле
+    /// -Parametr updateName - новое имя
     func changeLabel(updateName: String)
+    /// установка вью с условиями политики
+    func setupTermsPolicy()
+    /// Удаление экрана условий политики
+    func removeTerms()
+    /// Удаление визуального эффекта экрана профиля
+    func removeVisualEffect()
+    /// Переходы анимации
+    /// - Parametrs:
+    ///  -state: состояние экрана условий
+    ///  -duration: продолжительность
+    func animateTransition(state: TermsState, duration: TimeInterval)
 }
 
 /// Экран профиля пользователя
 final class ProfileViewController: UIViewController {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let termsHeight = 760
+        static let termsHandleArea = 300
+    }
+
     // MARK: - Visual Components
 
     private let tableView = UITableView()
+    private let visualEffectView = UIVisualEffectView()
 
     // MARK: - Public Properties
 
     var profilePresenter: ProfilePresenter?
+    var termsView: TermsPolicyView?
     var onTapHandler: VoidHandler?
     var arrowTapHandler: VoidHandler?
+    var termsTapHandler: VoidHandler?
 
     // MARK: - Private Properties
+
+    private var runningAnimations: [UIViewPropertyAnimator] = []
+    private var animationProgressWhenInterputted: CGFloat = 0
+    private var isVisible = true
+    private var nextState: TermsState {
+        isVisible ? .collapsed : .expanded
+    }
 
     // Массив с моделями ячеек
     private var cells: [CellTypeProtocol] = [
@@ -50,13 +81,14 @@ final class ProfileViewController: UIViewController {
         configureTitle()
         configureTable()
         registerCell()
-        onTap()
+        onTapChangeName()
         arrowButtonTapped()
+        termsButtonTapped()
     }
 
     // MARK: - Private Methods
 
-    private func onTap() {
+    private func onTapChangeName() {
         onTapHandler = { [weak self] in
             guard let self = self else { return }
             profilePresenter?.showAlert()
@@ -67,6 +99,13 @@ final class ProfileViewController: UIViewController {
         arrowTapHandler = { [weak self] in
             guard let self = self else { return }
             profilePresenter?.showBonuses()
+        }
+    }
+
+    private func termsButtonTapped() {
+        termsTapHandler = { [weak self] in
+            guard let self = self else { return }
+            profilePresenter?.showTermsPolicy()
         }
     }
 
@@ -104,6 +143,37 @@ final class ProfileViewController: UIViewController {
             LogOutTableViewCell.self,
             forCellReuseIdentifier: AppConstants.logOutIdentifier
         )
+    }
+
+    private func setupVisualEffect() {
+        visualEffectView.frame = view.frame
+        view.addSubview(visualEffectView)
+        let darkAnimator = UIViewPropertyAnimator(duration: 0.9, dampingRatio: 1)
+        visualEffectView.effect = UIBlurEffect(style: .dark)
+        darkAnimator.startAnimation()
+        runningAnimations.append(darkAnimator)
+    }
+
+    private func startInteractiveTransition(state: TermsState, duration: TimeInterval) {
+        if runningAnimations.isEmpty {
+            animateTransition(state: state, duration: duration)
+        }
+        for animator in runningAnimations {
+            animator.pauseAnimation()
+            animationProgressWhenInterputted = animator.fractionComplete
+        }
+    }
+
+    private func updateInteractiveTransition(fractionCompleted: CGFloat) {
+        for animator in runningAnimations {
+            animator.fractionComplete = fractionCompleted + animationProgressWhenInterputted
+        }
+    }
+
+    private func continueInteractiveTransition() {
+        for animator in runningAnimations {
+            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+        }
     }
 }
 
@@ -146,7 +216,7 @@ extension ProfileViewController: UITableViewDataSource {
             else {
                 return UITableViewCell()
             }
-            cell.configureCell(model: model)
+            cell.configureCell(model: model, tapButton: termsTapHandler)
             return cell
         case .logOut:
             guard
@@ -200,5 +270,81 @@ extension ProfileViewController: ProfileViewProtocol {
             fullName: updateName
         )
         tableView.reloadData()
+    }
+
+    /// настройка вью конфиденциальности
+    func setupTermsPolicy() {
+        termsView = TermsPolicyView()
+        guard let termsView = termsView else { return }
+        termsView.frame = CGRect(
+            x: 0,
+            y: Int(view.frame.height) - Constants.termsHandleArea,
+            width: Int(view.frame.width),
+            height: Constants.termsHeight
+        )
+        termsView.clipsToBounds = true
+        let scene = UIApplication.shared.connectedScenes
+        let windowScene = scene.first as? UIWindowScene
+        windowScene?.windows.last?.addSubview(termsView)
+
+        // устанавливааем распознователь жестов на вью c условиями
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(tapScreenTerms))
+        termsView.addGestureRecognizer(panGestureRecognizer)
+        profilePresenter?.addVisualEffect()
+        isVisible = true
+    }
+
+    @objc func tapScreenTerms(recognizer: UIPanGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            startInteractiveTransition(state: nextState, duration: 0.9)
+        case .changed:
+            let translation = recognizer.translation(in: termsView)
+            var fractionComplete = translation.y / CGFloat(Constants.termsHeight)
+            fractionComplete = isVisible ? fractionComplete : -fractionComplete
+            updateInteractiveTransition(fractionCompleted: fractionComplete)
+        case .ended:
+            continueInteractiveTransition()
+        default:
+            break
+        }
+    }
+
+    /// Анимация переходов
+    /// -Parametr:
+    /// -state: состояние вью "политики конфиденциальности"
+    ///  -duration: продолжительность
+    func animateTransition(state: TermsState, duration: TimeInterval) {
+        guard runningAnimations.isEmpty else { return }
+        let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
+            switch state {
+            case .started:
+                self.termsView?.frame.origin.y = self.view.frame.height - CGFloat(Constants.termsHandleArea)
+            case .expanded:
+                self.termsView?.frame.origin.y = self.view.frame.height - CGFloat(Constants.termsHeight)
+            case .collapsed:
+                self.termsView?.frame.origin.y = self.view.frame.height - CGFloat(Constants.termsHandleArea)
+                self.profilePresenter?.removeTermsPolicy()
+            }
+        }
+
+        frameAnimator.addCompletion { _ in
+            self.isVisible = !self.isVisible
+            self.runningAnimations.removeAll()
+        }
+
+        frameAnimator.startAnimation()
+        runningAnimations.append(frameAnimator)
+        setupVisualEffect()
+    }
+
+    /// удаление экрана с условиями
+    func removeTerms() {
+        termsView?.removeFromSuperview()
+    }
+
+    /// удаление визуального эффекта с вью
+    func removeVisualEffect() {
+        visualEffectView.removeFromSuperview()
     }
 }

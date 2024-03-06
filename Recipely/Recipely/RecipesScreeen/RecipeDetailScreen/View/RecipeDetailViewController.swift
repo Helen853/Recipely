@@ -176,7 +176,7 @@ extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
     /// Появление уведомления о добавлении в избранное
     func showAddFavoritesLabel() {
         addFavoritesLabel.text = AppConstants.addFavoritesText
-        addFavoritesLabel.font = UIFont.systemFont(ofSize: 16)
+        addFavoritesLabel.font = .verdana16
         addFavoritesLabel.textAlignment = .center
         addFavoritesLabel.textColor = .white
         addFavoritesLabel.clipsToBounds = true
@@ -200,7 +200,7 @@ extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
     func updateSaveButton(state: SaveButtonState) {
         switch state {
         case .red:
-            saveButton.backgroundColor = #colorLiteral(red: 0.9176470588, green: 0.3960784314, blue: 0.3960784314, alpha: 1)
+            saveButton.backgroundColor = .redForButton
         case .clear:
             saveButton.backgroundColor = .clear
         }
