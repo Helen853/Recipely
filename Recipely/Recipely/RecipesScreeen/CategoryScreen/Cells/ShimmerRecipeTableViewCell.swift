@@ -3,6 +3,7 @@
 
 import UIKit
 
+///Ячейка шиммер
 final class ShimmerRecipeTableViewCell: UITableViewCell {
     let gradientTitle = CAGradientLayer()
 
