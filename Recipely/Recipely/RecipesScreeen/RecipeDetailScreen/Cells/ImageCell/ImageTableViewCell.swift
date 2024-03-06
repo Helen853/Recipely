@@ -51,7 +51,7 @@ final class ImageTableViewCell: UITableViewCell {
     private func configureTitle() {
         contentView.addSubview(titleLabel)
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        titleLabel.font = .verdanaBold20
         titleLabel.textColor = .black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.widthAnchor.constraint(equalToConstant: 350).isActive = true
@@ -74,7 +74,7 @@ final class ImageTableViewCell: UITableViewCell {
 
     private func configureGroundView() {
         foodImageView.addSubview(massaView)
-        massaView.backgroundColor = #colorLiteral(red: 0.5053491592, green: 0.7708839774, blue: 0.7914870381, alpha: 0.6804118377)
+        massaView.backgroundColor = .turquoiseOpasity
         massaView.layer.cornerRadius = 25
         massaView.translatesAutoresizingMaskIntoConstraints = false
         massaView.widthAnchor.constraint(equalToConstant: 50).isActive = true
@@ -97,7 +97,7 @@ final class ImageTableViewCell: UITableViewCell {
     private func configureMassa() {
         massaView.addSubview(massaLabel)
         massaLabel.textAlignment = .center
-        massaLabel.font = UIFont.systemFont(ofSize: 10)
+        massaLabel.font = .verdana10
         massaLabel.textColor = .white
         massaLabel.translatesAutoresizingMaskIntoConstraints = false
         massaLabel.widthAnchor.constraint(equalToConstant: 39.17).isActive = true
@@ -108,7 +108,7 @@ final class ImageTableViewCell: UITableViewCell {
 
     private func configureTimeView() {
         foodImageView.addSubview(timeView)
-        timeView.backgroundColor = #colorLiteral(red: 0.5053491592, green: 0.7708839774, blue: 0.7914870381, alpha: 0.6804118377)
+        timeView.backgroundColor = .turquoiseOpasity
         timeView.layer.cornerRadius = 24
         timeView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         timeView.translatesAutoresizingMaskIntoConstraints = false
@@ -133,7 +133,7 @@ final class ImageTableViewCell: UITableViewCell {
         timeView.addSubview(timeTextLabel)
         timeTextLabel.textAlignment = .center
         timeTextLabel.text = AppConstants.timeText
-        timeTextLabel.font = UIFont.systemFont(ofSize: 10)
+        timeTextLabel.font = .verdana10
         timeTextLabel.textColor = .white
         timeTextLabel.translatesAutoresizingMaskIntoConstraints = false
         timeTextLabel.widthAnchor.constraint(equalToConstant: 83).isActive = true
@@ -145,7 +145,7 @@ final class ImageTableViewCell: UITableViewCell {
     private func configureTimeLabel() {
         timeView.addSubview(timeLabel)
         timeLabel.textAlignment = .center
-        timeLabel.font = UIFont.systemFont(ofSize: 10)
+        timeLabel.font = .verdana10
         timeLabel.textColor = .white
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true

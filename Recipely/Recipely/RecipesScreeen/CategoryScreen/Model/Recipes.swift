@@ -3,7 +3,7 @@
 
 // Ячейка еды
 struct Recipes {
-    // Каартинка еды
+    // Картинка еды
     var imageFoodName: String
     // Название еды
     var foodName: String

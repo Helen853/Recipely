@@ -8,7 +8,6 @@ final class LoginViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let fontVerdanaBold = "Verdana-Bold"
         static let errorColorName = "errorColor"
         static let titleLabelText = "Login"
         static let emailLabelText = "Email Address"
@@ -35,8 +34,8 @@ final class LoginViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.titleLabelText
-        label.font = UIFont(name: Constants.fontVerdanaBold, size: 28)
-        label.textColor = UIColor(red: 71 / 255, green: 92 / 255, blue: 102 / 255, alpha: 1.0)
+        label.font = .verdanaBold28
+        label.textColor = .grayForTitle
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -44,8 +43,8 @@ final class LoginViewController: UIViewController {
     private let emailLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.emailLabelText
-        label.font = UIFont(name: Constants.fontVerdanaBold, size: 18)
-        label.textColor = UIColor(red: 71 / 255, green: 92 / 255, blue: 102 / 255, alpha: 1.0)
+        label.font = .verdanaBold28
+        label.textColor = .grayForTitle
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -56,7 +55,7 @@ final class LoginViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor(red: 208 / 255, green: 212 / 255, blue: 218 / 255, alpha: 1.0).cgColor
+        textField.layer.borderColor = .grayForBorder
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: textField.frame.height))
         textField.leftViewMode = .always
         return textField
@@ -81,8 +80,8 @@ final class LoginViewController: UIViewController {
     private let passwordLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.passwordLabelText
-        label.font = UIFont(name: Constants.fontVerdanaBold, size: 18)
-        label.textColor = UIColor(red: 71 / 255, green: 92 / 255, blue: 102 / 255, alpha: 1.0)
+        label.font = .verdanaBold18
+        label.textColor = .grayForTitle
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -94,7 +93,7 @@ final class LoginViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor(red: 208 / 255, green: 212 / 255, blue: 218 / 255, alpha: 1.0).cgColor
+        textField.layer.borderColor = .grayForBorder
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: textField.frame.height))
         textField.leftViewMode = .always
         return textField
@@ -173,8 +172,8 @@ final class LoginViewController: UIViewController {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
         gradientLayer.colors = [
-            UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1.0).cgColor,
-            UIColor(red: 222 / 255, green: 238 / 255, blue: 225 / 255, alpha: 1.0).cgColor
+            CGColor.whiteForGradient,
+            CGColor.turquoiseForGradient
         ]
         view.layer.insertSublayer(gradientLayer, at: 0)
     }

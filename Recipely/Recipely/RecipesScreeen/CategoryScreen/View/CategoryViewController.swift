@@ -8,8 +8,6 @@ final class CategoryViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let fontVerdana = "Verdana"
-        static let fontVerdanaBold = "Verdana-Bold"
         static let backButtonImagename = "Arrow"
         static let serchPlaceholder = "Search recipes"
         static let searchImageName = "search"
@@ -52,8 +50,8 @@ final class CategoryViewController: UIViewController {
         let button = UIButton()
         button.setTitle(Constants.caloriesButtonTitle, for: .normal)
         button.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
-        button.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
-        button.titleLabel?.font = UIFont(name: Constants.fontVerdana, size: 16)
+        button.backgroundColor = .grayForGround
+        button.titleLabel?.font = .verdana16
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 20
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 10)
@@ -67,8 +65,8 @@ final class CategoryViewController: UIViewController {
         let button = UIButton()
         button.setTitle(Constants.timeButtonTitle, for: .normal)
         button.setImage(UIImage(named: Constants.caloriesButtonImageNameOne), for: .normal)
-        button.backgroundColor = UIColor(red: 242 / 255, green: 245 / 255, blue: 250 / 255, alpha: 1.0)
-        button.titleLabel?.font = UIFont(name: Constants.fontVerdana, size: 16)
+        button.backgroundColor = .grayForGround
+        button.titleLabel?.font = .verdana16
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 20
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 10)
@@ -186,7 +184,7 @@ final class CategoryViewController: UIViewController {
 
     private func setupNavigationItem() {
         let textAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: Constants.fontVerdanaBold, size: 24) ?? UIFont(),
+            .font: .verdanaBold24 ?? UIFont(),
             .foregroundColor: UIColor.black
         ]
 

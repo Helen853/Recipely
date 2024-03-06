@@ -47,7 +47,7 @@ final class TextTableViewCell: UITableViewCell {
 
     private func configureText() {
         contentView.addSubview(recipeLabel)
-        recipeLabel.font = UIFont(name: AppConstants.fontVerdana, size: 14)
+        recipeLabel.font = .verdana14
         recipeLabel.textColor = .black
         recipeLabel.numberOfLines = 0
         recipeLabel.textAlignment = .left
@@ -61,8 +61,8 @@ final class TextTableViewCell: UITableViewCell {
 
     private func configureGradient() {
         gradientLayer.colors = [
-            UIColor(red: 222 / 255, green: 238 / 255, blue: 239 / 255, alpha: 1.0).cgColor,
-            UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1.0).cgColor
+            CGColor.turquoiseForGradient,
+            CGColor.whiteForGradient
         ]
         contentView.layer.insertSublayer(gradientLayer, at: 0)
     }

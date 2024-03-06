@@ -58,11 +58,11 @@ final class InfoRecipeTableViewCell: UITableViewCell {
     }
 
     private func configureTitleLabel(nameLabel: UILabel, text: String) {
-        nameLabel.font = UIFont.systemFont(ofSize: 10)
+        nameLabel.font = .verdana10
         nameLabel.textColor = .white
         nameLabel.text = text
         nameLabel.textAlignment = .center
-        nameLabel.backgroundColor = #colorLiteral(red: 0.5053491592, green: 0.7708839774, blue: 0.7914870381, alpha: 1)
+        nameLabel.backgroundColor = .turquoise
         nameLabel.layer.cornerRadius = 16
         nameLabel.clipsToBounds = true
         nameLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -90,11 +90,11 @@ final class InfoRecipeTableViewCell: UITableViewCell {
     }
 
     private func configureNumberLabel(nameLabel: UILabel) {
-        nameLabel.font = UIFont(name: AppConstants.fontVerdana, size: 10)
-        nameLabel.textColor = #colorLiteral(red: 0.5053491592, green: 0.7708839774, blue: 0.7914870381, alpha: 1)
+        nameLabel.font = .verdana10
+        nameLabel.textColor = .turquoise
         nameLabel.textAlignment = .center
         nameLabel.layer.borderWidth = 2
-        nameLabel.layer.borderColor = #colorLiteral(red: 0.5053491592, green: 0.7708839774, blue: 0.7914870381, alpha: 1)
+        nameLabel.layer.borderColor = .turquoise
         nameLabel.layer.cornerRadius = 16
         nameLabel.clipsToBounds = true
         nameLabel.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]

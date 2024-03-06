@@ -38,9 +38,9 @@ final class BonusesViewController: UIViewController {
 
     private func configureTitle() {
         view.addSubview(titleLabel)
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        titleLabel.font = .verdanaBold20
         titleLabel.text = AppConstants.bonusesTitle
-        titleLabel.textColor = #colorLiteral(red: 0.3469149768, green: 0.4360020161, blue: 0.475877285, alpha: 1)
+        titleLabel.textColor = .grayForTitle
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.widthAnchor.constraint(equalToConstant: 350).isActive = true
@@ -71,9 +71,9 @@ final class BonusesViewController: UIViewController {
 
     private func configureCountLabel() {
         view.addSubview(countBonusesLabel)
-        countBonusesLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        countBonusesLabel.font = .verdanaBold30
         countBonusesLabel.text = AppConstants.countBonusesText
-        countBonusesLabel.textColor = #colorLiteral(red: 0.3469149768, green: 0.4360020161, blue: 0.475877285, alpha: 1)
+        countBonusesLabel.textColor = .grayForTitle
         countBonusesLabel.translatesAutoresizingMaskIntoConstraints = false
         countBonusesLabel.widthAnchor.constraint(equalToConstant: 177).isActive = true
         countBonusesLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
