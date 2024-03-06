@@ -13,7 +13,7 @@ protocol CategoryViewControllerProtocol: AnyObject {
     func buttonCaloriesState(color: String, image: String)
     /// Установка занчения кнопки времени
     func buttonTimeState(color: String, image: String)
-    ///
+    /// Изменнение состояния
     func changeState()
 }
 

@@ -11,7 +11,7 @@ final class TermsPolicyView: UIView {
     private let closeButton = UIButton()
     private let textLabel = UILabel()
 
-    // MARK: - Life Cycle
+    // MARK: - Initializers
 
     override init(frame: CGRect) {
         super.init(frame: frame)

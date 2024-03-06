@@ -10,6 +10,8 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
 
+    // MARK: - Public Properties
+
     var categoryTapHandler: ((_ type: CategoryCellType) -> ())?
     var category: Category?
 
