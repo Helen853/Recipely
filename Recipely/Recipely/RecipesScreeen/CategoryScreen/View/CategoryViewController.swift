@@ -80,6 +80,7 @@ final class CategoryViewController: UIViewController {
     private var isDataLoaded = false
     private var searching = false
     private var state: StateLoaded = .loading
+    private var logger = LoggerInvoker()
 
     // MARK: - Life Cycle
 
@@ -92,6 +93,10 @@ final class CategoryViewController: UIViewController {
         categoryPresenter?.changeState()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        makeLog()
+    }
+
     // MARK: - Public Methods
 
     func setupCategory(_ type: CategoryCellType) {
@@ -99,6 +104,10 @@ final class CategoryViewController: UIViewController {
     }
 
     // MARK: - Private Methods
+
+    func makeLog() {
+        logger.log(actionUser: .openRecipe)
+    }
 
     private func tappedNextButton() {
         tappedNextHandler = { [weak self] in
