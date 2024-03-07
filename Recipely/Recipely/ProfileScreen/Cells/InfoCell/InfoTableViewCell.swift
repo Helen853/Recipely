@@ -26,14 +26,14 @@ final class InfoTableViewCell: UITableViewCell {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
 
     // MARK: - Public Methods
 
-    func configureCell(model: Info, tapButton: VoidHandler?) {
+    func configureCell(model: Info, tapButton: VoidHandler?, user: User) {
         configureImage(nameImage: model.imageName)
-        configureLabel(title: model.fullName)
+        configureLabel(title: user.surname)
         onTapHandler = tapButton
     }
 

@@ -11,6 +11,7 @@ protocol ProfilePresenterProtocol {
     func showTermsPolicy()
     func removeTermsPolicy()
     func addVisualEffect()
+    var user: User { get set }
 }
 
 /// Презентер экрана профиля
@@ -23,6 +24,7 @@ final class ProfilePresenter {
 
     private weak var view: ProfileViewProtocol?
     private weak var profileCoordinator: ProfileCoordinator?
+    var user = UserStateWrapper.shared.loadUser()
     init(view: ProfileViewProtocol, coordinator: ProfileCoordinator) {
         self.view = view
         profileCoordinator = coordinator
@@ -50,6 +52,9 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     /// Изменение имени пользователя профиле
     /// - Parametr: текст из поля ввода
     func changeName(text: String) {
+        UserStateWrapper.shared.updateNickname(text)
+        user = UserStateWrapper.shared.loadUser()
+        print("Posle updateNickname \(user.email) \(user.password)")
         view?.changeLabel(updateName: text)
     }
 
