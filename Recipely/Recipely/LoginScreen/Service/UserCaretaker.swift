@@ -10,16 +10,25 @@
 import UIKit
 
 /// Caretaker User
-class UserCaretaker {
+final class UserCaretaker {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let key = "user_memento"
+    }
+
+    // MARK: - Private Properties
+
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
-    private let key = "user_memento"
+
+    // MARK: - Public Methods
 
     // Метод для сохранения снимка состояния пользователя
     func saveMemento(_ memento: UserMemento) {
         do {
             let data = try encoder.encode(memento)
-            UserDefaults.standard.set(data, forKey: key)
+            UserDefaults.standard.set(data, forKey: Constants.key)
         } catch {
             print(error)
         }
@@ -27,7 +36,7 @@ class UserCaretaker {
 
     // Метод для восстановления снимка состояния пользователя
     func retrieveMemento() -> UserMemento? {
-        guard let data = UserDefaults.standard.data(forKey: key) else { return nil }
+        guard let data = UserDefaults.standard.data(forKey: Constants.key) else { return nil }
         do {
             return try decoder.decode(UserMemento.self, from: data)
         } catch {

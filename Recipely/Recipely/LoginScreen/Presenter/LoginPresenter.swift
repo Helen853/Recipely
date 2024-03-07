@@ -3,7 +3,7 @@
 
 import UIKit
 
-///  Протокол LoginViewController
+/// Протокол LoginViewController
 protocol LoginViewControllerProtocol: AnyObject {
     /// Проверка валидации почты
     func setValidationStatusEmail(_ colorText: String, _ colorBorder: String, _ isValidation: Bool)
@@ -44,6 +44,7 @@ final class LoginPresenter: LoginPresenterProtocol {
         static let titleButtonText = "Login"
         static let dispatchQueueTime = 3.0
         static let passwordCount = 5
+        static let defaultSurname = "Surname Name"
     }
 
     // MARK: - Public Properties
@@ -77,15 +78,16 @@ final class LoginPresenter: LoginPresenterProtocol {
     }
 
     func setColorPassword(_ password: String, _ email: String) {
-        print("Password: \(String(describing: UserStateWrapper.shared.loadFromUserDefaults()?.password))")
-        print("Email: \(String(describing: UserStateWrapper.shared.loadFromUserDefaults()?.email))")
         if password.count > Constants.passwordCount, email.contains(Constants.domenEmail) {
-            if UserStateWrapper.shared.loadFromUserDefaults() == nil {
-                UserStateWrapper.shared.updateUser(User(email: email, password: password, surname: "Surname Name"))
-                print("Save email: \(email), save password: \(password)")
+            if UserOriginator.shared.loadFromUserDefaults() == nil {
+                UserOriginator.shared.updateUser(User(
+                    email: email,
+                    password: password,
+                    surname: Constants.defaultSurname
+                ))
             }
-            let userEmail = UserStateWrapper.shared.loadFromUserDefaults()?.email
-            let userPassword = UserStateWrapper.shared.loadFromUserDefaults()?.password
+            let userEmail = UserOriginator.shared.loadFromUserDefaults()?.email
+            let userPassword = UserOriginator.shared.loadFromUserDefaults()?.password
             if userEmail == email, userPassword == password {
                 view?.setValidationStatusPassword(
                     Constants.defaultTextColor,
@@ -121,23 +123,6 @@ final class LoginPresenter: LoginPresenterProtocol {
                 self?.view?.showErrorSplashOff()
             }
         }
-//          /// Переход на следующий экран
-//            view?.setloginButtonPressed(Constants.spinerIamgename, "")
-//            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.dispatchQueueTime) { [weak self] in
-//                self?.view?.setloginButtonPressed("", Constants.titleButtonText)
-//                self?.loginCoordinator?.goToTabBarScreen()
-//            }
-//        } else {
-//            view?.showErrorSplashOn()
-//            view?.setValidationStatusPassword(
-//                Constants.errorColor,
-//                Constants.errorColor,
-//                false
-//            )
-//            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.dispatchQueueTime) { [weak self] in
-//                self?.view?.showErrorSplashOff()
-//            }
-//        }
     }
 
     func setSecurity(_ isSecurity: Bool) {

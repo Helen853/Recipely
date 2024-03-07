@@ -3,5 +3,6 @@
 
 /// Cостояние юзера
 struct UserMemento: Codable {
+    /// Модель юзера
     var user: User
 }
