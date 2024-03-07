@@ -18,6 +18,8 @@ final class RecipesViewController: UIViewController {
     var categories: [Category] = []
     var recipesPresenter: RecipesPresenter?
     var categoryTapHandler: ((_ type: CategoryCellType) -> ())?
+//    var log: LogActions?
+    var logger = LoggerInvoker()
 
     // MARK: - Private Properties
 
@@ -31,9 +33,18 @@ final class RecipesViewController: UIViewController {
         recipesPresenter?.loadCell(model: info.categories)
         configureCollection()
         categoryTapped()
+//        logger.configureManager()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        makeLog()
     }
 
     // MARK: - Private Methods
+
+    private func makeLog() {
+        logger.log(actionUser: .openCategory)
+    }
 
     private func categoryTapped() {
         categoryTapHandler = { [weak self] type in

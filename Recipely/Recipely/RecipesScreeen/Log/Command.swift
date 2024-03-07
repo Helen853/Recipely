@@ -3,8 +3,10 @@
 
 import Foundation
 
+///Command 
 final class LogCommand {
     let action: LogActions
+
     init(action: LogActions) { self.action = action
     }
 
