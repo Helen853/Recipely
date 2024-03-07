@@ -7,13 +7,14 @@ import UIKit
 final class InfoTableViewCell: UITableViewCell {
     // MARK: - Visual Components
 
-    private let avatarImageView = UIImageView()
+    var avatarImageView = UIImageView()
     private let fullNameLabel = UILabel()
     private let changeButton = UIButton()
 
     // MARK: - Public Properties
 
     var onTapHandler: VoidHandler?
+    var tappedAvatarHandler: VoidHandler?
 
     // MARK: - Initializers
 
@@ -31,13 +32,22 @@ final class InfoTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configureCell(model: Info, tapButton: VoidHandler?) {
-        configureImage(nameImage: model.imageName)
+    func configureCell(model: Info, tapButton: VoidHandler?, tapAvatar: VoidHandler?, avatarData: Data?) {
+        if let avatarData = avatarData {
+            configureImageWithData(imageData: avatarData)
+        } else {
+            configureImage(nameImage: model.imageName)
+        }
         configureLabel(title: model.fullName)
         onTapHandler = tapButton
+        tappedAvatarHandler = tapAvatar
     }
 
     // MARK: - Private Methods
+
+    private func configureImageWithData(imageData: Data) {
+        avatarImageView.image = UIImage(data: imageData)
+    }
 
     private func configureImage(nameImage: String) {
         avatarImageView.image = UIImage(named: nameImage)
@@ -50,11 +60,15 @@ final class InfoTableViewCell: UITableViewCell {
     private func configureAvatar() {
         contentView.addSubview(avatarImageView)
         avatarImageView.clipsToBounds = true
+        avatarImageView.layer.cornerRadius = 80
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         avatarImageView.widthAnchor.constraint(equalToConstant: 160).isActive = true
         avatarImageView.heightAnchor.constraint(equalToConstant: 160).isActive = true
         avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 115).isActive = true
         avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 36).isActive = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(tappedAvatar))
+        avatarImageView.addGestureRecognizer(gesture)
+        avatarImageView.isUserInteractionEnabled = true
     }
 
     private func configureLabel() {
@@ -83,5 +97,9 @@ final class InfoTableViewCell: UITableViewCell {
 
     @objc private func onTapChangeName() {
         onTapHandler?()
+    }
+
+    @objc private func tappedAvatar() {
+        tappedAvatarHandler?()
     }
 }

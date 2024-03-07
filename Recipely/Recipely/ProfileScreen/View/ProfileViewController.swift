@@ -21,6 +21,7 @@ protocol ProfileViewProtocol: AnyObject {
     ///  -state: состояние экрана условий
     ///  -duration: продолжительность
     func animateTransition(state: TermsState, duration: TimeInterval)
+    func showGallery()
 }
 
 /// Экран профиля пользователя
@@ -29,13 +30,14 @@ final class ProfileViewController: UIViewController {
 
     private enum Constants {
         static let termsHeight = 760
-        static let termsHandleArea = 300
+        static let termsHandleArea = 380
     }
 
     // MARK: - Visual Components
 
     private let tableView = UITableView()
     private let visualEffectView = UIVisualEffectView()
+    private let imagePicker = ImagePicker()
 
     // MARK: - Public Properties
 
@@ -44,6 +46,7 @@ final class ProfileViewController: UIViewController {
     var onTapHandler: VoidHandler?
     var arrowTapHandler: VoidHandler?
     var termsTapHandler: VoidHandler?
+    var avatarTapHandler: VoidHandler?
 
     // MARK: - Private Properties
 
@@ -84,6 +87,7 @@ final class ProfileViewController: UIViewController {
         onTapChangeName()
         arrowButtonTapped()
         termsButtonTapped()
+        onTapChangeAvatar()
     }
 
     // MARK: - Private Methods
@@ -92,6 +96,13 @@ final class ProfileViewController: UIViewController {
         onTapHandler = { [weak self] in
             guard let self = self else { return }
             profilePresenter?.showAlert()
+        }
+    }
+
+    private func onTapChangeAvatar() {
+        avatarTapHandler = { [weak self] in
+            guard let self = self else { return }
+            profilePresenter?.changeAvatar()
         }
     }
 
@@ -196,7 +207,13 @@ extension ProfileViewController: UITableViewDataSource {
             else {
                 return UITableViewCell()
             }
-            cell.configureCell(model: model, tapButton: onTapHandler)
+            let avatarData = profilePresenter?.getAvatarData()
+            cell.configureCell(
+                model: model,
+                tapButton: onTapHandler,
+                tapAvatar: avatarTapHandler,
+                avatarData: avatarData
+            )
             return cell
         case .bonuses:
             guard
@@ -236,6 +253,15 @@ extension ProfileViewController: UITableViewDataSource {
 
 /// Имплементация ProfileViewProtocol
 extension ProfileViewController: ProfileViewProtocol {
+    // показать галлерею
+    func showGallery() {
+        imagePicker.showImagePicker(in: self) { image in
+            guard let savedImageData = image.pngData() else { return }
+            self.profilePresenter?.saveAvatar(image: savedImageData)
+            self.tableView.reloadData()
+        }
+    }
+
     // настройка алерта
     func configureAlert() {
         let alertController = UIAlertController(
