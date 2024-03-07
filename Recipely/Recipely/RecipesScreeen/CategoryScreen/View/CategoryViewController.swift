@@ -105,7 +105,7 @@ final class CategoryViewController: UIViewController {
 
     // MARK: - Private Methods
 
-    func makeLog() {
+    private func makeLog() {
         logger.log(actionUser: .openRecipe)
     }
 
