@@ -70,7 +70,6 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     func changeName(text: String) {
         UserStateWrapper.shared.updateNickname(text)
         user = UserStateWrapper.shared.loadUser()
-        print("Posle updateNickname \(user.email) \(user.password)")
         view?.changeLabel(updateName: text)
     }
 

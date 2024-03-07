@@ -5,14 +5,19 @@ import Foundation
 
 /// Структура которая управляет сохранинем и восстановлением состояния пользователя
 struct UserStateWrapper {
+  
+  private enum Constants {
+    static let key = "user_memento"
+    static let keyImage = "AvatarImageData"
+  }
+  
     static var shared = UserStateWrapper(user: User(email: "", password: "", surname: ""))
     private let userDefaults = UserDefaults.standard
-    private let key = "user_memento"
     private var user: User
 
-    init(user: User) {
-        self.user = user
-    }
+    //  init(load: loadFromUserDefaults) {
+//        self.user = user
+//    }
 
     /// Обновление информации о пользователе
     mutating func updateUser(_ updatedUser: User) {
@@ -43,7 +48,7 @@ struct UserStateWrapper {
     func saveToUserDefaults() {
         do {
             let encodedData = try JSONEncoder().encode(user)
-            userDefaults.set(encodedData, forKey: key)
+          userDefaults.set(encodedData, forKey: Constants.key)
         } catch {
             print(error)
         }
@@ -51,7 +56,7 @@ struct UserStateWrapper {
 
     /// Загрузка из UserDefaults
     func loadFromUserDefaults() -> User? {
-        guard let encodedData = userDefaults.data(forKey: key) else { return nil }
+      guard let encodedData = userDefaults.data(forKey: Constants.key) else { return nil }
         do {
             return try JSONDecoder().decode(User.self, from: encodedData)
         } catch {
@@ -60,21 +65,22 @@ struct UserStateWrapper {
         }
     }
 
-    func loadUser() -> User {
+    mutating func loadUser() -> User {
         guard let loadUser = loadFromUserDefaults() else { return User(email: "", password: "", surname: "") }
+        user = loadUser
         return loadUser
     }
 
     // сохранение картинки
     func saveImageInUserDefaults(data: Data) {
         let encoded = try? PropertyListEncoder().encode(data)
-        UserDefaults.standard.set(encoded, forKey: "AvatarImageData")
+      userDefaults.set(encoded, forKey: Constants.keyImage)
     }
 
     // получение картинки
     func getImageDataFromUserDefaults() -> Data? {
         guard
-            let data = UserDefaults.standard.data(forKey: "AvatarImageData"),
+          let data = UserDefaults.standard.data(forKey: Constants.keyImage),
             let decoded = try? PropertyListDecoder().decode(Data.self, from: data)
         else { return nil }
         return decoded
