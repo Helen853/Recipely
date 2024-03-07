@@ -28,29 +28,28 @@ final class ProfilePresenter {
     private weak var view: ProfileViewProtocol?
     private weak var profileCoordinator: ProfileCoordinator?
     var user = UserStateWrapper.shared.loadUser()
-    private var caretaker: Originator?
     init(view: ProfileViewProtocol, coordinator: ProfileCoordinator) {
         self.view = view
         profileCoordinator = coordinator
-        caretaker = Originator()
     }
 }
 
 // MARK: - ProfilePresenter + ProfilePresenterProtocol
 
 extension ProfilePresenter: ProfilePresenterProtocol {
+    func getAvatarData() -> Data? {
+        let data = UserStateWrapper.shared.getImageDataFromUserDefaults()
+        return data
     }
 
     func saveAvatar(image: Data) {
-        caretaker?.saveImageInUserDefaults(data: image)
+        UserStateWrapper.shared.saveImageInUserDefaults(data: image)
     }
 
     func changeAvatar() {
         view?.showGallery()
     }
 
-        let data = caretaker?.getImageDataFromUserDefaults()
-        return data
     func addVisualEffect() {
         view?.animateTransition(state: .started, duration: 1)
     }
@@ -69,6 +68,7 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     /// Изменение имени пользователя профиле
     /// - Parametr: текст из поля ввода
     func changeName(text: String) {
+        UserStateWrapper.shared.updateNickname(text)
         user = UserStateWrapper.shared.loadUser()
         print("Posle updateNickname \(user.email) \(user.password)")
         view?.changeLabel(updateName: text)
@@ -82,21 +82,5 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     /// Показываем алерт
     func showAlert() {
         view?.configureAlert()
-    }
-}
-
-/// asdasdasd
-final class Originator {
-    func saveImageInUserDefaults(data: Data) {
-        let encoded = try? PropertyListEncoder().encode(data)
-        UserDefaults.standard.set(encoded, forKey: "AvatarImageData")
-    }
-
-    func getImageDataFromUserDefaults() -> Data? {
-        guard
-            let data = UserDefaults.standard.data(forKey: "AvatarImageData"),
-            let decoded = try? PropertyListDecoder().decode(Data.self, from: data)
-        else { return nil }
-        return decoded
     }
 }

@@ -87,7 +87,6 @@
 		EDB335E92B9A2110008FD7AD /* Invoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335E82B9A2110008FD7AD /* Invoker.swift */; };
 		EDB335EB2B9A2122008FD7AD /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335EA2B9A2122008FD7AD /* Command.swift */; };
 		EDB335ED2B9A2133008FD7AD /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335EC2B9A2133008FD7AD /* Receiver.swift */; };
-		EDB335EF2B9A2559008FD7AD /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335EE2B9A2559008FD7AD /* DeleteButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,7 +170,6 @@
 		EDB335E82B9A2110008FD7AD /* Invoker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoker.swift; sourceTree = "<group>"; };
 		EDB335EA2B9A2122008FD7AD /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		EDB335EC2B9A2133008FD7AD /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
-		EDB335EE2B9A2559008FD7AD /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
 		F1C0200EE0C3DC7F4E1284E5 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		F82600648C6D1A4FD7643B0C /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -239,7 +237,6 @@
 			children = (
 				04FEC32C2B8F9EB60091D767 /* RecipeCell.swift */,
 				EDB335BB2B966180008FD7AD /* ShimmerRecipeTableViewCell.swift */,
-				EDB335EE2B9A2559008FD7AD /* DeleteButton.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";

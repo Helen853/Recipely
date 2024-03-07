@@ -207,16 +207,15 @@ extension ProfileViewController: UITableViewDataSource {
             else {
                 return UITableViewCell()
             }
+
+            let avatarData = profilePresenter?.getAvatarData()
+
             cell.configureCell(
                 model: model,
                 tapButton: onTapHandler,
-                user: profilePresenter?.user ?? User(email: "12", password: "12", surname: "")
-            let avatarData = profilePresenter?.getAvatarData()
-            cell.configureCell(
+                user: profilePresenter?.user ?? User(email: "12", password: "12", surname: ""),
                 tapAvatar: avatarTapHandler,
                 avatarData: avatarData
-                model: model,
-                tapButton: onTapHandler,
             )
             return cell
         case .bonuses:

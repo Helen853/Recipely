@@ -64,4 +64,19 @@ struct UserStateWrapper {
         guard let loadUser = loadFromUserDefaults() else { return User(email: "", password: "", surname: "") }
         return loadUser
     }
+
+    // сохранение картинки
+    func saveImageInUserDefaults(data: Data) {
+        let encoded = try? PropertyListEncoder().encode(data)
+        UserDefaults.standard.set(encoded, forKey: "AvatarImageData")
+    }
+
+    // получение картинки
+    func getImageDataFromUserDefaults() -> Data? {
+        guard
+            let data = UserDefaults.standard.data(forKey: "AvatarImageData"),
+            let decoded = try? PropertyListDecoder().decode(Data.self, from: data)
+        else { return nil }
+        return decoded
+    }
 }

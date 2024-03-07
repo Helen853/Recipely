@@ -32,16 +32,13 @@ final class InfoTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configureCell(model: Info, tapButton: VoidHandler?, user: User) {
-        configureImage(nameImage: model.imageName)
-        configureLabel(title: user.surname)
-    func configureCell(model: Info, tapButton: VoidHandler?, tapAvatar: VoidHandler?, avatarData: Data?) {
+    func configureCell(model: Info, tapButton: VoidHandler?, user: User, tapAvatar: VoidHandler?, avatarData: Data?) {
         if let avatarData = avatarData {
             configureImageWithData(imageData: avatarData)
         } else {
             configureImage(nameImage: model.imageName)
         }
-        configureLabel(title: model.fullName)
+        configureLabel(title: user.surname)
         onTapHandler = tapButton
         tappedAvatarHandler = tapAvatar
     }
