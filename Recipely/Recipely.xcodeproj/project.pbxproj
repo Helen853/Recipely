@@ -13,6 +13,10 @@
 		0469A20E2B9605D5006F349A /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A20D2B9605D5006F349A /* LoginPresenter.swift */; };
 		0469A25F2B984E88006F349A /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A25E2B984E88006F349A /* State.swift */; };
 		0469A2C72B98B207006F349A /* StateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A2C62B98B207006F349A /* StateButton.swift */; };
+		047A505C2B99A2E700797AAD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A505B2B99A2E700797AAD /* User.swift */; };
+		047A505E2B99A34200797AAD /* UserCaretaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A505D2B99A34200797AAD /* UserCaretaker.swift */; };
+		047A50602B99D48200797AAD /* UserOriginator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A505F2B99D48200797AAD /* UserOriginator.swift */; };
+		047A50622B99EBD300797AAD /* UserMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A50612B99EBD300797AAD /* UserMemento.swift */; };
 		04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC3192B8F94010091D767 /* CategoryViewController.swift */; };
 		04FEC31D2B8F94500091D767 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */; };
 		04FEC31F2B8F945C0091D767 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31E2B8F945C0091D767 /* Recipes.swift */; };
@@ -94,6 +98,10 @@
 		0469A20D2B9605D5006F349A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		0469A25E2B984E88006F349A /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		0469A2C62B98B207006F349A /* StateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateButton.swift; sourceTree = "<group>"; };
+		047A505B2B99A2E700797AAD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		047A505D2B99A34200797AAD /* UserCaretaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCaretaker.swift; sourceTree = "<group>"; };
+		047A505F2B99D48200797AAD /* UserOriginator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOriginator.swift; sourceTree = "<group>"; };
+		047A50612B99EBD300797AAD /* UserMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMemento.swift; sourceTree = "<group>"; };
 		04FEC3192B8F94010091D767 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		04FEC31E2B8F945C0091D767 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
@@ -175,6 +183,17 @@
 				0469A25E2B984E88006F349A /* State.swift */,
 			);
 			path = State;
+			sourceTree = "<group>";
+		};
+		047A505A2B99A2D300797AAD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				047A505B2B99A2E700797AAD /* User.swift */,
+				047A50612B99EBD300797AAD /* UserMemento.swift */,
+				047A505F2B99D48200797AAD /* UserOriginator.swift */,
+				047A505D2B99A34200797AAD /* UserCaretaker.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		04FEC3182B8F93D20091D767 /* CategoryScreen */ = {
@@ -337,6 +356,7 @@
 		554E474A719FC2CFDB246B82 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
+				047A505A2B99A2D300797AAD /* Service */,
 				76B9066415CDB231A1054A02 /* Presenter */,
 				CD886714913DBF929EC745BC /* View */,
 				B43059680E6A6B04821CCCB5 /* LoginViewControllerCoordinator.swift */,
@@ -794,6 +814,7 @@
 				6BFD435F7249D6C74016FE4A /* LogOutTableViewCell.swift in Sources */,
 				04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */,
 				85668033CE189CFC2EE1EC8F /* LoginCoordinator.swift in Sources */,
+				047A505E2B99A34200797AAD /* UserCaretaker.swift in Sources */,
 				92B85DE393ADE8B04925252A /* LoginViewController.swift in Sources */,
 				7624FE4A1C1A909CD406CC67 /* LoginViewControllerCoordinator.swift in Sources */,
 				5EFC07E4EBB455E1FF8A82AC /* MainTabBarViewController.swift in Sources */,
@@ -803,6 +824,7 @@
 				726A807D43AEF794A712114F /* ProfileCoordinator.swift in Sources */,
 				ED6537E22B91F2CD005C8BE2 /* InfoRecipe.swift in Sources */,
 				995902DCA50F73D6B693F43A /* ProfilePresenter.swift in Sources */,
+				047A50622B99EBD300797AAD /* UserMemento.swift in Sources */,
 				ED6537CE2B91920D005C8BE2 /* StorageCategory.swift in Sources */,
 				4B73D309DEAD3C1A35B0DF98 /* ProfileViewController.swift in Sources */,
 				EDB335BE2B978DBB008FD7AD /* UIColor+Extension.swift in Sources */,
@@ -814,6 +836,7 @@
 				CEEB83723799F51874159F69 /* RecipesCoordinator.swift in Sources */,
 				70419907185A5729727C7ABB /* RecipesPresenter.swift in Sources */,
 				B9B4FD3C53A944F5AC43F825 /* RecipesViewController.swift in Sources */,
+				047A50602B99D48200797AAD /* UserOriginator.swift in Sources */,
 				ED6537EE2B94A174005C8BE2 /* StorageDetail.swift in Sources */,
 				EDB335C22B97B1C2008FD7AD /* UIFont+Extension.swift in Sources */,
 				ECB98BF27F96C17F3BF0C185 /* SceneDelegate.swift in Sources */,
@@ -827,7 +850,7 @@
 				EC76E24A30F24713BD49711D /* TermsTableViewCell.swift in Sources */,
 				12BB284FF2ACBC8F06288E15 /* UIView+Extension.swift in Sources */,
 				04FEC31F2B8F945C0091D767 /* Recipes.swift in Sources */,
-				EDB335EF2B9A2559008FD7AD /* DeleteButton.swift in Sources */,
+				047A505C2B99A2E700797AAD /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -866,7 +889,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Recipely/Info.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -948,7 +971,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Recipely/Info.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

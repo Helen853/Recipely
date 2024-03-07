@@ -77,16 +77,37 @@ final class LoginPresenter: LoginPresenterProtocol {
     }
 
     func setColorPassword(_ password: String, _ email: String) {
+        print("Password: \(String(describing: UserStateWrapper.shared.loadFromUserDefaults()?.password))")
+        print("Email: \(String(describing: UserStateWrapper.shared.loadFromUserDefaults()?.email))")
         if password.count > Constants.passwordCount, email.contains(Constants.domenEmail) {
-            view?.setValidationStatusPassword(
-                Constants.defaultTextColor,
-                Constants.defaultBorderTextFieldColor,
-                true
-            )
-            view?.setloginButtonPressed(Constants.spinerIamgename, "")
-            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.dispatchQueueTime) { [weak self] in
-                self?.view?.setloginButtonPressed("", Constants.titleButtonText)
-                self?.loginCoordinator?.goToTabBarScreen()
+            if UserStateWrapper.shared.loadFromUserDefaults() == nil {
+                UserStateWrapper.shared.updateUser(User(email: email, password: password, surname: "Surname Name"))
+                print("Save email: \(email), save password: \(password)")
+            }
+            let userEmail = UserStateWrapper.shared.loadFromUserDefaults()?.email
+            let userPassword = UserStateWrapper.shared.loadFromUserDefaults()?.password
+            if userEmail == email, userPassword == password {
+                view?.setValidationStatusPassword(
+                    Constants.defaultTextColor,
+                    Constants.defaultBorderTextFieldColor,
+                    true
+                )
+                /// Переход на следующий экран
+                view?.setloginButtonPressed(Constants.spinerIamgename, "")
+                DispatchQueue.main.asyncAfter(deadline: .now() + Constants.dispatchQueueTime) { [weak self] in
+                    self?.view?.setloginButtonPressed("", Constants.titleButtonText)
+                    self?.loginCoordinator?.goToTabBarScreen()
+                }
+            } else {
+                view?.showErrorSplashOn()
+                view?.setValidationStatusPassword(
+                    Constants.errorColor,
+                    Constants.errorColor,
+                    false
+                )
+                DispatchQueue.main.asyncAfter(deadline: .now() + Constants.dispatchQueueTime) { [weak self] in
+                    self?.view?.showErrorSplashOff()
+                }
             }
         } else {
             view?.showErrorSplashOn()
@@ -99,6 +120,23 @@ final class LoginPresenter: LoginPresenterProtocol {
                 self?.view?.showErrorSplashOff()
             }
         }
+//          /// Переход на следующий экран
+//            view?.setloginButtonPressed(Constants.spinerIamgename, "")
+//            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.dispatchQueueTime) { [weak self] in
+//                self?.view?.setloginButtonPressed("", Constants.titleButtonText)
+//                self?.loginCoordinator?.goToTabBarScreen()
+//            }
+//        } else {
+//            view?.showErrorSplashOn()
+//            view?.setValidationStatusPassword(
+//                Constants.errorColor,
+//                Constants.errorColor,
+//                false
+//            )
+//            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.dispatchQueueTime) { [weak self] in
+//                self?.view?.showErrorSplashOff()
+//            }
+//        }
     }
 
     func setSecurity(_ isSecurity: Bool) {

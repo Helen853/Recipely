@@ -11,6 +11,7 @@ protocol ProfilePresenterProtocol {
     func showTermsPolicy()
     func removeTermsPolicy()
     func addVisualEffect()
+    var user: User { get set }
     func changeAvatar()
     func saveAvatar(image: Data)
     func getAvatarData() -> Data?
@@ -26,6 +27,7 @@ final class ProfilePresenter {
 
     private weak var view: ProfileViewProtocol?
     private weak var profileCoordinator: ProfileCoordinator?
+    var user = UserStateWrapper.shared.loadUser()
     private var caretaker: Originator?
     init(view: ProfileViewProtocol, coordinator: ProfileCoordinator) {
         self.view = view
@@ -37,9 +39,6 @@ final class ProfilePresenter {
 // MARK: - ProfilePresenter + ProfilePresenterProtocol
 
 extension ProfilePresenter: ProfilePresenterProtocol {
-    func getAvatarData() -> Data? {
-        let data = caretaker?.getImageDataFromUserDefaults()
-        return data
     }
 
     func saveAvatar(image: Data) {
@@ -50,6 +49,8 @@ extension ProfilePresenter: ProfilePresenterProtocol {
         view?.showGallery()
     }
 
+        let data = caretaker?.getImageDataFromUserDefaults()
+        return data
     func addVisualEffect() {
         view?.animateTransition(state: .started, duration: 1)
     }
@@ -68,6 +69,8 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     /// Изменение имени пользователя профиле
     /// - Parametr: текст из поля ввода
     func changeName(text: String) {
+        user = UserStateWrapper.shared.loadUser()
+        print("Posle updateNickname \(user.email) \(user.password)")
         view?.changeLabel(updateName: text)
     }
 
