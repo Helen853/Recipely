@@ -52,12 +52,11 @@ final class RecipeDetailViewController: UIViewController {
         makeLog()
     }
 
-    
-
     // MARK: - Private Methods
-  private func makeLog() {
-      logger.log(actionUser: .openRecipeDetail)
-  }
+
+    private func makeLog() {
+        logger.log(actionUser: .openRecipeDetail)
+    }
 
     private func configNavigationBar() {
         backButton.setImage(UIImage(named: AppConstants.back), for: .normal)

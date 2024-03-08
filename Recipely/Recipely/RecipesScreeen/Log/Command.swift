@@ -3,7 +3,7 @@
 
 import Foundation
 
-///Command 
+/// Command
 final class LogCommand {
     let action: LogActions
 

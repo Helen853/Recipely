@@ -3,7 +3,7 @@
 
 import Foundation
 
-///Invoker 
+/// Invoker
 final class LoggerInvoker {
     static let shared = LoggerInvoker()
     private let logger = Logger()

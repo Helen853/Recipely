@@ -3,7 +3,7 @@
 
 import UIKit
 
-///Receiver
+/// Receiver
 final class Logger {
     var actions: [String] = []
 
