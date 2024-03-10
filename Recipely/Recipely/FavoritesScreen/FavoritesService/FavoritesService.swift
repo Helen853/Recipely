@@ -33,11 +33,9 @@ class FavoritesService {
         saveFavorites()
     }
 
-    func removeFavorites(_ recipes: Recipes) {
-        if let index = favorites.firstIndex(of: recipes) {
-            favorites.remove(at: index)
-            saveFavorites()
-        }
+    func removeFavorites(_ index: Int) {
+        favorites.remove(at: index)
+        saveFavorites()
     }
 
     func load() -> [Recipes] {
@@ -50,10 +48,5 @@ class FavoritesService {
         )] }
         favorites = loadFavorites
         return favorites
-
-//    mutating func loadUser() -> User {
-//        guard let loadUser = loadFromUserDefaults() else { return User(email: "", password: "", surname: "") }
-//        user = loadUser
-//        return loadUser
     }
 }

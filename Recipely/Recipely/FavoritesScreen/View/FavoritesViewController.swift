@@ -48,14 +48,12 @@ final class FavoritesViewController: UIViewController {
         setupNavigationItems()
         setupTableView()
         setupBasketViewAnchors()
-        fvoritesPresenter?.returnFavorites()
-//        fvoritesPresenter?.returnFavourites(StorageFavorites())
-//        fvoritesPresenter?.returnFavorites(favorites: FavoritesService())
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         showLoadedTableView()
+        favorites = FavoritesService.shared.load()
         fvoritesPresenter?.returnFavorites()
     }
 
@@ -146,6 +144,7 @@ extension FavoritesViewController: UITableViewDataSource {
             favorites.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
+            FavoritesService.shared.removeFavorites(indexPath.row)
         }
 
         if favorites.isEmpty {
@@ -163,6 +162,6 @@ extension FavoritesViewController: FavoritesViewControllerProtocol {
     }
 
     func uppdateViewHidden() {
-        basketView.isHidden = favorites.isEmpty
+        basketView.isHidden = !FavoritesService.shared.favorites.isEmpty
     }
 }
