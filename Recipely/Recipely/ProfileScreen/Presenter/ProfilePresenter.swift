@@ -5,12 +5,26 @@ import UIKit
 
 /// Протокол для презентера экрана профиля
 protocol ProfilePresenterProtocol {
+    /// Смена имени
     func changeName(text: String)
+    /// Показ экрана бонусов
     func showBonuses()
+    /// Показ алерта с заменом имени
     func showAlert()
+    /// Показ экрана showTermsPolicy
     func showTermsPolicy()
+    /// Скрытие экрана showTermsPolicy
     func removeTermsPolicy()
+    /// Наложение эффектов
     func addVisualEffect()
+    /// Смена аватара
+    func changeAvatar()
+    /// Сохранение аватара
+    func saveAvatar(image: Data)
+    /// Получение аватара
+    func getAvatarData() -> Data?
+    /// Модель юзера
+    var user: User { get set }
 }
 
 /// Презентер экрана профиля
@@ -21,8 +35,17 @@ final class ProfilePresenter {
         static let removeTermsPolicyTime = 0.7
     }
 
+    // MARK: - Uplic Properties
+
+    var user = UserOriginator.shared.loadUser()
+
+    // MARK: - Private Properties
+
     private weak var view: ProfileViewProtocol?
     private weak var profileCoordinator: ProfileCoordinator?
+
+    // MARK: - Initializers
+
     init(view: ProfileViewProtocol, coordinator: ProfileCoordinator) {
         self.view = view
         profileCoordinator = coordinator
@@ -32,6 +55,19 @@ final class ProfilePresenter {
 // MARK: - ProfilePresenter + ProfilePresenterProtocol
 
 extension ProfilePresenter: ProfilePresenterProtocol {
+    func getAvatarData() -> Data? {
+        let data = UserOriginator.shared.getImageDataFromUserDefaults()
+        return data
+    }
+
+    func saveAvatar(image: Data) {
+        UserOriginator.shared.saveImageInUserDefaults(data: image)
+    }
+
+    func changeAvatar() {
+        view?.showGallery()
+    }
+
     func addVisualEffect() {
         view?.animateTransition(state: .started, duration: 1)
     }
@@ -50,6 +86,8 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     /// Изменение имени пользователя профиле
     /// - Parametr: текст из поля ввода
     func changeName(text: String) {
+        UserOriginator.shared.updateNickname(text)
+        user = UserOriginator.shared.loadUser()
         view?.changeLabel(updateName: text)
     }
 

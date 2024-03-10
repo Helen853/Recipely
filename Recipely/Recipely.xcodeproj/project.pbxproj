@@ -13,6 +13,10 @@
 		0469A20E2B9605D5006F349A /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A20D2B9605D5006F349A /* LoginPresenter.swift */; };
 		0469A25F2B984E88006F349A /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A25E2B984E88006F349A /* State.swift */; };
 		0469A2C72B98B207006F349A /* StateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A2C62B98B207006F349A /* StateButton.swift */; };
+		047A505C2B99A2E700797AAD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A505B2B99A2E700797AAD /* User.swift */; };
+		047A505E2B99A34200797AAD /* UserCaretaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A505D2B99A34200797AAD /* UserCaretaker.swift */; };
+		047A50602B99D48200797AAD /* UserOriginator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A505F2B99D48200797AAD /* UserOriginator.swift */; };
+		047A50622B99EBD300797AAD /* UserMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A50612B99EBD300797AAD /* UserMemento.swift */; };
 		04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC3192B8F94010091D767 /* CategoryViewController.swift */; };
 		04FEC31D2B8F94500091D767 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */; };
 		04FEC31F2B8F945C0091D767 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31E2B8F945C0091D767 /* Recipes.swift */; };
@@ -78,6 +82,11 @@
 		EDB335BE2B978DBB008FD7AD /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335BD2B978DBB008FD7AD /* UIColor+Extension.swift */; };
 		EDB335C02B979E03008FD7AD /* CGColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335BF2B979E03008FD7AD /* CGColor+Extension.swift */; };
 		EDB335C22B97B1C2008FD7AD /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335C12B97B1C2008FD7AD /* UIFont+Extension.swift */; };
+		EDB335E42B99D6A4008FD7AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335E32B99D6A4008FD7AD /* ImagePicker.swift */; };
+		EDB335E72B9A1F83008FD7AD /* LogActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335E62B9A1F83008FD7AD /* LogActions.swift */; };
+		EDB335E92B9A2110008FD7AD /* Invoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335E82B9A2110008FD7AD /* Invoker.swift */; };
+		EDB335EB2B9A2122008FD7AD /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335EA2B9A2122008FD7AD /* Command.swift */; };
+		EDB335ED2B9A2133008FD7AD /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335EC2B9A2133008FD7AD /* Receiver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +97,10 @@
 		0469A20D2B9605D5006F349A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		0469A25E2B984E88006F349A /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		0469A2C62B98B207006F349A /* StateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateButton.swift; sourceTree = "<group>"; };
+		047A505B2B99A2E700797AAD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		047A505D2B99A34200797AAD /* UserCaretaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCaretaker.swift; sourceTree = "<group>"; };
+		047A505F2B99D48200797AAD /* UserOriginator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOriginator.swift; sourceTree = "<group>"; };
+		047A50612B99EBD300797AAD /* UserMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMemento.swift; sourceTree = "<group>"; };
 		04FEC3192B8F94010091D767 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		04FEC31E2B8F945C0091D767 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
@@ -152,6 +165,11 @@
 		EDB335BD2B978DBB008FD7AD /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		EDB335BF2B979E03008FD7AD /* CGColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+Extension.swift"; sourceTree = "<group>"; };
 		EDB335C12B97B1C2008FD7AD /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		EDB335E32B99D6A4008FD7AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		EDB335E62B9A1F83008FD7AD /* LogActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogActions.swift; sourceTree = "<group>"; };
+		EDB335E82B9A2110008FD7AD /* Invoker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoker.swift; sourceTree = "<group>"; };
+		EDB335EA2B9A2122008FD7AD /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		EDB335EC2B9A2133008FD7AD /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
 		F1C0200EE0C3DC7F4E1284E5 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		F82600648C6D1A4FD7643B0C /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +181,17 @@
 				0469A25E2B984E88006F349A /* State.swift */,
 			);
 			path = State;
+			sourceTree = "<group>";
+		};
+		047A505A2B99A2D300797AAD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				047A505B2B99A2E700797AAD /* User.swift */,
+				047A50612B99EBD300797AAD /* UserMemento.swift */,
+				047A505F2B99D48200797AAD /* UserOriginator.swift */,
+				047A505D2B99A34200797AAD /* UserCaretaker.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		04FEC3182B8F93D20091D767 /* CategoryScreen */ = {
@@ -324,6 +353,7 @@
 		554E474A719FC2CFDB246B82 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
+				047A505A2B99A2D300797AAD /* Service */,
 				76B9066415CDB231A1054A02 /* Presenter */,
 				CD886714913DBF929EC745BC /* View */,
 				B43059680E6A6B04821CCCB5 /* LoginViewControllerCoordinator.swift */,
@@ -350,6 +380,7 @@
 			children = (
 				8B5FA87BA36174337E50A579 /* Info.swift */,
 				A857425DCBD2DCED9671C1B7 /* InfoTableViewCell.swift */,
+				EDB335E32B99D6A4008FD7AD /* ImagePicker.swift */,
 			);
 			path = InfoCell;
 			sourceTree = "<group>";
@@ -499,6 +530,7 @@
 		CA45AA8190E3F254C0E363BA /* RecipesScreeen */ = {
 			isa = PBXGroup;
 			children = (
+				EDB335E52B9A1F6A008FD7AD /* Log */,
 				ED6537CF2B91DFDE005C8BE2 /* RecipeDetailScreen */,
 				ED9F30A62B8FBE350069D8E2 /* Cell */,
 				7B38539BB261DCF19D8E435E /* Model */,
@@ -622,6 +654,17 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		EDB335E52B9A1F6A008FD7AD /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				EDB335E62B9A1F83008FD7AD /* LogActions.swift */,
+				EDB335E82B9A2110008FD7AD /* Invoker.swift */,
+				EDB335EA2B9A2122008FD7AD /* Command.swift */,
+				EDB335EC2B9A2133008FD7AD /* Receiver.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -731,6 +774,7 @@
 				54DF258E94B828A5495E0902 /* AppConstants.swift in Sources */,
 				C861CB10BCDA448E2535EB7B /* AppCoordinator.swift in Sources */,
 				ED6537D42B91E05D005C8BE2 /* RecipeDetailViewController.swift in Sources */,
+				EDB335ED2B9A2133008FD7AD /* Receiver.swift in Sources */,
 				47AFC27B68C73BEF473E8B74 /* AppDelegate.swift in Sources */,
 				C9CC647361C65913273A1AAA /* BaseCoordinator.swift in Sources */,
 				ED6537EC2B94911B005C8BE2 /* RecipeDetail.swift in Sources */,
@@ -751,6 +795,7 @@
 				ED6537DE2B91F297005C8BE2 /* RecipeDetailProtocol.swift in Sources */,
 				487C6D29AEAC58096001FD9B /* CellsTypes.swift in Sources */,
 				B74658D99DAE048F54FE7624 /* Favorites.swift in Sources */,
+				EDB335EB2B9A2122008FD7AD /* Command.swift in Sources */,
 				EDB335C02B979E03008FD7AD /* CGColor+Extension.swift in Sources */,
 				69BC773F1FE7F038321E12A2 /* FavoritesCoordinator.swift in Sources */,
 				015071CFB03747F1C83ED6E6 /* FavoritesPresenter.swift in Sources */,
@@ -766,6 +811,7 @@
 				6BFD435F7249D6C74016FE4A /* LogOutTableViewCell.swift in Sources */,
 				04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */,
 				85668033CE189CFC2EE1EC8F /* LoginCoordinator.swift in Sources */,
+				047A505E2B99A34200797AAD /* UserCaretaker.swift in Sources */,
 				92B85DE393ADE8B04925252A /* LoginViewController.swift in Sources */,
 				7624FE4A1C1A909CD406CC67 /* LoginViewControllerCoordinator.swift in Sources */,
 				5EFC07E4EBB455E1FF8A82AC /* MainTabBarViewController.swift in Sources */,
@@ -775,15 +821,19 @@
 				726A807D43AEF794A712114F /* ProfileCoordinator.swift in Sources */,
 				ED6537E22B91F2CD005C8BE2 /* InfoRecipe.swift in Sources */,
 				995902DCA50F73D6B693F43A /* ProfilePresenter.swift in Sources */,
+				047A50622B99EBD300797AAD /* UserMemento.swift in Sources */,
 				ED6537CE2B91920D005C8BE2 /* StorageCategory.swift in Sources */,
 				4B73D309DEAD3C1A35B0DF98 /* ProfileViewController.swift in Sources */,
 				EDB335BE2B978DBB008FD7AD /* UIColor+Extension.swift in Sources */,
 				0469A25F2B984E88006F349A /* State.swift in Sources */,
 				7EEA770942ADA3FF3BD5798F /* CategoryType.swift in Sources */,
+				EDB335E42B99D6A4008FD7AD /* ImagePicker.swift in Sources */,
 				0469A2C72B98B207006F349A /* StateButton.swift in Sources */,
+				EDB335E72B9A1F83008FD7AD /* LogActions.swift in Sources */,
 				CEEB83723799F51874159F69 /* RecipesCoordinator.swift in Sources */,
 				70419907185A5729727C7ABB /* RecipesPresenter.swift in Sources */,
 				B9B4FD3C53A944F5AC43F825 /* RecipesViewController.swift in Sources */,
+				047A50602B99D48200797AAD /* UserOriginator.swift in Sources */,
 				ED6537EE2B94A174005C8BE2 /* StorageDetail.swift in Sources */,
 				EDB335C22B97B1C2008FD7AD /* UIFont+Extension.swift in Sources */,
 				ECB98BF27F96C17F3BF0C185 /* SceneDelegate.swift in Sources */,
@@ -791,11 +841,13 @@
 				ED6537E62B91F48A005C8BE2 /* ImageTableViewCell.swift in Sources */,
 				33FF6C9945DC5EF6B190119C /* Terms.swift in Sources */,
 				ED6537E82B91F49B005C8BE2 /* InfoRecipeTableViewCell.swift in Sources */,
+				EDB335E92B9A2110008FD7AD /* Invoker.swift in Sources */,
 				C93EFBD768DBA88B24DD00B3 /* TermsPolicyView.swift in Sources */,
 				ED9F30A32B8F640F0069D8E2 /* TypeAlias.swift in Sources */,
 				EC76E24A30F24713BD49711D /* TermsTableViewCell.swift in Sources */,
 				12BB284FF2ACBC8F06288E15 /* UIView+Extension.swift in Sources */,
 				04FEC31F2B8F945C0091D767 /* Recipes.swift in Sources */,
+				047A505C2B99A2E700797AAD /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,7 +886,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Recipely/Info.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -916,7 +968,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Recipely/Info.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

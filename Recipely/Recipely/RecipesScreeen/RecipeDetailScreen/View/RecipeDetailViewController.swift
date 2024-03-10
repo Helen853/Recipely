@@ -35,6 +35,7 @@ final class RecipeDetailViewController: UIViewController {
     private let addFavoritesLabel = UILabel()
     private let storageDetail = RecipeDetail()
     private var details: [RecipeDetailProtocol] = []
+    private var logger = LoggerInvoker()
 
     // MARK: - Life Cycle
 
@@ -47,7 +48,15 @@ final class RecipeDetailViewController: UIViewController {
         registerCell()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        makeLog()
+    }
+
     // MARK: - Private Methods
+
+    private func makeLog() {
+        logger.log(actionUser: .openRecipeDetail)
+    }
 
     private func configNavigationBar() {
         backButton.setImage(UIImage(named: AppConstants.back), for: .normal)
@@ -105,6 +114,7 @@ final class RecipeDetailViewController: UIViewController {
 
     @objc private func tappedShare() {
         recipeDetailPresenter?.shareRecipeText()
+        logger.log(actionUser: .shareRecipe)
     }
 }
 
