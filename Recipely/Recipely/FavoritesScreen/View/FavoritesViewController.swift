@@ -48,12 +48,15 @@ final class FavoritesViewController: UIViewController {
         setupNavigationItems()
         setupTableView()
         setupBasketViewAnchors()
-        fvoritesPresenter?.returnFavourites(StorageFavorites())
+        fvoritesPresenter?.returnFavorites()
+//        fvoritesPresenter?.returnFavourites(StorageFavorites())
+//        fvoritesPresenter?.returnFavorites(favorites: FavoritesService())
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         showLoadedTableView()
+        fvoritesPresenter?.returnFavorites()
     }
 
     // MARK: - Private Methods

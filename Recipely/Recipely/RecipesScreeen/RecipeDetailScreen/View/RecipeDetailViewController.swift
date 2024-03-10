@@ -109,7 +109,8 @@ final class RecipeDetailViewController: UIViewController {
     }
 
     @objc private func tappedSave() {
-        recipeDetailPresenter?.updateColorButton()
+        guard let title = (details[0] as? Image)?.title else { return }
+        recipeDetailPresenter?.updateColorButton(title: title)
     }
 
     @objc private func tappedShare() {

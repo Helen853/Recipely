@@ -11,7 +11,7 @@ protocol RecipeDetailPresenterProtocol {
     /// Показать экран категорий рецептов
     func showCategory()
     /// Обновиление цвета кнопки
-    func updateColorButton()
+    func updateColorButton(title: String)
     /// Отправка текста рецепта в телеграм
     func shareRecipeText()
 }
@@ -45,13 +45,20 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
     }
 
     /// Обновиление цвета кнопки
-    func updateColorButton() {
+    func updateColorButton(title: String) {
         // проверка состояния
         switch state {
         case .clear:
             state = .red
             // показать уведомление о добавлении в избранное
             view?.showAddFavoritesLabel()
+            print(title)
+            if let recipe = CategoryViewController.shared.recipes.first(where: { $0.foodName == title }) {
+                FavoritesService.shared.addFavorites(recipe)
+                print(FavoritesService.shared.favorites.count)
+            } else {
+                print(CategoryViewController.shared.recipes.count)
+            }
             // через 3 секунды скрыть уведомление и изменить кнопку
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
                 self?.view?.removeLabel()

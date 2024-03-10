@@ -2,7 +2,7 @@
 // Copyright © RoadMap. All rights reserved.
 
 // Ячейка еды
-struct Recipes {
+struct Recipes: Equatable, Codable {
     // Картинка еды
     var imageFoodName: String
     // Название еды
@@ -11,6 +11,8 @@ struct Recipes {
     var foodTime: Int
     // Калории
     var foodKkal: Int
+    // Флаг избранного
+    var isFavorites: Bool
 }
 
 /// Сортировка по калорием

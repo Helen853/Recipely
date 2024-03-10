@@ -20,7 +20,6 @@ final class LoggerInvoker {
     }
 
     private func executeCommandsIfNeeded() {
-        print(commands.count)
         var stringCommand: [String] = []
         commands.forEach { stringCommand.append($0.log) }
         logger.writeMessageToLog(stringCommand)
