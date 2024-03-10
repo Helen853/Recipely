@@ -65,8 +65,8 @@ final class CategoryViewController: UIViewController {
 
     static var shared = CategoryViewController()
 
-    var tappedNextHandler: VoidHandler?
     var categoryPresenter: CategoryPresenterProtocol?
+    var recipes: [Recipes] = []
 
     // MARK: - Private Properties
 
@@ -76,7 +76,6 @@ final class CategoryViewController: UIViewController {
         text: Constants.notFoundViewText,
         image: UIImage(named: Constants.notFoundViewImageName) ?? UIImage()
     )
-    var recipes: [Recipes] = []
     private var searchidgRecipes: [Recipes] = []
     private var titleScreen: String?
     private var isDataLoaded = false
@@ -91,7 +90,6 @@ final class CategoryViewController: UIViewController {
         setupViews()
         setupAnchors()
         setupTableView()
-        tappedNextButton()
         categoryPresenter?.changeState()
     }
 
@@ -109,13 +107,6 @@ final class CategoryViewController: UIViewController {
 
     private func makeLog() {
         logger.log(actionUser: .openRecipe)
-    }
-
-    private func tappedNextButton() {
-        tappedNextHandler = { [weak self] in
-            guard let self = self else { return }
-            categoryPresenter?.showRecipeDetail()
-        }
     }
 
     private func setupViews() {
@@ -221,7 +212,12 @@ final class CategoryViewController: UIViewController {
 }
 
 /// CategoryViewController + UITableViewDelegate
-extension CategoryViewController: UITableViewDelegate {}
+extension CategoryViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let modelRecipes = CategoryViewController.shared.recipes[indexPath.row]
+        categoryPresenter?.returnModel(model: modelRecipes)
+    }
+}
 
 /// CategoryViewController + UITableViewDataSource
 extension CategoryViewController: UITableViewDataSource {
@@ -252,9 +248,9 @@ extension CategoryViewController: UITableViewDataSource {
             else { return UITableViewCell() }
             cell.selectionStyle = .none
             if searching {
-                cell.configure(with: searchidgRecipes[indexPath.row], handler: tappedNextHandler)
+                cell.configure(with: searchidgRecipes[indexPath.row])
             } else {
-                cell.configure(with: CategoryViewController.shared.recipes[indexPath.row], handler: tappedNextHandler)
+                cell.configure(with: CategoryViewController.shared.recipes[indexPath.row])
             }
             return cell
         }

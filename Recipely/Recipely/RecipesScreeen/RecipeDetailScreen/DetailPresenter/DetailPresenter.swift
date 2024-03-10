@@ -6,14 +6,16 @@ import Foundation
 /// Протокол для презентора подробного экрана с рецептом
 protocol RecipeDetailPresenterProtocol {
     /// Загрузка ячейки
-    ///  -   Parametr: массив с данными
-    func loadCell(model: [RecipeDetailProtocol])
+    ///  -   Parametr: рецепт с данными
+    func loadCell(recipe: Recipes)
     /// Показать экран категорий рецептов
     func showCategory()
     /// Обновиление цвета кнопки
     func updateColorButton(title: String)
     /// Отправка текста рецепта в телеграм
     func shareRecipeText()
+
+    func setupSaveButton(title: String?)
 }
 
 /// Презентор для экрана с подробным рецептом
@@ -34,9 +36,23 @@ final class RecipeDetailPresenter {
 
 extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
     /// Загрузка ячейки
-    ///  -   Parametr: массив с данными
-    func loadCell(model: [RecipeDetailProtocol]) {
-        view?.loadTable(details: model)
+    ///  -   Parametr: рецепт с данными
+    func loadCell(recipe: Recipes) {
+        let detail = storage.setupDetail(model: recipe)
+        view?.loadTable(details: detail)
+    }
+
+    /// Настройка кнопки "Сохранить в избранное"
+    ///  -   Parametr:  наименование рецепта
+    func setupSaveButton(title: String?) {
+        // проверяем содержится ли рецепт с данными наименованием в избранном
+        if FavoritesService.shared.favorites.contains(where: { $0.foodName == title }) {
+            state = .red
+            view?.updateSaveButton(state: state)
+        } else {
+            state = .clear
+            view?.updateSaveButton(state: state)
+        }
     }
 
     /// Отправка текста рецепта в телеграм
@@ -45,6 +61,7 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
     }
 
     /// Обновиление цвета кнопки
+    ///  -   Parametr:  наименование рецепта
     func updateColorButton(title: String) {
         // проверка состояния
         switch state {
@@ -63,7 +80,14 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
             }
         case .red:
             state = .clear
+            // обновить кнопку в другой цвет
             view?.updateSaveButton(state: state)
+
+            // находим индекс элемента по названию
+            guard let indexOfRecipe = FavoritesService.shared.favorites.firstIndex(where: { $0.foodName == title })
+            else { return }
+            // удаляем элемент из избранного
+            FavoritesService.shared.removeFavorites(Int(indexOfRecipe))
         }
     }
 
