@@ -29,7 +29,6 @@ final class FavoritesViewController: UIViewController {
 
     var favorites: [Recipes] = []
     var fvoritesPresenter: FavoritesPresenterProtocol?
-    var tappedNextHandler: VoidHandler?
 
     // MARK: - Private Properties
 
@@ -48,12 +47,13 @@ final class FavoritesViewController: UIViewController {
         setupNavigationItems()
         setupTableView()
         setupBasketViewAnchors()
-        fvoritesPresenter?.returnFavourites(StorageFavorites())
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         showLoadedTableView()
+        favorites = FavoritesService.shared.load()
+        fvoritesPresenter?.returnFavorites()
     }
 
     // MARK: - Private Methods
@@ -124,7 +124,7 @@ extension FavoritesViewController: UITableViewDataSource {
             else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.nextButton.isHidden = true
-            cell.configure(with: favorites[indexPath.row], handler: tappedNextHandler)
+            cell.configure(with: favorites[indexPath.row])
             return cell
         }
     }
@@ -143,6 +143,7 @@ extension FavoritesViewController: UITableViewDataSource {
             favorites.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
+            FavoritesService.shared.removeFavorites(indexPath.row)
         }
 
         if favorites.isEmpty {
@@ -160,6 +161,6 @@ extension FavoritesViewController: FavoritesViewControllerProtocol {
     }
 
     func uppdateViewHidden() {
-        basketView.isHidden = favorites.isEmpty
+        basketView.isHidden = !FavoritesService.shared.favorites.isEmpty
     }
 }

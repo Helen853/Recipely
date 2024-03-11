@@ -18,6 +18,7 @@ protocol RecipeDetailViewControllerProtocol: AnyObject {
     /// Отправить рецепт в телеграмм
     ///  -   Parametr: текст рецепта
     func shareRecipe(text: String)
+    // func chooseModel(title: String)
 }
 
 /// Экран подробного рецепта
@@ -41,7 +42,6 @@ final class RecipeDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        recipeDetailPresenter?.loadCell(model: storageDetail.fishDetail)
         configureView()
         configNavigationBar()
         configureTable()
@@ -49,7 +49,16 @@ final class RecipeDetailViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        // recipeDetailPresenter?.loadCell(model: storageDetail.fishDetail)
         makeLog()
+    }
+
+    func setupSaveButton(title: String?) {
+        recipeDetailPresenter?.setupSaveButton(title: title)
+    }
+
+    func setupCell(model: Recipes) {
+        recipeDetailPresenter?.loadCell(recipe: model)
     }
 
     // MARK: - Private Methods
@@ -109,7 +118,8 @@ final class RecipeDetailViewController: UIViewController {
     }
 
     @objc private func tappedSave() {
-        recipeDetailPresenter?.updateColorButton()
+        guard let title = (details[0] as? Image)?.title else { return }
+        recipeDetailPresenter?.updateColorButton(title: title)
     }
 
     @objc private func tappedShare() {

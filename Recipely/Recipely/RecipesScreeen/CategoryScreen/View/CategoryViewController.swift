@@ -63,8 +63,10 @@ final class CategoryViewController: UIViewController {
 
     // MARK: - Puplic Properties
 
-    var tappedNextHandler: VoidHandler?
+    static var shared = CategoryViewController()
+
     var categoryPresenter: CategoryPresenterProtocol?
+    var recipes: [Recipes] = []
 
     // MARK: - Private Properties
 
@@ -74,7 +76,6 @@ final class CategoryViewController: UIViewController {
         text: Constants.notFoundViewText,
         image: UIImage(named: Constants.notFoundViewImageName) ?? UIImage()
     )
-    private var recipes: [Recipes] = []
     private var searchidgRecipes: [Recipes] = []
     private var titleScreen: String?
     private var isDataLoaded = false
@@ -89,7 +90,6 @@ final class CategoryViewController: UIViewController {
         setupViews()
         setupAnchors()
         setupTableView()
-        tappedNextButton()
         categoryPresenter?.changeState()
     }
 
@@ -107,13 +107,6 @@ final class CategoryViewController: UIViewController {
 
     private func makeLog() {
         logger.log(actionUser: .openRecipe)
-    }
-
-    private func tappedNextButton() {
-        tappedNextHandler = { [weak self] in
-            guard let self = self else { return }
-            categoryPresenter?.showRecipeDetail()
-        }
     }
 
     private func setupViews() {
@@ -210,16 +203,21 @@ final class CategoryViewController: UIViewController {
     }
 
     @objc private func buttonTappedCalories() {
-        categoryPresenter?.buttonCaloriesChange(category: recipes)
+        categoryPresenter?.buttonCaloriesChange(category: CategoryViewController.shared.recipes)
     }
 
     @objc private func buttonTappedTimer() {
-        categoryPresenter?.buttonTimeChange(category: recipes)
+        categoryPresenter?.buttonTimeChange(category: CategoryViewController.shared.recipes)
     }
 }
 
 /// CategoryViewController + UITableViewDelegate
-extension CategoryViewController: UITableViewDelegate {}
+extension CategoryViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let modelRecipes = CategoryViewController.shared.recipes[indexPath.row]
+        categoryPresenter?.returnModel(model: modelRecipes)
+    }
+}
 
 /// CategoryViewController + UITableViewDataSource
 extension CategoryViewController: UITableViewDataSource {
@@ -231,7 +229,7 @@ extension CategoryViewController: UITableViewDataSource {
             if searching {
                 return searchidgRecipes.count
             } else {
-                return recipes.count
+                return CategoryViewController.shared.recipes.count
             }
         }
     }
@@ -250,9 +248,9 @@ extension CategoryViewController: UITableViewDataSource {
             else { return UITableViewCell() }
             cell.selectionStyle = .none
             if searching {
-                cell.configure(with: searchidgRecipes[indexPath.row], handler: tappedNextHandler)
+                cell.configure(with: searchidgRecipes[indexPath.row])
             } else {
-                cell.configure(with: recipes[indexPath.row], handler: tappedNextHandler)
+                cell.configure(with: CategoryViewController.shared.recipes[indexPath.row])
             }
             return cell
         }
@@ -283,7 +281,7 @@ extension CategoryViewController: CategoryViewControllerProtocol {
     }
 
     func sortedRecip(recipe: [Recipes]) {
-        recipes = recipe
+        CategoryViewController.shared.recipes = recipe
         tableView.reloadData()
     }
 
@@ -291,7 +289,7 @@ extension CategoryViewController: CategoryViewControllerProtocol {
     // - Parametr: массив рецептов
     // - Parametr: тайтл для навигейшенБара
     func uppdateRecipes(_ recipes: [Recipes], _ title: String) {
-        self.recipes = recipes
+        CategoryViewController.shared.recipes = recipes
         titleScreen = title
         setupNavigationItem()
         tableView.reloadData()
@@ -301,7 +299,8 @@ extension CategoryViewController: CategoryViewControllerProtocol {
 extension CategoryViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.count > Constants.searchAfterCount {
-            searchidgRecipes = recipes.filter { $0.foodName.prefix(searchText.count) == searchText }
+            searchidgRecipes = CategoryViewController.shared.recipes
+                .filter { $0.foodName.prefix(searchText.count) == searchText }
             notFoundView.isHidden = !searchidgRecipes.isEmpty
             searching = true
             tableView.reloadData()

@@ -15,7 +15,7 @@ final class FoodCell: UITableViewCell {
         static let pizzaLabelText = " kkal"
     }
 
-    var tappedNextHandler: VoidHandler?
+//    var tappedNextHandler: ((String?) -> ())?
 
     // MARK: - VIsual Components
 
@@ -85,7 +85,6 @@ final class FoodCell: UITableViewCell {
         contentView.backgroundColor = .white
         setupViews()
         setupAnchors()
-        addTargetNextButton()
     }
 
     required init?(coder: NSCoder) {
@@ -96,12 +95,11 @@ final class FoodCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configure(with items: Recipes, handler: VoidHandler?) {
+    func configure(with items: Recipes) {
         recipeImageView.image = UIImage(named: items.imageFoodName)
         titleRecipe.text = items.foodName
         timeLabel.text = String(items.foodTime) + Constants.timeLabelText
         pizzaLabel.text = String(items.foodKkal) + Constants.pizzaLabelText
-        tappedNextHandler = handler
     }
 
     // MARK: - Private Methods
@@ -169,13 +167,5 @@ final class FoodCell: UITableViewCell {
     private func setupAnchorsNextButton() {
         nextButton.trailingAnchor.constraint(equalTo: uiViewBackground.trailingAnchor, constant: -16).isActive = true
         nextButton.topAnchor.constraint(equalTo: uiViewBackground.topAnchor, constant: 40).isActive = true
-    }
-
-    private func addTargetNextButton() {
-        nextButton.addTarget(self, action: #selector(tappedNextButton), for: .touchUpInside)
-    }
-
-    @objc func tappedNextButton() {
-        tappedNextHandler?()
     }
 }

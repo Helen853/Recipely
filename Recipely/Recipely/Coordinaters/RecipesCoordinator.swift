@@ -23,9 +23,11 @@ final class RecipesCoordinator: BaseCoordinator {
         rootViewController?.popViewController(animated: true)
     }
 
-    func showRecipeDetailViewController() {
+    func showRecipeDetailViewController(model: Recipes) {
         let recipeDetailViewController = MainTabBarBuilder().makeRecipeDetailViewController()
         recipeDetailViewController.recipeDetailPresenter?.coordinator = self
+        recipeDetailViewController.setupSaveButton(title: model.foodName)
+        recipeDetailViewController.setupCell(model: model)
         rootViewController?.pushViewController(recipeDetailViewController, animated: true)
     }
 

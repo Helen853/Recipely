@@ -15,7 +15,6 @@ final class Logger {
         ).first else {
             return
         }
-        print(url.path)
 
         let pathUrl = url.appendingPathComponent("log")
         do {
