@@ -14,6 +14,9 @@ final class AppCoordinator: BaseCoordinator {
         net.getRecipesDetail { result in
             print(result)
         }
+        net.getRecipe { result in
+            print(result)
+        }
     }
 
     func showMainTabBar() {
