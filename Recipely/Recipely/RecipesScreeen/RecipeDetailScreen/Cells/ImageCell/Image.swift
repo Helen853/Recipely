@@ -8,7 +8,7 @@ struct Image: RecipeDetailProtocol {
     // Тип ячейки
     var cellType: DetailType = .image
     // Название рецепта
-    var title: String
+    var title: String?
     // Название картинки с рецептом
     var imageName: String
     // Масса блюда

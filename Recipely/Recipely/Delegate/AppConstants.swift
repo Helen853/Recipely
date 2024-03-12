@@ -64,7 +64,7 @@ struct AppConstants {
     static let clockImageName = "Clock"
     static let timeText = "Cooking time"
     static let massaText = "793 g"
-    static let time = "60 min"
+    static let time = " min"
 
     static let enerc = "Enerc kcal"
     static let carbohydrates = "Carbohydrates"
@@ -76,6 +76,7 @@ struct AppConstants {
     static let numberCarbohydrate = "10,78 g"
     static let numberFats = "10,00 g"
     static let numberProtein = "10,00 g"
+    static let secondImageName = "imageFood2"
 
     static let recipeText = """
       1/2 to 2 fish heads, depending on size,

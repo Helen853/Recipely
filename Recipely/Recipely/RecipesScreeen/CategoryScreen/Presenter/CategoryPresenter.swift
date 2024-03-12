@@ -24,9 +24,7 @@ protocol CategoryPresenterProtocol: AnyObject {
     var coordinator: RecipesCoordinator? { get set }
     /// Возврат рецептов
     func returnRecipes(_ type: CategoryCellType)
-    /// Переход на экран подробного рецепта
-    func showRecipeDetail()
-    /// Сортировка рецептов
+
     func sortedRecipe(category: [Recipes])
     /// Смена значения кнопки калорий
     func buttonCaloriesChange(category: [Recipes])
@@ -34,12 +32,13 @@ protocol CategoryPresenterProtocol: AnyObject {
     func buttonTimeChange(category: [Recipes])
     ///
     func changeState()
+    func returnModel(model: Recipes)
 }
 
 /// Презентер экрана категорий
 final class CategoryPresenter: CategoryPresenterProtocol {
-    func showRecipeDetail() {
-        coordinator?.showRecipeDetailViewController()
+    func returnModel(model: Recipes) {
+        coordinator?.showRecipeDetailViewController(model: model)
     }
 
     // MARK: - Constants

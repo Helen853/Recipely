@@ -11,8 +11,9 @@ protocol FavoritesViewControllerProtocol: AnyObject {
 
 /// Протокол FavoritesPresenter
 protocol FavoritesPresenterProtocol: AnyObject {
-    /// Получение элементов из хранилища с избранными рецептами
-    func returnFavourites(_ favorites: StorageFavorites)
+    // Получение элементов из хранилища с избранными рецептами
+//    func returnFavourites(_ favorites: StorageFavorites)
+    func returnFavorites()
 }
 
 /// Презентер экрана с фаворитами
@@ -32,13 +33,20 @@ final class FavoritesPresenter {
 
 /// FavoritesPresenter + FavoritesPresenterProtocol
 extension FavoritesPresenter: FavoritesPresenterProtocol {
-    func pushDetaivFavoriteController() {
-        debugPrint("pushDetailFavoritesViewController")
+    func returnFavorites() {
+        if FavoritesService.shared.favorites.count >= 1 {
+            print(FavoritesService.shared.favorites.count)
+            view?.uppdateFavorites(FavoritesService.shared.loadFavorites() ?? [Recipes(
+                imageFoodName: "",
+                foodName: "",
+                foodTime: 0,
+                foodKkal: 0,
+                isFavorites: false
+            )])
+        }
     }
 
-    func returnFavourites(_ favorites: StorageFavorites) {
-        if favorites.favoritesFood.count > 1 {
-            view?.uppdateFavorites(favorites.favoritesFood)
-        }
+    func pushDetaivFavoriteController() {
+        debugPrint("pushDetailFavoritesViewController")
     }
 }
