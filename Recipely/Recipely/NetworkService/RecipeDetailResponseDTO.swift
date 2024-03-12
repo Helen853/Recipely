@@ -1,7 +1,13 @@
-// RecipeResponseDTO.swift
+// RecipeDetailResponseDTO.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
+
+/// RecipeResponseDTO
+struct RecipeDetailResponseDTO: Codable {
+    /// Массив с рецептами
+    let hits: [RecipeDetailHitDTO]
+}
 
 /// RecipeResponseDTO
 struct RecipeResponseDTO: Codable {
@@ -10,9 +16,31 @@ struct RecipeResponseDTO: Codable {
 }
 
 /// RecipeHitDTO
+struct RecipeDetailHitDTO: Codable {
+    /// Рецепт
+    let recipe: RecipeDTO
+}
+
+/// RecipeHitDTO
 struct RecipeHitDTO: Codable {
     /// Рецепт
     let recipe: RecipeDTO
+}
+
+/// RecipeDTO
+struct RecipeDetailDTO: Codable {
+    /// Название рецепта
+    let label: String
+    /// Время приготовления
+    let totalTime: Double
+    /// Калории
+    let images: ImagesDTO
+    /// Масса рецепта
+    let totalWeight: Double
+    /// КБЖУ
+    let totalNutrients: TotalNutrientsDTO
+    /// Описание рецепта
+    let ingredientLines: [String]
 }
 
 /// RecipeDTO
@@ -26,13 +54,6 @@ struct RecipeDTO: Codable {
     /// Калории
     let calories: Double
     /// Картинка для детального рецепта
-    let images: ImagesDTO
-    /// Масса рецепта
-    let totalWeight: Double
-    /// КБЖУ
-    let totalNutrients: TotalNutrientsDTO
-    /// Описание рецепта
-    let ingredientLines: [String]
 }
 
 /// ImagesDTO

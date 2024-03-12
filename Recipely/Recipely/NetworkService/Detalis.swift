@@ -11,9 +11,6 @@ public final class Detalis: Identifiable {
     let label: String
     /// Время пригтовления
     let totalTime: Double
-    /// Калории
-    let calories: Double
-    /// Картинка рецепта
     let images: ImagesDTO
     /// Масса рецепта
     let totalWeight: Double
@@ -22,10 +19,9 @@ public final class Detalis: Identifiable {
 
     // MARK: - Initializers
 
-    init(dto: RecipeDTO) {
+    init(dto: RecipeDetailDTO) {
         label = dto.label
         totalTime = dto.totalTime
-        calories = dto.calories
         images = dto.images
         totalWeight = dto.totalWeight
         totalNutrients = dto.totalNutrients

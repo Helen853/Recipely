@@ -19,7 +19,7 @@
 		047A50602B99D48200797AAD /* UserOriginator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A505F2B99D48200797AAD /* UserOriginator.swift */; };
 		047A50622B99EBD300797AAD /* UserMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A50612B99EBD300797AAD /* UserMemento.swift */; };
 		04861E512BA08EF400921137 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E502BA08EF400921137 /* NetworkService.swift */; };
-		04861E532BA0955000921137 /* RecipeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E522BA0955000921137 /* RecipeResponseDTO.swift */; };
+		04861E532BA0955000921137 /* RecipeDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E522BA0955000921137 /* RecipeDetailResponseDTO.swift */; };
 		04861E5A2BA0C75200921137 /* Detalis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E592BA0C75200921137 /* Detalis.swift */; };
 		04861E5C2BA0F72C00921137 /* RequestCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E5B2BA0F72C00921137 /* RequestCreator.swift */; };
 		04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC3192B8F94010091D767 /* CategoryViewController.swift */; };
@@ -92,6 +92,7 @@
 		EDB335E92B9A2110008FD7AD /* Invoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335E82B9A2110008FD7AD /* Invoker.swift */; };
 		EDB335EB2B9A2122008FD7AD /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335EA2B9A2122008FD7AD /* Command.swift */; };
 		EDB335ED2B9A2133008FD7AD /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB335EC2B9A2133008FD7AD /* Receiver.swift */; };
+		EDB336392BA107F1008FD7AD /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB336382BA107F1008FD7AD /* Recipe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,7 +109,7 @@
 		047A505F2B99D48200797AAD /* UserOriginator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOriginator.swift; sourceTree = "<group>"; };
 		047A50612B99EBD300797AAD /* UserMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMemento.swift; sourceTree = "<group>"; };
 		04861E502BA08EF400921137 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		04861E522BA0955000921137 /* RecipeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResponseDTO.swift; sourceTree = "<group>"; };
+		04861E522BA0955000921137 /* RecipeDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailResponseDTO.swift; sourceTree = "<group>"; };
 		04861E592BA0C75200921137 /* Detalis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detalis.swift; sourceTree = "<group>"; };
 		04861E5B2BA0F72C00921137 /* RequestCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreator.swift; sourceTree = "<group>"; };
 		04FEC3192B8F94010091D767 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +181,7 @@
 		EDB335E82B9A2110008FD7AD /* Invoker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoker.swift; sourceTree = "<group>"; };
 		EDB335EA2B9A2122008FD7AD /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		EDB335EC2B9A2133008FD7AD /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
+		EDB336382BA107F1008FD7AD /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		F1C0200EE0C3DC7F4E1284E5 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		F82600648C6D1A4FD7643B0C /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -216,9 +218,10 @@
 			isa = PBXGroup;
 			children = (
 				04861E502BA08EF400921137 /* NetworkService.swift */,
-				04861E522BA0955000921137 /* RecipeResponseDTO.swift */,
+				04861E522BA0955000921137 /* RecipeDetailResponseDTO.swift */,
 				04861E592BA0C75200921137 /* Detalis.swift */,
 				04861E5B2BA0F72C00921137 /* RequestCreator.swift */,
+				EDB336382BA107F1008FD7AD /* Recipe.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -819,6 +822,7 @@
 				0469A1D02B931FCB006F349A /* BasketView.swift in Sources */,
 				C177D56382AE30999FEA8D1F /* BonusesViewController.swift in Sources */,
 				EDB335BC2B966180008FD7AD /* ShimmerRecipeTableViewCell.swift in Sources */,
+				EDB336392BA107F1008FD7AD /* Recipe.swift in Sources */,
 				ED9F30AA2B8FBED00069D8E2 /* Category.swift in Sources */,
 				3D1E8686A7D68154B8D22B97 /* MainTabBarBuilder.swift in Sources */,
 				981F24736C3C9CB2FD809B23 /* CellProtocol.swift in Sources */,
@@ -849,7 +853,7 @@
 				7624FE4A1C1A909CD406CC67 /* LoginViewControllerCoordinator.swift in Sources */,
 				5EFC07E4EBB455E1FF8A82AC /* MainTabBarViewController.swift in Sources */,
 				ED6537E02B91F2B9005C8BE2 /* Text.swift in Sources */,
-				04861E532BA0955000921137 /* RecipeResponseDTO.swift in Sources */,
+				04861E532BA0955000921137 /* RecipeDetailResponseDTO.swift in Sources */,
 				ED6537D62B91E07A005C8BE2 /* DetailPresenter.swift in Sources */,
 				4F0E92857560E63842C896D1 /* Profile.swift in Sources */,
 				726A807D43AEF794A712114F /* ProfileCoordinator.swift in Sources */,
