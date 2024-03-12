@@ -3,6 +3,18 @@
 
 import Foundation
 
+enum DishType: String {
+    case salad
+    case soup
+    case chicken
+    case meat
+    case fish
+    case sideDish
+    case pancake
+    case drinks
+    case desserts
+}
+
 /// hebfuhfuie
 class RequestCreator {
     private var components = URLComponents()
@@ -19,7 +31,7 @@ class RequestCreator {
         let typeQuery = URLQueryItem(name: "type", value: "public")
         let appIdQuery = URLQueryItem(name: "app_id", value: "55feeb4f")
         let appKeyQuery = URLQueryItem(name: "app_key", value: "474254b212c6eaa1e57af193e30de2ca")
-        let dishTypeQuery = URLQueryItem(name: "dishType", value: "")
+      let dishTypeQuery = URLQueryItem(name: "dishType", value: DishType.salad.rawValue)
 
         let queries: [URLQueryItem] = [typeQuery, appIdQuery, appKeyQuery, dishTypeQuery]
 
