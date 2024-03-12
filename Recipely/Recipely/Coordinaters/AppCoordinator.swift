@@ -7,9 +7,13 @@ import UIKit
 final class AppCoordinator: BaseCoordinator {
     private var mainTabBarController: MainTabBarController?
     private var appBuilder = MainTabBarBuilder()
+    var net = NetworkService()
 
     override func start() {
         showMainTabBar()
+        net.getRecipesDetail { result in
+            print(result)
+        }
     }
 
     func showMainTabBar() {

@@ -18,6 +18,10 @@
 		047A505E2B99A34200797AAD /* UserCaretaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A505D2B99A34200797AAD /* UserCaretaker.swift */; };
 		047A50602B99D48200797AAD /* UserOriginator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A505F2B99D48200797AAD /* UserOriginator.swift */; };
 		047A50622B99EBD300797AAD /* UserMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A50612B99EBD300797AAD /* UserMemento.swift */; };
+		04861E512BA08EF400921137 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E502BA08EF400921137 /* NetworkService.swift */; };
+		04861E532BA0955000921137 /* RecipeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E522BA0955000921137 /* RecipeResponseDTO.swift */; };
+		04861E5A2BA0C75200921137 /* Detalis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E592BA0C75200921137 /* Detalis.swift */; };
+		04861E5C2BA0F72C00921137 /* RequestCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E5B2BA0F72C00921137 /* RequestCreator.swift */; };
 		04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC3192B8F94010091D767 /* CategoryViewController.swift */; };
 		04FEC31D2B8F94500091D767 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */; };
 		04FEC31F2B8F945C0091D767 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31E2B8F945C0091D767 /* Recipes.swift */; };
@@ -103,6 +107,10 @@
 		047A505D2B99A34200797AAD /* UserCaretaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCaretaker.swift; sourceTree = "<group>"; };
 		047A505F2B99D48200797AAD /* UserOriginator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOriginator.swift; sourceTree = "<group>"; };
 		047A50612B99EBD300797AAD /* UserMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMemento.swift; sourceTree = "<group>"; };
+		04861E502BA08EF400921137 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		04861E522BA0955000921137 /* RecipeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResponseDTO.swift; sourceTree = "<group>"; };
+		04861E592BA0C75200921137 /* Detalis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detalis.swift; sourceTree = "<group>"; };
+		04861E5B2BA0F72C00921137 /* RequestCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreator.swift; sourceTree = "<group>"; };
 		04FEC3192B8F94010091D767 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		04FEC31E2B8F945C0091D767 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
@@ -204,6 +212,17 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		04861E4F2BA08EC800921137 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				04861E502BA08EF400921137 /* NetworkService.swift */,
+				04861E522BA0955000921137 /* RecipeResponseDTO.swift */,
+				04861E592BA0C75200921137 /* Detalis.swift */,
+				04861E5B2BA0F72C00921137 /* RequestCreator.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
 		04FEC3182B8F93D20091D767 /* CategoryScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +273,7 @@
 		07223B679F89B351B11A801E /* Recipely */ = {
 			isa = PBXGroup;
 			children = (
+				04861E4F2BA08EC800921137 /* NetworkService */,
 				3941CB8310D521D47E0DBBF2 /* BonusesScreen */,
 				578985BC87D0A1B662F9A5B1 /* Coordinaters */,
 				701836632847CB532E80E539 /* Delegate */,
@@ -806,6 +826,7 @@
 				ED6537DE2B91F297005C8BE2 /* RecipeDetailProtocol.swift in Sources */,
 				487C6D29AEAC58096001FD9B /* CellsTypes.swift in Sources */,
 				B74658D99DAE048F54FE7624 /* Favorites.swift in Sources */,
+				04861E5C2BA0F72C00921137 /* RequestCreator.swift in Sources */,
 				EDB335EB2B9A2122008FD7AD /* Command.swift in Sources */,
 				EDB335C02B979E03008FD7AD /* CGColor+Extension.swift in Sources */,
 				69BC773F1FE7F038321E12A2 /* FavoritesCoordinator.swift in Sources */,
@@ -814,6 +835,7 @@
 				ED9F30A82B8FBEB70069D8E2 /* CategoryCollectionViewCell.swift in Sources */,
 				276D51793032EA26BBFEB2A7 /* Info.swift in Sources */,
 				ED6537EA2B91F4AB005C8BE2 /* TextTableViewCell.swift in Sources */,
+				04861E512BA08EF400921137 /* NetworkService.swift in Sources */,
 				E40C6F1705DBD7B27FBA0796 /* InfoTableViewCell.swift in Sources */,
 				04FEC31D2B8F94500091D767 /* CategoryPresenter.swift in Sources */,
 				0469A1CE2B923227006F349A /* StorageFavorites.swift in Sources */,
@@ -827,6 +849,7 @@
 				7624FE4A1C1A909CD406CC67 /* LoginViewControllerCoordinator.swift in Sources */,
 				5EFC07E4EBB455E1FF8A82AC /* MainTabBarViewController.swift in Sources */,
 				ED6537E02B91F2B9005C8BE2 /* Text.swift in Sources */,
+				04861E532BA0955000921137 /* RecipeResponseDTO.swift in Sources */,
 				ED6537D62B91E07A005C8BE2 /* DetailPresenter.swift in Sources */,
 				4F0E92857560E63842C896D1 /* Profile.swift in Sources */,
 				726A807D43AEF794A712114F /* ProfileCoordinator.swift in Sources */,
@@ -845,6 +868,7 @@
 				70419907185A5729727C7ABB /* RecipesPresenter.swift in Sources */,
 				B9B4FD3C53A944F5AC43F825 /* RecipesViewController.swift in Sources */,
 				047A50602B99D48200797AAD /* UserOriginator.swift in Sources */,
+				04861E5A2BA0C75200921137 /* Detalis.swift in Sources */,
 				04460AAB2B9D97BC0065D50C /* FavoritesService.swift in Sources */,
 				ED6537EE2B94A174005C8BE2 /* StorageDetail.swift in Sources */,
 				EDB335C22B97B1C2008FD7AD /* UIFont+Extension.swift in Sources */,

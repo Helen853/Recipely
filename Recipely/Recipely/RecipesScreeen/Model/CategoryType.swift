@@ -4,7 +4,7 @@
 import Foundation
 
 /// Енам с типом категорий ячеек
-enum CategoryCellType {
+enum CategoryType {
     // салат
     case salad
     // суп

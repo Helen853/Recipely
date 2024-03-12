@@ -7,7 +7,7 @@ import UIKit
 protocol ReciperPresenterProtocol: AnyObject {
     /// Открытие ячейки
     /// -   Parametr: тип ячейки
-    func openCell(type: CategoryCellType)
+    func openCell(type: CategoryType)
     /// Загрузка  коллекции
     ///  -   Parametr: массив с данными
     func loadCell(model: [Category])
@@ -33,7 +33,7 @@ extension RecipesPresenter: ReciperPresenterProtocol {
 
     /// Открытие ячейку
     /// -   Parametr: тип ячейки
-    func openCell(type: CategoryCellType) {
+    func openCell(type: CategoryType) {
         coordinator?.pushDetailViewController(type: type)
     }
 }

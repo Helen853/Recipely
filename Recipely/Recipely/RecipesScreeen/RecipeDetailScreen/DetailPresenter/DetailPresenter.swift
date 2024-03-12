@@ -69,8 +69,7 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
             state = .red
             // показать уведомление о добавлении в избранное
             view?.showAddFavoritesLabel()
-            if var recipe = CategoryViewController.shared.recipes.first(where: { $0.foodName == title }) {
-                recipe.isFavorites = true
+            if let recipe = CategoryViewController.shared.recipes.first(where: { $0.foodName == title }) {
                 FavoritesService.shared.addFavorites(recipe)
             }
             // через 3 секунды скрыть уведомление и изменить кнопку

@@ -99,7 +99,7 @@ final class CategoryViewController: UIViewController {
 
     // MARK: - Public Methods
 
-    func setupCategory(_ type: CategoryCellType) {
+    func setupCategory(_ type: CategoryType) {
         categoryPresenter?.returnRecipes(type)
     }
 

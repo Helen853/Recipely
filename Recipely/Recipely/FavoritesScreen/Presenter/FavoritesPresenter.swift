@@ -40,8 +40,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
                 imageFoodName: "",
                 foodName: "",
                 foodTime: 0,
-                foodKkal: 0,
-                isFavorites: false
+                foodKkal: 0
             )])
         }
     }

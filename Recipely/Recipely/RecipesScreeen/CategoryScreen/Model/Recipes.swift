@@ -11,8 +11,6 @@ struct Recipes: Equatable, Codable {
     var foodTime: Int
     // Калории
     var foodKkal: Int
-    // Флаг избранного
-    var isFavorites: Bool
 }
 
 /// Сортировка по калорием

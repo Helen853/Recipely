@@ -43,8 +43,7 @@ class FavoritesService {
             imageFoodName: "",
             foodName: "",
             foodTime: 0,
-            foodKkal: 0,
-            isFavorites: false
+            foodKkal: 0
         )] }
         favorites = loadFavorites
         return favorites

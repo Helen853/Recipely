@@ -23,7 +23,7 @@ protocol CategoryPresenterProtocol: AnyObject {
     func goBackRecipesScreen()
     var coordinator: RecipesCoordinator? { get set }
     /// Возврат рецептов
-    func returnRecipes(_ type: CategoryCellType)
+    func returnRecipes(_ type: CategoryType)
 
     func sortedRecipe(category: [Recipes])
     /// Смена значения кнопки калорий
@@ -80,7 +80,7 @@ final class CategoryPresenter: CategoryPresenterProtocol {
         coordinator?.popRecipesViewController()
     }
 
-    func returnRecipes(_ type: CategoryCellType) {
+    func returnRecipes(_ type: CategoryType) {
         let storage = StorageRecipes()
         switch type {
         case .fish:
