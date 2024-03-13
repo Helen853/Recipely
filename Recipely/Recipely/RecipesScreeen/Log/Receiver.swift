@@ -5,7 +5,11 @@ import UIKit
 
 /// Receiver
 final class Logger {
-    var actions: [String] = []
+    // MARK: - Private Properties
+
+    private var actions: [String] = []
+
+    // MARK: - Public Methods
 
     func writeMessageToLog(_ message: [String]) {
         let manager = FileManager.default

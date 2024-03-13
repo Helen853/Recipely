@@ -12,7 +12,6 @@ protocol FavoritesViewControllerProtocol: AnyObject {
 /// Протокол FavoritesPresenter
 protocol FavoritesPresenterProtocol: AnyObject {
     // Получение элементов из хранилища с избранными рецептами
-//    func returnFavourites(_ favorites: StorageFavorites)
     func returnFavorites()
 }
 
@@ -40,13 +39,8 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
                 imageFoodName: "",
                 foodName: "",
                 foodTime: 0,
-                foodKkal: 0,
-                isFavorites: false
+                foodKkal: 0
             )])
         }
-    }
-
-    func pushDetaivFavoriteController() {
-        debugPrint("pushDetailFavoritesViewController")
     }
 }

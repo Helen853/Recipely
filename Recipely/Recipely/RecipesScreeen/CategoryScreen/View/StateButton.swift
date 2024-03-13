@@ -3,6 +3,7 @@
 
 import UIKit
 
+/// Кастомная кнопка
 final class StateButton: UIButton {
     // MARK: - Private Properties
 
@@ -24,6 +25,8 @@ final class StateButton: UIButton {
         image = UIImage()
         super.init(coder: coder)
     }
+
+    // MARK: - Private Methods
 
     private func configureView() {
         setTitle(title, for: .normal)

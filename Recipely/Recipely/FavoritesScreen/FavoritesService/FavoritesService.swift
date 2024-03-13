@@ -3,20 +3,15 @@
 
 import Foundation
 
-/// Сервис FavoritesService
-class FavoritesService {
+/// Сервис сохранения и удаления из избранного
+final class FavoritesService {
     static let shared = FavoritesService()
+
+    // MARK: - Public Properties
 
     var favorites: [Recipes] = []
 
-    func saveFavorites() {
-        do {
-            let encodedData = try JSONEncoder().encode(favorites)
-            UserDefaults.standard.set(encodedData, forKey: "favorites")
-        } catch {
-            print(error)
-        }
-    }
+    // MARK: - Public Methods
 
     func loadFavorites() -> [Recipes]? {
         guard let saved = UserDefaults.standard.data(forKey: "favorites") else { return [] }
@@ -43,10 +38,20 @@ class FavoritesService {
             imageFoodName: "",
             foodName: "",
             foodTime: 0,
-            foodKkal: 0,
-            isFavorites: false
+            foodKkal: 0
         )] }
         favorites = loadFavorites
         return favorites
+    }
+
+    // MARK: - Private Methods
+
+    private func saveFavorites() {
+        do {
+            let encodedData = try JSONEncoder().encode(favorites)
+            UserDefaults.standard.set(encodedData, forKey: "favorites")
+        } catch {
+            print(error)
+        }
     }
 }

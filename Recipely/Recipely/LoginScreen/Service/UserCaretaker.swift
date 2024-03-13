@@ -1,12 +1,6 @@
 // UserCaretaker.swift
 // Copyright © RoadMap. All rights reserved.
 
-//
-//  Caretaker.swift
-//  Recipely
-//
-//  Created by mac on 07.03.2024.
-//
 import UIKit
 
 /// Caretaker User

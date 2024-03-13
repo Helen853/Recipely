@@ -18,7 +18,12 @@ protocol RecipeDetailViewControllerProtocol: AnyObject {
     /// Отправить рецепт в телеграмм
     ///  -   Parametr: текст рецепта
     func shareRecipe(text: String)
-    // func chooseModel(title: String)
+    /// Настройка кнопки "Сохранить в избранное"
+    /// -   Parametr: название рецепта
+    func setupSaveButton(title: String?)
+    /// Настройка ячейки
+    /// -   Parametr: model - рецепт
+    func setupCell(model: Recipes)
 }
 
 /// Экран подробного рецепта
@@ -49,16 +54,7 @@ final class RecipeDetailViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        // recipeDetailPresenter?.loadCell(model: storageDetail.fishDetail)
         makeLog()
-    }
-
-    func setupSaveButton(title: String?) {
-        recipeDetailPresenter?.setupSaveButton(title: title)
-    }
-
-    func setupCell(model: Recipes) {
-        recipeDetailPresenter?.loadCell(recipe: model)
     }
 
     // MARK: - Private Methods
@@ -224,5 +220,13 @@ extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
         case .clear:
             saveButton.backgroundColor = .clear
         }
+    }
+
+    func setupSaveButton(title: String?) {
+        recipeDetailPresenter?.setupSaveButton(title: title)
+    }
+
+    func setupCell(model: Recipes) {
+        recipeDetailPresenter?.loadCell(recipe: model)
     }
 }

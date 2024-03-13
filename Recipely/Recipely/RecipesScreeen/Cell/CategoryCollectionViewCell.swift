@@ -12,7 +12,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public Properties
 
-    var categoryTapHandler: ((_ type: CategoryCellType) -> ())?
+    var categoryTapHandler: ((_ type: CategoryType) -> ())?
     var category: Category?
 
     // MARK: - Initializers
@@ -34,7 +34,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public Methods
 
-    func configureCell(model: Category, handler: ((_ type: CategoryCellType) -> ())?) {
+    func configureCell(model: Category, handler: ((_ type: CategoryType) -> ())?) {
         category = model
         imageView.image = UIImage(named: model.imageName)
         configureTextLabel(model: model)

@@ -7,9 +7,18 @@ import UIKit
 final class AppCoordinator: BaseCoordinator {
     private var mainTabBarController: MainTabBarController?
     private var appBuilder = MainTabBarBuilder()
+    var net = NetworkService()
 
     override func start() {
         showMainTabBar()
+//        net
+//            .getRecipesDetail("http://www.edamam.com/ontologies/edamam.owl#recipe_fe4af81200a431bf1a69740d874b443a") {
+//            result in
+//                print(result)
+//            }
+        net.getRecipe { result in
+            print(result)
+        }
     }
 
     func showMainTabBar() {
