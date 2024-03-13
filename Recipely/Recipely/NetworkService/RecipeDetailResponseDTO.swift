@@ -9,22 +9,10 @@ struct RecipeDetailResponseDTO: Codable {
     let hits: [RecipeDetailHitDTO]
 }
 
-/// RecipeResponseDTO
-struct RecipeResponseDTO: Codable {
-    /// Массив с рецептами
-    let hits: [RecipeHitDTO]
-}
-
 /// RecipeDetailHitDTO
 struct RecipeDetailHitDTO: Codable {
     /// Подробный рецепт
     let recipe: RecipeDetailDTO
-}
-
-/// RecipeHitDTO
-struct RecipeHitDTO: Codable {
-    /// Рецепт
-    let recipe: RecipeDTO
 }
 
 /// Подробный рецепт
@@ -41,20 +29,6 @@ struct RecipeDetailDTO: Codable {
     let totalNutrients: TotalNutrientsDTO
     /// Описание рецепта
     let ingredientLines: [String]
-}
-
-/// Рецепт
-struct RecipeDTO: Codable {
-    /// Картинка рецепта
-    let image: String
-    /// Название рецепта
-    let label: String
-    /// Время приготовления
-    let totalTime: Double
-    /// Калории
-    let calories: Double
-    /// URI
-    let uri: String
 }
 
 /// ImagesDTO

@@ -22,6 +22,7 @@
 		04861E532BA0955000921137 /* RecipeDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E522BA0955000921137 /* RecipeDetailResponseDTO.swift */; };
 		04861E5A2BA0C75200921137 /* Detalis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E592BA0C75200921137 /* Detalis.swift */; };
 		04861E5C2BA0F72C00921137 /* RequestCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E5B2BA0F72C00921137 /* RequestCreator.swift */; };
+		04861E5E2BA192FC00921137 /* RecipeResponceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04861E5D2BA192FC00921137 /* RecipeResponceDTO.swift */; };
 		04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC3192B8F94010091D767 /* CategoryViewController.swift */; };
 		04FEC31D2B8F94500091D767 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */; };
 		04FEC31F2B8F945C0091D767 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC31E2B8F945C0091D767 /* Recipes.swift */; };
@@ -112,6 +113,7 @@
 		04861E522BA0955000921137 /* RecipeDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailResponseDTO.swift; sourceTree = "<group>"; };
 		04861E592BA0C75200921137 /* Detalis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detalis.swift; sourceTree = "<group>"; };
 		04861E5B2BA0F72C00921137 /* RequestCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreator.swift; sourceTree = "<group>"; };
+		04861E5D2BA192FC00921137 /* RecipeResponceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResponceDTO.swift; sourceTree = "<group>"; };
 		04FEC3192B8F94010091D767 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		04FEC31C2B8F94500091D767 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		04FEC31E2B8F945C0091D767 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			children = (
 				04861E502BA08EF400921137 /* NetworkService.swift */,
 				04861E522BA0955000921137 /* RecipeDetailResponseDTO.swift */,
+				04861E5D2BA192FC00921137 /* RecipeResponceDTO.swift */,
 				04861E5B2BA0F72C00921137 /* RequestCreator.swift */,
 				04861E592BA0C75200921137 /* Detalis.swift */,
 				EDB336382BA107F1008FD7AD /* Recipe.swift */,
@@ -877,6 +880,7 @@
 				ED6537EE2B94A174005C8BE2 /* StorageDetail.swift in Sources */,
 				EDB335C22B97B1C2008FD7AD /* UIFont+Extension.swift in Sources */,
 				ECB98BF27F96C17F3BF0C185 /* SceneDelegate.swift in Sources */,
+				04861E5E2BA192FC00921137 /* RecipeResponceDTO.swift in Sources */,
 				EDB335BA2B9612F7008FD7AD /* StateTerms.swift in Sources */,
 				ED6537E62B91F48A005C8BE2 /* ImageTableViewCell.swift in Sources */,
 				33FF6C9945DC5EF6B190119C /* Terms.swift in Sources */,
