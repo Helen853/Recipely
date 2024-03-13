@@ -34,7 +34,7 @@ final class TextTableViewCell: UITableViewCell {
     // MARK: - Public Methods
 
     func configureCell(model: Text) {
-        recipeLabel.text = model.recipe.first
+        recipeLabel.text = model.recipe.joined()
     }
 
     // MARK: - Private Methods
