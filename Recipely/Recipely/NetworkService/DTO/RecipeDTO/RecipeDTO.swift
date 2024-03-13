@@ -1,19 +1,7 @@
-// RecipeResponceDTO.swift
+// RecipeDTO.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
-
-/// Структура представляющая блюда
-struct RecipeResponseDTO: Codable {
-    /// Массив с рецептами
-    let hits: [RecipeHitDTO]
-}
-
-/// Структура представляющее кокретное блюдо
-struct RecipeHitDTO: Codable {
-    /// Рецепт
-    let recipe: RecipeDTO
-}
 
 /// Рецепт
 struct RecipeDTO: Codable {
