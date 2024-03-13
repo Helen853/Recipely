@@ -38,12 +38,14 @@ enum DishType: String {
 
 /// Варианты path ссылки
 enum PuthState: String {
+  /// Puth для всех рецептов
     case allRecipes = "/api/recipes/v2"
+  /// Puth для деталей рецепта
     case oneRecipes = "/api/recipes/v2/by-uri"
 }
 
 /// Создание URL
-class RequestCreator {
+final class RequestCreator {
     private var components = URLComponents()
 
     func createComponentsAllRecipes(_ puthState: PuthState) -> URLRequest? {

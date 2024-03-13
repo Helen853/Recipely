@@ -7,6 +7,7 @@ import Foundation
 protocol NetworkServiceProtocol {
     /// Получение детального рецепта через JSON
     func getRecipesDetail(_ uri: String, completion: @escaping (Result<Detalis, Error>) -> Void)
+  /// Получение рецепта через JSON
     func getRecipe(completion: @escaping (Result<Recipe, Error>) -> Void)
 }
 

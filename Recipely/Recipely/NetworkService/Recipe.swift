@@ -5,6 +5,7 @@ import Foundation
 
 /// Данные с рецептом
 public final class Recipe: Identifiable {
+  // MARK: - Public Properties
     // Картинка еды
     var imageFoodName: String
     // Название еды
