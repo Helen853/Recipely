@@ -21,7 +21,7 @@ enum DishType: String {
     var dishCategory: String {
         switch self {
         case .chicken, .meat, .fish, .sideDish:
-            return "main course"
+            return "Main%20course"
         case .salad:
             return "salad"
         case .soup:

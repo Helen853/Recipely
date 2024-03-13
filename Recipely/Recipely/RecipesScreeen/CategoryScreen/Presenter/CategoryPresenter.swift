@@ -36,10 +36,15 @@ protocol CategoryPresenterProtocol: AnyObject {
     ///
     func changeState()
     func returnModel(model: Recipes)
+    // func getImage()
 }
 
 /// Презентер экрана категорий
 final class CategoryPresenter: CategoryPresenterProtocol {
+    //  func getImage() {
+//    <#code#>
+    //  }
+
     func returnModel(model: Recipes) {
         coordinator?.showRecipeDetailViewController(model: model)
     }
