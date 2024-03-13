@@ -51,7 +51,8 @@ final class MainTabBarBuilder {
 
     func makeRecipeDetailViewController() -> RecipeDetailViewController {
         let recipeDetailViewController = RecipeDetailViewController()
-        let detailPresenter = RecipeDetailPresenter(view: recipeDetailViewController)
+        let networkService = NetworkService()
+        let detailPresenter = RecipeDetailPresenter(view: recipeDetailViewController, network: networkService)
         recipeDetailViewController.recipeDetailPresenter = detailPresenter
         return recipeDetailViewController
     }

@@ -16,6 +16,8 @@ protocol RecipeDetailPresenterProtocol {
     func shareRecipeText()
     /// Настройка кнопки "Сохранить в избранное"
     func setupSaveButton(title: String?)
+
+    //  var recipes: Recipes { get set }
 }
 
 /// Презентор для экрана с подробным рецептом
@@ -24,11 +26,13 @@ final class RecipeDetailPresenter {
     private var state: SaveButtonState = .clear
     private var storage = RecipeDetail()
     private weak var view: RecipeDetailViewControllerProtocol?
+    let networkService: NetworkServiceProtocol?
 
     // MARK: - Initializers
 
-    init(view: RecipeDetailViewControllerProtocol) {
+    init(view: RecipeDetailViewControllerProtocol, network: NetworkServiceProtocol) {
         self.view = view
+        networkService = network
     }
 }
 
@@ -38,8 +42,20 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
     /// Загрузка ячейки
     ///  -   Parametr: рецепт с данными
     func loadCell(recipe: Recipes) {
-        let detail = storage.setupDetail(model: recipe)
-        view?.loadTable(details: detail)
+//        let detail = storage.setupDetail(model: recipe)
+//        view?.loadTable(details: detail)
+        networkService?.getRecipesDetail(recipe.uri, completion: { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(details):
+                    guard let detail = self?.storage.setupDetail(model: details) else { return }
+                    self?.view?.loadTable(details: detail)
+                    self?.view?.succes()
+                case let .failure(error):
+                    self?.view?.failure(error: error)
+                }
+            }
+        })
     }
 
     /// Настройка кнопки "Сохранить в избранное"

@@ -91,9 +91,6 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     }
 
     func returnRecipes(_ type: DishType) {
-//        let storage = StorageRecipes()
-//        switch type {
-//        case .fish:
         networkService?.getRecipe(dishType: type, completion: { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -107,23 +104,6 @@ final class CategoryPresenter: CategoryPresenterProtocol {
                 self.view?.uppdateRecipes(self.recipes ?? [], type.rawValue)
             }
         })
-//        case .salad:
-//            view?.uppdateRecipes(storage.chicken, Constants.salad)
-//        case .soup:
-//            view?.uppdateRecipes(storage.chicken, Constants.soup)
-//        case .chicken:
-//            view?.uppdateRecipes(storage.chicken, Constants.chiken)
-//        case .meat:
-//            view?.uppdateRecipes(storage.chicken, Constants.meat)
-//        case .sideDish:
-//            view?.uppdateRecipes(storage.chicken, Constants.sideDish)
-//        case .drinks:
-//            view?.uppdateRecipes(storage.chicken, Constants.drinks)
-//        case .pancake:
-//            view?.uppdateRecipes(storage.chicken, Constants.pancake)
-//        case .desserts:
-//            view?.uppdateRecipes(storage.chicken, Constants.desserts)
-//        }
     }
 
     func sortedRecipe(category: [Recipes]) {
