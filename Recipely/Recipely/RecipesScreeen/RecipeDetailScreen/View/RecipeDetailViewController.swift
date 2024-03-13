@@ -6,23 +6,18 @@ import UIKit
 /// Протокол для экрана с детальным рецептом
 protocol RecipeDetailViewControllerProtocol: AnyObject {
     /// Загрузка  таблицы
-    ///  -   Parametr: массив с данными
     func loadTable(details: [RecipeDetailProtocol])
     /// Обновление кнопки сохранить в избранное
-    ///  -   Parametr: состояние кнопки
     func updateSaveButton(state: SaveButtonState)
     /// Появление уведомления о добавлении в избранное
     func showAddFavoritesLabel()
     /// Исчезновение уведомления о добавлении в избранное
     func removeLabel()
     /// Отправить рецепт в телеграмм
-    ///  -   Parametr: текст рецепта
     func shareRecipe(text: String)
     /// Настройка кнопки "Сохранить в избранное"
-    /// -   Parametr: название рецепта
     func setupSaveButton(title: String?)
     /// Настройка ячейки
-    /// -   Parametr: model - рецепт
     func setupCell(model: Recipes)
 }
 

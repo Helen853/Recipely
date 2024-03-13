@@ -36,32 +36,32 @@ enum DishType: String {
     }
 }
 
-/// Варианты path ссылки
-enum PuthState: String {
-  /// Puth для всех рецептов
-    case allRecipes = "/api/recipes/v2"
-  /// Puth для деталей рецепта
-    case oneRecipes = "/api/recipes/v2/by-uri"
-}
-
 /// Создание URL
 final class RequestCreator {
+    /// Варианты path ссылки
+    enum PuthState: String {
+        /// Puth для всех рецептов
+        case allRecipes = "/api/recipes/v2"
+        /// Puth для деталей рецепта
+        case oneRecipes = "/api/recipes/v2/by-uri"
+    }
+
     private var components = URLComponents()
 
-    func createComponentsAllRecipes(_ puthState: PuthState) -> URLRequest? {
+    func makeComponentsAllRecipes(_ puthState: PuthState) -> URLRequest? {
         components.scheme = "https"
         components.host = "api.edamam.com"
         components.path = puthState.rawValue
-        components.queryItems = makeQueryItemsAllRecipes()
+        components.queryItems = makeAllRecipesQueryItems()
         guard let url = components.url else { return nil }
         return URLRequest(url: url)
     }
 
-    func createComponentsOneRecipes(_ uri: String, _ puthState: PuthState) -> URLRequest? {
+    func makeComponentsOneRecipes(_ uri: String, _ puthState: PuthState) -> URLRequest? {
         components.scheme = "https"
         components.host = "api.edamam.com"
         components.path = puthState.rawValue
-        components.queryItems = makeQueryItemsOneRecipes(uri)
+        components.queryItems = makeOneRecipesQueryItems(uri)
         guard let url = components.url else { return nil }
         return URLRequest(url: url)
     }
@@ -76,7 +76,7 @@ final class RequestCreator {
         return queries
     }
 
-    func makeQueryItemsAllRecipes() -> [URLQueryItem] {
+    func makeAllRecipesQueryItems() -> [URLQueryItem] {
         let typeQuery = URLQueryItem(name: "type", value: "public")
         let appIdQuery = URLQueryItem(name: "app_id", value: "55feeb4f")
         let appKeyQuery = URLQueryItem(name: "app_key", value: "474254b212c6eaa1e57af193e30de2ca")
@@ -91,7 +91,7 @@ final class RequestCreator {
         return queries
     }
 
-    func makeQueryItemsOneRecipes(_ uri: String) -> [URLQueryItem] {
+    func makeOneRecipesQueryItems(_ uri: String) -> [URLQueryItem] {
         let typeQuery = URLQueryItem(name: "type", value: "public")
         let appIdQuery = URLQueryItem(name: "app_id", value: "55feeb4f")
         let appKeyQuery = URLQueryItem(name: "app_key", value: "474254b212c6eaa1e57af193e30de2ca")

@@ -52,7 +52,7 @@ final class FavoritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         showLoadedTableView()
-        favorites = FavoritesService.shared.load()
+        favorites = FavoritesStorageService.shared.load()
         fvoritesPresenter?.returnFavorites()
     }
 
@@ -141,7 +141,7 @@ extension FavoritesViewController: UITableViewDataSource {
             favorites.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
-            FavoritesService.shared.removeFavorites(indexPath.row)
+            FavoritesStorageService.shared.removeFavorites(indexPath.row)
         }
 
         if favorites.isEmpty {
@@ -153,7 +153,6 @@ extension FavoritesViewController: UITableViewDataSource {
 /// FavoritesViewController + FavoritesViewControllerProtocol
 extension FavoritesViewController: FavoritesViewControllerProtocol {
     /// Обновление избранных рецептов
-    /// - Parametr: массив с рецептами
     func uppdateFavorites(_ favorites: [Recipes]) {
         uppdateViewHidden()
         self.favorites = favorites
@@ -162,6 +161,6 @@ extension FavoritesViewController: FavoritesViewControllerProtocol {
 
     /// Появление вью если в избранном пусто
     func uppdateViewHidden() {
-        basketView.isHidden = !FavoritesService.shared.favorites.isEmpty
+        basketView.isHidden = !FavoritesStorageService.shared.favorites.isEmpty
     }
 }

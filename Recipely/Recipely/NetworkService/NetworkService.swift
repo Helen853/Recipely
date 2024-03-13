@@ -3,49 +3,53 @@
 
 import Foundation
 
-///  Протокол NetworkServiceProtocol
+/// Протокол NetworkServiceProtocol
 protocol NetworkServiceProtocol {
     /// Получение детального рецепта через JSON
     func getRecipesDetail(_ uri: String, completion: @escaping (Result<Detalis, Error>) -> Void)
-  /// Получение рецепта через JSON
-    func getRecipe(completion: @escaping (Result<Recipe, Error>) -> Void)
+    /// Получение рецепта через JSON
+    func getRecipe(completion: @escaping (Result<[Recipe], Error>) -> Void)
 }
 
 /// Сервис для получения данных
-class NetworkService: NetworkServiceProtocol {
-    var requestCreator = RequestCreator()
+final class NetworkService: NetworkServiceProtocol {
+    private var requestCreator = RequestCreator()
 
-    func getRecipe(completion: @escaping (Result<Recipe, Error>) -> Void) {
-        guard let request = requestCreator.createComponentsAllRecipes(.allRecipes) else { return }
-        print(request)
+    func getRecipe(completion: @escaping (Result<[Recipe], Error>) -> Void) {
+        guard let request = requestCreator.makeComponentsAllRecipes(.allRecipes) else { return }
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
-                print(error)
+                completion(.failure(error))
                 return
             }
             guard let data = data else { return }
             do {
-                let detail = try JSONDecoder().decode(RecipeResponseDTO.self, from: data)
-                print(detail)
+                let result = try JSONDecoder().decode(RecipeResponseDTO.self, from: data)
+                let res = result.hits.map { Recipe(dto: $0.recipe) }
+                completion(.success(res))
             } catch {
-                print(error)
+                completion(.failure(error))
             }
         }.resume()
     }
 
     func getRecipesDetail(_ uri: String, completion: @escaping (Result<Detalis, Error>) -> Void) {
-        guard let request = requestCreator.createComponentsOneRecipes(uri, .oneRecipes) else { return }
+        guard let request = requestCreator.makeComponentsOneRecipes(uri, .oneRecipes) else { return }
+        print(request)
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
-                print(error)
+                completion(.failure(error))
                 return
             }
             guard let data = data else { return }
+            print(data)
             do {
-                let detail = try JSONDecoder().decode(RecipeDetailResponseDTO.self, from: data)
-                print(detail)
+                let result = try JSONDecoder().decode(RecipeDetailResponseDTO.self, from: data)
+                guard let detaiDto = result.hits.first else { return }
+                let detail = Detalis(dto: detaiDto)
+                completion(.success(detail))
             } catch {
-                print(error)
+                completion(.failure(error))
             }
         }.resume()
     }

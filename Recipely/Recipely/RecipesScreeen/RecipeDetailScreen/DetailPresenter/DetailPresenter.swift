@@ -46,7 +46,7 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
     ///  -   Parametr:  наименование рецепта
     func setupSaveButton(title: String?) {
         // проверяем содержится ли рецепт с данными наименованием в избранном
-        if FavoritesService.shared.favorites.contains(where: { $0.foodName == title }) {
+        if FavoritesStorageService.shared.favorites.contains(where: { $0.foodName == title }) {
             state = .red
             view?.updateSaveButton(state: state)
         } else {
@@ -70,7 +70,7 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
             // показать уведомление о добавлении в избранное
             view?.showAddFavoritesLabel()
             if let recipe = CategoryViewController.shared.recipes.first(where: { $0.foodName == title }) {
-                FavoritesService.shared.addFavorites(recipe)
+                FavoritesStorageService.shared.addFavorites(recipe)
             }
             // через 3 секунды скрыть уведомление и изменить кнопку
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
@@ -83,10 +83,11 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
             view?.updateSaveButton(state: state)
 
             // находим индекс элемента по названию
-            guard let indexOfRecipe = FavoritesService.shared.favorites.firstIndex(where: { $0.foodName == title })
+            guard let indexOfRecipe = FavoritesStorageService.shared.favorites
+                .firstIndex(where: { $0.foodName == title })
             else { return }
             // удаляем элемент из избранного
-            FavoritesService.shared.removeFavorites(Int(indexOfRecipe))
+            FavoritesStorageService.shared.removeFavorites(Int(indexOfRecipe))
         }
     }
 

@@ -4,18 +4,17 @@
 import Foundation
 
 /// Данные с рецептом
-public final class Recipe: Identifiable {
-  // MARK: - Public Properties
+final class Recipe {
+    // MARK: - Public Properties
+
     // Картинка еды
     var imageFoodName: String
     // Название еды
     var foodName: String
-    // Время готовки еды
+    // Время приготовления
     var foodTime: Double
-    // Калории
+    // Калорийность блюда
     var foodKkal: Double
-
-    // MARK: - Initializers
 
     init(dto: RecipeDTO) {
         imageFoodName = dto.image

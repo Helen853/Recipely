@@ -33,9 +33,9 @@ final class FavoritesPresenter {
 /// FavoritesPresenter + FavoritesPresenterProtocol
 extension FavoritesPresenter: FavoritesPresenterProtocol {
     func returnFavorites() {
-        if FavoritesService.shared.favorites.count >= 1 {
-            print(FavoritesService.shared.favorites.count)
-            view?.uppdateFavorites(FavoritesService.shared.loadFavorites() ?? [Recipes(
+        if FavoritesStorageService.shared.favorites.count >= 1 {
+            print(FavoritesStorageService.shared.favorites.count)
+            view?.uppdateFavorites(FavoritesStorageService.shared.loadFavorites() ?? [Recipes(
                 imageFoodName: "",
                 foodName: "",
                 foodTime: 0,

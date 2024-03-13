@@ -3,13 +3,13 @@
 
 import Foundation
 
-/// RecipeResponseDTO
+/// Структура представляющая блюда
 struct RecipeResponseDTO: Codable {
     /// Массив с рецептами
     let hits: [RecipeHitDTO]
 }
 
-/// RecipeHitDTO
+/// Структура представляющее кокретное блюдо
 struct RecipeHitDTO: Codable {
     /// Рецепт
     let recipe: RecipeDTO

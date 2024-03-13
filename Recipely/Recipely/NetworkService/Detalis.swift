@@ -4,30 +4,28 @@
 import Foundation
 
 /// Данные для таблицы с подробным рецептом
-public final class Detalis: Identifiable {
+final class Detalis {
     // MARK: - Public Properties
 
-    /// Название
+    // Название
     let label: String
     /// Время пригтовления
     let totalTime: Double
-    /// Картинка рецепта
+    // Картинка рецепта
     let images: ImagesDTO
-    /// Масса рецепта
+    /// Вес блюда
     let totalWeight: Double
-    /// КБЖУ
+    // КБЖУ
     let totalNutrients: TotalNutrientsDTO
-    /// Описание рецепта
+    /// Ингредиенты
     let ingridientsLines: [String]
 
-    // MARK: - Initializers
-
-    init(dto: RecipeDetailDTO) {
-        label = dto.label
-        totalTime = dto.totalTime
-        images = dto.images
-        totalWeight = dto.totalWeight
-        totalNutrients = dto.totalNutrients
-        ingridientsLines = dto.ingredientLines
+    init(dto: RecipeDetailHitDTO) {
+        label = dto.recipe.label
+        totalTime = dto.recipe.totalTime
+        images = dto.recipe.images
+        totalWeight = dto.recipe.totalWeight
+        totalNutrients = dto.recipe.totalNutrients
+        ingridientsLines = dto.recipe.ingredientLines
     }
 }

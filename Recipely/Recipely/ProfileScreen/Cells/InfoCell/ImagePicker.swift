@@ -8,7 +8,7 @@ final class ImagePicker: NSObject {
     // MARK: - Public Properties
 
     var imagePickerController: UIImagePickerController?
-    var returnImageHandler: ((UIImage) -> ())?
+    var returnImageHandler: ImageHandler?
 
     // MARK: - Public Methods
 

@@ -3,13 +3,13 @@
 
 import Foundation
 
-/// RecipeDetailResponseDTO
+/// Структура детальных рецептов
 struct RecipeDetailResponseDTO: Codable {
     /// Массив с подробными рецептами
     let hits: [RecipeDetailHitDTO]
 }
 
-/// RecipeDetailHitDTO
+/// Структура рецепта
 struct RecipeDetailHitDTO: Codable {
     /// Подробный рецепт
     let recipe: RecipeDetailDTO
@@ -31,7 +31,7 @@ struct RecipeDetailDTO: Codable {
     let ingredientLines: [String]
 }
 
-/// ImagesDTO
+/// Структура с размером фотограыии
 struct ImagesDTO: Codable {
     /// Размер фотографии
     let regular: LargeDTO
@@ -43,7 +43,7 @@ struct ImagesDTO: Codable {
     }
 }
 
-/// LargeDTO
+/// Структура с сылкой на картинку
 struct LargeDTO: Codable {
     /// Ссылка на фотографию
     let url: String
@@ -73,7 +73,7 @@ struct TotalNutrientsDTO: Codable {
     }
 }
 
-/// TotalDTO
+/// Структура представляющая кол-во КБЖУ
 struct TotalDTO: Codable {
     /// Количество КБЖУ
     let quantity: Double

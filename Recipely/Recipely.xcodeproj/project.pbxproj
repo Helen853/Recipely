@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		015071CFB03747F1C83ED6E6 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5F3571CC8D172D47594825 /* FavoritesPresenter.swift */; };
-		04460AAB2B9D97BC0065D50C /* FavoritesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04460AAA2B9D97BC0065D50C /* FavoritesService.swift */; };
+		04460AAB2B9D97BC0065D50C /* FavoritesStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04460AAA2B9D97BC0065D50C /* FavoritesStorageService.swift */; };
 		0469A1CE2B923227006F349A /* StorageFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A1CD2B923227006F349A /* StorageFavorites.swift */; };
 		0469A1D02B931FCB006F349A /* BasketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A1CF2B931FCB006F349A /* BasketView.swift */; };
 		0469A20E2B9605D5006F349A /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469A20D2B9605D5006F349A /* LoginPresenter.swift */; };
@@ -99,7 +99,7 @@
 /* Begin PBXFileReference section */
 		008E79B398C0013840C670AA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		036CDB27228B00761E3B8BF5 /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
-		04460AAA2B9D97BC0065D50C /* FavoritesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesService.swift; sourceTree = "<group>"; };
+		04460AAA2B9D97BC0065D50C /* FavoritesStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStorageService.swift; sourceTree = "<group>"; };
 		0469A1CD2B923227006F349A /* StorageFavorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageFavorites.swift; sourceTree = "<group>"; };
 		0469A1CF2B931FCB006F349A /* BasketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketView.swift; sourceTree = "<group>"; };
 		0469A20D2B9605D5006F349A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 		04460AA92B9D97A20065D50C /* FavoritesService */ = {
 			isa = PBXGroup;
 			children = (
-				04460AAA2B9D97BC0065D50C /* FavoritesService.swift */,
+				04460AAA2B9D97BC0065D50C /* FavoritesStorageService.swift */,
 			);
 			path = FavoritesService;
 			sourceTree = "<group>";
@@ -221,9 +221,9 @@
 			children = (
 				04861E502BA08EF400921137 /* NetworkService.swift */,
 				04861E522BA0955000921137 /* RecipeDetailResponseDTO.swift */,
+				04861E592BA0C75200921137 /* Detalis.swift */,
 				04861E5D2BA192FC00921137 /* RecipeResponceDTO.swift */,
 				04861E5B2BA0F72C00921137 /* RequestCreator.swift */,
-				04861E592BA0C75200921137 /* Detalis.swift */,
 				EDB336382BA107F1008FD7AD /* Recipe.swift */,
 			);
 			path = NetworkService;
@@ -876,7 +876,7 @@
 				B9B4FD3C53A944F5AC43F825 /* RecipesViewController.swift in Sources */,
 				047A50602B99D48200797AAD /* UserOriginator.swift in Sources */,
 				04861E5A2BA0C75200921137 /* Detalis.swift in Sources */,
-				04460AAB2B9D97BC0065D50C /* FavoritesService.swift in Sources */,
+				04460AAB2B9D97BC0065D50C /* FavoritesStorageService.swift in Sources */,
 				ED6537EE2B94A174005C8BE2 /* StorageDetail.swift in Sources */,
 				EDB335C22B97B1C2008FD7AD /* UIFont+Extension.swift in Sources */,
 				ECB98BF27F96C17F3BF0C185 /* SceneDelegate.swift in Sources */,
