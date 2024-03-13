@@ -17,8 +17,7 @@ final class RecipesViewController: UIViewController {
     // Массив с моделями ячеек категорий
     var categories: [Category] = []
     var recipesPresenter: RecipesPresenter?
-    var categoryTapHandler: ((_ type: CategoryCellType) -> ())?
-//    var log: LogActions?
+    var categoryTapHandler: ((_ type: CategoryType) -> ())?
     var logger = LoggerInvoker()
 
     // MARK: - Private Properties
@@ -33,7 +32,6 @@ final class RecipesViewController: UIViewController {
         recipesPresenter?.loadCell(model: info.categories)
         configureCollection()
         categoryTapped()
-//        logger.configureManager()
     }
 
     override func viewWillAppear(_ animated: Bool) {

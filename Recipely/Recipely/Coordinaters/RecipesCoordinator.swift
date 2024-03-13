@@ -11,7 +11,7 @@ final class RecipesCoordinator: BaseCoordinator {
         rootViewController = UINavigationController(rootViewController: view)
     }
 
-    func pushDetailViewController(type: CategoryCellType) {
+    func pushDetailViewController(type: CategoryType) {
         let categoryVewController = MainTabBarBuilder().makeCategoryViewcontroller()
         categoryVewController.categoryPresenter?.coordinator = self
         categoryVewController.setupCategory(type)

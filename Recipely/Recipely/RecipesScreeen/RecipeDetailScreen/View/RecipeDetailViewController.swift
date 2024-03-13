@@ -6,19 +6,19 @@ import UIKit
 /// Протокол для экрана с детальным рецептом
 protocol RecipeDetailViewControllerProtocol: AnyObject {
     /// Загрузка  таблицы
-    ///  -   Parametr: массив с данными
     func loadTable(details: [RecipeDetailProtocol])
     /// Обновление кнопки сохранить в избранное
-    ///  -   Parametr: состояние кнопки
     func updateSaveButton(state: SaveButtonState)
     /// Появление уведомления о добавлении в избранное
     func showAddFavoritesLabel()
     /// Исчезновение уведомления о добавлении в избранное
     func removeLabel()
     /// Отправить рецепт в телеграмм
-    ///  -   Parametr: текст рецепта
     func shareRecipe(text: String)
-    // func chooseModel(title: String)
+    /// Настройка кнопки "Сохранить в избранное"
+    func setupSaveButton(title: String?)
+    /// Настройка ячейки
+    func setupCell(model: Recipes)
 }
 
 /// Экран подробного рецепта
@@ -49,16 +49,7 @@ final class RecipeDetailViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        // recipeDetailPresenter?.loadCell(model: storageDetail.fishDetail)
         makeLog()
-    }
-
-    func setupSaveButton(title: String?) {
-        recipeDetailPresenter?.setupSaveButton(title: title)
-    }
-
-    func setupCell(model: Recipes) {
-        recipeDetailPresenter?.loadCell(recipe: model)
     }
 
     // MARK: - Private Methods
@@ -224,5 +215,13 @@ extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
         case .clear:
             saveButton.backgroundColor = .clear
         }
+    }
+
+    func setupSaveButton(title: String?) {
+        recipeDetailPresenter?.setupSaveButton(title: title)
+    }
+
+    func setupCell(model: Recipes) {
+        recipeDetailPresenter?.loadCell(recipe: model)
     }
 }

@@ -52,7 +52,7 @@ final class FavoritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         showLoadedTableView()
-        favorites = FavoritesService.shared.load()
+        favorites = FavoritesStorageService.shared.load()
         fvoritesPresenter?.returnFavorites()
     }
 
@@ -71,7 +71,6 @@ final class FavoritesViewController: UIViewController {
         tableView.register(FoodCell.self, forCellReuseIdentifier: Constants.foodCellIdentifier)
         tableView.separatorStyle = .none
         view.addSubview(tableView)
-
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -87,7 +86,6 @@ final class FavoritesViewController: UIViewController {
 
     private func setupBasketViewAnchors() {
         basketView.isHidden = false
-
         view.addSubview(basketView)
         basketView.translatesAutoresizingMaskIntoConstraints = false
         basketView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -143,7 +141,7 @@ extension FavoritesViewController: UITableViewDataSource {
             favorites.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
-            FavoritesService.shared.removeFavorites(indexPath.row)
+            FavoritesStorageService.shared.removeFavorites(indexPath.row)
         }
 
         if favorites.isEmpty {
@@ -154,13 +152,15 @@ extension FavoritesViewController: UITableViewDataSource {
 
 /// FavoritesViewController + FavoritesViewControllerProtocol
 extension FavoritesViewController: FavoritesViewControllerProtocol {
+    /// Обновление избранных рецептов
     func uppdateFavorites(_ favorites: [Recipes]) {
         uppdateViewHidden()
         self.favorites = favorites
         tableView.reloadData()
     }
 
+    /// Появление вью если в избранном пусто
     func uppdateViewHidden() {
-        basketView.isHidden = !FavoritesService.shared.favorites.isEmpty
+        basketView.isHidden = !FavoritesStorageService.shared.favorites.isEmpty
     }
 }

@@ -14,7 +14,7 @@ protocol RecipeDetailPresenterProtocol {
     func updateColorButton(title: String)
     /// Отправка текста рецепта в телеграм
     func shareRecipeText()
-
+    /// Настройка кнопки "Сохранить в избранное"
     func setupSaveButton(title: String?)
 }
 
@@ -46,7 +46,7 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
     ///  -   Parametr:  наименование рецепта
     func setupSaveButton(title: String?) {
         // проверяем содержится ли рецепт с данными наименованием в избранном
-        if FavoritesService.shared.favorites.contains(where: { $0.foodName == title }) {
+        if FavoritesStorageService.shared.favorites.contains(where: { $0.foodName == title }) {
             state = .red
             view?.updateSaveButton(state: state)
         } else {
@@ -69,9 +69,8 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
             state = .red
             // показать уведомление о добавлении в избранное
             view?.showAddFavoritesLabel()
-            if var recipe = CategoryViewController.shared.recipes.first(where: { $0.foodName == title }) {
-                recipe.isFavorites = true
-                FavoritesService.shared.addFavorites(recipe)
+            if let recipe = CategoryViewController.shared.recipes.first(where: { $0.foodName == title }) {
+                FavoritesStorageService.shared.addFavorites(recipe)
             }
             // через 3 секунды скрыть уведомление и изменить кнопку
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
@@ -84,10 +83,11 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
             view?.updateSaveButton(state: state)
 
             // находим индекс элемента по названию
-            guard let indexOfRecipe = FavoritesService.shared.favorites.firstIndex(where: { $0.foodName == title })
+            guard let indexOfRecipe = FavoritesStorageService.shared.favorites
+                .firstIndex(where: { $0.foodName == title })
             else { return }
             // удаляем элемент из избранного
-            FavoritesService.shared.removeFavorites(Int(indexOfRecipe))
+            FavoritesStorageService.shared.removeFavorites(Int(indexOfRecipe))
         }
     }
 

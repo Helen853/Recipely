@@ -5,9 +5,16 @@ import Foundation
 
 /// Invoker
 final class LoggerInvoker {
+    // MARK: - Public Properties
+
     static let shared = LoggerInvoker()
+
+    // MARK: - Private Properties
+
     private let logger = Logger()
     private var commands: [LogCommand] = []
+
+    // MARK: - Public Methods
 
     func log(actionUser: LogActions) {
         let command = LogCommand(action: actionUser)
@@ -18,6 +25,8 @@ final class LoggerInvoker {
         commands.append(command)
         executeCommandsIfNeeded()
     }
+
+    // MARK: - Private Methods
 
     private func executeCommandsIfNeeded() {
         var stringCommand: [String] = []

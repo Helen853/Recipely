@@ -7,14 +7,21 @@ import UIKit
 final class AppCoordinator: BaseCoordinator {
     private var mainTabBarController: MainTabBarController?
     private var appBuilder = MainTabBarBuilder()
+    var net = NetworkService()
 
     override func start() {
         showMainTabBar()
+        net
+            .getRecipesDetail("http://www.edamam.com/ontologies/edamam.owl#recipe_4bb99424e1bbc40d3cd1d891883d6745") { result in
+                print(result)
+            }
+//        net.getRecipe { result in
+//            print(result)
+//        }
     }
 
     func showMainTabBar() {
         mainTabBarController = MainTabBarController()
-
         let recipesCoordinator = RecipesCoordinator()
         let recipesModule = appBuilder.makeRecipesViewController(coordinator: recipesCoordinator)
         recipesCoordinator.setRootViewController(view: recipesModule)
