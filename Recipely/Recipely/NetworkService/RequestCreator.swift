@@ -21,7 +21,7 @@ enum DishType: String {
     var dishCategory: String {
         switch self {
         case .chicken, .meat, .fish, .sideDish:
-            return "Main Course"
+            return "main course"
         case .salad:
             return "salad"
         case .soup:
@@ -48,11 +48,11 @@ final class RequestCreator {
 
     private var components = URLComponents()
 
-    func makeComponentsAllRecipes(_ puthState: PuthState) -> URLRequest? {
+    func makeComponentsAllRecipes(dishType: DishType, _ puthState: PuthState) -> URLRequest? {
         components.scheme = "https"
         components.host = "api.edamam.com"
         components.path = puthState.rawValue
-        components.queryItems = makeAllRecipesQueryItems()
+        components.queryItems = makeAllRecipesQueryItems(dishType: dishType)
         guard let url = components.url else { return nil }
         return URLRequest(url: url)
     }
@@ -76,11 +76,11 @@ final class RequestCreator {
         return queries
     }
 
-    func makeAllRecipesQueryItems() -> [URLQueryItem] {
+    func makeAllRecipesQueryItems(dishType: DishType) -> [URLQueryItem] {
         let typeQuery = URLQueryItem(name: "type", value: "public")
         let appIdQuery = URLQueryItem(name: "app_id", value: "55feeb4f")
         let appKeyQuery = URLQueryItem(name: "app_key", value: "474254b212c6eaa1e57af193e30de2ca")
-        let dishTypeQuery = URLQueryItem(name: "dishType", value: DishType.sideDish.dishCategory)
+        let dishTypeQuery = URLQueryItem(name: "dishType", value: dishType.rawValue)
 
         var queries: [URLQueryItem] = [typeQuery, appIdQuery, appKeyQuery, dishTypeQuery]
 

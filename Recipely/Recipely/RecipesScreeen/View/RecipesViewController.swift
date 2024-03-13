@@ -17,7 +17,7 @@ final class RecipesViewController: UIViewController {
     // Массив с моделями ячеек категорий
     var categories: [Category] = []
     var recipesPresenter: RecipesPresenter?
-    var categoryTapHandler: ((_ type: CategoryType) -> ())?
+    var categoryTapHandler: ((_ type: DishType) -> ())?
     var logger = LoggerInvoker()
 
     // MARK: - Private Properties

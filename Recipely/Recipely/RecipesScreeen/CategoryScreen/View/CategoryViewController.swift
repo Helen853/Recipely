@@ -99,7 +99,7 @@ final class CategoryViewController: UIViewController {
 
     // MARK: - Public Methods
 
-    func setupCategory(_ type: CategoryType) {
+    func setupCategory(_ type: DishType) {
         categoryPresenter?.returnRecipes(type)
     }
 
@@ -261,6 +261,14 @@ extension CategoryViewController: UITableViewDataSource {
 
 /// CategoryViewController + CategoryViewControllerProtocol
 extension CategoryViewController: CategoryViewControllerProtocol {
+    func succes() {
+        tableView.reloadData()
+    }
+
+    func failure(error: Error) {
+        print(error)
+    }
+
     func changeState() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             self?.state = .loaded

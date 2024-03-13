@@ -4,7 +4,7 @@
 import Foundation
 
 /// Данные с рецептом
-final class Recipe {
+final class Recipes: Decodable, Encodable {
     // MARK: - Public Properties
 
     // Картинка еды

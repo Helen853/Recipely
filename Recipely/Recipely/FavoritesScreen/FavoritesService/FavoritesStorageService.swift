@@ -40,12 +40,13 @@ final class FavoritesStorageService {
     }
 
     func load() -> [Recipes] {
-        guard let loadFavorites = loadFavorites() else { return [Recipes(
-            imageFoodName: "",
-            foodName: "",
-            foodTime: 0,
-            foodKkal: 0
-        )] }
+        guard let loadFavorites = loadFavorites() else { return [Recipes(dto: RecipeDTO(
+            image: "",
+            label: "",
+            totalTime: 0,
+            calories: 0,
+            uri: ""
+        ))] }
         favorites = loadFavorites
         return favorites
     }

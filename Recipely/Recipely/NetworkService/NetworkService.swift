@@ -8,15 +8,15 @@ protocol NetworkServiceProtocol {
     /// Получение детального рецепта через JSON
     func getRecipesDetail(_ uri: String, completion: @escaping (Result<Detalis, Error>) -> Void)
     /// Получение рецепта через JSON
-    func getRecipe(completion: @escaping (Result<[Recipe], Error>) -> Void)
+    func getRecipe(dishType: DishType, completion: @escaping (Result<[Recipes], Error>) -> Void)
 }
 
 /// Сервис для получения данных
 final class NetworkService: NetworkServiceProtocol {
     private var requestCreator = RequestCreator()
 
-    func getRecipe(completion: @escaping (Result<[Recipe], Error>) -> Void) {
-        guard let request = requestCreator.makeComponentsAllRecipes(.allRecipes) else { return }
+    func getRecipe(dishType: DishType, completion: @escaping (Result<[Recipes], Error>) -> Void) {
+        guard let request = requestCreator.makeComponentsAllRecipes(dishType: dishType, .allRecipes) else { return }
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 completion(.failure(error))
@@ -25,7 +25,7 @@ final class NetworkService: NetworkServiceProtocol {
             guard let data = data else { return }
             do {
                 let result = try JSONDecoder().decode(RecipeResponseDTO.self, from: data)
-                let res = result.hits.map { Recipe(dto: $0.recipe) }
+                let res = result.hits.map { Recipes(dto: $0.recipe) }
                 completion(.success(res))
             } catch {
                 completion(.failure(error))

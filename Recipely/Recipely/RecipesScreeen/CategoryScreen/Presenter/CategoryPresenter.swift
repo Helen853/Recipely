@@ -15,6 +15,9 @@ protocol CategoryViewControllerProtocol: AnyObject {
     func buttonTimeState(color: String, image: String)
     /// Изменение состояния
     func changeState()
+
+    func succes()
+    func failure(error: Error)
 }
 
 /// Протокол CategoryPresenter
@@ -23,7 +26,7 @@ protocol CategoryPresenterProtocol: AnyObject {
     func goBackRecipesScreen()
     var coordinator: RecipesCoordinator? { get set }
     /// Возврат рецептов
-    func returnRecipes(_ type: CategoryType)
+    func returnRecipes(_ type: DishType)
 
     func sortedRecipe(category: [Recipes])
     /// Смена значения кнопки калорий
@@ -67,11 +70,13 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     private var sortedCalories = SortedCalories.non
     private var sortedTime = SortedTime.non
     private var recipes: [Recipes]?
+    let networkService: NetworkServiceProtocol?
 
     // MARK: - Initializers
 
-    init(view: CategoryViewControllerProtocol) {
+    init(view: CategoryViewControllerProtocol, networkService: NetworkServiceProtocol) {
         self.view = view
+        self.networkService = networkService
     }
 
     // MARK: - Public Methods
@@ -80,28 +85,40 @@ final class CategoryPresenter: CategoryPresenterProtocol {
         coordinator?.popRecipesViewController()
     }
 
-    func returnRecipes(_ type: CategoryType) {
-        let storage = StorageRecipes()
-        switch type {
-        case .fish:
-            view?.uppdateRecipes(storage.fish, Constants.fish)
-        case .salad:
-            view?.uppdateRecipes(storage.chicken, Constants.salad)
-        case .soup:
-            view?.uppdateRecipes(storage.chicken, Constants.soup)
-        case .chicken:
-            view?.uppdateRecipes(storage.chicken, Constants.chiken)
-        case .meat:
-            view?.uppdateRecipes(storage.chicken, Constants.meat)
-        case .sideDish:
-            view?.uppdateRecipes(storage.chicken, Constants.sideDish)
-        case .drinks:
-            view?.uppdateRecipes(storage.chicken, Constants.drinks)
-        case .pancake:
-            view?.uppdateRecipes(storage.chicken, Constants.pancake)
-        case .desserts:
-            view?.uppdateRecipes(storage.chicken, Constants.desserts)
-        }
+    func returnRecipes(_ type: DishType) {
+//        let storage = StorageRecipes()
+//        switch type {
+//        case .fish:
+        networkService?.getRecipe(dishType: type, completion: { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(recipes):
+                    self.recipes = recipes
+                    self.view?.succes()
+                case let .failure(error):
+                    self.view?.failure(error: error)
+                }
+                self.view?.uppdateRecipes(self.recipes ?? [], type.rawValue)
+            }
+        })
+//        case .salad:
+//            view?.uppdateRecipes(storage.chicken, Constants.salad)
+//        case .soup:
+//            view?.uppdateRecipes(storage.chicken, Constants.soup)
+//        case .chicken:
+//            view?.uppdateRecipes(storage.chicken, Constants.chiken)
+//        case .meat:
+//            view?.uppdateRecipes(storage.chicken, Constants.meat)
+//        case .sideDish:
+//            view?.uppdateRecipes(storage.chicken, Constants.sideDish)
+//        case .drinks:
+//            view?.uppdateRecipes(storage.chicken, Constants.drinks)
+//        case .pancake:
+//            view?.uppdateRecipes(storage.chicken, Constants.pancake)
+//        case .desserts:
+//            view?.uppdateRecipes(storage.chicken, Constants.desserts)
+//        }
     }
 
     func sortedRecipe(category: [Recipes]) {
