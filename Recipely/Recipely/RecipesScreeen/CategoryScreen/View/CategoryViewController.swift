@@ -154,7 +154,6 @@ final class CategoryViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         view.addSubview(tableView)
-
         tableView.topAnchor.constraint(equalTo: caloriesButton.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -163,7 +162,6 @@ final class CategoryViewController: UIViewController {
 
     private func setupNotFoundView() {
         notFoundView.isHidden = true
-
         notFoundView.translatesAutoresizingMaskIntoConstraints = false
         notFoundView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
         notFoundView.topAnchor.constraint(equalTo: tableView.topAnchor, constant: -200).isActive = true
@@ -296,6 +294,7 @@ extension CategoryViewController: CategoryViewControllerProtocol {
     }
 }
 
+/// CategoryViewController + UISearchBarDelegate
 extension CategoryViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.count > Constants.searchAfterCount {

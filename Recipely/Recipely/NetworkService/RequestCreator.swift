@@ -70,9 +70,7 @@ class RequestCreator {
         let appKeyQuery = URLQueryItem(name: "app_key", value: "474254b212c6eaa1e57af193e30de2ca")
         let dishTypeQuery = URLQueryItem(name: "dishType", value: DishType.meat.dishCategory)
         let quaryItem = URLQueryItem(name: "q", value: "zxc")
-
         let queries: [URLQueryItem] = [typeQuery, appIdQuery, appKeyQuery, dishTypeQuery, quaryItem]
-
         return queries
     }
 

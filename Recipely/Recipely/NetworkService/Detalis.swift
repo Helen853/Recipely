@@ -17,6 +17,8 @@ public final class Detalis: Identifiable {
     let totalWeight: Double
     /// КБЖУ
     let totalNutrients: TotalNutrientsDTO
+    /// Описание рецепта
+    let ingridientsLines: [String]
 
     // MARK: - Initializers
 
@@ -26,5 +28,6 @@ public final class Detalis: Identifiable {
         images = dto.images
         totalWeight = dto.totalWeight
         totalNutrients = dto.totalNutrients
+        ingridientsLines = dto.ingredientLines
     }
 }

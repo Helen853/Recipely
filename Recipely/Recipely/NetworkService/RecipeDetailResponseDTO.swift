@@ -3,9 +3,9 @@
 
 import Foundation
 
-/// RecipeResponseDTO
+/// RecipeDetailResponseDTO
 struct RecipeDetailResponseDTO: Codable {
-    /// Массив с рецептами
+    /// Массив с подробными рецептами
     let hits: [RecipeDetailHitDTO]
 }
 
@@ -15,10 +15,10 @@ struct RecipeResponseDTO: Codable {
     let hits: [RecipeHitDTO]
 }
 
-/// RecipeHitDTO
+/// RecipeDetailHitDTO
 struct RecipeDetailHitDTO: Codable {
-    /// Рецепт
-    let recipe: RecipeDTO
+    /// Подробный рецепт
+    let recipe: RecipeDetailDTO
 }
 
 /// RecipeHitDTO
@@ -27,7 +27,7 @@ struct RecipeHitDTO: Codable {
     let recipe: RecipeDTO
 }
 
-/// RecipeDTO
+/// Подробный рецепт
 struct RecipeDetailDTO: Codable {
     /// Название рецепта
     let label: String
@@ -43,7 +43,7 @@ struct RecipeDetailDTO: Codable {
     let ingredientLines: [String]
 }
 
-/// RecipeDTO
+/// Рецепт
 struct RecipeDTO: Codable {
     /// Картинка рецепта
     let image: String
@@ -75,7 +75,7 @@ struct LargeDTO: Codable {
     let url: String
 }
 
-/// TotalNutrientsDTO
+/// КБЖУ для детального рецепта
 struct TotalNutrientsDTO: Codable {
     /// Калории
     let calories: TotalDTO

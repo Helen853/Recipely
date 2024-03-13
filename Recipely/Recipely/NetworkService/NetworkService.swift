@@ -22,7 +22,6 @@ class NetworkService: NetworkServiceProtocol {
                 print(error)
                 return
             }
-
             guard let data = data else { return }
             do {
                 let detail = try JSONDecoder().decode(RecipeResponseDTO.self, from: data)
@@ -40,7 +39,6 @@ class NetworkService: NetworkServiceProtocol {
                 print(error)
                 return
             }
-
             guard let data = data else { return }
             do {
                 let detail = try JSONDecoder().decode(RecipeDetailResponseDTO.self, from: data)

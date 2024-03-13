@@ -55,23 +55,28 @@ final class ProfilePresenter {
 // MARK: - ProfilePresenter + ProfilePresenterProtocol
 
 extension ProfilePresenter: ProfilePresenterProtocol {
+    /// Получение аватара
     func getAvatarData() -> Data? {
         let data = UserOriginator.shared.getImageDataFromUserDefaults()
         return data
     }
 
+    /// Сохранение аватара
     func saveAvatar(image: Data) {
         UserOriginator.shared.saveImageInUserDefaults(data: image)
     }
 
+    /// Смена аватара
     func changeAvatar() {
         view?.showGallery()
     }
 
+    /// Наложение эффектов
     func addVisualEffect() {
         view?.animateTransition(state: .started, duration: 1)
     }
 
+    /// Скрытие экрана showTermsPolicy
     func removeTermsPolicy() {
         DispatchQueue.main.asyncAfter(deadline: .now() + Constants.removeTermsPolicyTime) { [weak self] in
             self?.view?.removeTerms()
@@ -79,6 +84,7 @@ extension ProfilePresenter: ProfilePresenterProtocol {
         }
     }
 
+    /// Показ экрана showTermsPolicy
     func showTermsPolicy() {
         view?.setupTermsPolicy()
     }

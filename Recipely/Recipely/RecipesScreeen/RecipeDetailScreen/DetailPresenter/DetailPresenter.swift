@@ -14,7 +14,7 @@ protocol RecipeDetailPresenterProtocol {
     func updateColorButton(title: String)
     /// Отправка текста рецепта в телеграм
     func shareRecipeText()
-
+    /// Настройка кнопки "Сохранить в избранное"
     func setupSaveButton(title: String?)
 }
 

@@ -5,7 +5,7 @@ import Foundation
 
 /// Command
 final class LogCommand {
-    let action: LogActions
+    private let action: LogActions
 
     init(action: LogActions) { self.action = action
     }

@@ -18,7 +18,6 @@ final class RecipesViewController: UIViewController {
     var categories: [Category] = []
     var recipesPresenter: RecipesPresenter?
     var categoryTapHandler: ((_ type: CategoryType) -> ())?
-//    var log: LogActions?
     var logger = LoggerInvoker()
 
     // MARK: - Private Properties
@@ -33,7 +32,6 @@ final class RecipesViewController: UIViewController {
         recipesPresenter?.loadCell(model: info.categories)
         configureCollection()
         categoryTapped()
-//        logger.configureManager()
     }
 
     override func viewWillAppear(_ animated: Bool) {
