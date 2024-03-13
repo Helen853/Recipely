@@ -17,6 +17,7 @@ final class NetworkService: NetworkServiceProtocol {
 
     func getRecipe(dishType: DishType, completion: @escaping (Result<[Recipes], Error>) -> Void) {
         guard let request = requestCreator.makeComponentsAllRecipes(dishType: dishType, .allRecipes) else { return }
+        print(request)
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 completion(.failure(error))

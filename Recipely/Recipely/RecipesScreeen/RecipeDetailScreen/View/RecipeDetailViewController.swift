@@ -19,6 +19,10 @@ protocol RecipeDetailViewControllerProtocol: AnyObject {
     func setupSaveButton(title: String?)
     /// Настройка ячейки
     func setupCell(model: Recipes)
+    ///
+    func succes()
+    ///
+    func failure(error: Error)
 }
 
 /// Экран подробного рецепта
@@ -170,6 +174,14 @@ extension RecipeDetailViewController: UITableViewDataSource {
 // MARK: - Extension RecipeDetailViewController + RecipeDetailViewControllerProtocol
 
 extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
+    func succes() {
+        tableView.reloadData()
+    }
+
+    func failure(error: Error) {
+        print(error)
+    }
+
     /// Загрузка  таблицы
     ///  -   Parametr: массив с данными
     func loadTable(details: [RecipeDetailProtocol]) {

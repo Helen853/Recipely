@@ -21,7 +21,7 @@ enum DishType: String {
     var dishCategory: String {
         switch self {
         case .chicken, .meat, .fish, .sideDish:
-            return "main course"
+            return "Main course"
         case .salad:
             return "salad"
         case .soup:
@@ -66,25 +66,28 @@ final class RequestCreator {
         return URLRequest(url: url)
     }
 
-    func makeQueryItemsAllRecipesSearch() -> [URLQueryItem] {
-        let typeQuery = URLQueryItem(name: "type", value: "public")
-        let appIdQuery = URLQueryItem(name: "app_id", value: "55feeb4f")
-        let appKeyQuery = URLQueryItem(name: "app_key", value: "474254b212c6eaa1e57af193e30de2ca")
-        let dishTypeQuery = URLQueryItem(name: "dishType", value: DishType.meat.dishCategory)
-        let quaryItem = URLQueryItem(name: "q", value: "zxc")
-        let queries: [URLQueryItem] = [typeQuery, appIdQuery, appKeyQuery, dishTypeQuery, quaryItem]
-        return queries
+    func makeSearchText(_ type: DishType) -> URLQueryItem {
+        var searchText: String
+        switch type {
+        case .chicken, .meat, .fish:
+            searchText = "\(type.rawValue)"
+        default:
+            searchText = ""
+        }
+
+        return URLQueryItem(name: "q", value: searchText)
     }
 
     func makeAllRecipesQueryItems(dishType: DishType) -> [URLQueryItem] {
         let typeQuery = URLQueryItem(name: "type", value: "public")
         let appIdQuery = URLQueryItem(name: "app_id", value: "55feeb4f")
         let appKeyQuery = URLQueryItem(name: "app_key", value: "474254b212c6eaa1e57af193e30de2ca")
-        let dishTypeQuery = URLQueryItem(name: "dishType", value: dishType.rawValue)
+        let searchQuery = makeSearchText(dishType)
+        let dishTypeQuery = URLQueryItem(name: "dishType", value: dishType.dishCategory)
 
-        var queries: [URLQueryItem] = [typeQuery, appIdQuery, appKeyQuery, dishTypeQuery]
+        var queries: [URLQueryItem] = [typeQuery, appIdQuery, appKeyQuery, searchQuery, dishTypeQuery]
 
-        if dishTypeQuery.value == DishType.sideDish.dishCategory {
+        if dishType == .sideDish {
             let healhtQuery = URLQueryItem(name: "health", value: "vegetarian")
             queries.append(healhtQuery)
         }

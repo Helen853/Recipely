@@ -15,11 +15,14 @@ final class Recipes: Decodable, Encodable {
     var foodTime: Double
     // Калорийность блюда
     var foodKkal: Double
+    //
+    let uri: String
 
     init(dto: RecipeDTO) {
         imageFoodName = dto.image
         foodName = dto.label
         foodTime = dto.totalTime
         foodKkal = dto.calories
+        uri = dto.uri
     }
 }
