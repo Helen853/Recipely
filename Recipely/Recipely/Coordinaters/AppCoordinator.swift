@@ -11,11 +11,10 @@ final class AppCoordinator: BaseCoordinator {
 
     override func start() {
         showMainTabBar()
-//        net
-//            .getRecipesDetail("http://www.edamam.com/ontologies/edamam.owl#recipe_fe4af81200a431bf1a69740d874b443a") {
-//            result in
-//                print(result)
-//            }
+        net.getRecipesDetail("http://www.edamam.com/ontologies/edamam.owl#recipe_fe4af81200a431bf1a69740d874b443a") {
+            result in
+                print(result)
+            }
         net.getRecipe { result in
             print(result)
         }
@@ -23,7 +22,6 @@ final class AppCoordinator: BaseCoordinator {
 
     func showMainTabBar() {
         mainTabBarController = MainTabBarController()
-
         let recipesCoordinator = RecipesCoordinator()
         let recipesModule = appBuilder.makeRecipesViewController(coordinator: recipesCoordinator)
         recipesCoordinator.setRootViewController(view: recipesModule)
