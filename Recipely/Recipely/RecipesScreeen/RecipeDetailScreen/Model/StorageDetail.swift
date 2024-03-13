@@ -11,14 +11,14 @@ struct RecipeDetail {
             Image(
                 title: model.label,
                 imageName: model.images.regular.url,
-                massa: String(model.totalWeight),
+                massa: String(Int(ceil(model.totalWeight))) + AppConstants.massaText,
                 timeText: String(model.totalTime) + AppConstants.time
             ),
             InfoRecipe(
-                countEnerc: String(model.totalNutrients.calories.quantity),
-                countCarbohydrate: String(model.totalNutrients.chocdf.quantity),
-                countFats: String(model.totalNutrients.fat.quantity),
-                countProtein: String(model.totalNutrients.protein.quantity)
+                countEnerc: String(Int(ceil(model.totalNutrients.calories.quantity))),
+                countCarbohydrate: String(Int(ceil(model.totalNutrients.chocdf.quantity))),
+                countFats: String(Int(ceil(model.totalNutrients.fat.quantity))),
+                countProtein: String(Int(ceil(model.totalNutrients.protein.quantity)))
             ),
             Text(recipe: model.ingridientsLines)
         ]
