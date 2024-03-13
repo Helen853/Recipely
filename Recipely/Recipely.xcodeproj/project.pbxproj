@@ -219,8 +219,8 @@
 			children = (
 				04861E502BA08EF400921137 /* NetworkService.swift */,
 				04861E522BA0955000921137 /* RecipeDetailResponseDTO.swift */,
-				04861E592BA0C75200921137 /* Detalis.swift */,
 				04861E5B2BA0F72C00921137 /* RequestCreator.swift */,
+				04861E592BA0C75200921137 /* Detalis.swift */,
 				EDB336382BA107F1008FD7AD /* Recipe.swift */,
 			);
 			path = NetworkService;

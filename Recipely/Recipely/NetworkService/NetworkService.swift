@@ -6,20 +6,18 @@ import Foundation
 ///  Протокол NetworkServiceProtocol
 protocol NetworkServiceProtocol {
     /// Получение детального рецепта через JSON
-    func getRecipesDetail(completion: @escaping (Result<Detalis, Error>) -> Void)
+    func getRecipesDetail(_ uri: String, completion: @escaping (Result<Detalis, Error>) -> Void)
     func getRecipe(completion: @escaping (Result<Recipe, Error>) -> Void)
 }
 
 /// Сервис для получения данных
 class NetworkService: NetworkServiceProtocol {
-    func getRecipe(completion: @escaping (Result<Recipe, Error>) -> Void) {
-        guard let urlString =
-            URL(
-                string: "https://api.edamam.com/api/recipes/v2?type=public&app_id=55feeb4f&app_key=474254b212c6eaa1e57af193e30de2ca&dishType=Soup"
-            )
-        else { return }
+    var requestCreator = RequestCreator()
 
-        URLSession.shared.dataTask(with: urlString) { data, _, error in
+    func getRecipe(completion: @escaping (Result<Recipe, Error>) -> Void) {
+        guard let request = requestCreator.createComponentsAllRecipes(.allRecipes) else { return }
+        print(request)
+        URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 print(error)
                 return
@@ -35,14 +33,9 @@ class NetworkService: NetworkServiceProtocol {
         }.resume()
     }
 
-    func getRecipesDetail(completion: @escaping (Result<Detalis, Error>) -> Void) {
-        guard let urlString =
-            URL(
-                string: "https://api.edamam.com/api/recipes/v2?type=public&app_id=55feeb4f&app_key=474254b212c6eaa1e57af193e30de2ca&dishType=Soup"
-            )
-        else { return }
-
-        URLSession.shared.dataTask(with: urlString) { data, _, error in
+    func getRecipesDetail(_ uri: String, completion: @escaping (Result<Detalis, Error>) -> Void) {
+        guard let request = requestCreator.createComponentsOneRecipes(uri, .oneRecipes) else { return }
+        URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 print(error)
                 return

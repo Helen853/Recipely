@@ -53,7 +53,8 @@ struct RecipeDTO: Codable {
     let totalTime: Double
     /// Калории
     let calories: Double
-    /// Картинка для детального рецепта
+    /// URI
+    let uri: String
 }
 
 /// ImagesDTO

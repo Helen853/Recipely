@@ -11,6 +11,7 @@ public final class Detalis: Identifiable {
     let label: String
     /// Время пригтовления
     let totalTime: Double
+    /// Картинка рецепта
     let images: ImagesDTO
     /// Масса рецепта
     let totalWeight: Double
