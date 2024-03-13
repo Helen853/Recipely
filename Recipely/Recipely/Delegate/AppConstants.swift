@@ -63,7 +63,7 @@ struct AppConstants {
     static let secondFish = "imageFood2"
     static let clockImageName = "Clock"
     static let timeText = "Cooking time"
-    static let massaText = "793 g"
+    static let massaText = " g"
     static let time = " min"
 
     static let enerc = "Enerc kcal"
@@ -153,4 +153,7 @@ struct AppConstants {
     static let openRecipeText = "User open screen Recipe"
     static let openRecipeDetailText = "User open screen Detail"
     static let shareRecipeText = "User share Recipe"
+
+    static let reloadImageName = "reload"
+    static let reloadLabelText = "Reload"
 }
