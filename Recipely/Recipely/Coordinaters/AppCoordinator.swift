@@ -22,7 +22,6 @@ final class AppCoordinator: BaseCoordinator {
 
     func showMainTabBar() {
         mainTabBarController = MainTabBarController()
-
         let recipesCoordinator = RecipesCoordinator()
         let recipesModule = appBuilder.makeRecipesViewController(coordinator: recipesCoordinator)
         recipesCoordinator.setRootViewController(view: recipesModule)

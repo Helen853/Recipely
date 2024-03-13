@@ -148,4 +148,9 @@ struct AppConstants {
     Thank you for being a part of our culinary community!
     Enjoy exploring and cooking up a storm!
     """
+
+    static let openCategoryText = "User open screen Category"
+    static let openRecipeText = "User open screen Recipe"
+    static let openRecipeDetailText = "User open screen Detail"
+    static let shareRecipeText = "User share Recipe"
 }

@@ -13,13 +13,13 @@ final class LogCommand {
     var log: String {
         switch action {
         case .openCategory:
-            return "User open screen Category"
+            return AppConstants.openCategoryText
         case .openRecipe:
-            return "User open screen Recipe"
+            return AppConstants.openRecipeText
         case .openRecipeDetail:
-            return "User open screen Detail"
+            return AppConstants.openRecipeDetailText
         case .shareRecipe:
-            return "User share Recipe"
+            return AppConstants.shareRecipeText
         }
     }
 }
