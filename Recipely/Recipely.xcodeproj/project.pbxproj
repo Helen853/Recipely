@@ -66,6 +66,7 @@
 		EC76E24A30F24713BD49711D /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F39E528952CCE47B1865BB /* TermsTableViewCell.swift */; };
 		ECB98BF27F96C17F3BF0C185 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A3671F8DF2A330D2A9CCF1 /* SceneDelegate.swift */; };
 		ED0EA8402BA246B000A757E1 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0EA83F2BA246B000A757E1 /* ErrorView.swift */; };
+		ED0EA86A2BA3396A00A757E1 /* ShimmerImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0EA8692BA3396A00A757E1 /* ShimmerImageTableViewCell.swift */; };
 		ED22ED8A2BA238F9001D919C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED22ED892BA238F9001D919C /* UIImage+Extension.swift */; };
 		ED6537CE2B91920D005C8BE2 /* StorageCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6537CD2B91920D005C8BE2 /* StorageCategory.swift */; };
 		ED6537D42B91E05D005C8BE2 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6537D32B91E05D005C8BE2 /* RecipeDetailViewController.swift */; };
@@ -166,6 +167,7 @@
 		E7936ED31A5297ACC97C1548 /* RecipesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesPresenter.swift; sourceTree = "<group>"; };
 		EC78B0E2C10F00A01BCEC4D3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ED0EA83F2BA246B000A757E1 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		ED0EA8692BA3396A00A757E1 /* ShimmerImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerImageTableViewCell.swift; sourceTree = "<group>"; };
 		ED22ED892BA238F9001D919C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		ED6537CD2B91920D005C8BE2 /* StorageCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCategory.swift; sourceTree = "<group>"; };
 		ED6537D32B91E05D005C8BE2 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
@@ -682,6 +684,7 @@
 			children = (
 				ED6537E32B91F2DB005C8BE2 /* Image.swift */,
 				ED6537E52B91F48A005C8BE2 /* ImageTableViewCell.swift */,
+				ED0EA8692BA3396A00A757E1 /* ShimmerImageTableViewCell.swift */,
 			);
 			path = ImageCell;
 			sourceTree = "<group>";
@@ -910,6 +913,7 @@
 				6BFD435F7249D6C74016FE4A /* LogOutTableViewCell.swift in Sources */,
 				EDD488392BA20A93008FCAF0 /* RecipeHitDTO.swift in Sources */,
 				04FEC31A2B8F94010091D767 /* CategoryViewController.swift in Sources */,
+				ED0EA86A2BA3396A00A757E1 /* ShimmerImageTableViewCell.swift in Sources */,
 				85668033CE189CFC2EE1EC8F /* LoginCoordinator.swift in Sources */,
 				047A505E2B99A34200797AAD /* UserCaretaker.swift in Sources */,
 				92B85DE393ADE8B04925252A /* LoginViewController.swift in Sources */,

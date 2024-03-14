@@ -16,7 +16,7 @@ protocol RecipeDetailPresenterProtocol {
     func shareRecipeText()
     /// Настройка кнопки "Сохранить в избранное"
     func setupSaveButton(title: String?)
-
+    func changeState()
     //  var recipes: Recipes { get set }
 }
 
@@ -39,6 +39,10 @@ final class RecipeDetailPresenter {
 // MARK: - Extension RecipeDetailPresenter + RecipeDetailPresenterProtocol
 
 extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
+    func changeState() {
+        view?.changeState()
+    }
+
     /// Загрузка ячейки
     ///  -   Parametr: рецепт с данными
     func loadCell(recipe: Recipes) {
