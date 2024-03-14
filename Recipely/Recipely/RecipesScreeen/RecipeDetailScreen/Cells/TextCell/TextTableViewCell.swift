@@ -34,7 +34,11 @@ final class TextTableViewCell: UITableViewCell {
     // MARK: - Public Methods
 
     func configureCell(model: Text) {
-        recipeLabel.text = model.recipe.first
+        var textRecipe = String()
+        for item in model.recipe {
+            textRecipe += "\(item) \n"
+        }
+        recipeLabel.text = textRecipe
     }
 
     // MARK: - Private Methods

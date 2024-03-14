@@ -41,10 +41,6 @@ protocol CategoryPresenterProtocol: AnyObject {
 
 /// Презентер экрана категорий
 final class CategoryPresenter: CategoryPresenterProtocol {
-    //  func getImage() {
-//    <#code#>
-    //  }
-
     func returnModel(model: Recipes) {
         coordinator?.showRecipeDetailViewController(model: model)
     }
