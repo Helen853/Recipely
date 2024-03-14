@@ -91,6 +91,7 @@ final class CategoryViewController: UIViewController {
         text: "Field to load data",
         image: UIImage(named: "lightning") ?? UIImage()
     )
+    private var currentDishType: DishType?
     private var logger = LoggerInvoker()
 
     // MARK: - Life Cycle
@@ -101,6 +102,7 @@ final class CategoryViewController: UIViewController {
         setupAnchors()
         setupTableView()
         categoryPresenter?.changeState()
+        setupRefreshControl()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -109,8 +111,16 @@ final class CategoryViewController: UIViewController {
 
     // MARK: - Public Methods
 
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+
     func setupCategory(_ type: DishType) {
         categoryPresenter?.returnRecipes(type)
+        currentDishType = type
+        refreshData()
     }
 
     // MARK: - Private Methods
@@ -221,6 +231,11 @@ final class CategoryViewController: UIViewController {
     @objc private func buttonTappedTimer() {
         categoryPresenter?.buttonTimeChange(category: CategoryViewController.shared.recipes)
     }
+
+    @objc private func refreshData() {
+        guard let dishType = currentDishType else { return }
+        categoryPresenter?.returnRecipes(dishType)
+    }
 }
 
 /// CategoryViewController + UITableViewDelegate
@@ -283,10 +298,12 @@ extension CategoryViewController: UITableViewDataSource {
 extension CategoryViewController: CategoryViewControllerProtocol {
     func succes() {
         tableView.reloadData()
+        tableView.refreshControl?.endRefreshing()
     }
 
     func failure(error: Error) {
         print(error)
+        tableView.refreshControl?.endRefreshing()
     }
 
     func changeState() {

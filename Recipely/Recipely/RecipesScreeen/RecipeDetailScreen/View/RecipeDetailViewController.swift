@@ -25,6 +25,8 @@ protocol RecipeDetailViewControllerProtocol: AnyObject {
     func failure(error: Error)
     ///
     func checkViewState()
+    ///
+    func updateRecipe(recipe: Recipes?)
 }
 
 /// Экран подробного рецепта
@@ -53,6 +55,7 @@ final class RecipeDetailViewController: UIViewController {
         text: "Field to load data",
         image: UIImage(named: "lightning") ?? UIImage()
     )
+    private var recipe: Recipes?
 
     // MARK: - Life Cycle
 
@@ -62,6 +65,7 @@ final class RecipeDetailViewController: UIViewController {
         configNavigationBar()
         configureTable()
         registerCell()
+        setupRefreshControl()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +73,12 @@ final class RecipeDetailViewController: UIViewController {
     }
 
     // MARK: - Private Methods
+
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
 
     private func makeLog() {
         logger.log(actionUser: .openRecipeDetail)
@@ -133,6 +143,10 @@ final class RecipeDetailViewController: UIViewController {
         recipeDetailPresenter?.shareRecipeText()
         logger.log(actionUser: .shareRecipe)
     }
+
+    @objc private func refreshData() {
+        recipeDetailPresenter?.loadCell(recipe: recipe)
+    }
 }
 
 // MARK: - Extension RecipeDetailViewController + UITableViewDataSource
@@ -185,6 +199,10 @@ extension RecipeDetailViewController: UITableViewDataSource {
 // MARK: - Extension RecipeDetailViewController + RecipeDetailViewControllerProtocol
 
 extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
+    func updateRecipe(recipe: Recipes?) {
+        self.recipe = recipe
+    }
+
     func checkViewState() {
         switch recipeDetailPresenter?.stateDetails {
         case .noData:
@@ -201,10 +219,12 @@ extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
 
     func succes() {
         tableView.reloadData()
+        tableView.refreshControl?.endRefreshing()
     }
 
     func failure(error: Error) {
         print(error)
+        tableView.refreshControl?.endRefreshing()
     }
 
     /// Загрузка  таблицы

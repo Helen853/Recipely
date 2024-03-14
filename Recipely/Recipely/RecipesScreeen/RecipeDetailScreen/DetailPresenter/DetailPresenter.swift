@@ -7,7 +7,7 @@ import Foundation
 protocol RecipeDetailPresenterProtocol {
     /// Загрузка ячейки
     ///  -   Parametr: рецепт с данными
-    func loadCell(recipe: Recipes)
+    func loadCell(recipe: Recipes?)
     /// Показать экран категорий рецептов
     func showCategory()
     /// Обновиление цвета кнопки
@@ -45,8 +45,8 @@ final class RecipeDetailPresenter {
 extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
     /// Загрузка ячейки
     ///  -   Parametr: рецепт с данными
-    func loadCell(recipe: Recipes) {
-        networkService?.getRecipesDetail(recipe.uri, completion: { [weak self] result in
+    func loadCell(recipe: Recipes?) {
+        networkService?.getRecipesDetail(recipe?.uri ?? "", completion: { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(details):
@@ -55,6 +55,7 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
                         self?.stateDetails = .noData
                         self?.view?.checkViewState()
                     } else {
+                        self?.view?.updateRecipe(recipe: recipe)
                         self?.view?.loadTable(details: detail)
                         self?.view?.succes()
                     }
