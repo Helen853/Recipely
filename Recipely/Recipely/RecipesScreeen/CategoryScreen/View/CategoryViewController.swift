@@ -250,6 +250,13 @@ extension CategoryViewController: UITableViewDataSource {
             } else {
                 cell.configure(with: CategoryViewController.shared.recipes[indexPath.row])
             }
+
+            categoryPresenter?.getImage(index: indexPath.row, handler: { data in
+                guard let image = UIImage(data: data) else { return }
+                DispatchQueue.main.async {
+                    cell.configureImage(image: image)
+                }
+            })
             return cell
         }
     }

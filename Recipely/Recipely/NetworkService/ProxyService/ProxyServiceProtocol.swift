@@ -5,5 +5,5 @@ import Foundation
 
 // потокол для сервиса загрузки фото
 protocol LoadServiceProtocol {
-    func loadImage(url: URL, complition: @escaping (UIImage?, URLResponse?, Error?) -> ())
+    func loadImage(url: URL, complition: @escaping (Data?, URLResponse?, Error?) -> ())
 }

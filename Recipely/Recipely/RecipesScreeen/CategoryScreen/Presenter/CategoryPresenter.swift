@@ -36,7 +36,7 @@ protocol CategoryPresenterProtocol: AnyObject {
     ///
     func changeState()
     func returnModel(model: Recipes)
-    // func getImage()
+    func getImage(index: Int, handler: @escaping (Data) -> ())
 }
 
 /// Презентер экрана категорий
@@ -72,6 +72,8 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     private var sortedTime = SortedTime.non
     private var recipes: [Recipes]?
     let networkService: NetworkServiceProtocol?
+    var imageService = LoadImageSErvice()
+    lazy var proxy = ProxyImageService(service: imageService)
 
     // MARK: - Initializers
 
@@ -86,6 +88,15 @@ final class CategoryPresenter: CategoryPresenterProtocol {
         coordinator?.popRecipesViewController()
     }
 
+    func getImage(index: Int, handler: @escaping (Data) -> ()) {
+        guard let recipes = recipes else { return }
+        guard let imageURL = URL(string: recipes[index].imageFoodName) else { return }
+        proxy.loadImage(url: imageURL, complition: { data, _, _ in
+            guard let data = data else { return }
+            handler(data)
+        })
+    }
+
     func returnRecipes(_ type: DishType) {
         networkService?.getRecipe(dishType: type, completion: { [weak self] result in
             guard let self = self else { return }
@@ -93,7 +104,6 @@ final class CategoryPresenter: CategoryPresenterProtocol {
                 switch result {
                 case let .success(recipes):
                     self.recipes = recipes
-                    self.view?.succes()
                 case let .failure(error):
                     self.view?.failure(error: error)
                 }
