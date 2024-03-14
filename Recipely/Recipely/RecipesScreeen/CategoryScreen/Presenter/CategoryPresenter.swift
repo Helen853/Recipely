@@ -18,6 +18,7 @@ protocol CategoryViewControllerProtocol: AnyObject {
 
     func succes()
     func failure(error: Error)
+    func checkViewState()
 }
 
 /// Протокол CategoryPresenter
@@ -36,15 +37,11 @@ protocol CategoryPresenterProtocol: AnyObject {
     ///
     func changeState()
     func returnModel(model: Recipes)
-    // func getImage()
+    var state: ViewState<[Recipes]> { get }
 }
 
 /// Презентер экрана категорий
 final class CategoryPresenter: CategoryPresenterProtocol {
-    //  func getImage() {
-//    <#code#>
-    //  }
-
     func returnModel(model: Recipes) {
         coordinator?.showRecipeDetailViewController(model: model)
     }
@@ -75,6 +72,12 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     private var sortedCalories = SortedCalories.non
     private var sortedTime = SortedTime.non
     private var recipes: [Recipes]?
+    var state: ViewState<[Recipes]> = .loading {
+        didSet {
+            view?.checkViewState()
+        }
+    }
+
     let networkService: NetworkServiceProtocol?
 
     // MARK: - Initializers
@@ -96,9 +99,16 @@ final class CategoryPresenter: CategoryPresenterProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case let .success(recipes):
-                    self.recipes = recipes
-                    self.view?.succes()
+                    if recipes.isEmpty {
+                        self.state = .noData
+                        self.view?.checkViewState()
+                    } else {
+                        self.recipes = recipes
+                        self.view?.succes()
+                    }
                 case let .failure(error):
+                    self.state = .error
+                    self.view?.checkViewState()
                     self.view?.failure(error: error)
                 }
                 self.view?.uppdateRecipes(self.recipes ?? [], type.rawValue)

@@ -80,7 +80,17 @@ final class CategoryViewController: UIViewController {
     private var titleScreen: String?
     private var isDataLoaded = false
     private var searching = false
-    private var state: StateLoaded = .loading
+    private var state: ViewState<[Recipes]> = .loading
+    private var noDataView = ErrorView(
+        frame: .zero,
+        text: "Start typing Text",
+        image: UIImage(named: "search2") ?? UIImage()
+    )
+    private var errorView = ErrorView(
+        frame: .zero,
+        text: "Field to load data",
+        image: UIImage(named: "lightning") ?? UIImage()
+    )
     private var logger = LoggerInvoker()
 
     // MARK: - Life Cycle
@@ -153,6 +163,10 @@ final class CategoryViewController: UIViewController {
         tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: caloriesButton.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -223,12 +237,16 @@ extension CategoryViewController: UITableViewDataSource {
         switch state {
         case .loading:
             return Constants.countShimmerRows
-        case .loaded:
+        case .data:
             if searching {
                 return searchidgRecipes.count
             } else {
                 return CategoryViewController.shared.recipes.count
             }
+        case .noData:
+            return 0
+        case .error:
+            return 0
         }
     }
 
@@ -237,7 +255,7 @@ extension CategoryViewController: UITableViewDataSource {
         case .loading:
             tableView.isScrollEnabled = false
             return ShimmerRecipeTableViewCell()
-        case .loaded:
+        case .data:
             tableView.isScrollEnabled = true
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: Constants.foodCellIdentifier,
@@ -251,6 +269,8 @@ extension CategoryViewController: UITableViewDataSource {
                 cell.configure(with: CategoryViewController.shared.recipes[indexPath.row])
             }
             return cell
+        default:
+            return UITableViewCell()
         }
     }
 
@@ -271,7 +291,7 @@ extension CategoryViewController: CategoryViewControllerProtocol {
 
     func changeState() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.state = .loaded
+            self?.state = .data(self?.recipes ?? [])
             self?.tableView.reloadData()
         }
     }
@@ -299,6 +319,24 @@ extension CategoryViewController: CategoryViewControllerProtocol {
         titleScreen = title
         setupNavigationItem()
         tableView.reloadData()
+    }
+
+    func checkViewState() {
+        switch categoryPresenter?.state {
+        case .noData:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.noDataView.reloadButton.isHidden = true
+                self?.view.addSubview(self?.noDataView ?? UIView())
+            }
+        case .error:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.view.addSubview(self?.errorView ?? UIView())
+            }
+        case .data, .loading:
+            tableView.reloadData()
+        default:
+            break
+        }
     }
 }
 

@@ -7,99 +7,110 @@ import UIKit
 final class ErrorView: UIView {
     // MARK: - Visual Components
 
-    private let backgroundView = UIView()
-    private let imageBackgroundView = UIView()
-    private let titleLabel = UILabel()
-    private let reloadButton = UIButton()
-    private let centrImageView = UIImageView()
-    private let reloadImageView = UIImageView()
-    private let reloadLabel = UILabel()
+    private let backgroundView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private let viewText: UILabel = {
+        let label = UILabel()
+        label.font = .verdana14
+        label.textColor = .grayForText
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
+        return label
+    }()
+
+    private let viewImageBackground: UIView = {
+        let view = UIView()
+        view.backgroundColor = .grayForGround
+        view.layer.cornerRadius = 12
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    let reloadButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        button.backgroundColor = .grayForGround
+        button.setImage(UIImage(named: "reloadImage"), for: .normal)
+        button.setTitle("Reload", for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.setTitleColor(.grayForText, for: .normal)
+        button.titleLabel?.font = .verdana14
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    private let viewImage = UIImageView()
 
     // MARK: - Initializers
 
-    init(frame: CGRect, imageName: String, title: String) {
+    init(frame: CGRect, text: String, image: UIImage) {
         super.init(frame: .zero)
-        reloadImageView.image = UIImage(named: imageName)
-        titleLabel.text = title
-        configureView()
-        configureimageBackgroundView()
-        configureCentrImageView()
-        configureLabel()
-        configureButton()
+        viewText.text = text
+        viewImage.image = image
+        setupViews()
+        setupAnchors()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureView()
-        configureimageBackgroundView()
-        configureCentrImageView()
-        configureLabel()
-        configureButton()
+        setupViews()
+        setupAnchors()
     }
 
-    private func configureView() {
+    // MARK: - Private Methods
+
+    private func setupViews() {
         addSubview(backgroundView)
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        addSubview(viewText)
+        addSubview(viewImageBackground)
+        addSubview(viewImage)
+        addSubview(reloadButton)
+    }
+
+    private func setupAnchors() {
+        setupAnchorsBackgroundView()
+        setupAnchorsViewImageBackground()
+        setupvAnchorsViewText()
+        setupAnchorsViewImage()
+        setupAnchorsReloadButton()
+    }
+
+    private func setupAnchorsBackgroundView() {
+        backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 190).isActive = true
+//        backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
         backgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 350).isActive = true
         backgroundView.heightAnchor.constraint(equalToConstant: 132).isActive = true
     }
 
-    private func configureimageBackgroundView() {
-        addSubview(imageBackgroundView)
-        imageBackgroundView.backgroundColor = .grayForGround
-        imageBackgroundView.layer.cornerRadius = 12
-        imageBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        imageBackgroundView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
-        imageBackgroundView.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
-        imageBackgroundView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        imageBackgroundView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+    private func setupAnchorsViewImageBackground() {
+        viewImageBackground.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
+        viewImageBackground.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
+        viewImageBackground.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        viewImageBackground.widthAnchor.constraint(equalToConstant: 50).isActive = true
     }
 
-    private func configureCentrImageView() {
-        imageBackgroundView.addSubview(centrImageView)
-        centrImageView.translatesAutoresizingMaskIntoConstraints = false
-        centrImageView.centerYAnchor.constraint(equalTo: imageBackgroundView.centerYAnchor).isActive = true
-        centrImageView.centerXAnchor.constraint(equalTo: imageBackgroundView.centerXAnchor).isActive = true
+    private func setupvAnchorsViewText() {
+        viewText.topAnchor.constraint(equalTo: viewImageBackground.bottomAnchor, constant: 17).isActive = true
+        viewText.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
+        viewText.widthAnchor.constraint(equalToConstant: 350).isActive = true
     }
 
-    private func configureLabel() {
-        titleLabel.font = .verdana14
-        titleLabel.textColor = .grayForText
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.topAnchor.constraint(equalTo: imageBackgroundView.bottomAnchor, constant: 17).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
+    private func setupAnchorsViewImage() {
+        viewImage.translatesAutoresizingMaskIntoConstraints = false
+        viewImage.centerYAnchor.constraint(equalTo: viewImageBackground.centerYAnchor).isActive = true
+        viewImage.centerXAnchor.constraint(equalTo: viewImageBackground.centerXAnchor).isActive = true
     }
 
-    private func configureButton() {
-        addSubview(reloadButton)
-        reloadButton.translatesAutoresizingMaskIntoConstraints = false
-        reloadButton.layer.cornerRadius = 12
-        reloadButton.backgroundColor = .grayForGround
+    private func setupAnchorsReloadButton() {
+        reloadButton.topAnchor.constraint(equalTo: viewText.bottomAnchor, constant: 30).isActive = true
         reloadButton.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
-        reloadButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25).isActive = true
-        configureReloadImage()
-        configureReloadLabel()
-    }
-
-    private func configureReloadImage() {
-        reloadButton.addSubview(reloadImageView)
-        reloadImageView.translatesAutoresizingMaskIntoConstraints = false
-        reloadImageView.widthAnchor.constraint(equalToConstant: 14).isActive = true
-        reloadImageView.heightAnchor.constraint(equalToConstant: 14).isActive = true
-        reloadImageView.leadingAnchor.constraint(equalTo: reloadButton.leadingAnchor, constant: 41).isActive = true
-        reloadImageView.centerYAnchor.constraint(equalTo: reloadButton.centerYAnchor).isActive = true
-    }
-
-    private func configureReloadLabel() {
-        reloadButton.addSubview(reloadLabel)
-        reloadLabel.translatesAutoresizingMaskIntoConstraints = false
-        reloadLabel.widthAnchor.constraint(equalToConstant: 46).isActive = true
-        reloadLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        reloadLabel.trailingAnchor.constraint(equalTo: reloadButton.trailingAnchor, constant: -40).isActive = true
-        reloadLabel.centerYAnchor.constraint(equalTo: reloadButton.centerYAnchor).isActive = true
-        reloadLabel.font = .verdana14
-        reloadLabel.textColor = .grayForText
+        reloadButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        reloadButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
     }
 }

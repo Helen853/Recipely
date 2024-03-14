@@ -23,6 +23,8 @@ protocol RecipeDetailViewControllerProtocol: AnyObject {
     func succes()
     ///
     func failure(error: Error)
+    ///
+    func checkViewState()
 }
 
 /// Экран подробного рецепта
@@ -41,6 +43,16 @@ final class RecipeDetailViewController: UIViewController {
     private let storageDetail = RecipeDetail()
     private var details: [RecipeDetailProtocol] = []
     private var logger = LoggerInvoker()
+    private var noDataView = ErrorView(
+        frame: .zero,
+        text: "Start typing Text",
+        image: UIImage(named: "search2") ?? UIImage()
+    )
+    private var errorView = ErrorView(
+        frame: .zero,
+        text: "Field to load data",
+        image: UIImage(named: "lightning") ?? UIImage()
+    )
 
     // MARK: - Life Cycle
 
@@ -132,7 +144,6 @@ extension RecipeDetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellType = details[indexPath.row].cellType
-
         switch cellType {
         case .image:
             guard
@@ -174,6 +185,20 @@ extension RecipeDetailViewController: UITableViewDataSource {
 // MARK: - Extension RecipeDetailViewController + RecipeDetailViewControllerProtocol
 
 extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
+    func checkViewState() {
+        switch recipeDetailPresenter?.stateDetails {
+        case .noData:
+            noDataView.reloadButton.isHidden = true
+            view.addSubview(noDataView)
+        case .error:
+            view.addSubview(errorView)
+        case .data, .loading:
+            tableView.reloadData()
+        default:
+            break
+        }
+    }
+
     func succes() {
         tableView.reloadData()
     }
