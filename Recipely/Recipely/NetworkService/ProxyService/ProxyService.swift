@@ -18,22 +18,23 @@ final class ProxyImageService: LoadServiceProtocol {
             complition(casheData, nil, nil)
         } else {
             service.loadImage(url: url) { [weak self] data, response, error in
-                try? self?.saveImage(imageName: imageName, image: data)
+                self?.saveImage(imageName: imageName, image: data)
                 complition(data, response, error)
             }
         }
     }
 
-    func saveImage(imageName: String, image: Data?) throws {
+    func saveImage(imageName: String, image: Data?) {
         do {
             guard
                 let folder = FileManager.default.urls(
-                    for: .documentDirectory,
+                    for: .desktopDirectory,
                     in: .userDomainMask
                 ).first?.appending(path: "SavedData")
             else {
                 return
             }
+            print(folder)
             try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
             let fileURL = folder.appendingPathComponent(imageName)
             try image?.write(to: fileURL)
