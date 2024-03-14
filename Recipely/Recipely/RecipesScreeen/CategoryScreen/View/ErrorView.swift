@@ -32,19 +32,6 @@ final class ErrorView: UIView {
         return view
     }()
 
-    let reloadButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 12
-        button.backgroundColor = .grayForGround
-        button.setImage(UIImage(named: "reloadImage"), for: .normal)
-        button.setTitle("Reload", for: .normal)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
-        button.setTitleColor(.grayForText, for: .normal)
-        button.titleLabel?.font = .verdana14
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
     private let viewImage = UIImageView()
 
     // MARK: - Initializers
@@ -70,7 +57,6 @@ final class ErrorView: UIView {
         addSubview(viewText)
         addSubview(viewImageBackground)
         addSubview(viewImage)
-        addSubview(reloadButton)
     }
 
     private func setupAnchors() {
@@ -78,7 +64,6 @@ final class ErrorView: UIView {
         setupAnchorsViewImageBackground()
         setupvAnchorsViewText()
         setupAnchorsViewImage()
-        setupAnchorsReloadButton()
     }
 
     private func setupAnchorsBackgroundView() {
@@ -105,12 +90,5 @@ final class ErrorView: UIView {
         viewImage.translatesAutoresizingMaskIntoConstraints = false
         viewImage.centerYAnchor.constraint(equalTo: viewImageBackground.centerYAnchor).isActive = true
         viewImage.centerXAnchor.constraint(equalTo: viewImageBackground.centerXAnchor).isActive = true
-    }
-
-    private func setupAnchorsReloadButton() {
-        reloadButton.topAnchor.constraint(equalTo: viewText.bottomAnchor, constant: 30).isActive = true
-        reloadButton.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
-        reloadButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        reloadButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
     }
 }

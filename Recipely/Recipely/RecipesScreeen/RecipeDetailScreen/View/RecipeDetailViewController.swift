@@ -55,6 +55,20 @@ final class RecipeDetailViewController: UIViewController {
         text: "Field to load data",
         image: UIImage(named: "lightning") ?? UIImage()
     )
+    private let reloadButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        button.backgroundColor = .grayForGround
+        button.setImage(UIImage(named: "reloadImage"), for: .normal)
+        button.setTitle("Reload", for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.setTitleColor(.grayForText, for: .normal)
+        button.titleLabel?.font = .verdana14
+        button.isHidden = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     private var recipe: Recipes?
 
     // MARK: - Life Cycle
@@ -66,6 +80,8 @@ final class RecipeDetailViewController: UIViewController {
         configureTable()
         registerCell()
         setupRefreshControl()
+        view.addSubview(reloadButton)
+        setupAnchorsReloadButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -74,9 +90,17 @@ final class RecipeDetailViewController: UIViewController {
 
     // MARK: - Private Methods
 
+    private func setupAnchorsReloadButton() {
+        reloadButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 450).isActive = true
+        reloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        reloadButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        reloadButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+    }
+
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        reloadButton.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
 
@@ -206,9 +230,10 @@ extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
     func checkViewState() {
         switch recipeDetailPresenter?.stateDetails {
         case .noData:
-            noDataView.reloadButton.isHidden = true
+            reloadButton.isHidden = true
             view.addSubview(noDataView)
         case .error:
+            reloadButton.isHidden = false
             view.addSubview(errorView)
         case .data, .loading:
             tableView.reloadData()

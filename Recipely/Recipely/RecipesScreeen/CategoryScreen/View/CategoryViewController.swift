@@ -49,6 +49,21 @@ final class CategoryViewController: UIViewController {
         return imageView
     }()
 
+    private lazy var reloadButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        button.backgroundColor = .grayForGround
+        button.setImage(UIImage(named: "reloadImage"), for: .normal)
+        button.setTitle("Reload", for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.setTitleColor(.grayForText, for: .normal)
+        button.titleLabel?.font = .verdana14
+        button.isHidden = true
+        button.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     private lazy var caloriesButton: UIButton = makeSortingButton(
         title: Constants.caloriesButtonTitle,
         image: UIImage(named: Constants.caloriesButtonImageNameOne) ?? UIImage(),
@@ -134,6 +149,7 @@ final class CategoryViewController: UIViewController {
         view.addSubview(caloriesButton)
         view.addSubview(timeButton)
         view.addSubview(searchBar)
+        tableView.addSubview(reloadButton)
         tableView.addSubview(notFoundView)
     }
 
@@ -142,6 +158,14 @@ final class CategoryViewController: UIViewController {
         setupAnchorsCaloriesButton()
         setupAnchorsTimeButton()
         setupNotFoundView()
+        setupAnchorsReloadButton()
+    }
+
+    private func setupAnchorsReloadButton() {
+        reloadButton.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 250).isActive = true
+        reloadButton.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+        reloadButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        reloadButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
     }
 
     private func setupAnchorsSearchBar() {
@@ -342,11 +366,11 @@ extension CategoryViewController: CategoryViewControllerProtocol {
         switch categoryPresenter?.state {
         case .noData:
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-                self?.noDataView.reloadButton.isHidden = true
                 self?.view.addSubview(self?.noDataView ?? UIView())
             }
         case .error:
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.reloadButton.isHidden = false
                 self?.view.addSubview(self?.errorView ?? UIView())
             }
         case .data, .loading:
