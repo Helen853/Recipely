@@ -27,6 +27,8 @@ protocol RecipeDetailViewControllerProtocol: AnyObject {
     func checkViewState()
     ///
     func updateRecipe(recipe: Recipes?)
+    ///
+    func changeState()
 }
 
 /// Экран подробного рецепта
@@ -70,6 +72,7 @@ final class RecipeDetailViewController: UIViewController {
     }()
 
     private var recipe: Recipes?
+    private var state: ViewState<Recipes> = .loading
 
     // MARK: - Life Cycle
 
@@ -82,6 +85,7 @@ final class RecipeDetailViewController: UIViewController {
         setupRefreshControl()
         view.addSubview(reloadButton)
         setupAnchorsReloadButton()
+        recipeDetailPresenter?.changeState()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -152,6 +156,10 @@ final class RecipeDetailViewController: UIViewController {
             TextTableViewCell.self,
             forCellReuseIdentifier: AppConstants.textIdentifier
         )
+        tableView.register(
+            ShimmerImageTableViewCell.self,
+            forCellReuseIdentifier: AppConstants.shimmerIdentifier
+        )
     }
 
     @objc private func tappedBack() {
@@ -181,41 +189,50 @@ extension RecipeDetailViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellType = details[indexPath.row].cellType
-        switch cellType {
-        case .image:
-            guard
-                let cell = tableView
-                .dequeueReusableCell(withIdentifier: AppConstants.imageIdentifier) as? ImageTableViewCell,
-                let model = details[indexPath.row] as? Image
-            else {
-                return UITableViewCell()
+        switch state {
+        case .loading:
+            tableView.isScrollEnabled = false
+            return ShimmerImageTableViewCell()
+        case .data:
+            tableView.isScrollEnabled = true
+            let cellType = details[indexPath.row].cellType
+            switch cellType {
+            case .image:
+                guard
+                    let cell = tableView
+                    .dequeueReusableCell(withIdentifier: AppConstants.imageIdentifier) as? ImageTableViewCell,
+                    let model = details[indexPath.row] as? Image
+                else {
+                    return UITableViewCell()
+                }
+                cell.configureCell(model: model)
+                return cell
+            case .info:
+                guard
+                    let cell = tableView
+                    .dequeueReusableCell(
+                        withIdentifier: AppConstants
+                            .infoRecipeIdentifier
+                    ) as? InfoRecipeTableViewCell,
+                    let model = details[indexPath.row] as? InfoRecipe
+                else {
+                    return UITableViewCell()
+                }
+                cell.configureCell(model: model)
+                return cell
+            case .text:
+                guard
+                    let cell = tableView
+                    .dequeueReusableCell(withIdentifier: AppConstants.textIdentifier) as? TextTableViewCell,
+                    let model = details[indexPath.row] as? Text
+                else {
+                    return UITableViewCell()
+                }
+                cell.configureCell(model: model)
+                return cell
             }
-            cell.configureCell(model: model)
-            return cell
-        case .info:
-            guard
-                let cell = tableView
-                .dequeueReusableCell(
-                    withIdentifier: AppConstants
-                        .infoRecipeIdentifier
-                ) as? InfoRecipeTableViewCell,
-                let model = details[indexPath.row] as? InfoRecipe
-            else {
-                return UITableViewCell()
-            }
-            cell.configureCell(model: model)
-            return cell
-        case .text:
-            guard
-                let cell = tableView
-                .dequeueReusableCell(withIdentifier: AppConstants.textIdentifier) as? TextTableViewCell,
-                let model = details[indexPath.row] as? Text
-            else {
-                return UITableViewCell()
-            }
-            cell.configureCell(model: model)
-            return cell
+        case .noData, .error:
+            return UITableViewCell()
         }
     }
 }
@@ -223,6 +240,19 @@ extension RecipeDetailViewController: UITableViewDataSource {
 // MARK: - Extension RecipeDetailViewController + RecipeDetailViewControllerProtocol
 
 extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
+    func changeState() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.state = .data(self?.recipe ?? Recipes(dto: RecipeDTO(
+                image: "",
+                label: "",
+                totalTime: 0,
+                calories: 0,
+                uri: ""
+            )))
+            self?.tableView.reloadData()
+        }
+    }
+
     func updateRecipe(recipe: Recipes?) {
         self.recipe = recipe
     }
