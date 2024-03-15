@@ -101,8 +101,6 @@ final class FoodCell: UITableViewCell {
         titleRecipe.text = items.foodName
         timeLabel.text = String(Int(ceil(items.foodTime))) + Constants.timeLabelText
         pizzaLabel.text = String(Int(ceil(items.foodKkal))) + Constants.pizzaLabelText
-//        guard let imageUrl = URL(string: items.imageFoodName) else { return }
-//        recipeImageView.load(url: imageUrl)
     }
 
     func configureImage(image: UIImage) {

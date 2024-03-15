@@ -19,6 +19,7 @@ protocol RecipeDetailPresenterProtocol {
     var stateDetails: ViewState<Detalis> { get }
     func changeState()
     //  var recipes: Recipes { get set }
+    func getImage(index: Int, handler: @escaping (Data) -> ())
 }
 
 /// Презентор для экрана с подробным рецептом
@@ -26,8 +27,11 @@ final class RecipeDetailPresenter {
     weak var coordinator: RecipesCoordinator?
     private var state: SaveButtonState = .clear
     private var storage = RecipeDetail()
+    private var details: [RecipeDetailProtocol]? = []
     private weak var view: RecipeDetailViewControllerProtocol?
     let networkService: NetworkServiceProtocol?
+    var imageService = LoadImageSErvice()
+    lazy var proxy = ProxyImageService(service: imageService)
     var stateDetails: ViewState<Detalis> = .loading {
         didSet {
             view?.checkViewState()
@@ -45,6 +49,16 @@ final class RecipeDetailPresenter {
 // MARK: - Extension RecipeDetailPresenter + RecipeDetailPresenterProtocol
 
 extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
+    func getImage(index: Int, handler: @escaping (Data) -> ()) {
+        guard let details = details else { return }
+        guard let stringUrl = (details[index] as? Image)?.imageName else { return }
+        guard let imageURL = URL(string: stringUrl) else { return }
+        proxy.loadImage(url: imageURL, complition: { data, _, _ in
+            guard let data = data else { return }
+            handler(data)
+        })
+    }
+
     func changeState() {
         view?.changeState()
     }
@@ -57,6 +71,7 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
                 switch result {
                 case let .success(details):
                     guard let detail = self?.storage.setupDetail(model: details) else { return }
+                    self?.details = detail
                     if detail.isEmpty {
                         self?.stateDetails = .noData
                         self?.view?.checkViewState()

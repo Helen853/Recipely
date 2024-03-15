@@ -15,7 +15,6 @@ protocol CategoryViewControllerProtocol: AnyObject {
     func buttonTimeState(color: String, image: String)
     /// Изменение состояния
     func changeState()
-
     func succes()
     func failure(error: Error)
     func checkViewState()
@@ -117,7 +116,7 @@ final class CategoryPresenter: CategoryPresenterProtocol {
                     } else {
                         self.recipes = recipes
                     }
-                        self.view?.succes()
+                    self.view?.succes()
                 case let .failure(error):
                     self.state = .error
                     self.view?.checkViewState()

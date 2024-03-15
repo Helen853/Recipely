@@ -54,20 +54,4 @@ final class NetworkService: NetworkServiceProtocol {
             }
         }.resume()
     }
-
-    //  func loadImage(url: URL, handler: @escaping (Result<Data, Error>) -> ()) {
-//    URLSession.shared.dataTask(with: url, handler: handler).resume()
-//      //    { result in
-//      //      DispatchQueue.main.async {
-//      //        switch result {
-//      //        case let .success(data):
-//      //            handler(.success(data))
-//      //
-//      //        case let .failure(error):
-//      //          handler(.failure(error))
-//      //
-//      //        }
-//      //    }
-//
-    //  }
 }

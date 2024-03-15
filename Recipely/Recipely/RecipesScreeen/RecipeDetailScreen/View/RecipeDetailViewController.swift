@@ -206,6 +206,12 @@ extension RecipeDetailViewController: UITableViewDataSource {
                     return UITableViewCell()
                 }
                 cell.configureCell(model: model)
+                recipeDetailPresenter?.getImage(index: indexPath.row, handler: { data in
+                    guard let image = UIImage(data: data) else { return }
+                    DispatchQueue.main.async {
+                        cell.configureImage(image: image)
+                    }
+                })
                 return cell
             case .info:
                 guard

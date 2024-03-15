@@ -43,8 +43,10 @@ final class ImageTableViewCell: UITableViewCell {
         titleLabel.text = model.title
         massaLabel.text = model.massa
         timeLabel.text = model.timeText
-        guard let imageUrl = URL(string: model.imageName) else { return }
-        foodImageView.load(url: imageUrl)
+    }
+
+    func configureImage(image: UIImage) {
+        foodImageView.image = image
     }
 
     // MARK: - Private Methods

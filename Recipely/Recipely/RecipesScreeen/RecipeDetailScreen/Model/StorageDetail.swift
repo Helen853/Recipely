@@ -5,7 +5,7 @@ import Foundation
 
 /// Подробный рецепт
 struct RecipeDetail {
-    /// метод принимает модель с экрана рецептов и возвращает массив моделей для детального рецепта
+    /// метод принимает модель деталей и возвращает массив моделей для детального рецепта
     func setupDetail(model: Detalis) -> [RecipeDetailProtocol] {
         let details: [RecipeDetailProtocol] = [
             Image(
