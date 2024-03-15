@@ -41,7 +41,7 @@ protocol CategoryPresenterProtocol: AnyObject {
     /// Пережача модели на следующий экран
     func returnModel(model: Recipes)
     /// Изначальный стейт
-    var state: ViewState<[Recipes]> { get set }
+    var state: ViewState<[Recipes]> { get }
     /// Получение картинки
     func getImage(index: Int, handler: @escaping (Data) -> ())
 }
