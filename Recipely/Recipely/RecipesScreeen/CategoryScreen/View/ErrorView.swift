@@ -68,7 +68,6 @@ final class ErrorView: UIView {
 
     private func setupAnchorsBackgroundView() {
         backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 190).isActive = true
-//        backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
         backgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 350).isActive = true
         backgroundView.heightAnchor.constraint(equalToConstant: 132).isActive = true
     }

@@ -7,15 +7,15 @@ import Foundation
 final class Recipes: Decodable, Encodable {
     // MARK: - Public Properties
 
-    // Картинка еды
+    /// Картинка еды
     var imageFoodName: String
-    // Название еды
+    /// Название еды
     var foodName: String
-    // Время приготовления
+    /// Время приготовления
     var foodTime: Double
-    // Калорийность блюда
+    /// Калорийность блюда
     var foodKkal: Double
-    //
+    /// Ссылка на детали рецепта
     let uri: String
 
     init(dto: RecipeDTO) {

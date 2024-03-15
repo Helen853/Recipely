@@ -8,8 +8,9 @@ final class ShimmerImageTableViewCell: UITableViewCell {
     private enum Constants {
         static let gradientKey = "background"
     }
-  
+
     // MARK: - VIsual Components
+
     private let titleLabel = UILabel()
     private let titleStackView = UIStackView()
     private let enercLabel = UILabel()
@@ -25,7 +26,6 @@ final class ShimmerImageTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
-        
     }
 
     required init?(coder: NSCoder) {
@@ -39,15 +39,13 @@ final class ShimmerImageTableViewCell: UITableViewCell {
         super.layoutSublayers(of: self.layer)
         setupViews()
     }
-  
-  private func setupViews() {
-    contentView.addSubview(titleLabel)
-    contentView.addSubview(titleStackView)
-    contentView.addSubview(enercLabel)
-    contentView.addSubview(carbohydratesLabel)
-    contentView.addSubview(fatsLabel)
-    contentView.addSubview(proteinLabel)
-  }
 
-   
+    private func setupViews() {
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(titleStackView)
+        contentView.addSubview(enercLabel)
+        contentView.addSubview(carbohydratesLabel)
+        contentView.addSubview(fatsLabel)
+        contentView.addSubview(proteinLabel)
+    }
 }

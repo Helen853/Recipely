@@ -70,6 +70,7 @@
 		ED0EA86F2BA3677800A757E1 /* ProxyServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0EA86E2BA3677800A757E1 /* ProxyServiceProtocol.swift */; };
 		ED0EA8712BA3678500A757E1 /* ProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0EA8702BA3678500A757E1 /* ProxyService.swift */; };
 		ED0EA8732BA36DD300A757E1 /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0EA8722BA36DD300A757E1 /* URLSession+Extension.swift */; };
+		ED0EA8752BA37CA000A757E1 /* LoadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0EA8742BA37CA000A757E1 /* LoadService.swift */; };
 		ED22ED8A2BA238F9001D919C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED22ED892BA238F9001D919C /* UIImage+Extension.swift */; };
 		ED6537CE2B91920D005C8BE2 /* StorageCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6537CD2B91920D005C8BE2 /* StorageCategory.swift */; };
 		ED6537D42B91E05D005C8BE2 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6537D32B91E05D005C8BE2 /* RecipeDetailViewController.swift */; };
@@ -174,6 +175,7 @@
 		ED0EA86E2BA3677800A757E1 /* ProxyServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyServiceProtocol.swift; sourceTree = "<group>"; };
 		ED0EA8702BA3678500A757E1 /* ProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyService.swift; sourceTree = "<group>"; };
 		ED0EA8722BA36DD300A757E1 /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
+		ED0EA8742BA37CA000A757E1 /* LoadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadService.swift; sourceTree = "<group>"; };
 		ED22ED892BA238F9001D919C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		ED6537CD2B91920D005C8BE2 /* StorageCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCategory.swift; sourceTree = "<group>"; };
 		ED6537D32B91E05D005C8BE2 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
@@ -644,6 +646,7 @@
 			children = (
 				ED0EA86E2BA3677800A757E1 /* ProxyServiceProtocol.swift */,
 				ED0EA8702BA3678500A757E1 /* ProxyService.swift */,
+				ED0EA8742BA37CA000A757E1 /* LoadService.swift */,
 			);
 			path = ProxyService;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				015071CFB03747F1C83ED6E6 /* FavoritesPresenter.swift in Sources */,
 				EDD488382BA20A93008FCAF0 /* RecipeDTO.swift in Sources */,
 				360A7FFC4D48100CF9191E84 /* FavoritesViewController.swift in Sources */,
+				ED0EA8752BA37CA000A757E1 /* LoadService.swift in Sources */,
 				ED9F30A82B8FBEB70069D8E2 /* CategoryCollectionViewCell.swift in Sources */,
 				276D51793032EA26BBFEB2A7 /* Info.swift in Sources */,
 				ED6537EA2B91F4AB005C8BE2 /* TextTableViewCell.swift in Sources */,
@@ -1013,7 +1017,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1.0.0;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = H2NN82372P;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Recipely/Info.plist;
@@ -1095,7 +1099,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1.0.0;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = H2NN82372P;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Recipely/Info.plist;
