@@ -6,7 +6,6 @@ import UIKit
 /// Протокол для экрана рецептов
 protocol RecipesViewControllerProtocol: AnyObject {
     /// Загрузка  коллекции
-    ///  -   Parametr: массив с данными
     func loadCollection(categories: [Category])
 }
 
@@ -17,7 +16,7 @@ final class RecipesViewController: UIViewController {
     // Массив с моделями ячеек категорий
     var categories: [Category] = []
     var recipesPresenter: RecipesPresenter?
-    var categoryTapHandler: ((_ type: CategoryType) -> ())?
+    var categoryTapHandler: ((_ type: DishType) -> ())?
     var logger = LoggerInvoker()
 
     // MARK: - Private Properties
@@ -129,7 +128,6 @@ extension RecipesViewController: UICollectionViewDelegateFlowLayout {
 
 extension RecipesViewController: RecipesViewControllerProtocol {
     /// Загрузка  коллекции
-    ///  -   Parametr: массив с данными
     func loadCollection(categories: [Category]) {
         self.categories = categories
     }

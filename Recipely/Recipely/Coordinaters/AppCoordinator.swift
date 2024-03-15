@@ -11,13 +11,6 @@ final class AppCoordinator: BaseCoordinator {
 
     override func start() {
         showMainTabBar()
-        net
-            .getRecipesDetail("http://www.edamam.com/ontologies/edamam.owl#recipe_4bb99424e1bbc40d3cd1d891883d6745") { result in
-                print(result)
-            }
-//        net.getRecipe { result in
-//            print(result)
-//        }
     }
 
     func showMainTabBar() {

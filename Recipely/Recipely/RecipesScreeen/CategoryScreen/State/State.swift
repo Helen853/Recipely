@@ -2,9 +2,13 @@
 // Copyright © RoadMap. All rights reserved.
 
 /// Состояния загрузки ячеек
-enum StateLoaded {
+enum ViewState<Model> {
     /// Процесс загрузки
     case loading
     /// Загружено
-    case loaded
+    case data(_ model: Model)
+    /// Нет данных
+    case noData
+    /// Ошибка
+    case error
 }

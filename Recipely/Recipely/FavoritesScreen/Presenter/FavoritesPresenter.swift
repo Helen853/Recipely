@@ -35,12 +35,13 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     func returnFavorites() {
         if FavoritesStorageService.shared.favorites.count >= 1 {
             print(FavoritesStorageService.shared.favorites.count)
-            view?.uppdateFavorites(FavoritesStorageService.shared.loadFavorites() ?? [Recipes(
-                imageFoodName: "",
-                foodName: "",
-                foodTime: 0,
-                foodKkal: 0
-            )])
+            view?.uppdateFavorites(FavoritesStorageService.shared.loadFavorites() ?? [Recipes(dto: RecipeDTO(
+                image: "",
+                label: "",
+                totalTime: 0,
+                calories: 0,
+                uri: ""
+            ))])
         }
     }
 }

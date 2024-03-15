@@ -34,16 +34,19 @@ final class ImageTableViewCell: UITableViewCell {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
 
     // MARK: - Public Methods
 
     func configureCell(model: Image) {
         titleLabel.text = model.title
-        foodImageView.image = UIImage(named: model.imageName)
         massaLabel.text = model.massa
         timeLabel.text = model.timeText
+    }
+
+    func configureImage(image: UIImage) {
+        foodImageView.image = image
     }
 
     // MARK: - Private Methods

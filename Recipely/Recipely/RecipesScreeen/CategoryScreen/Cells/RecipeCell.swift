@@ -15,8 +15,6 @@ final class FoodCell: UITableViewCell {
         static let pizzaLabelText = " kkal"
     }
 
-//    var tappedNextHandler: ((String?) -> ())?
-
     // MARK: - VIsual Components
 
     private let uiViewBackground: UIView = {
@@ -29,6 +27,8 @@ final class FoodCell: UITableViewCell {
 
     private let recipeImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 12
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -96,10 +96,13 @@ final class FoodCell: UITableViewCell {
     // MARK: - Public Methods
 
     func configure(with items: Recipes) {
-        recipeImageView.image = UIImage(named: items.imageFoodName)
         titleRecipe.text = items.foodName
-        timeLabel.text = String(items.foodTime) + Constants.timeLabelText
-        pizzaLabel.text = String(items.foodKkal) + Constants.pizzaLabelText
+        timeLabel.text = String(Int(ceil(items.foodTime))) + Constants.timeLabelText
+        pizzaLabel.text = String(Int(ceil(items.foodKkal))) + Constants.pizzaLabelText
+    }
+
+    func configureImage(image: UIImage) {
+        recipeImageView.image = image
     }
 
     // MARK: - Private Methods
@@ -134,6 +137,8 @@ final class FoodCell: UITableViewCell {
     }
 
     private func setupAnchorsRecipeImageView() {
+        recipeImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        recipeImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         recipeImageView.leadingAnchor.constraint(equalTo: uiViewBackground.leadingAnchor, constant: 10).isActive = true
         recipeImageView.topAnchor.constraint(equalTo: uiViewBackground.topAnchor, constant: 10).isActive = true
     }

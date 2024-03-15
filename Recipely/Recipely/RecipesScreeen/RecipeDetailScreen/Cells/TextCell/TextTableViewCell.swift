@@ -21,7 +21,7 @@ final class TextTableViewCell: UITableViewCell {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
 
     // MARK: - Life Cycle
@@ -34,7 +34,11 @@ final class TextTableViewCell: UITableViewCell {
     // MARK: - Public Methods
 
     func configureCell(model: Text) {
-        recipeLabel.text = model.recipe
+        var textRecipe = String()
+        for item in model.recipe {
+            textRecipe += "\(item) \n"
+        }
+        recipeLabel.text = textRecipe
     }
 
     // MARK: - Private Methods

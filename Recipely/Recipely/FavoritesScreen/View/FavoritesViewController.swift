@@ -38,7 +38,7 @@ final class FavoritesViewController: UIViewController {
         text: Constants.basketViewText,
         image: UIImage(named: Constants.basketViewImageName) ?? UIImage()
     )
-    private var state: StateLoaded = .loading
+    private var state: ViewState<[Recipes]> = .loading
 
     // MARK: - Life Cycle
 
@@ -79,7 +79,7 @@ final class FavoritesViewController: UIViewController {
 
     private func showLoadedTableView() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.state = .loaded
+            self?.state = .data([])
             self?.tableView.reloadData()
         }
     }
@@ -103,8 +103,10 @@ extension FavoritesViewController: UITableViewDataSource {
         switch state {
         case .loading:
             return Constants.countShimmerRows
-        case .loaded:
+        case .data:
             return favorites.count
+        default:
+            return 0
         }
     }
 
@@ -113,7 +115,7 @@ extension FavoritesViewController: UITableViewDataSource {
         case .loading:
             tableView.isScrollEnabled = false
             return ShimmerRecipeTableViewCell()
-        case .loaded:
+        case .data:
             tableView.isScrollEnabled = true
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: Constants.foodCellIdentifier,
@@ -124,6 +126,8 @@ extension FavoritesViewController: UITableViewDataSource {
             cell.nextButton.isHidden = true
             cell.configure(with: favorites[indexPath.row])
             return cell
+        default:
+            return UITableViewCell()
         }
     }
 
