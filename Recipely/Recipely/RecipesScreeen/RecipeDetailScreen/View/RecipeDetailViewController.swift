@@ -188,6 +188,8 @@ final class RecipeDetailViewController: UIViewController {
     }
 
     @objc private func refreshData() {
+        state = .loading
+        changeState()
         recipeDetailPresenter?.loadCell(recipe: recipe)
     }
 }

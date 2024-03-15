@@ -262,6 +262,8 @@ final class CategoryViewController: UIViewController {
     }
 
     @objc private func refreshData() {
+        state = .loading
+        changeState()
         guard let dishType = currentDishType else { return }
         categoryPresenter?.returnRecipes(dishType)
     }
