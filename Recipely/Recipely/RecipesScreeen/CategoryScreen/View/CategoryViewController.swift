@@ -23,6 +23,12 @@ final class CategoryViewController: UIViewController {
         static let notFoundViewTitle = "Nothing found"
         static let notFoundViewText = "Try entering your query differently"
         static let notFoundViewImageName = "search2"
+        static let reloadButtonText = "Reload"
+        static let reloadButtonImageName = "reloadImage"
+        static let noDataViewText = "Start typing Text"
+        static let noDataViewImageName = "search2"
+        static let errorViewText = "Field to load data"
+        static let errorViewImageName = "lightning"
     }
 
     // MARK: - Visual Components
@@ -53,8 +59,8 @@ final class CategoryViewController: UIViewController {
         let button = UIButton()
         button.layer.cornerRadius = 12
         button.backgroundColor = .grayForGround
-        button.setImage(UIImage(named: "reloadImage"), for: .normal)
-        button.setTitle("Reload", for: .normal)
+        button.setImage(UIImage(named: Constants.reloadButtonImageName), for: .normal)
+        button.setTitle(Constants.reloadButtonText, for: .normal)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         button.setTitleColor(.grayForText, for: .normal)
         button.titleLabel?.font = .verdana14
@@ -79,7 +85,6 @@ final class CategoryViewController: UIViewController {
     // MARK: - Puplic Properties
 
     static var shared = CategoryViewController()
-
     var categoryPresenter: CategoryPresenterProtocol?
     var recipes: [Recipes] = []
 
@@ -98,13 +103,13 @@ final class CategoryViewController: UIViewController {
     private var state: ViewState<[Recipes]> = .loading
     private var noDataView = ErrorView(
         frame: .zero,
-        text: "Start typing Text",
-        image: UIImage(named: "search2") ?? UIImage()
+        text: Constants.noDataViewText,
+        image: UIImage(named: Constants.noDataViewImageName) ?? UIImage()
     )
     private var errorView = ErrorView(
         frame: .zero,
-        text: "Field to load data",
-        image: UIImage(named: "lightning") ?? UIImage()
+        text: Constants.errorViewText,
+        image: UIImage(named: Constants.errorViewImageName) ?? UIImage()
     )
     private var currentDishType: DishType?
     private var logger = LoggerInvoker()
@@ -360,8 +365,6 @@ extension CategoryViewController: CategoryViewControllerProtocol {
     }
 
     // Обновляется массив с рецептами и название экрана
-    // - Parametr: массив рецептов
-    // - Parametr: тайтл для навигейшенБара
     func uppdateRecipes(_ recipes: [Recipes], _ title: String) {
         CategoryViewController.shared.recipes = recipes
         titleScreen = title

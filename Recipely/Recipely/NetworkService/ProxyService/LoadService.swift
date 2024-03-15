@@ -5,6 +5,7 @@ import Foundation
 
 /// Сервис загрузки фото
 final class LoadImageSErvice: LoadServiceProtocol {
+    /// Метод закгрузки фотографии
     func loadImage(url: URL, complition: @escaping (Data?, URLResponse?, Error?) -> ()) {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData

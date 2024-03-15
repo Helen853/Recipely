@@ -6,7 +6,6 @@ import Foundation
 /// Протокол для презентора подробного экрана с рецептом
 protocol RecipeDetailPresenterProtocol {
     /// Загрузка ячейки
-    ///  -   Parametr: рецепт с данными
     func loadCell(recipe: Recipes?)
     /// Показать экран категорий рецептов
     func showCategory()
@@ -16,7 +15,7 @@ protocol RecipeDetailPresenterProtocol {
     func shareRecipeText()
     /// Настройка кнопки "Сохранить в избранное"
     func setupSaveButton(title: String?)
-    var stateDetails: ViewState<Detalis> { get }
+    /// Смена стейта
     func changeState()
     //  var recipes: Recipes { get set }
     func getImage(index: Int, handler: @escaping (Data) -> ())
@@ -24,13 +23,15 @@ protocol RecipeDetailPresenterProtocol {
 
 /// Презентор для экрана с подробным рецептом
 final class RecipeDetailPresenter {
+    // MARK: - Private Properties
+
     weak var coordinator: RecipesCoordinator?
     private var state: SaveButtonState = .clear
     private var storage = RecipeDetail()
     private var details: [RecipeDetailProtocol]? = []
     private weak var view: RecipeDetailViewControllerProtocol?
-    let networkService: NetworkServiceProtocol?
-    var imageService = LoadImageSErvice()
+    private let networkService: NetworkServiceProtocol?
+    private var imageService = LoadImageSErvice()
     lazy var proxy = ProxyImageService(service: imageService)
     var stateDetails: ViewState<Detalis> = .loading {
         didSet {
@@ -64,7 +65,6 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
     }
 
     /// Загрузка ячейки
-    ///  -   Parametr: рецепт с данными
     func loadCell(recipe: Recipes?) {
         networkService?.getRecipesDetail(recipe?.uri ?? "", completion: { [weak self] result in
             DispatchQueue.main.async {
@@ -90,7 +90,6 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
     }
 
     /// Настройка кнопки "Сохранить в избранное"
-    ///  -   Parametr:  наименование рецепта
     func setupSaveButton(title: String?) {
         // проверяем содержится ли рецепт с данными наименованием в избранном
         if FavoritesStorageService.shared.favorites.contains(where: { $0.foodName == title }) {
@@ -108,7 +107,6 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
     }
 
     /// Обновиление цвета кнопки
-    ///  -   Parametr:  наименование рецепта
     func updateColorButton(title: String) {
         // проверка состояния
         switch state {

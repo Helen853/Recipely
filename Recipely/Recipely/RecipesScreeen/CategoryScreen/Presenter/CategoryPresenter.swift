@@ -15,8 +15,11 @@ protocol CategoryViewControllerProtocol: AnyObject {
     func buttonTimeState(color: String, image: String)
     /// Изменение состояния
     func changeState()
+    /// Метод который выполнится при удачном запросе
     func succes()
+    /// Метод который не выполнится при удачном запросе
     func failure(error: Error)
+    /// Проверка стейта
     func checkViewState()
 }
 
@@ -27,17 +30,20 @@ protocol CategoryPresenterProtocol: AnyObject {
     var coordinator: RecipesCoordinator? { get set }
     /// Возврат рецептов
     func returnRecipes(_ type: DishType)
-
+    /// Сортировка
     func sortedRecipe(category: [Recipes])
     /// Смена значения кнопки калорий
     func buttonCaloriesChange(category: [Recipes])
     /// Смена значения кнопки калорий
     func buttonTimeChange(category: [Recipes])
-    ///
+    /// Смена стейта
     func changeState()
+    /// Пережача модели на следующий экран
     func returnModel(model: Recipes)
-    func getImage(index: Int, handler: @escaping (Data) -> ())
+    /// Изначальный стейт
     var state: ViewState<[Recipes]> { get }
+    /// Получение картинки
+    func getImage(index: Int, handler: @escaping (Data) -> ())
 }
 
 /// Презентер экрана категорий
@@ -65,6 +71,14 @@ final class CategoryPresenter: CategoryPresenterProtocol {
         static let stateImageThree = "CaloriesImageThree"
     }
 
+    // MARK: - Public Properties
+
+    var state: ViewState<[Recipes]> = .loading {
+        didSet {
+            view?.checkViewState()
+        }
+    }
+
     // MARK: - Private Properties
 
     private weak var view: CategoryViewControllerProtocol?
@@ -72,15 +86,9 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     private var sortedCalories = SortedCalories.non
     private var sortedTime = SortedTime.non
     private var recipes: [Recipes]?
-    var state: ViewState<[Recipes]> = .loading {
-        didSet {
-            view?.checkViewState()
-        }
-    }
-
-    let networkService: NetworkServiceProtocol?
-    var imageService = LoadImageSErvice()
-    lazy var proxy = ProxyImageService(service: imageService)
+    private let networkService: NetworkServiceProtocol?
+    private var imageService = LoadImageSErvice()
+    private lazy var proxy = ProxyImageService(service: imageService)
 
     // MARK: - Initializers
 
@@ -115,8 +123,8 @@ final class CategoryPresenter: CategoryPresenterProtocol {
                         self.view?.checkViewState()
                     } else {
                         self.recipes = recipes
+                        self.view?.succes()
                     }
-                    self.view?.succes()
                 case let .failure(error):
                     self.state = .error
                     self.view?.checkViewState()

@@ -6,7 +6,6 @@ import UIKit
 /// Протокол для экрана рецептов
 protocol RecipesViewControllerProtocol: AnyObject {
     /// Загрузка  коллекции
-    ///  -   Parametr: массив с данными
     func loadCollection(categories: [Category])
 }
 
@@ -129,7 +128,6 @@ extension RecipesViewController: UICollectionViewDelegateFlowLayout {
 
 extension RecipesViewController: RecipesViewControllerProtocol {
     /// Загрузка  коллекции
-    ///  -   Parametr: массив с данными
     func loadCollection(categories: [Category]) {
         self.categories = categories
     }

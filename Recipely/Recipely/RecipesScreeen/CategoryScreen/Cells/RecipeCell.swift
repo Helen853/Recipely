@@ -15,8 +15,6 @@ final class FoodCell: UITableViewCell {
         static let pizzaLabelText = " kkal"
     }
 
-//    var tappedNextHandler: ((String?) -> ())?
-
     // MARK: - VIsual Components
 
     private let uiViewBackground: UIView = {

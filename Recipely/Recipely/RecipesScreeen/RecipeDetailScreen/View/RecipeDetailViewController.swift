@@ -19,20 +19,31 @@ protocol RecipeDetailViewControllerProtocol: AnyObject {
     func setupSaveButton(title: String?)
     /// Настройка ячейки
     func setupCell(model: Recipes)
-    ///
+    /// Метод при удоачном запросе
     func succes()
-    ///
+    /// Метод при неудачном запросе
     func failure(error: Error)
-    ///
+    /// Поверка стейта
     func checkViewState()
-    ///
+    /// Обновление рецептов
     func updateRecipe(recipe: Recipes?)
-    ///
+    /// Выбор стейта
     func changeState()
 }
 
 /// Экран подробного рецепта
 final class RecipeDetailViewController: UIViewController {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let noDataViewText = "Start typing Text"
+        static let noDataViewImageName = "search2"
+        static let errorViewText = "Field to load data"
+        static let errorViewImageName = "lightning"
+        static let reloadButtonImageName = "reloadImage"
+        static let reloadButtonText = "Reload"
+    }
+
     // MARK: - Public Properties
 
     var recipeDetailPresenter: RecipeDetailPresenter?
@@ -49,20 +60,20 @@ final class RecipeDetailViewController: UIViewController {
     private var logger = LoggerInvoker()
     private var noDataView = ErrorView(
         frame: .zero,
-        text: "Start typing Text",
-        image: UIImage(named: "search2") ?? UIImage()
+        text: Constants.noDataViewText,
+        image: UIImage(named: Constants.noDataViewImageName) ?? UIImage()
     )
     private var errorView = ErrorView(
         frame: .zero,
-        text: "Field to load data",
-        image: UIImage(named: "lightning") ?? UIImage()
+        text: Constants.errorViewText,
+        image: UIImage(named: Constants.errorViewImageName) ?? UIImage()
     )
     private let reloadButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 12
         button.backgroundColor = .grayForGround
-        button.setImage(UIImage(named: "reloadImage"), for: .normal)
-        button.setTitle("Reload", for: .normal)
+        button.setImage(UIImage(named: Constants.reloadButtonImageName), for: .normal)
+        button.setTitle(Constants.reloadButtonText, for: .normal)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         button.setTitleColor(.grayForText, for: .normal)
         button.titleLabel?.font = .verdana14
@@ -289,13 +300,11 @@ extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
     }
 
     /// Загрузка  таблицы
-    ///  -   Parametr: массив с данными
     func loadTable(details: [RecipeDetailProtocol]) {
         self.details = details
     }
 
     /// Отправить рецепт в телеграмм
-    ///  -   Parametr: текст рецепта
     func shareRecipe(text: String) {
         let textToShare = [text]
         let activity = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
@@ -325,7 +334,6 @@ extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
     }
 
     /// Обновление кнопки сохранить в избранное
-    ///  -   Parametr: состояние кнопки
     func updateSaveButton(state: SaveButtonState) {
         switch state {
         case .red:

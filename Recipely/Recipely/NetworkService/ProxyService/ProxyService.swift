@@ -5,12 +5,24 @@ import UIKit
 
 /// Cервис для сохранения фото
 final class ProxyImageService: LoadServiceProtocol {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let pathName = "SavedData"
+    }
+
+    // MARK: - Private Properties
+
     private var fileManager = FileManager.default
     private var service: LoadServiceProtocol
+
+    // MARK: - Initializers
 
     init(service: LoadServiceProtocol) {
         self.service = service
     }
+
+    // MARK: - Public Methods
 
     func loadImage(url: URL, complition: @escaping (Data?, URLResponse?, Error?) -> ()) {
         let imageName = url.lastPathComponent
@@ -30,16 +42,15 @@ final class ProxyImageService: LoadServiceProtocol {
                 let folder = FileManager.default.urls(
                     for: .desktopDirectory,
                     in: .userDomainMask
-                ).first?.appending(path: "SavedData")
+                ).first?.appending(path: Constants.pathName)
             else {
                 return
             }
-            print(folder)
             try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
             let fileURL = folder.appendingPathComponent(imageName)
             try image?.write(to: fileURL)
         } catch {
-            print("Unable to save profile data")
+            print(error)
         }
     }
 
