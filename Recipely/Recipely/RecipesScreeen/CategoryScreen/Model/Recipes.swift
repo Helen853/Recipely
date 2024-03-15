@@ -2,7 +2,7 @@
 // Copyright © RoadMap. All rights reserved.
 
 // Ячейка еды
-struct Recipes: Equatable, Codable {
+struct RecipesV2: Equatable, Codable {
     // Картинка еды
     var imageFoodName: String
     // Название еды

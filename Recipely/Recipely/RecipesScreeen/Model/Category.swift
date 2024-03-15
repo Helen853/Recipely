@@ -16,5 +16,5 @@ struct Category {
     // размер шрифта
     var sizeText: CGFloat
     // тип категории
-    var categoryType: CategoryType
+    var categoryType: DishType
 }

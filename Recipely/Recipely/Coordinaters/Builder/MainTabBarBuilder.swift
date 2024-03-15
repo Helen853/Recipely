@@ -43,14 +43,16 @@ final class MainTabBarBuilder {
 
     func makeCategoryViewcontroller() -> CategoryViewController {
         let categoryViewController = CategoryViewController()
-        let categoryPresenter = CategoryPresenter(view: categoryViewController)
+        let networkService = NetworkService()
+        let categoryPresenter = CategoryPresenter(view: categoryViewController, networkService: networkService)
         categoryViewController.categoryPresenter = categoryPresenter
         return categoryViewController
     }
 
     func makeRecipeDetailViewController() -> RecipeDetailViewController {
         let recipeDetailViewController = RecipeDetailViewController()
-        let detailPresenter = RecipeDetailPresenter(view: recipeDetailViewController)
+        let networkService = NetworkService()
+        let detailPresenter = RecipeDetailPresenter(view: recipeDetailViewController, network: networkService)
         recipeDetailViewController.recipeDetailPresenter = detailPresenter
         return recipeDetailViewController
     }

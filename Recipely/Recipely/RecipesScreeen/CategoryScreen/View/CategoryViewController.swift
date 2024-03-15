@@ -23,6 +23,12 @@ final class CategoryViewController: UIViewController {
         static let notFoundViewTitle = "Nothing found"
         static let notFoundViewText = "Try entering your query differently"
         static let notFoundViewImageName = "search2"
+        static let reloadButtonText = "Reload"
+        static let reloadButtonImageName = "reloadImage"
+        static let noDataViewText = "Start typing Text"
+        static let noDataViewImageName = "search2"
+        static let errorViewText = "Field to load data"
+        static let errorViewImageName = "lightning"
     }
 
     // MARK: - Visual Components
@@ -49,6 +55,21 @@ final class CategoryViewController: UIViewController {
         return imageView
     }()
 
+    private lazy var reloadButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        button.backgroundColor = .grayForGround
+        button.setImage(UIImage(named: Constants.reloadButtonImageName), for: .normal)
+        button.setTitle(Constants.reloadButtonText, for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.setTitleColor(.grayForText, for: .normal)
+        button.titleLabel?.font = .verdana14
+        button.isHidden = true
+        button.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     private lazy var caloriesButton: UIButton = makeSortingButton(
         title: Constants.caloriesButtonTitle,
         image: UIImage(named: Constants.caloriesButtonImageNameOne) ?? UIImage(),
@@ -64,7 +85,6 @@ final class CategoryViewController: UIViewController {
     // MARK: - Puplic Properties
 
     static var shared = CategoryViewController()
-
     var categoryPresenter: CategoryPresenterProtocol?
     var recipes: [Recipes] = []
 
@@ -80,7 +100,18 @@ final class CategoryViewController: UIViewController {
     private var titleScreen: String?
     private var isDataLoaded = false
     private var searching = false
-    private var state: StateLoaded = .loading
+    private var state: ViewState<[Recipes]> = .loading
+    private var noDataView = ErrorView(
+        frame: .zero,
+        text: Constants.noDataViewText,
+        image: UIImage(named: Constants.noDataViewImageName) ?? UIImage()
+    )
+    private var errorView = ErrorView(
+        frame: .zero,
+        text: Constants.errorViewText,
+        image: UIImage(named: Constants.errorViewImageName) ?? UIImage()
+    )
+    private var currentDishType: DishType?
     private var logger = LoggerInvoker()
 
     // MARK: - Life Cycle
@@ -91,6 +122,7 @@ final class CategoryViewController: UIViewController {
         setupAnchors()
         setupTableView()
         categoryPresenter?.changeState()
+        setupRefreshControl()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,8 +131,16 @@ final class CategoryViewController: UIViewController {
 
     // MARK: - Public Methods
 
-    func setupCategory(_ type: CategoryType) {
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+
+    func setupCategory(_ type: DishType) {
         categoryPresenter?.returnRecipes(type)
+        currentDishType = type
+        refreshData()
     }
 
     // MARK: - Private Methods
@@ -114,6 +154,7 @@ final class CategoryViewController: UIViewController {
         view.addSubview(caloriesButton)
         view.addSubview(timeButton)
         view.addSubview(searchBar)
+        tableView.addSubview(reloadButton)
         tableView.addSubview(notFoundView)
     }
 
@@ -122,6 +163,14 @@ final class CategoryViewController: UIViewController {
         setupAnchorsCaloriesButton()
         setupAnchorsTimeButton()
         setupNotFoundView()
+        setupAnchorsReloadButton()
+    }
+
+    private func setupAnchorsReloadButton() {
+        reloadButton.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 250).isActive = true
+        reloadButton.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+        reloadButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        reloadButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
     }
 
     private func setupAnchorsSearchBar() {
@@ -153,6 +202,10 @@ final class CategoryViewController: UIViewController {
         tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: caloriesButton.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -207,6 +260,13 @@ final class CategoryViewController: UIViewController {
     @objc private func buttonTappedTimer() {
         categoryPresenter?.buttonTimeChange(category: CategoryViewController.shared.recipes)
     }
+
+    @objc private func refreshData() {
+        state = .loading
+        changeState()
+        guard let dishType = currentDishType else { return }
+        categoryPresenter?.returnRecipes(dishType)
+    }
 }
 
 /// CategoryViewController + UITableViewDelegate
@@ -223,12 +283,16 @@ extension CategoryViewController: UITableViewDataSource {
         switch state {
         case .loading:
             return Constants.countShimmerRows
-        case .loaded:
+        case .data:
             if searching {
                 return searchidgRecipes.count
             } else {
                 return CategoryViewController.shared.recipes.count
             }
+        case .noData:
+            return 0
+        case .error:
+            return 0
         }
     }
 
@@ -237,7 +301,7 @@ extension CategoryViewController: UITableViewDataSource {
         case .loading:
             tableView.isScrollEnabled = false
             return ShimmerRecipeTableViewCell()
-        case .loaded:
+        case .data:
             tableView.isScrollEnabled = true
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: Constants.foodCellIdentifier,
@@ -250,7 +314,16 @@ extension CategoryViewController: UITableViewDataSource {
             } else {
                 cell.configure(with: CategoryViewController.shared.recipes[indexPath.row])
             }
+
+            categoryPresenter?.getImage(index: indexPath.row, handler: { data in
+                guard let image = UIImage(data: data) else { return }
+                DispatchQueue.main.async {
+                    cell.configureImage(image: image)
+                }
+            })
             return cell
+        default:
+            return UITableViewCell()
         }
     }
 
@@ -261,9 +334,19 @@ extension CategoryViewController: UITableViewDataSource {
 
 /// CategoryViewController + CategoryViewControllerProtocol
 extension CategoryViewController: CategoryViewControllerProtocol {
+    func succes() {
+        tableView.reloadData()
+        tableView.refreshControl?.endRefreshing()
+    }
+
+    func failure(error: Error) {
+        print(error)
+        tableView.refreshControl?.endRefreshing()
+    }
+
     func changeState() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.state = .loaded
+            self?.state = .data(self?.recipes ?? [])
             self?.tableView.reloadData()
         }
     }
@@ -284,13 +367,29 @@ extension CategoryViewController: CategoryViewControllerProtocol {
     }
 
     // Обновляется массив с рецептами и название экрана
-    // - Parametr: массив рецептов
-    // - Parametr: тайтл для навигейшенБара
     func uppdateRecipes(_ recipes: [Recipes], _ title: String) {
         CategoryViewController.shared.recipes = recipes
         titleScreen = title
         setupNavigationItem()
         tableView.reloadData()
+    }
+
+    func checkViewState() {
+        switch categoryPresenter?.state {
+        case .noData:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.view.addSubview(self?.noDataView ?? UIView())
+            }
+        case .error:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.reloadButton.isHidden = false
+                self?.view.addSubview(self?.errorView ?? UIView())
+            }
+        case .data, .loading:
+            tableView.reloadData()
+        default:
+            break
+        }
     }
 }
 

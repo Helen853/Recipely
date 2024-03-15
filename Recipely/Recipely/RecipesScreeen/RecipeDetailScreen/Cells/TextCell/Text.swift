@@ -8,5 +8,5 @@ struct Text: RecipeDetailProtocol {
     /// Тип ячейки
     var cellType: DetailType = .text
     /// Текст рецепта
-    var recipe: String
+    var recipe: [String]
 }
