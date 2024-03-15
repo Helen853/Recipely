@@ -49,6 +49,21 @@ final class CategoryViewController: UIViewController {
         return imageView
     }()
 
+    private lazy var reloadButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        button.backgroundColor = .grayForGround
+        button.setImage(UIImage(named: "reloadImage"), for: .normal)
+        button.setTitle("Reload", for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.setTitleColor(.grayForText, for: .normal)
+        button.titleLabel?.font = .verdana14
+        button.isHidden = true
+        button.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     private lazy var caloriesButton: UIButton = makeSortingButton(
         title: Constants.caloriesButtonTitle,
         image: UIImage(named: Constants.caloriesButtonImageNameOne) ?? UIImage(),
@@ -80,7 +95,18 @@ final class CategoryViewController: UIViewController {
     private var titleScreen: String?
     private var isDataLoaded = false
     private var searching = false
-    private var state: StateLoaded = .loading
+    private var state: ViewState<[Recipes]> = .loading
+    private var noDataView = ErrorView(
+        frame: .zero,
+        text: "Start typing Text",
+        image: UIImage(named: "search2") ?? UIImage()
+    )
+    private var errorView = ErrorView(
+        frame: .zero,
+        text: "Field to load data",
+        image: UIImage(named: "lightning") ?? UIImage()
+    )
+    private var currentDishType: DishType?
     private var logger = LoggerInvoker()
 
     // MARK: - Life Cycle
@@ -91,6 +117,7 @@ final class CategoryViewController: UIViewController {
         setupAnchors()
         setupTableView()
         categoryPresenter?.changeState()
+        setupRefreshControl()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,8 +126,16 @@ final class CategoryViewController: UIViewController {
 
     // MARK: - Public Methods
 
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+
     func setupCategory(_ type: DishType) {
         categoryPresenter?.returnRecipes(type)
+        currentDishType = type
+        refreshData()
     }
 
     // MARK: - Private Methods
@@ -114,6 +149,7 @@ final class CategoryViewController: UIViewController {
         view.addSubview(caloriesButton)
         view.addSubview(timeButton)
         view.addSubview(searchBar)
+        tableView.addSubview(reloadButton)
         tableView.addSubview(notFoundView)
     }
 
@@ -122,6 +158,14 @@ final class CategoryViewController: UIViewController {
         setupAnchorsCaloriesButton()
         setupAnchorsTimeButton()
         setupNotFoundView()
+        setupAnchorsReloadButton()
+    }
+
+    private func setupAnchorsReloadButton() {
+        reloadButton.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 250).isActive = true
+        reloadButton.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+        reloadButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        reloadButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
     }
 
     private func setupAnchorsSearchBar() {
@@ -153,6 +197,10 @@ final class CategoryViewController: UIViewController {
         tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: caloriesButton.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -207,6 +255,11 @@ final class CategoryViewController: UIViewController {
     @objc private func buttonTappedTimer() {
         categoryPresenter?.buttonTimeChange(category: CategoryViewController.shared.recipes)
     }
+
+    @objc private func refreshData() {
+        guard let dishType = currentDishType else { return }
+        categoryPresenter?.returnRecipes(dishType)
+    }
 }
 
 /// CategoryViewController + UITableViewDelegate
@@ -223,12 +276,16 @@ extension CategoryViewController: UITableViewDataSource {
         switch state {
         case .loading:
             return Constants.countShimmerRows
-        case .loaded:
+        case .data:
             if searching {
                 return searchidgRecipes.count
             } else {
                 return CategoryViewController.shared.recipes.count
             }
+        case .noData:
+            return 0
+        case .error:
+            return 0
         }
     }
 
@@ -237,7 +294,7 @@ extension CategoryViewController: UITableViewDataSource {
         case .loading:
             tableView.isScrollEnabled = false
             return ShimmerRecipeTableViewCell()
-        case .loaded:
+        case .data:
             tableView.isScrollEnabled = true
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: Constants.foodCellIdentifier,
@@ -258,6 +315,8 @@ extension CategoryViewController: UITableViewDataSource {
                 }
             })
             return cell
+        default:
+            return UITableViewCell()
         }
     }
 
@@ -270,15 +329,17 @@ extension CategoryViewController: UITableViewDataSource {
 extension CategoryViewController: CategoryViewControllerProtocol {
     func succes() {
         tableView.reloadData()
+        tableView.refreshControl?.endRefreshing()
     }
 
     func failure(error: Error) {
         print(error)
+        tableView.refreshControl?.endRefreshing()
     }
 
     func changeState() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.state = .loaded
+            self?.state = .data(self?.recipes ?? [])
             self?.tableView.reloadData()
         }
     }
@@ -306,6 +367,24 @@ extension CategoryViewController: CategoryViewControllerProtocol {
         titleScreen = title
         setupNavigationItem()
         tableView.reloadData()
+    }
+
+    func checkViewState() {
+        switch categoryPresenter?.state {
+        case .noData:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.view.addSubview(self?.noDataView ?? UIView())
+            }
+        case .error:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.reloadButton.isHidden = false
+                self?.view.addSubview(self?.errorView ?? UIView())
+            }
+        case .data, .loading:
+            tableView.reloadData()
+        default:
+            break
+        }
     }
 }
 

@@ -23,7 +23,11 @@ protocol RecipeDetailViewControllerProtocol: AnyObject {
     func succes()
     ///
     func failure(error: Error)
-
+    ///
+    func checkViewState()
+    ///
+    func updateRecipe(recipe: Recipes?)
+    ///
     func changeState()
 }
 
@@ -43,7 +47,32 @@ final class RecipeDetailViewController: UIViewController {
     private let storageDetail = RecipeDetail()
     private var details: [RecipeDetailProtocol] = []
     private var logger = LoggerInvoker()
-    private var state: StateLoaded = .loading
+    private var noDataView = ErrorView(
+        frame: .zero,
+        text: "Start typing Text",
+        image: UIImage(named: "search2") ?? UIImage()
+    )
+    private var errorView = ErrorView(
+        frame: .zero,
+        text: "Field to load data",
+        image: UIImage(named: "lightning") ?? UIImage()
+    )
+    private let reloadButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        button.backgroundColor = .grayForGround
+        button.setImage(UIImage(named: "reloadImage"), for: .normal)
+        button.setTitle("Reload", for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.setTitleColor(.grayForText, for: .normal)
+        button.titleLabel?.font = .verdana14
+        button.isHidden = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    private var recipe: Recipes?
+    private var state: ViewState<Recipes> = .loading
 
     // MARK: - Life Cycle
 
@@ -53,6 +82,9 @@ final class RecipeDetailViewController: UIViewController {
         configNavigationBar()
         configureTable()
         registerCell()
+        setupRefreshControl()
+        view.addSubview(reloadButton)
+        setupAnchorsReloadButton()
         recipeDetailPresenter?.changeState()
     }
 
@@ -61,6 +93,20 @@ final class RecipeDetailViewController: UIViewController {
     }
 
     // MARK: - Private Methods
+
+    private func setupAnchorsReloadButton() {
+        reloadButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 450).isActive = true
+        reloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        reloadButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        reloadButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+    }
+
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        reloadButton.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
 
     private func makeLog() {
         logger.log(actionUser: .openRecipeDetail)
@@ -129,6 +175,10 @@ final class RecipeDetailViewController: UIViewController {
         recipeDetailPresenter?.shareRecipeText()
         logger.log(actionUser: .shareRecipe)
     }
+
+    @objc private func refreshData() {
+        recipeDetailPresenter?.loadCell(recipe: recipe)
+    }
 }
 
 // MARK: - Extension RecipeDetailViewController + UITableViewDataSource
@@ -143,7 +193,7 @@ extension RecipeDetailViewController: UITableViewDataSource {
         case .loading:
             tableView.isScrollEnabled = false
             return ShimmerImageTableViewCell()
-        case .loaded:
+        case .data:
             tableView.isScrollEnabled = true
             let cellType = details[indexPath.row].cellType
             switch cellType {
@@ -181,6 +231,8 @@ extension RecipeDetailViewController: UITableViewDataSource {
                 cell.configureCell(model: model)
                 return cell
             }
+        case .noData, .error:
+            return UITableViewCell()
         }
     }
 }
@@ -190,17 +242,44 @@ extension RecipeDetailViewController: UITableViewDataSource {
 extension RecipeDetailViewController: RecipeDetailViewControllerProtocol {
     func changeState() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.state = .loaded
+            self?.state = .data(self?.recipe ?? Recipes(dto: RecipeDTO(
+                image: "",
+                label: "",
+                totalTime: 0,
+                calories: 0,
+                uri: ""
+            )))
             self?.tableView.reloadData()
+        }
+    }
+
+    func updateRecipe(recipe: Recipes?) {
+        self.recipe = recipe
+    }
+
+    func checkViewState() {
+        switch recipeDetailPresenter?.stateDetails {
+        case .noData:
+            reloadButton.isHidden = true
+            view.addSubview(noDataView)
+        case .error:
+            reloadButton.isHidden = false
+            view.addSubview(errorView)
+        case .data, .loading:
+            tableView.reloadData()
+        default:
+            break
         }
     }
 
     func succes() {
         tableView.reloadData()
+        tableView.refreshControl?.endRefreshing()
     }
 
     func failure(error: Error) {
         print(error)
+        tableView.refreshControl?.endRefreshing()
     }
 
     /// Загрузка  таблицы
