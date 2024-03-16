@@ -114,7 +114,8 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     }
 
     func returnRecipes(_ type: DishType) {
-        if dataService.fetch(category: type).isEmpty {
+        let recipesFromCoreData = dataService.fetch(category: type)
+        if recipesFromCoreData.isEmpty {
             networkService?.getRecipe(dishType: type, completion: { [weak self] result in
                 guard let self = self else { return }
                 DispatchQueue.main.async {
@@ -122,7 +123,6 @@ final class CategoryPresenter: CategoryPresenterProtocol {
                     case let .success(recipes):
                         if recipes.isEmpty {
                             self.state = .noData
-                            self.view?.checkViewState()
                         } else {
                             self.dataService.create(recipes: recipes, category: type)
                             self.recipes = recipes
@@ -130,16 +130,15 @@ final class CategoryPresenter: CategoryPresenterProtocol {
                         }
                     case let .failure(error):
                         self.state = .error
-                        self.view?.checkViewState()
                         self.view?.failure(error: error)
                     }
                     self.view?.uppdateRecipes(self.recipes ?? [], type.rawValue)
                 }
             })
         } else {
-            recipes = dataService.fetch(category: type)
-//            state = .data(dataService.fetch(category: type))
-            view?.uppdateRecipes(recipes ?? [], type.rawValue)
+            recipes = recipesFromCoreData
+            view?.succes()
+            view?.uppdateRecipes(recipesFromCoreData, type.rawValue)
         }
     }
 
