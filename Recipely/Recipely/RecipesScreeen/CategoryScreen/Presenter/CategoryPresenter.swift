@@ -89,6 +89,7 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     private let networkService: NetworkServiceProtocol?
     private var imageService = LoadImageSErvice()
     private lazy var proxy = ProxyImageService(service: imageService)
+    private let dataService = DataService(coreDataManager: CoreDataManager.shared)
 
     // MARK: - Initializers
 
@@ -113,26 +114,31 @@ final class CategoryPresenter: CategoryPresenterProtocol {
     }
 
     func returnRecipes(_ type: DishType) {
-        networkService?.getRecipe(dishType: type, completion: { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(recipes):
-                    if recipes.isEmpty {
-                        self.state = .noData
+        if dataService.fetch(category: type).isEmpty {
+            networkService?.getRecipe(dishType: type, completion: { [weak self] result in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    switch result {
+                    case let .success(recipes):
+                        if recipes.isEmpty {
+                            self.state = .noData
+                            self.view?.checkViewState()
+                        } else {
+                            self.dataService.create(recipes: recipes, category: type)
+                            self.recipes = recipes
+                            self.view?.succes()
+                        }
+                    case let .failure(error):
+                        self.state = .error
                         self.view?.checkViewState()
-                    } else {
-                        self.recipes = recipes
-                        self.view?.succes()
+                        self.view?.failure(error: error)
                     }
-                case let .failure(error):
-                    self.state = .error
-                    self.view?.checkViewState()
-                    self.view?.failure(error: error)
+                    self.view?.uppdateRecipes(self.recipes ?? [], type.rawValue)
                 }
-                self.view?.uppdateRecipes(self.recipes ?? [], type.rawValue)
-            }
-        })
+            })
+        } else {
+            recipes = dataService.fetch(category: type)
+        }
     }
 
     func sortedRecipe(category: [Recipes]) {
