@@ -138,6 +138,8 @@ final class CategoryPresenter: CategoryPresenterProtocol {
             })
         } else {
             recipes = dataService.fetch(category: type)
+//            state = .data(dataService.fetch(category: type))
+            view?.uppdateRecipes(recipes ?? [], type.rawValue)
         }
     }
 

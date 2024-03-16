@@ -33,7 +33,7 @@ extension DataService: DataServiceProtocol {
             recipeCoreData.foodTime = recipe.foodTime
             recipeCoreData.imageFoodName = recipe.imageFoodName
             recipeCoreData.uri = recipe.uri
-            recipeCoreData.category = category.dishCategory
+            recipeCoreData.category = category.rawValue
 
             coreDataManager.saveContext()
         }
@@ -41,10 +41,10 @@ extension DataService: DataServiceProtocol {
 
     // получааю запись
     func fetch(category: DishType) -> [Recipes] {
-        let fetchReques = NSFetchRequest<RecipesCoreData>(entityName: "RecipesCoreData")
+        let fetchReques = RecipesCoreData.fetchRequest()
         do {
             let recipes = try? coreDataManager.context.fetch(fetchReques)
-            guard let recipesOfCertainCategory = recipes?.filter({ $0.category == category.dishCategory })
+            guard let recipesOfCertainCategory = recipes?.filter({ $0.category == category.rawValue })
             else { return [] }
             return recipesOfCertainCategory.map { Recipes(recipesCoreData: $0) }
         }
