@@ -40,12 +40,13 @@ final class ProxyImageService: LoadServiceProtocol {
         do {
             guard
                 let folder = FileManager.default.urls(
-                    for: .desktopDirectory,
+                    for: .cachesDirectory,
                     in: .userDomainMask
                 ).first?.appending(path: Constants.pathName)
             else {
                 return
             }
+            print(folder)
             try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
             let fileURL = folder.appendingPathComponent(imageName)
             try image?.write(to: fileURL)
@@ -56,12 +57,12 @@ final class ProxyImageService: LoadServiceProtocol {
 
     func getSavedImage(imageName: String) -> Data? {
         guard
-            let url = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first?
-            .appending(path: imageName)
+            let folderURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?
+            .appending(path: Constants.pathName).appending(path: imageName),
+            let data = FileManager.default.contents(atPath: folderURL.path())
         else {
             return nil
         }
-        let data = try? Data(contentsOf: url)
         return data
     }
 }
