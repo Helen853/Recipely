@@ -265,7 +265,7 @@ final class CategoryViewController: UIViewController {
         state = .loading
         changeState()
         guard let dishType = currentDishType else { return }
-        categoryPresenter?.returnRecipes(dishType)
+        succes()
     }
 }
 
