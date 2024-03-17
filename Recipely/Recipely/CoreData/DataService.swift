@@ -41,11 +41,11 @@ extension DataService: DataServiceProtocol {
     }
 
     func createRecipeDetail(details: Detalis) {
-        guard let recipeEntityDesription = NSEntityDescription.entity(
+        guard let recipeDetailEntityDesription = NSEntityDescription.entity(
             forEntityName: "RecipeDetailsCD",
             in: coreDataManager.context
         ) else { return }
-        let recipeDetails = RecipeDetailsCD(entity: recipeEntityDesription, insertInto: coreDataManager.context)
+        let recipeDetails = RecipeDetailsCD(entity: recipeDetailEntityDesription, insertInto: coreDataManager.context)
         recipeDetails.calories = details.calories
         recipeDetails.chocdf = details.chocdf
         recipeDetails.fats = details.fats
@@ -59,18 +59,19 @@ extension DataService: DataServiceProtocol {
         coreDataManager.saveContext()
     }
 
-    func fetchDetails(uri: String) {
-        let fetchReques = RecipesCoreData.fetchRequest()
+    func fetchDetails(recipes: Recipes) -> Detalis? {
+        let fetchRequest = RecipeDetailsCD.fetchRequest()
         do {
-            let details = try? coreDataManager.context.fetch(fetchReques)
+            let details = try? coreDataManager.context.fetch(fetchRequest) as? [Detalis]
+            return details?.first(where: { $0.label == recipes.foodName })
         }
     }
 
     // получааю запись рецептов
     func fetch(category: DishType) -> [Recipes] {
-        let fetchReques = RecipesCoreData.fetchRequest()
+        let fetchRequest = RecipesCoreData.fetchRequest()
         do {
-            let recipes = try? coreDataManager.context.fetch(fetchReques)
+            let recipes = try? coreDataManager.context.fetch(fetchRequest)
             guard let recipesOfCertainCategory = recipes?.filter({ $0.category == category.rawValue })
             else { return [] }
             return recipesOfCertainCategory.map { Recipes(recipesCoreData: $0) }
