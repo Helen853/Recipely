@@ -6,7 +6,7 @@ import Foundation
 /// Протокол для презентора подробного экрана с рецептом
 protocol RecipeDetailPresenterProtocol {
     /// Загрузка ячейки
-    func loadCell(recipe: Recipes?)
+    func loadCell(recipe: Recipes)
     /// Показать экран категорий рецептов
     func showCategory()
     /// Обновиление цвета кнопки
@@ -33,6 +33,7 @@ final class RecipeDetailPresenter {
     private let networkService: NetworkServiceProtocol?
     private var imageService = LoadImageSErvice()
     lazy var proxy = ProxyImageService(service: imageService)
+    private let dataService = DataService(coreDataManager: CoreDataManager.shared)
     var stateDetails: ViewState<Detalis> = .loading {
         didSet {
             view?.checkViewState()
@@ -65,28 +66,39 @@ extension RecipeDetailPresenter: RecipeDetailPresenterProtocol {
     }
 
     /// Загрузка ячейки
-    func loadCell(recipe: Recipes?) {
-        networkService?.getRecipesDetail(recipe?.uri ?? "", completion: { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(details):
-                    guard let detail = self?.storage.setupDetail(model: details) else { return }
-                    self?.details = detail
-                    if detail.isEmpty {
-                        self?.stateDetails = .noData
+    func loadCell(recipe: Recipes) {
+        let recipeDetailsFromCD = dataService.fetchDetails(recipes: recipe)
+        if recipeDetailsFromCD == nil {
+            networkService?.getRecipesDetail(recipe.uri, completion: { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case let .success(details):
+                        guard let detail = self?.storage.setupDetail(model: details) else { return }
+                        self?.details = detail
+                        if detail.isEmpty {
+                            self?.stateDetails = .noData
+                            self?.view?.checkViewState()
+                        } else {
+                            self?.dataService.createRecipeDetail(details: details)
+                            self?.view?.updateRecipe(recipe: recipe)
+                            self?.view?.loadTable(details: detail)
+                            self?.view?.succes()
+                        }
+                    case let .failure(error):
+                        self?.stateDetails = .error
                         self?.view?.checkViewState()
-                    } else {
-                        self?.view?.updateRecipe(recipe: recipe)
-                        self?.view?.loadTable(details: detail)
-                        self?.view?.succes()
+                        self?.view?.failure(error: error)
                     }
-                case let .failure(error):
-                    self?.stateDetails = .error
-                    self?.view?.checkViewState()
-                    self?.view?.failure(error: error)
                 }
-            }
-        })
+            })
+        } else {
+            guard let recipeDetail = dataService.fetchDetails(recipes: recipe) else { return }
+            let recipeDetails = storage.setupDetail(model: recipeDetail)
+            self.details = recipeDetails
+            guard let details = details else { return }
+            view?.succes()
+            view?.loadTable(details: details)
+        }
     }
 
     /// Настройка кнопки "Сохранить в избранное"

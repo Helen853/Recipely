@@ -59,11 +59,15 @@ extension DataService: DataServiceProtocol {
         coreDataManager.saveContext()
     }
 
-    func fetchDetails(recipes: Recipes) -> Detalis? {
+    func fetchDetails(recipes: Recipes?) -> Detalis? {
         let fetchRequest = RecipeDetailsCD.fetchRequest()
         do {
-            let details = try? coreDataManager.context.fetch(fetchRequest) as? [Detalis]
-            return details?.first(where: { $0.label == recipes.foodName })
+            let details = try? coreDataManager.context.fetch(fetchRequest)
+            guard let recipeDetail = details else { return nil }
+            for recipe in recipeDetail where recipe.label == recipes?.foodName {
+                return Detalis(recipeDetailsCD: recipe)
+            }
+            return nil
         }
     }
 
