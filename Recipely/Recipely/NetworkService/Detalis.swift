@@ -37,15 +37,15 @@ final class Detalis {
         ingridientsLines = dto.recipe.ingredientLines.joined(separator: "\n")
     }
 
-//    init(recipeDetailsCD: RecipeDetailsCD) {
-//        label = recipeDetailsCD.label ?? ""
-//        totalTime = recipeDetailsCD.totalTime
-//        images = recipeDetailsCD.images ?? ""
-//        totalWeight = recipeDetailsCD.totalWeight
-//        calories = recipeDetailsCD.calories
-//        chocdf = recipeDetailsCD.chocdf
-//        fats = recipeDetailsCD.fats
-//        proteins = recipeDetailsCD.proteinn
-//        ingridientsLines = recipeDetailsCD.ingridientsLines ?? ""
-//    }
+    init(recipeDetailsCD: RecipeDetailsCD) {
+        label = recipeDetailsCD.label ?? ""
+        totalTime = recipeDetailsCD.totalTime
+        images = recipeDetailsCD.images ?? ""
+        totalWeight = recipeDetailsCD.totalWeight
+        calories = recipeDetailsCD.calories
+        chocdf = recipeDetailsCD.chocdf
+        fats = recipeDetailsCD.fats
+        proteins = recipeDetailsCD.proteinn
+        ingridientsLines = recipeDetailsCD.ingridientsLines ?? ""
+    }
 }
