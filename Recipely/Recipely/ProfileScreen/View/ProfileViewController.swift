@@ -213,7 +213,7 @@ extension ProfileViewController: UITableViewDataSource {
             cell.configureCell(
                 model: model,
                 tapButton: onTapHandler,
-                user: profilePresenter?.user ?? User(email: "", password: "", surname: ""),
+                user: profilePresenter?.user ?? User(email: "", surname: ""),
                 tapAvatar: avatarTapHandler,
                 avatarData: avatarData
             )

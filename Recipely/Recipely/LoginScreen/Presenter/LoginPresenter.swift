@@ -1,6 +1,7 @@
 // LoginPresenter.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Keychain
 import UIKit
 
 /// Протокол LoginViewController
@@ -82,13 +83,13 @@ final class LoginPresenter: LoginPresenterProtocol {
             if UserOriginator.shared.loadFromUserDefaults() == nil {
                 UserOriginator.shared.updateUser(User(
                     email: email,
-                    password: password,
                     surname: Constants.defaultSurname
                 ))
+                Keychain.save(password, forKey: "password")
             }
             let userEmail = UserOriginator.shared.loadFromUserDefaults()?.email
-            let userPassword = UserOriginator.shared.loadFromUserDefaults()?.password
-            if userEmail == email, userPassword == password {
+            let data = Keychain.load("password")
+            if userEmail == email, data == password {
                 view?.setValidationStatusPassword(
                     Constants.defaultTextColor,
                     Constants.defaultBorderTextFieldColor,

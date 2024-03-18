@@ -25,4 +25,12 @@ final class Recipes: Decodable, Encodable {
         foodKkal = dto.calories
         uri = dto.uri
     }
+
+    init(recipesCoreData: RecipesCoreData) {
+        imageFoodName = recipesCoreData.imageFoodName ?? ""
+        foodName = recipesCoreData.foodName ?? ""
+        foodTime = recipesCoreData.foodTime
+        foodKkal = recipesCoreData.foodKkal
+        uri = recipesCoreData.uri ?? ""
+    }
 }

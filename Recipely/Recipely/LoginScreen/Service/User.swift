@@ -5,8 +5,6 @@
 struct User: Codable {
     /// Почта
     var email: String
-    /// Пароль
-    var password: String
     /// Ник пользователя
     var surname: String
 }

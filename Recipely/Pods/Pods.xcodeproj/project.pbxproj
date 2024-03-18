@@ -38,13 +38,13 @@
 		462B459916B1605E432BE7E97CC5C7DB /* Pods-Recipely-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Recipely-acknowledgements.plist"; sourceTree = "<group>"; };
 		54F9D00D3EE2CA9BF00ED2968FDB32E7 /* Pods-Recipely-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Recipely-dummy.m"; sourceTree = "<group>"; };
 		54FB68FFF536AB8FC2ACFBB85891B0F5 /* Keychain-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Keychain-Info.plist"; sourceTree = "<group>"; };
-		60716C90CF91E4035F743523FEE67834 /* Keychain */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Keychain; path = Keychain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		60716C90CF91E4035F743523FEE67834 /* Keychain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Keychain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		77E80BB7C0C749F9CD43891144267127 /* Keychain-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Keychain-prefix.pch"; sourceTree = "<group>"; };
 		87F9F5636647235B53008D2C93128D2A /* Keychain-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Keychain-dummy.m"; sourceTree = "<group>"; };
 		8C017BDD5BDDB1D3312E254DB68A20A0 /* Pods-Recipely.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Recipely.modulemap"; sourceTree = "<group>"; };
 		8EDB0A77F6536FA8DC3DB3344D4007AE /* KeychainItemClass.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainItemClass.swift; path = Keychain/Classes/KeychainItemClass.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F998CA5AEF8712358488B83DB5E706B /* KeychainProtocolType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainProtocolType.swift; path = Keychain/Classes/KeychainProtocolType.swift; sourceTree = "<group>"; };
 		A300311F73D3D70AA3958B117ABEF000 /* Keychain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Keychain.debug.xcconfig; sourceTree = "<group>"; };
 		A48E8CFFE0EE766076ED85682642DF16 /* Pods-Recipely-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Recipely-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		C724242161E71A33DA7FCFD1924C910B /* Keychain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Keychain.release.xcconfig; sourceTree = "<group>"; };
 		D2976052B277BF20B619F2B31262D270 /* KeychainItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainItem.swift; path = Keychain/Classes/KeychainItem.swift; sourceTree = "<group>"; };
 		E5230C99AB2F539ACB545F93F9BAE2AB /* KeychainItemFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainItemFactory.swift; path = Keychain/Classes/KeychainItemFactory.swift; sourceTree = "<group>"; };
-		F2BF6B79BD6AAC665EE209B994ED581D /* Pods-Recipely */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Recipely"; path = Pods_Recipely.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2BF6B79BD6AAC665EE209B994ED581D /* Pods_Recipely.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipely.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F472DF28820328AEC9375AB121F77F11 /* Pods-Recipely-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Recipely-Info.plist"; sourceTree = "<group>"; };
 		FDFFA390F6EFB4F9D10171FE7D6177B4 /* Keychain.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Keychain.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,7 +88,6 @@
 				9F998CA5AEF8712358488B83DB5E706B /* KeychainProtocolType.swift */,
 				B1E8312B9679712562EFCE8114EA0D96 /* Support Files */,
 			);
-			name = Keychain;
 			path = Keychain;
 			sourceTree = "<group>";
 		};
@@ -118,8 +117,8 @@
 		BAB385C850A29E906BE7968BB3042124 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				60716C90CF91E4035F743523FEE67834 /* Keychain */,
-				F2BF6B79BD6AAC665EE209B994ED581D /* Pods-Recipely */,
+				60716C90CF91E4035F743523FEE67834 /* Keychain.framework */,
+				F2BF6B79BD6AAC665EE209B994ED581D /* Pods_Recipely.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,7 +213,7 @@
 			);
 			name = "Pods-Recipely";
 			productName = Pods_Recipely;
-			productReference = F2BF6B79BD6AAC665EE209B994ED581D /* Pods-Recipely */;
+			productReference = F2BF6B79BD6AAC665EE209B994ED581D /* Pods_Recipely.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E99A1AAC0FD1584B1C0B398B33671BEF /* Keychain */ = {
@@ -232,7 +231,7 @@
 			);
 			name = Keychain;
 			productName = Keychain;
-			productReference = 60716C90CF91E4035F743523FEE67834 /* Keychain */;
+			productReference = 60716C90CF91E4035F743523FEE67834 /* Keychain.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -367,7 +366,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Keychain/Keychain-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Keychain/Keychain-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -566,7 +565,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Keychain/Keychain-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Keychain/Keychain-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
