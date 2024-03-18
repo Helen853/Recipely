@@ -26,7 +26,6 @@ struct UserOriginator {
     /// Обновление информации о пользователе
     mutating func updateUser(_ updatedUser: User) {
         user.email = updatedUser.email
-//        user.password = updatedUser.password
         user.surname = updatedUser.surname
         saveToUserDefaults()
     }
