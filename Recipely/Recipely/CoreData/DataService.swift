@@ -6,13 +6,23 @@ import Foundation
 import UIKit
 
 protocol DataServiceProtocol {
+    /// Создание записи рецептов
     func create(recipes: [Recipes], category: DishType)
+    /// получить запись рецептов
     func fetch(category: DishType) -> [Recipes]
+    /// создать запись детальных рецептов
     func createRecipeDetail(details: Detalis)
+    /// получить запись детальных рецептов
+    func fetchDetails(recipes: Recipes?) -> Detalis?
 }
 
-/// yewfuiwef
+/// Data Service для записи и получения записей о рецептах и детальных рецептах
 final class DataService: NSObject {
+  // MARK: - Constants
+  private enum Constants {
+    static let forEntityNameRecipes = "RecipesCoreData"
+    static let forEntityNameRecipesDetails = "RecipeDetailsCD"
+  }
     private var coreDataManager: CoreDataManager
 
     init(coreDataManager: CoreDataManager) {
@@ -20,11 +30,12 @@ final class DataService: NSObject {
     }
 }
 
+/// DataService + DataServiceProtocol
 extension DataService: DataServiceProtocol {
     // создаю запись рецептов экранов
     func create(recipes: [Recipes], category: DishType) {
         guard let recipeEntityDesription = NSEntityDescription.entity(
-            forEntityName: "RecipesCoreData",
+          forEntityName: Constants.forEntityNameRecipes,
             in: coreDataManager.context
         ) else { return }
         for recipe in recipes {
@@ -42,7 +53,7 @@ extension DataService: DataServiceProtocol {
 
     func createRecipeDetail(details: Detalis) {
         guard let recipeDetailEntityDesription = NSEntityDescription.entity(
-            forEntityName: "RecipeDetailsCD",
+          forEntityName: Constants.forEntityNameRecipesDetails,
             in: coreDataManager.context
         ) else { return }
         let recipeDetails = RecipeDetailsCD(entity: recipeDetailEntityDesription, insertInto: coreDataManager.context)

@@ -5,4 +5,4 @@ import CoreData
 import Foundation
 
 @objc(RecipeDetailsCD)
-public class RecipeDetailsCD: NSManagedObject {}
+public final class RecipeDetailsCD: NSManagedObject {}

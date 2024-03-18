@@ -6,4 +6,4 @@ import Foundation
 
 /// cebyidued
 @objc(RecipesCoreData)
-public class RecipesCoreData: NSManagedObject {}
+public final class RecipesCoreData: NSManagedObject {}

@@ -5,6 +5,7 @@ import CoreData
 import Foundation
 import UIKit
 
+/// Создание контейнера и функции для мохранения данных
 final class CoreDataManager: NSObject {
     static let shared = CoreDataManager()
     override private init() {}

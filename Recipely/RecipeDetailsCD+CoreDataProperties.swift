@@ -4,7 +4,7 @@
 import CoreData
 import Foundation
 
-/// erere
+/// Структура RecipeDetailsCD
 public extension RecipeDetailsCD {
     @nonobjc class func fetchRequest() -> NSFetchRequest<RecipeDetailsCD> {
         NSFetchRequest<RecipeDetailsCD>(entityName: "RecipeDetailsCD")

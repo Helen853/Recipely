@@ -15,14 +15,15 @@ final class Detalis {
     let images: String
     /// Вес блюда
     let totalWeight: Double
-    // КБЖУ
-//    let totalNutrients: TotalNutrientsDTO
     /// Ингредиенты
     let ingridientsLines: String
-
+    /// Жиры
     let fats: Double
+    /// Протеин
     let proteins: Double
+    /// Угливоды
     let chocdf: Double
+    /// Калории
     let calories: Double
 
     init(dto: RecipeDetailHitDTO) {
