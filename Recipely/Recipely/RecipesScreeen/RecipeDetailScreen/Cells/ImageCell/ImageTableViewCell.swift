@@ -37,6 +37,11 @@ final class ImageTableViewCell: UITableViewCell {
         super.init(coder: coder)
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        foodImageView.image = nil
+    }
+
     // MARK: - Public Methods
 
     func configureCell(model: Image) {

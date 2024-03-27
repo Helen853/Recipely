@@ -10,17 +10,17 @@ struct RecipeDetail {
         let details: [RecipeDetailProtocol] = [
             Image(
                 title: model.label,
-                imageName: model.images.regular.url,
+                imageName: model.images,
                 massa: String(Int(ceil(model.totalWeight))) + AppConstants.massaText,
                 timeText: String(model.totalTime) + AppConstants.time
             ),
             InfoRecipe(
-                countEnerc: String(Int(ceil(model.totalNutrients.calories.quantity))),
-                countCarbohydrate: String(Int(ceil(model.totalNutrients.chocdf.quantity))),
-                countFats: String(Int(ceil(model.totalNutrients.fat.quantity))),
-                countProtein: String(Int(ceil(model.totalNutrients.protein.quantity)))
+                countEnerc: String(Int(ceil(model.calories))),
+                countCarbohydrate: String(Int(ceil(model.chocdf))),
+                countFats: String(Int(ceil(model.fats))),
+                countProtein: String(Int(ceil(model.proteins)))
             ),
-            Text(recipe: model.ingridientsLines)
+            Text(recipe: model.ingridientsLines.components(separatedBy: "\n"))
         ]
         return details
     }

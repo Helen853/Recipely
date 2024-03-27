@@ -14,7 +14,7 @@ struct UserOriginator {
 
     // MARK: - Public Properties
 
-    static var shared = UserOriginator(user: User(email: "", password: "", surname: ""))
+    static var shared = UserOriginator(user: User(email: "", surname: ""))
 
     // MARK: - Private Properties
 
@@ -26,7 +26,6 @@ struct UserOriginator {
     /// Обновление информации о пользователе
     mutating func updateUser(_ updatedUser: User) {
         user.email = updatedUser.email
-        user.password = updatedUser.password
         user.surname = updatedUser.surname
         saveToUserDefaults()
     }
@@ -70,7 +69,7 @@ struct UserOriginator {
     }
 
     mutating func loadUser() -> User {
-        guard let loadUser = loadFromUserDefaults() else { return User(email: "", password: "", surname: "") }
+        guard let loadUser = loadFromUserDefaults() else { return User(email: "", surname: "") }
         user = loadUser
         return loadUser
     }
